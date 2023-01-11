@@ -11,7 +11,6 @@ git clone https://github.com/lixiao189/dotfiles.git ~/.dotfiles
 Run the command behind to install the dependencies.
 
 ```bash
-cd ~
-chmod +x ./dotfiles/install.sh
-./dotfiles/install.sh
+chmod +x ./install.sh
+./install.sh
 ```
