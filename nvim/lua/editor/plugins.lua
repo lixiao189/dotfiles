@@ -42,6 +42,19 @@ return require('packer').startup(function(use)
     -- Notify plugin
     use 'rcarriga/nvim-notify'
 
+    -- tags plugin
+    use 'ludovicchabant/vim-gutentags'
+    use {
+        'skywind3000/gutentags_plus',
+        config = function()
+            vim.g.gutentags_modules = { 'ctags', 'gtags_cscope' }
+            vim.g.gutentags_plus_switch = 1
+            vim.g.gutentags_project_root = { '.root', '.git' }
+            vim.g.gutentags_cache_dir = vim.fn.expand('~/.cache/tags')
+            vim.g.gutentags_plus_nomap = 1
+        end
+    }
+
     -- The lsp support
     use 'neovim/nvim-lspconfig'
     use 'hrsh7th/nvim-cmp'

@@ -31,6 +31,9 @@ map('t', '<C-j>', [[<C-\><C-n><C-W>j]])
 map('t', '<C-k>', [[<C-\><C-n><C-W>k]])
 map('t', '<C-l>', [[<C-\><C-n><C-W>l]])
 
+-- Preview quickfix item in split view
+vim.cmd [[ autocmd! FileType qf nnoremap <buffer> <leader><Enter> <C-w><Enter><C-w>L ]]
+
 local wk = require("which-key")
 wk.register {
     ["[b"] = { "<cmd>BufferLineCyclePrev<CR>", "Previous buffer" },
@@ -39,13 +42,21 @@ wk.register {
 wk.register({
     w = { ":w<cr>", "Save the file" },
     q = { ":q<cr>", "Quit the window" },
-    t = { ":ToggleTerm<cr>", "Open terminal" },
     m = { ":NvimTreeToggle<CR>", "Toggle file manager" },
     r = { ":!sh run.sh<cr>", "Run code with run.sh" },
     v = { ":vertical split<CR>", "Vertical split the window" },
     s = { ":split<CR>", "Split the window" },
+    t = {
+        name = "+tags",
+        s = { ":GscopeFind s <C-R><C-W><cr>", "Find symbol (reference) under cursor" },
+        d = { ":GscopeFind g <C-R><C-W><cr>", "Find symbol definition under cursor" },
+        a = { ":GscopeFind a <C-R><C-W><cr>", "Find symbol assignments" },
+        c = { ":GscopeFind c <C-R><C-W><cr>", "Functions calling this function" },
+        C = { ":GscopeFind d <C-R><C-W><cr>", "Functions called by this function" }
+    },
     f = {
         name = "+find",
+        m = { ":NvimTreeFindFile<CR>", "Show current file in file manager" },
         f = { "<cmd>Telescope find_files<cr>", "Find File" },
         o = { "<cmd>Telescope oldfiles<cr>", "Show recent old file" },
         r = { "<cmd>lua require('spectre').open()<cr>", "Find and replace" },
@@ -80,6 +91,8 @@ wk.register({
     },
     c = {
         name = "+code",
+        l = { ":LspStop<CR>", "Turn off LSP" },
+        L = { ":LspStart<CR>", "Turn on LSP" },
         a = { ":lua vim.lsp.buf.code_action()<CR>", "Lsp Code action" },
         s = { ":SymbolsOutline<cr>", "Symbol outline" },
         k = { ":lua vim.lsp.buf.hover()<CR>", "Lsp document hover" },
