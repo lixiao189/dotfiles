@@ -10,7 +10,6 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 # Install the dependencies on Mac
 case $(uname) in
     Darwin)
-        xcode-select --install
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
      
         brew tap --custom-remote --force-auto-update homebrew/cask https://github.com/Homebrew/homebrew-cask
