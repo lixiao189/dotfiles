@@ -7,8 +7,8 @@ import:
 # window style setting
 window:
   dimensions:
-    columns: 120
-    lines: 50
+    columns: 180
+    lines: 54
   dynamic_title: true
   dynamic_padding: false
   padding:
