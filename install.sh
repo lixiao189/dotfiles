@@ -24,6 +24,7 @@ case $(uname) in
         brew install nvim
         brew install bat
         brew install exa
+        brew install fzf && /opt/homebrew/opt/fzf/install
       
         brew install node
         brew install fd
