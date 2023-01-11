@@ -13,6 +13,6 @@ require 'nvim-tree'.setup {
         ignore = false,
     },
     view = {
-        hide_root_folder = true,
+        hide_root_folder = false,
     }
 }
