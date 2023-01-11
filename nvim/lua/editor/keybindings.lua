@@ -48,6 +48,7 @@ wk.register({
     s = { ":split<CR>", "Split the window" },
     t = {
         name = "+tags",
+        g = { ":lua require'telescope.builtin'.tags()<CR>", "Find symbol globally" },
         s = { ":GscopeFind s <C-R><C-W><cr>", "Find symbol (reference) under cursor" },
         d = { ":GscopeFind g <C-R><C-W><cr>", "Find symbol definition under cursor" },
         a = { ":GscopeFind a <C-R><C-W><cr>", "Find symbol assignments" },
