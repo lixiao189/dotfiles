@@ -45,6 +45,7 @@ alias ls="exa -l --icons"
 alias vim="nvim"
 alias cat="bat --theme='base16'"
 alias t="tmux attach || tmux"
+alias ts="tmux source-file ~/.tmux.conf"
 
 ### z for autojump 
 . /opt/homebrew/etc/profile.d/z.sh
