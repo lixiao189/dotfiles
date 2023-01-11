@@ -135,8 +135,8 @@ return require('packer').startup(function(use)
     use 'p00f/nvim-ts-rainbow'
 
     -- The file manager
-    use 'kyazdani42/nvim-web-devicons' -- for file icons
-    use 'kyazdani42/nvim-tree.lua'
+    use 'nvim-tree/nvim-web-devicons' -- for file icons
+    use 'nvim-tree/nvim-tree.lua'
 
     -- Tree sitter plugin
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
