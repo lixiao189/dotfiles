@@ -1,0 +1,41 @@
+env:
+  TERM: xterm-256color 
+
+import:
+  - ./one_dark.yml
+
+# window style setting
+window:
+  dimensions:
+    columns: 120
+    lines: 50
+  dynamic_title: true
+  dynamic_padding: false
+  padding:
+    x: 10
+    y: 8
+  decorations_theme_variant: dark
+
+# cursor setting
+cursor:
+  blink_interval: 750
+  blink_timeout: 5
+  style:
+    shape: Block
+    blinking: On
+
+# setting fonts
+font:
+  size: 13.0
+  normal:
+    family: "FiraCode Nerd Font Mono"
+    style: "Regular"
+  bold:
+    family: "FiraCode Nerd Font Mono"
+    style: Bold
+  italic:
+    family: "FiraCode Nerd Font Mono"
+    style: Italic
+  bold_italic:
+    family: "FiraCode Nerd Font Mono"
+    style: Bold Italic
