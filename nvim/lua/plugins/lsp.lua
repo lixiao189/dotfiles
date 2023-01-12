@@ -28,7 +28,7 @@ local servers = {
     'tsserver',
     'gopls',
     'clangd',
-    'cmake',
+    'neocmake',
     'volar',
     'jdtls',
     'jsonls',
