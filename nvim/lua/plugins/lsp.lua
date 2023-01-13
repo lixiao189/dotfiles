@@ -125,7 +125,7 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local global_opts = {}
 global_opts.capabilities = capabilities
-global_opts.on_attach = function(client, bufnr)
+global_opts.on_attach = function(_, bufnr)
     -- Show diagnostic under cursor
     vim.api.nvim_create_autocmd("CursorHold", {
         buffer = bufnr,
@@ -140,17 +140,6 @@ global_opts.on_attach = function(client, bufnr)
             vim.diagnostic.open_float(nil, opts)
         end
     })
-    -- highlight symbol under cursor
-    if client.server_capabilities.documentHighlightProvider then
-        vim.cmd [[
-            augroup lsp_document_highlight
-              autocmd! * <buffer>
-              autocmd! CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-              autocmd! CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
-              autocmd! CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-            augroup END
-        ]]
-    end
 end
 
 

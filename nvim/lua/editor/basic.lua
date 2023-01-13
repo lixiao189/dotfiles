@@ -1,8 +1,5 @@
 -- Theme settings
-require("github-theme").setup({
-    theme_style = "dark",
-    sidebars = { "NvimTree", "qf", "vista_kind", "terminal", "packer" },
-})
+vim.cmd[[colorscheme dracula]]
 
 vim.g.vim_json_conceal = 0
 vim.g.mapleader = ' '
