@@ -145,8 +145,6 @@ return require('packer').startup(function(use)
     }
 
 
-    use 'p00f/nvim-ts-rainbow'
-
     -- The file manager
     use 'nvim-tree/nvim-web-devicons' -- for file icons
     use 'nvim-tree/nvim-tree.lua'
