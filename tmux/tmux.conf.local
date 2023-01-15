@@ -354,9 +354,6 @@ bind-key j select-pane -D  # move down
 bind-key k select-pane -U  # move up
 bind-key l select-pane -R  # move right
 
-bind-key -r n previous-window # select previous window
-bind-key -r p next-window     # select next window
-
 # increase history size
 #set -g history-limit 10000
 
