@@ -21,7 +21,6 @@ return require('packer').startup(function(use)
 
     use 'akinsho/bufferline.nvim'
     use 'famiu/bufdelete.nvim'
-    use 'antoinemadec/FixCursorHold.nvim'
     use 'dstein64/vim-startuptime'
     use 'nvim-lua/plenary.nvim'
 
@@ -63,7 +62,6 @@ return require('packer').startup(function(use)
     use 'onsails/lspkind-nvim'
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
-    use 'simrat39/symbols-outline.nvim'
     use 'ray-x/lsp_signature.nvim'
     use 'hrsh7th/cmp-cmdline'
     use 'folke/neodev.nvim'
@@ -90,6 +88,24 @@ return require('packer').startup(function(use)
             require('trouble').setup()
         end
     }
+    use({
+        "glepnir/lspsaga.nvim",
+        branch = "main",
+        config = function()
+            require('lspsaga').setup {
+                lightbulb = {
+                    sign = false,
+                },
+                ui = {
+                    border = 'rounded',
+                    colors = {
+                        --float window normal bakcground color
+                        normal_bg = '#282a35',
+                    },
+                }
+            }
+        end,
+    })
 
     -- The plugin for key bindings
     use 'folke/which-key.nvim'
@@ -99,6 +115,14 @@ return require('packer').startup(function(use)
         'akinsho/toggleterm.nvim',
         config = function()
             require("toggleterm").setup()
+        end
+    }
+
+    -- Lsp colorized
+    use {
+        'norcalli/nvim-colorizer.lua',
+        config = function()
+            require 'colorizer'.setup()
         end
     }
 

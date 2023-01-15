@@ -8,8 +8,8 @@ map("n", "H", "^")
 map("v", "L", "$")
 map("v", "H", "^")
 
--- Use Ctrl + c to stop highlighting
-map("n", "<C-c>", "<CMD>noh<CR>")
+-- Use esc to stop highlighting
+map("n", "<esc>", "<CMD>noh<CR>")
 
 map("n", "<A-Down>", ":resize -2<CR>")
 map("n", "<A-Up>", ":resize +2<CR>")
@@ -95,8 +95,8 @@ wk.register({
         l = { ":LspStop<CR>", "Turn off LSP" },
         L = { ":LspStart<CR>", "Turn on LSP" },
         a = { ":lua vim.lsp.buf.code_action()<CR>", "Lsp Code action" },
-        s = { ":SymbolsOutline<cr>", "Symbol outline" },
-        k = { ":lua vim.lsp.buf.hover()<CR>", "Lsp document hover" },
+        s = { ":Lspsaga outline<CR>", "Symbol outline" },
+        k = { ":Lspsaga hover_doc<CR>", "Lsp document hover" },
         f = { ":lua vim.lsp.buf.format { async = true }<CR>", "Format the code" },
         r = { ":lua vim.lsp.buf.rename()<CR>", "Rename variable" },
         t = { ":TroubleToggle<cr>", "Show trouble" },
