@@ -18,7 +18,8 @@ case $(uname) in
         brew install font-fira-code-nerd-font
 
         brew install tmux
-        brew install alacritty
+        brew install iterm2
+        brew install karabiner-elements
         
         brew install nvim
         brew install bat
@@ -31,7 +32,6 @@ case $(uname) in
         brew install ripgrep
         brew install watchman
         brew install lazygit
-
 
         python3 -m pip install pynvim
     ;;
