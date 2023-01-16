@@ -15,7 +15,7 @@ case $(uname) in
         brew tap --custom-remote --force-auto-update homebrew/cask https://github.com/Homebrew/homebrew-cask
         brew install git
         brew tap homebrew/cask-fonts
-        brew install font-fira-code-nerd-font
+        brew install font-caskaydia-cove-nerd-font
 
         brew install tmux
         brew install iterm2
