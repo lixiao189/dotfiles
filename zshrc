@@ -48,6 +48,7 @@ alias t="tmux attach || tmux"
 alias ts="tmux source-file ~/.tmux.conf"
 alias td="tmux detach"
 alias e="exit"
+alias lg="lazygit"
 
 ### z for autojump 
 . /opt/homebrew/etc/profile.d/z.sh
