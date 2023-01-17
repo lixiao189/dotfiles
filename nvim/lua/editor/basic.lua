@@ -1,6 +1,3 @@
--- Theme settings
-vim.cmd[[colorscheme dracula]]
-
 vim.g.vim_json_conceal = 0
 vim.g.mapleader = ' '
 
@@ -40,8 +37,17 @@ vim.o.pumheight = 10 -- pop up menu height
 vim.o.swapfile = false -- creates a swap file
 vim.o.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program) it is not allowed to be edited
 
+require("catppuccin").setup {
+    transparent_background = true,
+    integrations = {
+        notify = true,
+        lsp_saga = true,
+    }
+}
+
 vim.cmd [[
     syntax on
+    colorscheme catppuccin-macchiato
     filetype plugin indent on " required
     autocmd FileType go setlocal noexpandtab
     autocmd FileType vim,c,cpp,vue,html,css,ts,yaml,javascript,json,typescript setlocal tabstop=2 shiftwidth=2

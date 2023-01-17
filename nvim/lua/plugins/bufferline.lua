@@ -6,8 +6,5 @@ require("bufferline").setup {
         right_mouse_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
         diagnostics_update_in_insert = true,
         diagnostics = "nvim_lsp",
-        numbers = function(opts)
-            return string.format('%s', opts.ordinal)
-        end,
     }
 }

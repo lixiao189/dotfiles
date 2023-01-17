@@ -98,10 +98,8 @@ return require('packer').startup(function(use)
                 },
                 ui = {
                     border = 'rounded',
-                    colors = {
-                        --float window normal bakcground color
-                        normal_bg = '#282a35',
-                    },
+                    colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
+                    kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
                 }
             }
         end,
@@ -221,7 +219,7 @@ return require('packer').startup(function(use)
 
     -- Themes
     use 'folke/tokyonight.nvim'
-    use 'Mofiqul/dracula.nvim'
+    use { "catppuccin/nvim", as = "catppuccin" }
     use { 'stevearc/dressing.nvim' }
 
     if packer_bootstrap then
