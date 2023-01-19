@@ -16,8 +16,7 @@ end
 vim.o.completeopt = "menu,menuone,noselect"
 
 -- Lsp signature settings
-local lsp_signature = require "lsp_signature"
-lsp_signature.setup {
+require("lsp_signature").setup {
     bind = true, -- This is mandatory, otherwise border config won't get registered.
     hint_enable = false,
 }
@@ -73,18 +72,14 @@ cmp.setup {
             select = true,
         },
         ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
+            if luasnip.expand_or_locally_jumpable() then
                 luasnip.expand_or_jump()
             else
                 fallback()
             end
         end, { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
+            if luasnip.locally_jumpable(-1) then
                 luasnip.jump(-1)
             else
                 fallback()
@@ -94,7 +89,6 @@ cmp.setup {
     sources = {
         { name = 'nvim_lsp' },
         { name = 'buffer' },
-        { name = 'vsnip' }, -- For vsnip users.
     },
 }
 
