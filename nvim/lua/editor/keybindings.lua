@@ -42,7 +42,7 @@ wk.register {
 wk.register({
     w = { ":w<cr>", "Save the file" },
     q = { ":q<cr>", "Quit the window" },
-    m = { ":NvimTreeToggle<CR>", "Toggle file manager" },
+    m = { ":Neotree toggle<CR>", "Toggle file manager" },
     r = { ":!sh run.sh<cr>", "Run code with run.sh" },
     v = { ":vertical split<CR>", "Vertical split the window" },
     s = { ":split<CR>", "Split the window" },
@@ -57,7 +57,6 @@ wk.register({
     },
     f = {
         name = "+find",
-        m = { ":NvimTreeFindFile<CR>", "Show current file in file manager" },
         f = { "<cmd>Telescope find_files<cr>", "Find File" },
         o = { "<cmd>Telescope oldfiles<cr>", "Show recent old file" },
         r = { "<cmd>lua require('spectre').open()<cr>", "Find and replace" },

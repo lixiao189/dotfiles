@@ -168,8 +168,15 @@ return require('packer').startup(function(use)
 
 
     -- The file manager
-    use 'nvim-tree/nvim-web-devicons' -- for file icons
-    use 'nvim-tree/nvim-tree.lua'
+    use {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
+        requires = {
+            'nvim-tree/nvim-web-devicons', -- for file icons
+            "MunifTanjim/nui.nvim",
+            { 's1n7ax/nvim-window-picker', tag = "v1.*" }
+        }
+    }
 
     -- Tree sitter plugin
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
