@@ -100,7 +100,7 @@ return require('packer').startup(function(use)
                     border = 'rounded',
                     colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
                     kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
-                }
+                },
             }
         end,
     })
@@ -227,7 +227,6 @@ return require('packer').startup(function(use)
     -- Themes
     use 'folke/tokyonight.nvim'
     use { "catppuccin/nvim", as = "catppuccin" }
-    use { 'stevearc/dressing.nvim' }
 
     if packer_bootstrap then
         require('packer').sync()

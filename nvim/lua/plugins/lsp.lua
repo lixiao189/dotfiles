@@ -13,6 +13,18 @@ function CopyTable(tab)
     return _copy(tab)
 end
 
+local augroup_format = vim.api.nvim_create_augroup("Format", { clear = true })
+local enable_format_on_save = function(_, bufnr)
+    vim.api.nvim_clear_autocmds({ group = augroup_format, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        group = augroup_format,
+        buffer = bufnr,
+        callback = function()
+            vim.lsp.buf.format({ bufnr = bufnr })
+        end,
+    })
+end
+
 vim.o.completeopt = "menu,menuone,noselect"
 
 -- Lsp signature settings
@@ -119,7 +131,7 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local global_opts = {}
 global_opts.capabilities = capabilities
-global_opts.on_attach = function(_, bufnr)
+global_opts.on_attach = function(client, bufnr)
     -- Show diagnostic under cursor
     vim.api.nvim_create_autocmd("CursorHold", {
         buffer = bufnr,
@@ -134,6 +146,8 @@ global_opts.on_attach = function(_, bufnr)
             vim.diagnostic.open_float(nil, opts)
         end
     })
+
+    enable_format_on_save(client, bufnr)
 end
 
 
