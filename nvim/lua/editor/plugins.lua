@@ -194,12 +194,6 @@ return require('packer').startup(function(use)
             require 'treesitter-context'.setup {}
         end
     }
-    use {
-        'abecodes/tabout.nvim',
-        config = function()
-            require('tabout').setup {}
-        end,
-    }
 
     -- The commenter
     use {
