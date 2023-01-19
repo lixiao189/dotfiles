@@ -7,6 +7,9 @@ vim.g.indent_blankline_filetype_exclude = {
     "Outline",
     "dashboard",
     "packer",
+    "qf",
+    "neo-tree",
+    "lspsagaoutline"
 }
 
 require("indent_blankline").setup {

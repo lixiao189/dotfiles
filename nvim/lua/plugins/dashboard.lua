@@ -11,3 +11,4 @@ dashboard.custom_header = {
 
 dashboard.hide_statusline = true
 dashboard.hide_tabline = true
+dashboard.hide_winbar = true
