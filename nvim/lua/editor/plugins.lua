@@ -108,14 +108,6 @@ return require('packer').startup(function(use)
     -- The plugin for key bindings
     use 'folke/which-key.nvim'
 
-    -- Inner terminal
-    use {
-        'akinsho/toggleterm.nvim',
-        config = function()
-            require("toggleterm").setup()
-        end
-    }
-
     -- Lsp colorized
     use {
         'norcalli/nvim-colorizer.lua',

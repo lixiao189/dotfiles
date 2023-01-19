@@ -24,13 +24,6 @@ map("n", "<C-l>", "<C-w>l")
 map("v", "<<", "<gv");
 map("v", ">>", ">gv");
 
--- Keybingdings for toggle_terminal plugin
-map("t", '<esc>', [[<C-\><C-n>]])
-map('t', '<C-h>', [[<C-\><C-n><C-W>h]])
-map('t', '<C-j>', [[<C-\><C-n><C-W>j]])
-map('t', '<C-k>', [[<C-\><C-n><C-W>k]])
-map('t', '<C-l>', [[<C-\><C-n><C-W>l]])
-
 -- Preview quickfix item in split view
 vim.cmd [[ autocmd! FileType qf nnoremap <buffer> <leader><Enter> <C-w><Enter><C-w>L ]]
 
