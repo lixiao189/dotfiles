@@ -24,8 +24,13 @@ return require('packer').startup(function(use)
     use 'dstein64/vim-startuptime'
     use 'nvim-lua/plenary.nvim'
 
-    -- The welcome plugin
-    use 'glepnir/dashboard-nvim'
+    use {
+        'goolord/alpha-nvim',
+        requires = { 'nvim-tree/nvim-web-devicons' },
+        config = function()
+            require 'alpha'.setup(require 'alpha.themes.startify'.config)
+        end
+    }
 
     -- The search and replace plugin
     use {

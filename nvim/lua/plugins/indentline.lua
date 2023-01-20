@@ -4,6 +4,7 @@ vim.g.indent_blankline_filetype_exclude = {
     "lspinstallinfo",
     "help",
     "checkhealth",
+    "alpha",
     "Outline",
     "dashboard",
     "packer",
