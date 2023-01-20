@@ -20,13 +20,17 @@ case $(uname) in
         brew install tmux
         brew install iterm2
         brew install karabiner-elements
-        
+       
+        brew install tree-sitter
         brew install nvim
         brew install bat
         brew install exa
         brew install fzf && /opt/homebrew/opt/fzf/install
       
         brew install node
+        brew install go 
+        brew install openjdk
+        brew install maven
         brew install fd
         brew install gnu-sed
         brew install ripgrep

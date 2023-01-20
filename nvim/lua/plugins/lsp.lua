@@ -46,7 +46,6 @@ local servers = {
     'yamlls',
     'rust_analyzer',
     'vimls',
-    'omnisharp_mono',
     'sumneko_lua',
     'intelephense',
 }

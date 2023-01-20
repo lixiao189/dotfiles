@@ -6,7 +6,10 @@ vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 require("nvim-treesitter.install").prefer_git = true
 
 require 'nvim-treesitter.configs'.setup {
-    ensure_installed = "all",
+    ensure_installed = {
+        "c", "lua", "vim", "help", "cpp", "go", "python", "javascript", "typescript",
+        "vue", "php", "yaml", "json", "cmake", "rust", "make", "markdown", "latex"
+    },
 
     -- Install languages synchronously (only applied to `ensure_installed`)
     sync_install = false,

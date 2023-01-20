@@ -49,6 +49,7 @@ alias ts="tmux source-file ~/.tmux.conf"
 alias td="tmux detach"
 alias e="exit"
 alias lg="lazygit"
+alias nv="neovide --multigrid"
 
 ### z for autojump 
 . /opt/homebrew/etc/profile.d/z.sh
@@ -84,7 +85,7 @@ export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
 export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
 export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
 
-### Path export
+### PATH export
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
@@ -93,6 +94,9 @@ export PATH="/opt/homebrew/opt/python@3.8/libexec/bin:$PATH"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
+
+export JAVA_HOME="/opt/homebrew/opt/openjdk/"
+
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
