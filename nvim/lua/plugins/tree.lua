@@ -31,5 +31,13 @@ require("neo-tree").setup {
     },
     window = {
         width = 30
+    },
+    event_handlers = {
+        {
+            event = "file_opened",
+            handler = function(_)
+                vim.o.signcolumn = "yes"
+            end
+        }
     }
 }
