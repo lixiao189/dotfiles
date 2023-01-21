@@ -5,6 +5,11 @@ vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 -- Use git to download parsers
 require("nvim-treesitter.install").prefer_git = true
 
+for _, config in pairs(require("nvim-treesitter.parsers").get_parser_configs()) do
+    config.install_info.url = config.install_info.url:gsub("https://github.com/",
+        "https://ghproxy.com/https://github.com/")
+end
+
 require 'nvim-treesitter.configs'.setup {
     ensure_installed = {
         "c", "lua", "vim", "help", "cpp", "go", "python", "javascript", "typescript",
