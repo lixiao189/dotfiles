@@ -1,20 +1,5 @@
 vim.cmd [[packadd packer.nvim]]
 
-local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
-        install_path })
-end
-
--- Run PackerCompile automatically
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
-
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
@@ -121,20 +106,11 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- The markdown previewer
-    use {
-        "ellisonleao/glow.nvim",
-        branch = 'main',
-        run = ':GlowInstall'
-    }
-
     -- The markdown previewer with web browser
     use({
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end,
     })
-
-
 
     -- The git tui client
     use 'kdheepak/lazygit.nvim'
@@ -184,12 +160,6 @@ return require('packer').startup(function(use)
     use 'windwp/nvim-ts-autotag'
     use 'JoosepAlviste/nvim-ts-context-commentstring'
     use {
-        'lewis6991/spellsitter.nvim',
-        config = function()
-            require('spellsitter').setup()
-        end
-    }
-    use {
         'nvim-treesitter/nvim-treesitter-context',
         config = function()
             require 'treesitter-context'.setup {}
@@ -222,8 +192,4 @@ return require('packer').startup(function(use)
     -- Themes
     use 'folke/tokyonight.nvim'
     use { "catppuccin/nvim", as = "catppuccin" }
-
-    if packer_bootstrap then
-        require('packer').sync()
-    end
 end)
