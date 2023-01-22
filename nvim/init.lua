@@ -13,9 +13,6 @@ require("plugins/lsp")
 -- The settings of the status line
 require("plugins/statusline")
 
--- The markdown preview plugin
-require("plugins/markdown")
-
 -- The notify plugin
 require("plugins/notify")
 
