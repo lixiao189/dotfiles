@@ -9,7 +9,8 @@ return require('packer').startup {
         use 'dstein64/vim-startuptime'
         use 'nvim-lua/plenary.nvim'
 
-        use { 'akinsho/bufferline.nvim',
+        use {
+            'akinsho/bufferline.nvim',
             config = function()
                 require("bufferline").setup {
                     options = {
@@ -38,10 +39,32 @@ return require('packer').startup {
         }
 
         -- Status line plugin
-        use 'nvim-lualine/lualine.nvim'
+        use {
+            'nvim-lualine/lualine.nvim',
+            config = function()
+                require('lualine').setup {
+                    options = {
+                        theme = 'catppuccin',
+                        disabled_filetypes = { 'neo-tree', 'lspsagaoutline', 'qf', 'alpha' },
+                        section_separators = '',
+                        component_separators = ''
+                    },
+                }
+            end
+        }
 
         -- Notify plugin
-        use 'rcarriga/nvim-notify'
+        use {
+            'rcarriga/nvim-notify',
+            config = function()
+                vim.notify = require("notify")
+                require("notify").setup({
+                    background_colour = "#000000",
+                })
+                -- Enable telescope support
+                require("telescope").load_extension("notify")
+            end
+        }
 
         -- tags plugin
         use 'ludovicchabant/vim-gutentags'
@@ -192,7 +215,26 @@ return require('packer').startup {
         }
 
         -- The indent plugin
-        use 'lukas-reineke/indent-blankline.nvim'
+        use {
+            'lukas-reineke/indent-blankline.nvim',
+            config = function()
+                vim.g.indent_blankline_filetype_exclude = {
+                    "lspinfo",
+                    "mason",
+                    "help",
+                    "checkhealth",
+                    "alpha",
+                    "packer",
+                    "qf",
+                    "neo-tree",
+                    "lspsagaoutline"
+                }
+
+                require("indent_blankline").setup {
+                    show_current_context = true,
+                }
+            end
+        }
 
         -- The plugin to solve cutting problem
         use { 'gbprod/cutlass.nvim',

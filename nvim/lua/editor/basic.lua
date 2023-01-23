@@ -10,6 +10,7 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.cindent = true
 vim.o.autoindent = true
+vim.o.showmode = false
 
 vim.o.shortmess = vim.o.shortmess .. "I"
 vim.o.pumheight = 10
