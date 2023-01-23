@@ -5,11 +5,22 @@ return require('packer').startup {
         -- Packer can manage itself
         use 'wbthomason/packer.nvim'
 
-        use 'akinsho/bufferline.nvim'
         use 'famiu/bufdelete.nvim'
         use 'dstein64/vim-startuptime'
         use 'nvim-lua/plenary.nvim'
 
+        use { 'akinsho/bufferline.nvim',
+            config = function()
+                require("bufferline").setup {
+                    options = {
+                        close_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
+                        right_mouse_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
+                        diagnostics_update_in_insert = true,
+                        diagnostics = "nvim_lsp",
+                    }
+                }
+            end
+        }
         use {
             'goolord/alpha-nvim',
             requires = { 'nvim-tree/nvim-web-devicons' },
@@ -53,16 +64,19 @@ return require('packer').startup {
         use 'onsails/lspkind-nvim'
         use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
         use 'L3MON4D3/LuaSnip' -- Snippets plugin
-        use 'ray-x/lsp_signature.nvim'
         use 'hrsh7th/cmp-cmdline'
         use 'folke/neodev.nvim'
         use 'williamboman/mason-lspconfig.nvim'
         use 'jayp0521/mason-null-ls.nvim'
         use 'jose-elias-alvarez/null-ls.nvim'
+        use "williamboman/mason.nvim"
         use {
-            "williamboman/mason.nvim",
+            'ray-x/lsp_signature.nvim',
             config = function()
-                require("mason").setup()
+                require("lsp_signature").setup {
+                    bind = true,
+                    hint_enable = false,
+                }
             end
         }
         use {
@@ -191,7 +205,6 @@ return require('packer').startup {
         }
 
         -- Themes
-        use 'folke/tokyonight.nvim'
         use { "catppuccin/nvim", as = "catppuccin" }
     end,
 
