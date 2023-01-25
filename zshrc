@@ -49,7 +49,7 @@ alias ts="tmux source-file ~/.tmux.conf"
 alias td="tmux detach"
 alias e="exit"
 alias lg="lazygit"
-alias nv="neovide --multigrid"
+alias diff="colordiff"
 
 ### z for autojump 
 . /opt/homebrew/etc/profile.d/z.sh

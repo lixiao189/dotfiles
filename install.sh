@@ -35,6 +35,7 @@ case $(uname) in
         brew install gnu-sed
         brew install ripgrep
         brew install watchman
+        brew install colordiff
         brew install lazygit
 
         python3 -m pip install pynvim
