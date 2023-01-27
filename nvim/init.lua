@@ -1,5 +1,5 @@
 -- Load plugins for vim
-require("editor/plugins")
+require("editor/packer")
 
 -- Load basic configuration for neovim
 require("editor/basic")
