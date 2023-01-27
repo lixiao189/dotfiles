@@ -151,7 +151,13 @@ return require('packer').startup {
         })
 
         -- The git tui client
-        use 'kdheepak/lazygit.nvim'
+        use {
+            'TimUntersberger/neogit',
+            requires = 'nvim-lua/plenary.nvim',
+            config = function()
+                require('neogit').setup {}
+            end
+        }
         use {
             'akinsho/git-conflict.nvim',
             config = function()

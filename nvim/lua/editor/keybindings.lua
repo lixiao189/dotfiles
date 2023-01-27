@@ -58,7 +58,7 @@ wk.register({
     },
     g = {
         name = "+git action",
-        t = { "<cmd>LazyGit<cr>", "Show git tui" },
+        t = { "<cmd>Neogit<cr>", "Show git tui" },
 
         p = { "<cmd>Gitsigns preview_hunk<CR>", "Preview the hunk changes" },
         d = { "<cmd>Gitsigns diffthis<CR>", "Show diff in this buffer" },
