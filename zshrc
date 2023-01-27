@@ -43,7 +43,6 @@ fi
 ### alias
 alias ls="exa -l --icons"
 alias vim="nvim"
-alias cat="bat --theme='base16'"
 alias t="tmux attach || tmux"
 alias ts="tmux source-file ~/.tmux.conf"
 alias td="tmux detach"
