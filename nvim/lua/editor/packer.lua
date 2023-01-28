@@ -145,10 +145,21 @@ return require('packer').startup {
         }
 
         -- The markdown previewer with web browser
-        use({
+        use {
             "iamcco/markdown-preview.nvim",
             run = function() vim.fn["mkdp#util#install"]() end,
-        })
+        }
+
+        -- Latex support
+        use {
+            'lervag/vimtex',
+            config = function()
+                vim.g.vimtex_compiler_latexmk_engines = {
+                    ['_'] = '-xelatex'
+                }
+                vim.g.vimtex_view_method = "skim"
+            end
+        }
 
         -- The git tui client
         use {
