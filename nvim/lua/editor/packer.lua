@@ -124,11 +124,6 @@ return require('packer').startup {
                     lightbulb = {
                         sign = false,
                     },
-                    ui = {
-                        border = 'rounded',
-                        colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
-                        kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
-                    },
                 }
             end,
         })
