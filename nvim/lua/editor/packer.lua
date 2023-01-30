@@ -124,6 +124,9 @@ return require('packer').startup {
                     lightbulb = {
                         sign = false,
                     },
+                    symbol_in_winbar = {
+                        show_file = false,
+                    },
                 }
             end,
         })
