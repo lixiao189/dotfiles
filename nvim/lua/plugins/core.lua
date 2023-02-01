@@ -25,6 +25,7 @@ return {
         'karb94/neoscroll.nvim',
         config = true
     },
+
     {
         'akinsho/bufferline.nvim',
         config = function()
@@ -194,6 +195,7 @@ return {
             require("catppuccin").setup {
                 transparent_background = true,
                 integrations = {
+                    fidget = true,
                     cmp = true,
                     gitsigns = true,
                     telescope = true,
