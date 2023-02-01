@@ -38,13 +38,11 @@ vim.o.pumheight = 10 -- pop up menu height
 vim.o.swapfile = false -- creates a swap file
 vim.o.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program) it is not allowed to be edited
 
-require("catppuccin").setup {
-    transparent_background = true,
-    integrations = {
-        notify = true,
-        lsp_saga = true,
-    }
-}
+vim.o.foldmethod = "expr"
+vim.o.foldlevel = 99
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+
+vim.o.completeopt = "menu,menuone,noselect"
 
 -- Disable underline
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
@@ -55,8 +53,41 @@ vim.lsp.with(
 
 vim.cmd [[
     syntax on
-    colorscheme catppuccin-latte
     filetype plugin indent on " required
     autocmd FileType go setlocal noexpandtab
     autocmd FileType vim,c,cpp,vue,html,css,ts,yaml,javascript,json,typescript setlocal tabstop=2 shiftwidth=2
 ]]
+
+-- Keybindings
+local function map(mode, lhs, rhs)
+    vim.api.nvim_set_keymap(mode, lhs, rhs, { noremap = true, silent = true })
+end
+
+-- Moving to beginning and the end
+map("n", "L", "$")
+map("n", "H", "^")
+map("v", "L", "$")
+map("v", "H", "^")
+
+-- Moving to previous line
+map("n", "K", ":m-2<CR>")
+map("n", "J", ":m+<CR>")
+
+-- Use esc to stop highlighting
+map("n", "<esc>", "<CMD>noh<CR>")
+
+map("n", "<A-Down>", ":resize -2<CR>")
+map("n", "<A-Up>", ":resize +2<CR>")
+map("n", "<A-Left>", ":vertical resize -2<CR>")
+map("n", "<A-Right>", ":vertical resize +2<CR>")
+
+map("n", "<C-h>", "<C-w>h")
+map("n", "<C-j>", "<C-w>j")
+map("n", "<C-k>", "<C-w>k")
+map("n", "<C-l>", "<C-w>l")
+
+map("v", "<<", "<gv");
+map("v", ">>", ">gv");
+
+-- Preview quickfix item in split view
+vim.cmd [[ autocmd! FileType qf nnoremap <buffer> <leader><Enter> <C-w><Enter><C-w>L ]]
