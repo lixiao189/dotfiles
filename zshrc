@@ -44,6 +44,7 @@ fi
 alias ls="exa -l --icons"
 alias vim="nvim"
 alias t="tmux attach || tmux"
+alias r="ranger"
 alias ts="tmux source-file ~/.tmux.conf"
 alias td="tmux detach"
 alias e="exit"

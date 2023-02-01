@@ -48,3 +48,4 @@ ln -s ~/.dotfiles/tmux/tmux.conf.local ~/.tmux.conf.local
 ln -s ~/.dotfiles/alacritty ~/.config/alacritty
 ln -s ~/.dotfiles/nvim ~/.config/nvim
 ln -s ~/.dotfiles/karabiner ~/.config/karabiner
+ln -s ~/.dotfiles/ranger ~/.config/ranger
