@@ -83,18 +83,15 @@ return {
                     'autopep8',
                     'prettier'
                 },
-                automatic_installation = true,
-                automatic_setup = false, -- Recommended, but optional
             })
+            require 'mason-null-ls'.setup_handlers {
+                function(source_name, methods)
+                    require("mason-null-ls.automatic_setup")(source_name, methods)
+                end
+            }
 
             -- set formater
-            local null_ls = require("null-ls")
-            require("null-ls").setup {
-                sources = {
-                    null_ls.builtins.formatting.prettier,
-                    null_ls.builtins.formatting.autopep8
-                }
-            }
+            require("null-ls").setup()
         end
     },
 }
