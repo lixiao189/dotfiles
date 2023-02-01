@@ -10,6 +10,12 @@ return require('packer').startup {
         use 'nvim-lua/plenary.nvim'
 
         use {
+            'karb94/neoscroll.nvim',
+            config = function()
+                require('neoscroll').setup()
+            end
+        }
+        use {
             'akinsho/bufferline.nvim',
             config = function()
                 require("bufferline").setup {

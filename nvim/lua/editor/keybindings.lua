@@ -8,6 +8,10 @@ map("n", "H", "^")
 map("v", "L", "$")
 map("v", "H", "^")
 
+-- Moving to previous line
+map("n", "K", ":m-2<CR>")
+map("n", "J", ":m+<CR>")
+
 -- Use esc to stop highlighting
 map("n", "<esc>", "<CMD>noh<CR>")
 
