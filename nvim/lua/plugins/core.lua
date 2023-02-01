@@ -1,5 +1,6 @@
 return {
     'famiu/bufdelete.nvim',
+    'dstein64/vim-startuptime',
     'nvim-lua/plenary.nvim',
 
     {

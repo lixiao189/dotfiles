@@ -1,4 +1,4 @@
--- Load basic configuration for neovim
+-- Load basic editor configuration
 require("basic")
 
 -- Setup nvim package manager
@@ -15,7 +15,6 @@ if not vim.loop.fs_stat(lazypath) then
     }
 end
 vim.opt.rtp:prepend(lazypath)
-
 require("lazy").setup("plugins", {
     -- Setup git mirrors
     git = {
