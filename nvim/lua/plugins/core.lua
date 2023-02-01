@@ -2,6 +2,8 @@ return {
     'famiu/bufdelete.nvim',
     'dstein64/vim-startuptime',
     'nvim-lua/plenary.nvim',
+    'danilamihailov/beacon.nvim',
+
     {
         {
             'nvim-tree/nvim-web-devicons',
@@ -198,7 +200,8 @@ return {
                     notify = true,
                     lsp_saga = true,
                     neotree = true,
-                    neogit = true
+                    neogit = true,
+                    beacon = true,
                 }
             }
         end
