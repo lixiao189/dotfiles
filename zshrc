@@ -44,8 +44,8 @@ fi
 alias ls="exa -l --icons"
 alias vim="nvim"
 alias t="tmux attach || tmux"
-alias r=". ranger"
-alias ranger=". ranger"
+alias r="ranger"
+alias rcd=". ranger"
 alias ts="tmux source-file ~/.tmux.conf"
 alias td="tmux detach"
 alias e="exit"
@@ -99,6 +99,7 @@ export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
 
 export JAVA_HOME="/opt/homebrew/opt/openjdk/"
+export EDITOR="nvim"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 

@@ -17,12 +17,13 @@ case $(uname) in
         brew tap homebrew/cask-fonts
         brew install font-caskaydia-cove-nerd-font
 
-        brew install tmux
         brew install iterm2
         brew install karabiner-elements
        
         brew install tree-sitter
         brew install nvim
+        brew install tmux
+        brew install ranger
         brew install bat
         brew install exa
         brew install fzf && /opt/homebrew/opt/fzf/install
