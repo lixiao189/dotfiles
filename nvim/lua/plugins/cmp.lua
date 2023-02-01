@@ -9,6 +9,8 @@ return {
             'hrsh7th/cmp-buffer',
             'onsails/lspkind-nvim',
             'hrsh7th/cmp-cmdline',
+            'hrsh7th/cmp-path',
+            'davidsierradz/cmp-conventionalcommits',
         },
         config = function()
             -- nvim-cmp setup
@@ -55,7 +57,15 @@ return {
                 sources = {
                     { name = 'nvim_lsp' },
                     { name = 'buffer' },
+                    { name = 'path' },
                 },
+            }
+
+            require 'cmp'.setup.buffer {
+                sources = require 'cmp'.config.sources(
+                    { { name = 'conventionalcommits' } },
+                    { { name = 'buffer' } }
+                ),
             }
 
             -- The settings of the cmdline complete
