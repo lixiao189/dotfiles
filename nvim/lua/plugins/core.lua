@@ -2,12 +2,26 @@ return {
     'famiu/bufdelete.nvim',
     'dstein64/vim-startuptime',
     'nvim-lua/plenary.nvim',
+    {
+        {
+            'nvim-tree/nvim-web-devicons',
+            opts = {
+                override = {
+                    md = {
+                        icon = "",
+                        color = "#519aba",
+                        cterm_color = "67",
+                        name = "Markdown",
+                    },
+                }
+            }
+        }
+    },
+
 
     {
         'karb94/neoscroll.nvim',
-        config = function()
-            require('neoscroll').setup()
-        end
+        config = true
     },
     {
         'akinsho/bufferline.nvim',
@@ -24,7 +38,6 @@ return {
     },
     {
         'goolord/alpha-nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
             require 'alpha'.setup(require 'alpha.themes.startify'.config)
         end
@@ -33,9 +46,7 @@ return {
     -- The search and replace plugin
     {
         'windwp/nvim-spectre',
-        config = function()
-            require('spectre').setup()
-        end
+        config = true
     },
 
     -- Status line plugin
@@ -106,31 +117,6 @@ return {
         end
     },
 
-    -- The git tui client
-    {
-        'TimUntersberger/neogit',
-        dependencies = 'nvim-lua/plenary.nvim',
-        config = function()
-            require('neogit').setup {}
-        end
-    },
-    {
-        'akinsho/git-conflict.nvim',
-        config = function()
-            require('git-conflict').setup()
-        end
-    },
-    -- Show the diff signs of the git
-    {
-        'lewis6991/gitsigns.nvim',
-        config = function()
-            require('gitsigns').setup {
-                signs = {
-                    untracked = { text = '│' },
-                }
-            }
-        end
-    },
 
     -- The telescope support
     'nvim-telescope/telescope.nvim',
@@ -142,7 +128,6 @@ return {
             require('nvim-autopairs').setup()
         end
     },
-
 
     -- The file manager
     {
@@ -188,7 +173,8 @@ return {
     },
 
     -- The plugin to solve cutting problem
-    { 'gbprod/cutlass.nvim',
+    {
+        'gbprod/cutlass.nvim',
         config = function()
             require("cutlass").setup {
                 cut_key = 'x',
@@ -206,11 +192,15 @@ return {
             require("catppuccin").setup {
                 transparent_background = true,
                 integrations = {
+                    cmp = true,
+                    gitsigns = true,
+                    telescope = true,
                     notify = true,
                     lsp_saga = true,
+                    neotree = true,
+                    neogit = true
                 }
             }
-
         end
     }
 }

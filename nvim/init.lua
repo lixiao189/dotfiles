@@ -19,5 +19,8 @@ require("lazy").setup("plugins", {
     -- Setup git mirrors
     git = {
         url_format = 'https://ghproxy.com/https://github.com/%s.git'
+    },
+    install = {
+        colorscheme = { "habamax", "catppuccin-latte", "catppuccin" },
     }
 })
