@@ -26,7 +26,6 @@ case $(uname) in
         brew install ranger
         brew install bat
         brew install exa
-        brew install fzf && /opt/homebrew/opt/fzf/install
       
         brew install node
         brew install go 

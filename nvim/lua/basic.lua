@@ -76,15 +76,15 @@ map("n", "J", ":m+<CR>")
 -- Use esc to stop highlighting
 map("n", "<esc>", "<CMD>noh<CR>")
 
-map("n", "<A-Down>", ":resize -2<CR>")
-map("n", "<A-Up>", ":resize +2<CR>")
-map("n", "<A-Left>", ":vertical resize -2<CR>")
-map("n", "<A-Right>", ":vertical resize +2<CR>")
+-- map("n", "<A-Down>", ":resize -2<CR>")
+-- map("n", "<A-Up>", ":resize +2<CR>")
+-- map("n", "<A-Left>", ":vertical resize -2<CR>")
+-- map("n", "<A-Right>", ":vertical resize +2<CR>")
 
-map("n", "<C-h>", "<C-w>h")
-map("n", "<C-j>", "<C-w>j")
-map("n", "<C-k>", "<C-w>k")
-map("n", "<C-l>", "<C-w>l")
+-- map("n", "<C-h>", "<C-w>h")
+-- map("n", "<C-j>", "<C-w>j")
+-- map("n", "<C-k>", "<C-w>k")
+-- map("n", "<C-l>", "<C-w>l")
 
 map("v", "<<", "<gv");
 map("v", ">>", ">gv");

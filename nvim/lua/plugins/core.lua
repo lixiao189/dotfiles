@@ -4,6 +4,11 @@ return {
     'danilamihailov/beacon.nvim',
 
     {
+        "aserowy/tmux.nvim",
+        config = function() return require("tmux").setup() end
+    },
+
+    {
         {
             'nvim-tree/nvim-web-devicons',
             opts = {
