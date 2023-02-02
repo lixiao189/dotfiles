@@ -21,7 +21,8 @@ case $(uname) in
         brew install ranger
         brew install bat
         brew install exa
-      
+     
+        brew install python@3.11 
         brew install node
         brew install go 
         brew install openjdk

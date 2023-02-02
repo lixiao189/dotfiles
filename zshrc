@@ -90,7 +90,7 @@ export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
-export PATH="/opt/homebrew/opt/python@3.8/libexec/bin:$PATH"
+export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
 
