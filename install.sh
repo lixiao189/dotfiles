@@ -2,11 +2,6 @@
 /bin/bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
 zinit self-update
 
-# nvim packer install
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
-
 # Install the dependencies on Mac
 case $(uname) in
     Darwin)
