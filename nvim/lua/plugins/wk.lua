@@ -9,8 +9,6 @@ return {
             }
             wk.register({
                 w = { ":w<cr>", "Save the file" },
-                q = { ":q<cr>", "Quit the window" },
-                Q = { ":qa<cr>", "Quit neovim" },
                 m = { ":Neotree toggle<CR>", "Toggle file manager" },
                 r = { ":!sh run.sh<cr>", "Run code with run.sh" },
                 v = { ":vertical split<CR>", "Vertical split the window" },
