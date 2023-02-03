@@ -2,6 +2,9 @@
 /bin/bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
 zinit self-update
 
+# install tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 # Install the dependencies on Mac
 case $(uname) in
     Darwin)
@@ -24,13 +27,10 @@ case $(uname) in
      
         brew install python@3.11 
         brew install node
-        brew install go 
-        brew install openjdk
-        brew install maven
         brew install fd
         brew install gnu-sed
         brew install ripgrep
-        brew install watchman
+        brew install entr
         brew install colordiff
         brew install lazygit
 
