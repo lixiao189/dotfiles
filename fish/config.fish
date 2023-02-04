@@ -25,3 +25,8 @@ alias td 'tmux detach'
 
 #------------- pure settings ---------------------
 set -gx pure_enable_single_line_prompt true 
+
+#------------- proxy settings --------------------
+set -x http_proxy 'http://127.0.0.1:7890'
+set -x https_proxy 'http://127.0.0.1:7890'
+set -x all_proxy 'socks5//127.0.0.1:7891'
