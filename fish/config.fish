@@ -26,6 +26,11 @@ alias td 'tmux detach'
 #------------- pure settings ---------------------
 set -gx pure_enable_single_line_prompt true 
 
+#------------- brew settings ---------------------
+set -gx HOMEBREW_BREW_GIT_REMOTE "https://mirrors.ustc.edu.cn/brew.git"
+set -gx HOMEBREW_CORE_GIT_REMOTE "https://mirrors.ustc.edu.cn/homebrew-core.git"
+set -gx HOMEBREW_BOTTLE_DOMAIN "https://mirrors.ustc.edu.cn/homebrew-bottles"
+
 #------------- proxy settings --------------------
 set -x http_proxy 'http://127.0.0.1:7890'
 set -x https_proxy 'http://127.0.0.1:7890'
