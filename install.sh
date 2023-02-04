@@ -1,9 +1,3 @@
-# fisher installation
-curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-
-# install tpm
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
 # Install the dependencies on Mac
 case $(uname) in
     Darwin)
@@ -45,3 +39,9 @@ ln -s ~/.dotfiles/fish ~/.config/fish
 
 # Install devicons for ranger 
 git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
+
+# fisher installation
+curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+
+# install tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
