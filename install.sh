@@ -44,3 +44,6 @@ ln -s ~/.dotfiles/alacritty ~/.config/alacritty
 ln -s ~/.dotfiles/nvim ~/.config/nvim
 ln -s ~/.dotfiles/karabiner ~/.config/karabiner
 ln -s ~/.dotfiles/ranger ~/.config/ranger
+
+# Install devicons for ranger 
+git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
