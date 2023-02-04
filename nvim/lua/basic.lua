@@ -55,7 +55,7 @@ vim.cmd [[
     syntax on
     filetype plugin indent on " required
     autocmd FileType go setlocal noexpandtab
-    autocmd FileType vim,c,cpp,vue,html,css,ts,yaml,javascript,json,typescript setlocal tabstop=2 shiftwidth=2
+    autocmd FileType vim,c,cpp,vue,html,css,ts,yaml,javascript,json,typescript,astro setlocal tabstop=2 shiftwidth=2
 ]]
 
 -- Keybindings
