@@ -23,3 +23,5 @@ alias ts 'tmux source-file ~/.tmux.conf'
 alias diff colordiff
 alias td 'tmux detach'
 
+#------------- pure settings ---------------------
+set -gx pure_enable_single_line_prompt true 
