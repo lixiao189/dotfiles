@@ -1,6 +1,5 @@
-# install zinit
-/bin/bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
-zinit self-update
+# fisher installation
+curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 
 # install tpm
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
