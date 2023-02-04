@@ -3,3 +3,6 @@ if status is-interactive
 end
 
 set -g fish_greeting
+
+# default editor
+set -gx EDITOR "nvim" 
