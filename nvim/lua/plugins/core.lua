@@ -19,6 +19,12 @@ return {
                         cterm_color = "67",
                         name = "Markdown",
                     },
+                    log = {
+                        icon = "",
+                        color = "#6d8086",
+                        cterm_color = "66",
+                        name = "Log",
+                    }
                 }
             }
         }
