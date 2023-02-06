@@ -76,9 +76,6 @@ map("n", "J", ":m+<CR>")
 -- Use esc to stop highlighting
 map("n", "<esc>", "<CMD>noh<CR>")
 
-map("n", "<M-q>", ":q<CR>")
-map("n", "<M-x>", ":qa<CR>")
-
 map("v", "<<", "<gv");
 map("v", ">>", ">gv");
 

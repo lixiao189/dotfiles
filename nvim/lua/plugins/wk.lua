@@ -8,6 +8,8 @@ return {
                 ["]b"] = { "<cmd>BufferLineCycleNext<CR>", "Next buffer", },
             }
             wk.register({
+                q = { ":q<CR>", "Close the panel" },
+                Q = { ":qa<CR>", "Close the app" },
                 w = { ":w<cr>", "Save the file" },
                 m = { ":Neotree toggle<CR>", "Toggle file manager" },
                 r = { ":!sh run.sh<cr>", "Run code with run.sh" },
