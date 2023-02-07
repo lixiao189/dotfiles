@@ -1,6 +1,12 @@
 return {
     'neovim/nvim-lspconfig',
     {
+        "folke/neoconf.nvim",
+        config = function()
+            require("neoconf").setup {}
+        end
+    },
+    {
         "williamboman/mason.nvim",
         config = function()
             require("mason").setup()

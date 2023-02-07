@@ -1,0 +1,7 @@
+{
+  "lspconfig": {
+    "clangd": {
+      "clangd.fallbackFlags": ["-std=c++17"]
+    }
+  }
+}
