@@ -1,7 +1,3 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-end
-
 set -g fish_greeting
 
 #------------- default editor --------------------
@@ -23,9 +19,6 @@ alias t 'tmux attach || tmux'
 alias ts 'tmux source-file ~/.tmux.conf'
 alias diff colordiff
 alias td 'tmux detach'
-
-#------------- pure settings ---------------------
-set -gx pure_enable_single_line_prompt true 
 
 #------------- brew settings ---------------------
 set -gx HOMEBREW_BREW_GIT_REMOTE "https://mirrors.ustc.edu.cn/brew.git"

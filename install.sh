@@ -35,14 +35,13 @@ ln -s ~/.dotfiles/alacritty ~/.config/alacritty
 ln -s ~/.dotfiles/nvim ~/.config/nvim
 ln -s ~/.dotfiles/karabiner ~/.config/karabiner
 ln -s ~/.dotfiles/ranger ~/.config/ranger
-ln -s ~/.dotfiles/fish/fish_plugins ~/.config/fish/fish_plugins
-ln -s ~/.dotfiles/fish/config.fish ~/.config/fish/config.fish
+ln -s ~/.dotfiles/omf/ ~/.config/omf
 
 # Install devicons for ranger 
 git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
 
-# fisher installation
-curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+# oh my fish installation
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 
 # install tpm
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
