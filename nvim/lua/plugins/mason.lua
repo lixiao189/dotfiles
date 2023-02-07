@@ -37,11 +37,12 @@ return {
                 ensure_installed = servers,
             }
 
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
             require("neodev").setup {} -- make sure to setup lua-dev BEFORE lspconfig
             require("mason-lspconfig").setup_handlers {
                 function(server_name) -- default handler
+                    local capabilities = require('cmp_nvim_lsp').default_capabilities()
                     local lsp_server = require("lspconfig")[server_name]
+
                     if lsp_server == nil then
                         return
                     elseif server_name == "sumneko_lua" then
@@ -55,6 +56,12 @@ return {
                                     }
                                 }
                             }
+                        }
+                    elseif server_name == "clangd" then
+                        capabilities.offsetEncoding = { "utf-16" }
+                        lsp_server.setup {
+                            capabilities = capabilities,
+                            on_attach = attach_func
                         }
                     else
                         lsp_server.setup {
