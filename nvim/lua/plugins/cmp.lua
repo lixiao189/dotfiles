@@ -92,15 +92,6 @@ return {
     },
 
     {
-        'ray-x/lsp_signature.nvim',
-        config = function()
-            require("lsp_signature").setup {
-                bind = true,
-                hint_enable = false,
-            }
-        end
-    },
-    {
         'Shatur/neovim-cmake',
         dependencies = { "mfussenegger/nvim-dap" },
         config = function()

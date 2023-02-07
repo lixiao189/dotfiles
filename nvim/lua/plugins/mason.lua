@@ -1,14 +1,4 @@
 return {
-    {
-        -- Show lsp progress
-        'j-hui/fidget.nvim',
-        opts = {
-            window = {
-                blend = 0,
-            },
-        }
-    },
-
     'neovim/nvim-lspconfig',
     {
         "williamboman/mason.nvim",

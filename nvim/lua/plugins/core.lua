@@ -196,6 +196,29 @@ return {
         end
     },
 
+
+    {
+        "folke/noice.nvim",
+        config = function()
+            require("noice").setup {
+                {
+                    lsp = {
+                        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                        override = {
+                            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                            ["vim.lsp.util.stylize_markdown"] = true,
+                            ["cmp.entry.get_documentation"] = true,
+                        },
+                    },
+                }
+            }
+        end,
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        }
+    },
+
     -- Themes
     {
         "catppuccin/nvim",
@@ -205,7 +228,7 @@ return {
             require("catppuccin").setup {
                 transparent_background = true,
                 integrations = {
-                    fidget = true,
+                    noice = true,
                     cmp = true,
                     gitsigns = true,
                     telescope = true,
@@ -217,5 +240,5 @@ return {
                 }
             }
         end
-    }
+    },
 }

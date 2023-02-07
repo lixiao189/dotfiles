@@ -1,4 +1,10 @@
 return {
+    {
+        'bennypowers/nvim-regexplainer',
+        dependencies = { 'MunifTanjim/nui.nvim' },
+        config = function() require 'regexplainer'.setup() end,
+    },
+
     -- Tree sitter plugin
     {
         'nvim-treesitter/nvim-treesitter',
@@ -15,7 +21,7 @@ return {
             require 'nvim-treesitter.configs'.setup {
                 ensure_installed = {
                     "c", "vim", "lua", "cpp", "go", "python", "javascript", "html", "css",
-                    "typescript", "vue", "php", "cmake", "markdown"
+                    "typescript", "vue", "cmake", "markdown", "markdown_inline", "bash", "regex"
                 },
 
                 -- Install languages synchronously (only applied to `ensure_installed`)
