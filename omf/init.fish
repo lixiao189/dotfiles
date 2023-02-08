@@ -26,9 +26,9 @@ set -gx HOMEBREW_CORE_GIT_REMOTE "https://mirrors.ustc.edu.cn/homebrew-core.git"
 set -gx HOMEBREW_BOTTLE_DOMAIN "https://mirrors.ustc.edu.cn/homebrew-bottles"
 
 #------------- proxy settings --------------------
-set -x http_proxy 'http://127.0.0.1:7890'
-set -x https_proxy 'http://127.0.0.1:7890'
-set -x all_proxy 'socks5//127.0.0.1:7891'
+set -gx http_proxy 'http://127.0.0.1:7890'
+set -gx https_proxy 'http://127.0.0.1:7890'
+set -gx all_proxy 'socks5//127.0.0.1:7891'
 
 #------------- theme settings --------------------
 set theme_primary                                   1eb980

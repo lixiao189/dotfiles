@@ -97,7 +97,7 @@ return {
         config = function()
             vim.g.gutentags_modules = { 'ctags', 'gtags_cscope' }
             vim.g.gutentags_plus_switch = 1
-            vim.g.gutentags_project_root = { '.root', '.git' }
+            vim.g.gutentags_project_root = { '.root' }
             vim.g.gutentags_cache_dir = vim.fn.expand('~/.cache/tags')
             vim.g.gutentags_plus_nomap = 1
         end
