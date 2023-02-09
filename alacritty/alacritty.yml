@@ -10,14 +10,13 @@ import:
 # window style setting
 window:
   dimensions:
-    columns: 180
-    lines: 54
+    columns: 140
+    lines: 40
   dynamic_title: true
   dynamic_padding: false
   padding:
     x: 10
     y: 8
-  decorations_theme_variant: dark
 
 # cursor setting
 cursor:
@@ -29,7 +28,13 @@ cursor:
 
 # setting fonts
 font:
-  size: 13.0
+  offset:
+    x: 1
+    y: 4
+  glyph_offset:
+    x: 0
+    y: 2
+  size: 12.0
   normal:
     family: "CaskaydiaCove Nerd Font Mono"
     style: "Regular"
@@ -43,7 +48,7 @@ font:
     family: "CaskaydiaCove Nerd Font Mono"
     style: Bold Italic
 
-# Map option as alt in Mac OS
+# fix for meta key
 key_bindings:
   - { key: A, mods: Alt, chars: "\x1ba" }
   - { key: B, mods: Alt, chars: "\x1bb" }
@@ -119,4 +124,4 @@ key_bindings:
   - { key: Key5, mods: Alt|Shift, chars: "\x1b%" } # Alt + %
   - { key: Key6, mods: Alt|Shift, chars: "\x1b^" } # Alt + ^
   - { key: Backslash, mods: Alt, chars: "\x1b\\" } # Alt + \
-  - { key: Backslash, mods: Alt|Shift, chars: "\x1b|" } # Alt + |
+  - { key: Backslash, mods: Alt|Shift, chars: "\x1b|" } # Alt + |```
