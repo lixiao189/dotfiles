@@ -10,11 +10,11 @@ set -gx PATH /opt/homebrew/opt/python@3.10/libexec/bin $PATH
 set -gx PATH github/copilot.vim $PATH
 
 #------------- alias settings --------------------
-alias vim nvim
+alias nv nvim
 alias r ranger
 alias lg lazygit
 alias e exit
-alias ls="exa -l --icons"
+alias ls "exa -l --icons"
 alias t 'tmux attach || tmux'
 alias ts 'tmux source-file ~/.tmux.conf'
 alias diff colordiff
