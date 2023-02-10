@@ -57,13 +57,6 @@ return {
                                 }
                             }
                         }
-                    elseif server_name == "typescript-language-server" then
-                        client.server_capabilities.documentFormattingProvider = false
-                        client.server_capabilities.documentRangeFormattingProvider = false
-                        lsp_server.setup {
-                            capabilities = capabilities,
-                            on_attach = attach_func
-                        }
                     elseif server_name == "clangd" then
                         capabilities.offsetEncoding = { "utf-16" }
                         lsp_server.setup {

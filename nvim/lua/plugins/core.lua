@@ -41,6 +41,7 @@ return {
         config = function()
             require("bufferline").setup {
                 options = {
+                    separator_style = { "", "" },
                     close_command = "Bdelete! %d", -- can be a string | function, see "Mo actions"
                     right_mo_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
                     diagnostics_update_in_insert = true,
