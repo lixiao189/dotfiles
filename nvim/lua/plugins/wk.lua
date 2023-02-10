@@ -16,6 +16,14 @@ return {
                 r = { ":!sh run.sh<cr>", "Run code with run.sh" },
                 v = { ":vertical split<CR>", "Vertical split the window" },
                 s = { ":split<CR>", "Split the window" },
+                h = {
+                    name = "+easy motion",
+                    w = { ":HopWord<CR>", "Go to any word" },
+                    c = { ":HopChar1<CR>", "Go to any character" },
+                    l = { ":HopLine<CR>", "Go to any line" },
+                    a = { ":HopAnywhere<CR>", "Go to anywhere" },
+                    p = { ":HopPattern<CR>", "Go to any pattern" },
+                },
                 t = {
                     name = "+tags",
                     g = { ":lua require'telescope.builtin'.tags()<CR>", "Find symbol globally" },

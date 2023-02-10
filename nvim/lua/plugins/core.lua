@@ -4,6 +4,13 @@ return {
     'danilamihailov/beacon.nvim',
 
     {
+        'phaazon/hop.nvim',
+        config = function()
+            require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+        end
+    },
+
+    {
         "aserowy/tmux.nvim",
         config = function() return require("tmux").setup() end
     },

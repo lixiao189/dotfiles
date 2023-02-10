@@ -18,6 +18,7 @@
   "git-conflict.nvim": { "branch": "main", "commit": "c92604a64a2cce15a6e6a753f4501bcee06fa00a" },
   "gitsigns.nvim": { "branch": "main", "commit": "ec4742a7eebf68bec663041d359b95637242b5c3" },
   "gutentags_plus": { "branch": "master", "commit": "345e49dd8d4fd14f59959e6e62b628359bfe263b" },
+  "hop.nvim": { "branch": "master", "commit": "90db1b2c61b820e230599a04fedcd2679e64bd07" },
   "indent-blankline.nvim": { "branch": "master", "commit": "8299fe7703dfff4b1752aeed271c3b95281a952d" },
   "lazy.nvim": { "branch": "main", "commit": "e28555950f8ceb52e86533df6df333dcd55fba04" },
   "lspkind-nvim": { "branch": "master", "commit": "c68b3a003483cf382428a43035079f78474cd11e" },
