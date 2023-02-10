@@ -70,7 +70,7 @@ return {
             require('lualine').setup {
                 options = {
                     theme = 'catppuccin',
-                    disabled_filetypes = { 'neo-tree', 'lspsagaoutline', 'qf', 'alpha' },
+                    disabled_filetypes = { 'neo-tree', 'lspsagaoutline', 'qf', 'alpha', 'dbui' },
                     section_separators = '',
                     component_separators = ''
                 },

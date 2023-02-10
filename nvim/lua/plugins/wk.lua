@@ -11,6 +11,7 @@ return {
                 q = { ":q<CR>", "Close the panel" },
                 Q = { ":qa<CR>", "Close the app" },
                 w = { ":w<cr>", "Save the file" },
+                d = { ":DBUIToggle<CR>", "Open database ui" },
                 m = { ":Neotree toggle<CR>", "Toggle file manager" },
                 r = { ":!sh run.sh<cr>", "Run code with run.sh" },
                 v = { ":vertical split<CR>", "Vertical split the window" },
