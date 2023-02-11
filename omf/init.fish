@@ -15,11 +15,14 @@ alias r ranger
 alias lg lazygit
 alias e exit
 alias ls "exa -l --icons"
-alias t 'tmux attach || tmux'
 alias ts 'tmux source-file ~/.tmux.conf'
 alias diff colordiff
-alias td 'tmux detach'
 
+alias t 'tmux attach || tmux new-session'
+alias ta 'tmux attach -t'
+alias tn 'tmux new-session'
+alias tl 'tmux list-sessions'
+alias td 'tmux detach'
 #------------- brew settings ---------------------
 set -gx HOMEBREW_BREW_GIT_REMOTE "https://mirrors.ustc.edu.cn/brew.git"
 set -gx HOMEBREW_CORE_GIT_REMOTE "https://mirrors.ustc.edu.cn/homebrew-core.git"
