@@ -31,7 +31,7 @@ return {
             local servers = {
                 'clangd',
                 'neocmake',
-                'sumneko_lua',
+                'lua_ls',
             }
             require("mason-lspconfig").setup {
                 ensure_installed = servers,
@@ -45,7 +45,7 @@ return {
 
                     if lsp_server == nil then
                         return
-                    elseif server_name == "sumneko_lua" then
+                    elseif server_name == "lua_ls" then
                         lsp_server.setup {
                             capabilities = capabilities,
                             on_attach = attach_func,
