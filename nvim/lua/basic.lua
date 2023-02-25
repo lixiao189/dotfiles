@@ -43,13 +43,14 @@ vim.o.foldlevel = 99
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 
 vim.o.completeopt = "menu,menuone,noselect"
+vim.o.ignorecase = true -- ignorecase in auto completion
 
 -- Disable underline
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
-vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = false
-})
+    vim.lsp.with(
+        vim.lsp.diagnostic.on_publish_diagnostics, {
+        underline = false
+    })
 
 vim.cmd [[
     syntax on
