@@ -23,10 +23,10 @@ case $(uname) in
         brew install ripgrep
         brew install gnu-sed 
         brew install entr
+        brew install dust
+        brew install dog
         brew install colordiff
         brew install lazygit
-
-        python3 -m pip install pynvim
     ;;
 esac
 
