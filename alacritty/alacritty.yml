@@ -21,11 +21,10 @@ window:
 
 # cursor setting
 cursor:
-  blink_interval: 750
-  blink_timeout: 5
   style:
     shape: Block
-    blinking: On
+    blinking: Never
+  vi_mode_style: Block
 
 # setting fonts
 font:
