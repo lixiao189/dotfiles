@@ -3,7 +3,7 @@ return {
         'hrsh7th/nvim-cmp',
         dependencies = {
             'folke/neodev.nvim',
-            'L3MON4D3/LuaSnip', -- Snippets plugin
+            'L3MON4D3/LuaSnip',         -- Snippets plugin
             'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
@@ -41,7 +41,7 @@ return {
                 formatting = {
                     format = require("lspkind").cmp_format({
                         mode = 'symbol', -- show only symbol annotations
-                        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                        maxwidth = 50,   -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
                         symbol_map = { Copilot = "" },
                         before = function(_, vim_item)
                             return vim_item

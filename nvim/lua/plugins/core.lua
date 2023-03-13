@@ -49,7 +49,7 @@ return {
             require("bufferline").setup {
                 options = {
                     separator_style = { "", "" },
-                    close_command = "Bdelete! %d", -- can be a string | function, see "Mo actions"
+                    close_command = "Bdelete! %d",    -- can be a string | function, see "Mo actions"
                     right_mo_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
                     diagnostics_update_in_insert = true,
                     diagnostics = "nvim_lsp",
@@ -204,29 +204,6 @@ return {
         end
     },
 
-
-    {
-        "folke/noice.nvim",
-        config = function()
-            require("noice").setup {
-                {
-                    lsp = {
-                        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-                        override = {
-                            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                            ["vim.lsp.util.stylize_markdown"] = true,
-                            ["cmp.entry.get_documentation"] = true,
-                        },
-                    },
-                }
-            }
-        end,
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
-        }
-    },
-
     -- Themes
     {
         "catppuccin/nvim",
@@ -236,7 +213,7 @@ return {
             require("catppuccin").setup {
                 transparent_background = true,
                 integrations = {
-                    noice = true,
+                    fidget = true,
                     cmp = true,
                     gitsigns = true,
                     telescope = true,
