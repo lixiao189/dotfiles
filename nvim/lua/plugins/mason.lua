@@ -31,7 +31,7 @@ return {
             local servers = {
                 'clangd',
                 'neocmake',
-                'lua_ls',
+                'lua-language-server',
             }
             require("mason-lspconfig").setup {
                 ensure_installed = servers,
