@@ -31,7 +31,7 @@ return {
             local servers = {
                 'clangd',
                 'neocmake',
-                'lua-language-server',
+                'lua_ls',
             }
             require("mason-lspconfig").setup {
                 ensure_installed = servers,
@@ -39,7 +39,7 @@ return {
 
             require("neodev").setup {} -- make sure to setup lua-dev BEFORE lspconfig
             require("mason-lspconfig").setup_handlers {
-                function(server_name) -- default handler
+                function(server_name)  -- default handler
                     local capabilities = require('cmp_nvim_lsp').default_capabilities()
                     local lsp_server = require("lspconfig")[server_name]
 
