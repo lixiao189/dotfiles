@@ -38,18 +38,18 @@ set -gx HOMEBREW_PIP_INDEX_URL "https://pypi.tuna.tsinghua.edu.cn/simple"
 
 #------------- theme settings --------------------
 # light theme 
-set theme_primary                                   1eb980
-set theme_secondary                                 006af0
-set theme_primary_variant                           045d56
-set theme_secondary_variant                         555870
-set theme_hilight                                   b15dff
+# set theme_primary                                   1eb980
+# set theme_secondary                                 006af0
+# set theme_primary_variant                           045d56
+# set theme_secondary_variant                         555870
+# set theme_hilight                                   b15dff
 
 # dark theme
-# set theme_primary                                   1eb980
-# set theme_secondary                                 4095f2
-# set theme_primary_variant                           87b5f7
-# set theme_secondary_variant                         ccd6f2
-# set theme_hilight                                   b15dff
+set theme_primary                                   1eb980
+set theme_secondary                                 4095f2
+set theme_primary_variant                           87b5f7
+set theme_secondary_variant                         ccd6f2
+set theme_hilight                                   b15dff
 
 
 set -g theme_color_user                             $theme_hilight

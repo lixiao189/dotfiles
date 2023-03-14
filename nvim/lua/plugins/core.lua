@@ -209,7 +209,7 @@ return {
         "catppuccin/nvim",
         name = "catppuccin",
         config = function()
-            vim.cmd('colorscheme catppuccin-latte')
+            vim.cmd('colorscheme catppuccin-mocha')
             require("catppuccin").setup {
                 transparent_background = true,
                 integrations = {
