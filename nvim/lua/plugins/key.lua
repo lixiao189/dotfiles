@@ -1,7 +1,13 @@
 return {
+    -- key binding finding plugin
     {
         'folke/which-key.nvim',
+        dependencies = {
+            'mrjones2014/legendary.nvim', -- A legend for keymaps
+        },
         config = function()
+            require('legendary').setup { which_key = { auto_register = true } }
+
             local wk = require("which-key")
             wk.register {
                 ["[b"] = { "<cmd>BufferLineCyclePrev<CR>", "Previous buffer" },
@@ -43,7 +49,6 @@ return {
                 g = {
                     name = "+git action",
                     t = { "<cmd>Neogit<cr>", "Show git tui" },
-
                     p = { "<cmd>Gitsigns preview_hunk<CR>", "Preview the hunk changes" },
                     d = { "<cmd>Gitsigns diffthis<CR>", "Show diff in this buffer" },
                     s = { ":Gitsigns stage_hunk<CR>", "Stage hunk" },
@@ -51,9 +56,7 @@ return {
                     S = { ":Gitsigns stage_buffer<CR>", "Stage buffer" },
                     u = { ":Gitsigns undo_stage_hunk<CR>", "Undo stage" },
                     R = { ":Gitsigns reset_buffer<CR>", "Reset buffer" },
-
                     c = { ":GitConflictListQf<CR>", "List confilicts" },
-
                     j = {
                         name = "+jump hunk",
                         p = { ":Gitsigns prev_hunk<CR>", "Previous change" },
