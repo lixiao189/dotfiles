@@ -16,27 +16,24 @@ return {
     },
 
     {
-        {
-            'nvim-tree/nvim-web-devicons',
-            opts = {
-                override = {
-                    md = {
-                        icon = "",
-                        color = "#519aba",
-                        cterm_color = "67",
-                        name = "Markdown",
-                    },
-                    log = {
-                        icon = "",
-                        color = "#6d8086",
-                        cterm_color = "66",
-                        name = "Log",
-                    }
+        'nvim-tree/nvim-web-devicons',
+        opts = {
+            override = {
+                md = {
+                    icon = "",
+                    color = "#519aba",
+                    cterm_color = "67",
+                    name = "Markdown",
+                },
+                log = {
+                    icon = "",
+                    color = "#6d8086",
+                    cterm_color = "66",
+                    name = "Log",
                 }
             }
         }
     },
-
 
     {
         'karb94/neoscroll.nvim',
@@ -68,21 +65,6 @@ return {
     {
         'windwp/nvim-spectre',
         config = true
-    },
-
-    -- Status line plugin
-    {
-        'nvim-lualine/lualine.nvim',
-        config = function()
-            require('lualine').setup {
-                options = {
-                    theme = 'auto',
-                    disabled_filetypes = { 'neo-tree', 'lspsagaoutline', 'qf', 'alpha', 'dbui' },
-                    section_separators = '',
-                    component_separators = ''
-                },
-            }
-        end
     },
 
     -- Notify plugin
@@ -171,28 +153,6 @@ return {
         end
     },
 
-    -- The indent plugin
-    {
-        'lukas-reineke/indent-blankline.nvim',
-        config = function()
-            vim.g.indent_blankline_filetype_exclude = {
-                "lspinfo",
-                "mason",
-                "help",
-                "checkhealth",
-                "alpha",
-                "packer",
-                "qf",
-                "neo-tree",
-                "lspsagaoutline"
-            }
-
-            require("indent_blankline").setup {
-                show_current_context = true,
-            }
-        end
-    },
-
     -- The plugin to solve cutting problem
     {
         'gbprod/cutlass.nvim',
@@ -206,13 +166,27 @@ return {
 
     -- Themes
     {
-        'projekt0n/github-nvim-theme',
-        tag = 'v0.0.7',
-        config = function()
-            require("github-theme").setup({
-                theme_style = "dimmed",
-            })
-        end
+        'svrana/neosolarized.nvim',
+        dependencies = { 'tjdevries/colorbuddy.nvim' },
+        opts = {
+            comment_italics = true,
+            background_set = false,
+        },
+    },
+    -- Status line plugin
+    {
+        'nvim-lualine/lualine.nvim',
+        opts = {
+            options = {
+                theme = 'solarized_dark',
+                disabled_filetypes = { 'neo-tree', 'lspsagaoutline', 'qf', 'alpha', 'dbui' },
+                section_separators = '',
+                component_separators = ''
+            },
+            sections = {
+                lualine_b = { 'branch', 'diagnostics' },
+            },
+        },
     },
     {
         'stevearc/dressing.nvim',
