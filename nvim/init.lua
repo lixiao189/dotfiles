@@ -20,7 +20,4 @@ require("lazy").setup("plugins", {
     git = {
         url_format = 'https://ghproxy.com/https://github.com/%s.git'
     },
-    install = {
-        colorscheme = { "habamax", "catppuccin-latte", "catppuccin" },
-    }
 })

@@ -76,7 +76,7 @@ return {
         config = function()
             require('lualine').setup {
                 options = {
-                    theme = 'catppuccin',
+                    theme = 'auto',
                     disabled_filetypes = { 'neo-tree', 'lspsagaoutline', 'qf', 'alpha', 'dbui' },
                     section_separators = '',
                     component_separators = ''
@@ -206,24 +206,12 @@ return {
 
     -- Themes
     {
-        "catppuccin/nvim",
-        name = "catppuccin",
+        'projekt0n/github-nvim-theme',
+        tag = 'v0.0.7',
         config = function()
-            vim.cmd('colorscheme catppuccin-mocha')
-            require("catppuccin").setup {
-                transparent_background = true,
-                integrations = {
-                    fidget = true,
-                    cmp = true,
-                    gitsigns = true,
-                    telescope = true,
-                    notify = true,
-                    lsp_saga = true,
-                    neotree = true,
-                    neogit = true,
-                    beacon = true,
-                }
-            }
+            require("github-theme").setup({
+                theme_style = "dimmed",
+            })
         end
     },
     {
