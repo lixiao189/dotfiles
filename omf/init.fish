@@ -43,6 +43,7 @@ set -gx HOMEBREW_PIP_INDEX_URL "https://pypi.tuna.tsinghua.edu.cn/simple"
 # set theme_primary_variant                           045d56
 # set theme_secondary_variant                         555870
 # set theme_hilight                                   b15dff
+# set theme_symbol                                    93a1a1
 
 # dark theme
 set theme_primary                                   1eb980
@@ -50,15 +51,16 @@ set theme_secondary                                 4095f2
 set theme_primary_variant                           87b5f7
 set theme_secondary_variant                         ccd6f2
 set theme_hilight                                   b15dff
+set theme_symbol                                    93a1a1
 
 
 set -g theme_color_user                             $theme_hilight
 set -g theme_color_host                             $theme_primary_variant
-set -g theme_color_separator                        brblack
+set -g theme_color_separator                        $theme_symbol
 set -g theme_color_normal                           normal
 set -g theme_color_time                             $theme_secondary_variant
 set -g theme_color_path                             $theme_primary
-set -g theme_color_prompt                           $theme_secondary_variant
+set -g theme_color_prompt                           $theme_symbol
 set -g theme_color_virtualenv                       $theme_secondary
 set -g theme_color_status_prefix                    $theme_hilight
 set -g theme_color_status_jobs                      $theme_primary
@@ -67,8 +69,8 @@ set -g theme_prompt_segment_separator_color         $theme_primary
 set -g theme_prompt_userhost_separator              '@'
 set -g __fish_git_prompt_char_branch_begin          '['
 set -g __fish_git_prompt_char_branch_end            ']'
-set -g __fish_git_prompt_color_branch_begin         brblack
-set -g __fish_git_prompt_color_branch_end           brblack
+set -g __fish_git_prompt_color_branch_begin         $theme_symbol
+set -g __fish_git_prompt_color_branch_end           $theme_symbol
 set -g __fish_git_prompt_color_branch               $theme_secondary
 
 set -g theme_display_rw no
