@@ -25,19 +25,6 @@ return {
     {
         'williamboman/mason-lspconfig.nvim',
         config = function()
-            local augroup_format = vim.api.nvim_create_augroup("Format", { clear = true })
-            local attach_func = function(_, bufnr)
-                -- auto format after save
-                vim.api.nvim_clear_autocmds({ group = augroup_format, buffer = bufnr })
-                vim.api.nvim_create_autocmd("BufWritePre", {
-                    group = augroup_format,
-                    buffer = bufnr,
-                    callback = function()
-                        vim.lsp.buf.format({ bufnr = bufnr })
-                    end,
-                })
-            end
-
             local servers = {
                 'clangd',
                 'neocmake',
@@ -58,26 +45,12 @@ return {
                     elseif server_name == "lua_ls" then
                         lsp_server.setup {
                             capabilities = capabilities,
-                            on_attach = attach_func,
-                            settings = {
-                                Lua = {
-                                    completion = {
-                                        callSnippet = "Replace"
-                                    }
-                                }
-                            }
-                        }
+                            settings = { Lua = { completion = { callSnippet = "Replace" } } } }
                     elseif server_name == "clangd" then
                         capabilities.offsetEncoding = { "utf-16" }
-                        lsp_server.setup {
-                            capabilities = capabilities,
-                            on_attach = attach_func
-                        }
+                        lsp_server.setup { capabilities = capabilities }
                     else
-                        lsp_server.setup {
-                            capabilities = capabilities,
-                            on_attach = attach_func
-                        }
+                        lsp_server.setup { capabilities = capabilities }
                     end
                 end,
             }
