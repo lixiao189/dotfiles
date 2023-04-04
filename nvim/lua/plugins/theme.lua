@@ -14,6 +14,7 @@ return {
         'shaunsingh/solarized.nvim',
         config = function()
             vim.o.background = 'light'
+            vim.g.solarized_borders = true
             require('solarized').set()
         end
     },
