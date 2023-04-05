@@ -11,26 +11,6 @@ return {
             'hrsh7th/cmp-cmdline',
             'hrsh7th/cmp-path',
             'davidsierradz/cmp-conventionalcommits',
-            {
-                'zbirenbaum/copilot.lua',
-                cmd = "Copilot",
-                event = "InsertEnter",
-                config = function()
-                    require("copilot").setup {
-                        suggestion = { enabled = false },
-                        panel = { enabled = false },
-                    }
-                end,
-            },
-            {
-                "zbirenbaum/copilot-cmp",
-                after = { "copilot.lua" },
-                config = function()
-                    require("copilot_cmp").setup {
-                        method = "getCompletionsCycling",
-                    }
-                end
-            },
         },
         config = function()
             -- nvim-cmp setup
@@ -42,7 +22,6 @@ return {
                     format = require("lspkind").cmp_format({
                         mode = 'symbol', -- show only symbol annotations
                         maxwidth = 50,   -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-                        symbol_map = { Copilot = "" },
                         before = function(_, vim_item)
                             return vim_item
                         end
@@ -77,7 +56,6 @@ return {
                 }),
                 sources = {
                     -- Copilot Source
-                    { name = "copilot" },
                     { name = 'nvim_lsp' },
                     { name = 'buffer' },
                     { name = 'path' },
