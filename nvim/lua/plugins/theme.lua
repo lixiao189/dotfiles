@@ -10,12 +10,19 @@ return {
     -- },
 
     -- Theme: solarized light theme
+    -- {
+    --     'shaunsingh/solarized.nvim',
+    --     config = function()
+    --         vim.o.background = 'light'
+    --         vim.g.solarized_borders = true
+    --         require('solarized').set()
+    --     end
+    -- },
+
     {
-        'shaunsingh/solarized.nvim',
-        config = function()
-            vim.o.background = 'light'
-            vim.g.solarized_borders = true
-            require('solarized').set()
+        'navarasu/onedark.nvim',
+        config = function() 
+            require('onedark').load()
         end
     },
 
@@ -24,7 +31,7 @@ return {
         'nvim-lualine/lualine.nvim',
         opts = {
             options = {
-                theme = 'solarized',
+                theme = 'auto',
                 disabled_filetypes = { 'neo-tree', 'lspsagaoutline', 'qf', 'alpha', 'dbui' },
                 section_separators = '',
                 component_separators = ''
