@@ -21,7 +21,7 @@ return {
 
     {
         'navarasu/onedark.nvim',
-        config = function() 
+        config = function()
             require('onedark').load()
         end
     },
