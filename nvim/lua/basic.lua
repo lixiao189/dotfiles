@@ -12,6 +12,10 @@ vim.o.cindent = true
 vim.o.autoindent = true
 vim.o.showmode = false
 
+-- Increase the NVIM speed 
+vim.o.ttyfast = true
+vim.o.lazyredraw = true
+
 vim.o.shortmess = vim.o.shortmess .. "I"
 vim.o.pumheight = 10
 vim.o.mouse = "a"
