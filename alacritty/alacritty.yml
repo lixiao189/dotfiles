@@ -3,7 +3,8 @@ env:
 
 import:
   # - ~/.config/alacritty/theme/catppuccin-latte.yml
-  - ~/.config/alacritty/theme/solarized-dark.yaml
+  # - ~/.config/alacritty/theme/solarized-dark.yaml
+  - ~/.config/alacritty/theme/one-dark.yaml
 
 # window style setting
 window:
@@ -16,6 +17,7 @@ window:
     x: 10
     y: 8
   option_as_alt: Both
+  decorations_theme_variant: Dark
 
 # cursor setting
 cursor:
