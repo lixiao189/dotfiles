@@ -4,6 +4,13 @@ return {
     'danilamihailov/beacon.nvim',
 
     {
+        'abecodes/tabout.nvim',
+        config = function()
+            require('tabout').setup {}
+        end
+    },
+
+    {
         'phaazon/hop.nvim',
         config = function()
             require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
