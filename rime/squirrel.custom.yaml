@@ -1,0 +1,67 @@
+patch:
+  app_options:
+    com.apple.Spotlight:
+      ascii_mode: true # 开启默认英文
+    com.microsoft.VSCode:
+      ascii_mode: true
+    com.apple.Spotlight:
+      ascii_mode: true
+    com.googlecode.iterm2:
+      ascii_mode: true
+      vim_mode: true
+    org.alacritty:
+      ascii_mode: true
+      vim_mode: true
+    md.obsidian:
+      ascii_mode: true
+      vim_mode: true
+    com.raycast.macos:
+      ascii_mode: true
+    org.gnu.Emacs:
+      ascii_mode: true
+      vim_mode: true
+
+  style:
+    # 选择皮肤，亮色与暗色主题
+    color_scheme: nord_light
+    color_scheme_dark: nord_dark
+
+    inline_preedit: true
+
+  # 皮肤列表
+  preset_color_schemes:
+    nord_light:
+      name: 北方浅色
+      horizontal: true # true横排，false竖排
+      candidate_format: "%c %@ " # 用 1/6 em 空格 U+2005 来控制编号 %c 和候选词 %@ 前后的空间
+      font_point: 16 # 候选文字大小
+      label_font_point: 14 # 候选编号大小
+      corner_radius: 5 # 窗口圆角
+      line_spacing: 10 # 行间距(适用于竖排)
+      back_color: 0xF4EFEC # 候选条背景色
+      border_color: 0xF4EFEC # 边框色
+      candidate_text_color: 0xC1A181 # 第一候选项文字颜色
+      comment_text_color: 0xD0C088 # 拼音等提示文字颜色
+      hilited_back_color: 0xF0E9E5 # 第一候选项背景背景色
+      hilited_candidate_back_color: 0xE9DED8 # 候选文字背景色
+      hilited_candidate_text_color: 0xAC815E # 第一候选项文字颜色
+      hilited_text_color: 0xAD8EB4 # 高亮拼音 (需要开启内嵌编码)
+      text_color: 0x7087D0 # 拼音等提示文字颜色
+
+    nord_dark:
+      name: 北方深色
+      horizontal: true # true横排，false竖排
+      candidate_format: "%c %@ " # 用 1/6 em 空格 U+2005 来控制编号 %c 和候选词 %@ 前后的空间
+      font_point: 16 # 候选文字大小
+      label_font_point: 14 # 候选编号大小
+      corner_radius: 5 # 窗口圆角
+      line_spacing: 10 # 行间距(适用于竖排)
+      back_color: 0x473A33 # 候选条背景色
+      border_color: 0x473A33 # 边框色
+      candidate_text_color: 0xF5D887 # 第一候选项文字颜色
+      comment_text_color: 0xE6B687 # 拼音等提示文字颜色
+      hilited_back_color: 0x473A33 # 第一候选项背景背景色
+      hilited_candidate_back_color: 0x5D4C43 # 候选文字背景色
+      hilited_candidate_text_color: 0xC0E077 # 第一候选项文字颜色
+      hilited_text_color: 0x6EC8F5 # 高亮拼音 (需要开启内嵌编码)
+      text_color: 0x78E8F0 # 拼音等提示文字颜色

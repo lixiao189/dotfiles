@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Install the dependencies on Mac
 case $(uname) in
     Darwin)
@@ -45,3 +47,8 @@ curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install 
 
 # install tpm
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# Setup the rime config file
+git clone https://github.com/iDvel/rime-ice.git
+ln -s ~/.dotfiles/rime/default.custom.yaml ~/Library/Rime
+ln -s ~/.dotfiles/rime/squirrel.custom.yaml ~/Library/Rime
