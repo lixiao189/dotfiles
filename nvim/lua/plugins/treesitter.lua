@@ -40,10 +40,8 @@ return {
                 highlight = {
                     -- `false` will disable the whole extension
                     enable = true,
-
                     -- list of language that will be disabled
                     disable = { 'latex' },
-
                     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
                     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
                     -- Using this option may slow down your editor, and you may see some duplicate highlights.
@@ -75,5 +73,10 @@ return {
             require 'treesitter-context'.setup {}
         end
     },
-
+    {
+        "danymat/neogen",
+        dependencies = "nvim-treesitter/nvim-treesitter",
+        config = true,
+        version = "*"
+    }
 }
