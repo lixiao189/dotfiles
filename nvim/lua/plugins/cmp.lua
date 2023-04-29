@@ -54,7 +54,7 @@ return {
           end, { "i", "s" }),
         }),
         sources = {
-          { name = 'nvim_lsp', max_item_count = 20 },
+          { name = 'nvim_lsp', max_item_count = 8 },
           { name = 'buffer' },
         },
       }
