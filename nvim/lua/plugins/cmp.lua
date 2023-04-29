@@ -19,7 +19,6 @@ return {
             'hrsh7th/cmp-buffer',
             'onsails/lspkind-nvim',
             'hrsh7th/cmp-path',
-            'davidsierradz/cmp-conventionalcommits',
         },
         config = function()
             -- nvim-cmp setup
@@ -74,13 +73,6 @@ return {
                         hl_group = "LspCodeLens",
                     },
                 },
-            }
-
-            require 'cmp'.setup.buffer {
-                sources = require 'cmp'.config.sources(
-                    { { name = 'conventionalcommits' } },
-                    { { name = 'buffer' } }
-                ),
             }
         end
     },

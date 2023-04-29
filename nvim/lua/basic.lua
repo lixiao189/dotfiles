@@ -12,10 +12,6 @@ vim.o.cindent = true
 vim.o.autoindent = true
 vim.o.showmode = false
 
--- Increase the NVIM speed 
-vim.o.ttyfast = true
-vim.o.lazyredraw = true
-
 vim.o.shortmess = vim.o.shortmess .. "I"
 vim.o.pumheight = 10
 vim.o.mouse = "a"
@@ -26,8 +22,10 @@ vim.o.expandtab = true
 vim.o.wrap = false
 vim.o.splitbelow = true
 vim.o.splitright = true
-vim.o.spelllang = vim.o.spelllang .. ",cjk"
 vim.o.updatetime = 200
+vim.o.timeoutlen = 300
+vim.o.undofile = true
+vim.o.undolevels = 10000
 vim.o.fillchars = vim.o.fillchars .. "eob: "
 vim.o.termguicolors = true
 vim.o.numberwidth = 4 -- set number column width to 2 {default 4}
