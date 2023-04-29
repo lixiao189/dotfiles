@@ -18,7 +18,6 @@ return {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'onsails/lspkind-nvim',
-      'hrsh7th/cmp-path',
     },
     config = function()
       -- nvim-cmp setup
@@ -31,12 +30,6 @@ return {
           expand = function(args)
             snippy.expand_snippet(args.body) -- For `snippy` users.
           end,
-        },
-        formatting = {
-          format = require("lspkind").cmp_format({
-            mode = "symbol",
-            max_width = 20,
-          })
         },
         mapping = cmp.mapping.preset.insert({
           ['<C-d>'] = cmp.mapping.scroll_docs(-4),
@@ -63,12 +56,6 @@ return {
         sources = {
           { name = 'nvim_lsp' },
           { name = 'buffer' },
-          { name = 'path' },
-        },
-        experimental = {
-          ghost_text = {
-            hl_group = "LspCodeLens",
-          },
         },
       }
     end
