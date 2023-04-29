@@ -61,5 +61,8 @@
         "/Users/node/.local/share/nvim/site/pack/packer/start/which-key.nvim/lua",
         "/Users/node/.dotfiles/nvim/lua",
         "${3rd}/luassert/library"
+    ],
+    "diagnostics.disable": [
+        "unused-local"
     ]
 }
