@@ -2,6 +2,7 @@ return {
     -- key binding finding plugin
     {
         'folke/which-key.nvim',
+        event = "VeryLazy",
         dependencies = {
             'mrjones2014/legendary.nvim', -- A legend for keymaps
         },

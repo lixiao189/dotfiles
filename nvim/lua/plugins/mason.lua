@@ -9,13 +9,19 @@ return {
             }
         end
     },
-    'neovim/nvim-lspconfig',
+
     {
-        "folke/neoconf.nvim",
-        config = function()
-            require("neoconf").setup {}
-        end
+        'neovim/nvim-lspconfig',
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            { "folke/neoconf.nvim", cmd = "Neoconf",                                config = true },
+            "mason.nvim",
+            { "folke/neodev.nvim",  opts = { experimental = { pathStrict = true } } },
+            "williamboman/mason-lspconfig.nvim",
+            "hrsh7th/cmp-nvim-lsp",
+        }
     },
+
     {
         "williamboman/mason.nvim",
         config = function()
@@ -58,6 +64,7 @@ return {
     },
     {
         'jayp0521/mason-null-ls.nvim',
+        event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             'jose-elias-alvarez/null-ls.nvim',
         },

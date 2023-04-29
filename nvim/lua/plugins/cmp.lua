@@ -1,9 +1,8 @@
 return {
     {
         'hrsh7th/nvim-cmp',
+        event = "InsertEnter",
         dependencies = {
-            'folke/neodev.nvim',
-
             -- Snip
             'dcampos/cmp-snippy',
             {
@@ -19,7 +18,6 @@ return {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
             'onsails/lspkind-nvim',
-            'hrsh7th/cmp-cmdline',
             'hrsh7th/cmp-path',
             'davidsierradz/cmp-conventionalcommits',
         },
@@ -71,6 +69,11 @@ return {
                     { name = 'buffer' },
                     { name = 'path' },
                 },
+                experimental = {
+                    ghost_text = {
+                        hl_group = "LspCodeLens",
+                    },
+                },
             }
 
             require 'cmp'.setup.buffer {
@@ -79,27 +82,6 @@ return {
                     { { name = 'buffer' } }
                 ),
             }
-
-            -- The settings of the cmdline complete
-            require 'cmp'.setup.cmdline(':', {
-                view = {
-                    entries = "custom",
-                },
-                sources = {
-                    { name = 'cmdline' },
-                },
-                mapping = cmp.mapping.preset.cmdline({}),
-            })
-
-            require 'cmp'.setup.cmdline('/', {
-                view = {
-                    entries = "custom",
-                },
-                sources = {
-                    { name = 'buffer' }
-                },
-                mapping = cmp.mapping.preset.cmdline({}),
-            })
         end
     },
 

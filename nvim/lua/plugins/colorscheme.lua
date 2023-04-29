@@ -1,5 +1,4 @@
 return {
-    -- Theme: solarized dark theme
     -- {
     --     'svrana/neosolarized.nvim',
     --     dependencies = { 'tjdevries/colorbuddy.nvim' },
@@ -25,26 +24,4 @@ return {
             require('onedark').load()
         end
     },
-
-    -- Status line plugin
-    {
-        'nvim-lualine/lualine.nvim',
-        opts = {
-            options = {
-                theme = 'auto',
-                disabled_filetypes = { 'neo-tree', 'lspsagaoutline', 'qf', 'alpha', 'dbui' },
-                section_separators = '',
-                component_separators = ''
-            },
-            sections = {
-                lualine_b = { 'branch', 'diagnostics' },
-            },
-        },
-    },
-    {
-        'stevearc/dressing.nvim',
-        config = function()
-            require('dressing').setup()
-        end
-    }
 }

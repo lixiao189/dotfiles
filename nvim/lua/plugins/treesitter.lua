@@ -67,12 +67,7 @@ return {
 
     'windwp/nvim-ts-autotag',
     'JoosepAlviste/nvim-ts-context-commentstring',
-    {
-        'nvim-treesitter/nvim-treesitter-context',
-        config = function()
-            require 'treesitter-context'.setup {}
-        end
-    },
+
     {
         "danymat/neogen",
         dependencies = "nvim-treesitter/nvim-treesitter",

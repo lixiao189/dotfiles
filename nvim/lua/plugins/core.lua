@@ -23,49 +23,8 @@ return {
     },
 
     {
-        'nvim-tree/nvim-web-devicons',
-        opts = {
-            override = {
-                md = {
-                    icon = "",
-                    color = "#519aba",
-                    cterm_color = "67",
-                    name = "Markdown",
-                },
-                log = {
-                    icon = "",
-                    color = "#6d8086",
-                    cterm_color = "66",
-                    name = "Log",
-                }
-            }
-        }
-    },
-
-    {
         'karb94/neoscroll.nvim',
         config = true
-    },
-
-    {
-        'akinsho/bufferline.nvim',
-        config = function()
-            require("bufferline").setup {
-                options = {
-                    separator_style = { "", "" },
-                    close_command = "Bdelete! %d",    -- can be a string | function, see "Mo actions"
-                    right_mo_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
-                    diagnostics_update_in_insert = true,
-                    diagnostics = "nvim_lsp",
-                }
-            }
-        end
-    },
-    {
-        'goolord/alpha-nvim',
-        config = function()
-            require 'alpha'.setup(require 'alpha.themes.startify'.config)
-        end
     },
 
     -- The search and replace plugin
