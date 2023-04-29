@@ -20,7 +20,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = {
     { import = "plugins" },
-    { import = "lazyvim.plugins.extras.coding.copilot" },
   },
   -- Setup git mirrors
   git = {

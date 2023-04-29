@@ -29,11 +29,13 @@ return {
         snippet = {
           -- REQUIRED - you must specify a snippet engine
           expand = function(args)
-            snippy.expand_snippet(args.body)             -- For `snippy` users.
+            snippy.expand_snippet(args.body) -- For `snippy` users.
           end,
         },
         formatting = {
           format = require("lspkind").cmp_format({
+            mode = "symbol",
+            max_width = 20,
           })
         },
         mapping = cmp.mapping.preset.insert({
@@ -41,7 +43,7 @@ return {
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<CR>'] = cmp.mapping.confirm {
             behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
+            select = false,
           },
           ["<Tab>"] = cmp.mapping(function(fallback)
             if snippy.can_expand_or_advance() then
