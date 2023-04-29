@@ -25,7 +25,6 @@ require("lazy").setup({
   git = {
     url_format = 'https://ghproxy.com/https://github.com/%s.git'
   },
-  checker = { enabled = true }, -- automatically check for plugin updates
   performance = {
     rtp = {
       -- disable some rtp plugins
