@@ -4,16 +4,8 @@ return {
   'danilamihailov/beacon.nvim',
 
   {
-    'abecodes/tabout.nvim',
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require('tabout').setup {}
-    end
-  },
-
-  {
     'phaazon/hop.nvim',
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "VimEnter" },
     config = function()
       require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
     end
