@@ -21,6 +21,7 @@ return {
 
   {
     'Shatur/neovim-cmake',
+    event = "VeryLazy",
     dependencies = { "mfussenegger/nvim-dap" },
     config = true
   },

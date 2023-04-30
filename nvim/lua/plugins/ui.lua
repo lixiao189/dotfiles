@@ -31,6 +31,7 @@ return {
   -- Notify plugin
   {
     'rcarriga/nvim-notify',
+    event = "VimEnter",
     config = function()
       vim.notify = require("notify")
       require("notify").setup({

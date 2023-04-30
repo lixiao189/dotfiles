@@ -20,6 +20,7 @@ return {
 
   {
     'navarasu/onedark.nvim',
+    event = "VimEnter",
     config = function()
       require('onedark').load()
     end

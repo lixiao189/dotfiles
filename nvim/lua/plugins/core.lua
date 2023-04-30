@@ -5,6 +5,7 @@ return {
 
   {
     'abecodes/tabout.nvim',
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require('tabout').setup {}
     end
@@ -12,6 +13,7 @@ return {
 
   {
     'phaazon/hop.nvim',
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
     end
@@ -19,23 +21,27 @@ return {
 
   {
     "aserowy/tmux.nvim",
+    event = "VimEnter",
     config = function() return require("tmux").setup() end
   },
 
   {
     'karb94/neoscroll.nvim',
+    event = "VimEnter",
     config = true
   },
 
   -- The search and replace plugin
   {
     'windwp/nvim-spectre',
+    event = { "BufReadPre", "BufNewFile" },
     config = true
   },
 
   -- Lsp colorized
   {
     'norcalli/nvim-colorizer.lua',
+    event = "VeryLazy",
     config = function()
       require 'colorizer'.setup()
     end
@@ -44,27 +50,20 @@ return {
   -- The markdown previewer with web browser
   {
     "iamcco/markdown-preview.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     build = function() vim.fn["mkdp#util#install"]() end,
   },
 
-  -- Latex support
-  {
-    'lervag/vimtex',
-    config = function()
-      vim.g.vimtex_compiler_latexmk_engines = {
-        ['_'] = '-xelatex'
-      }
-      vim.g.vimtex_view_method = "skim"
-    end
-  },
-
-
   -- The telescope support
-  'nvim-telescope/telescope.nvim',
+  {
+    'nvim-telescope/telescope.nvim',
+    event = "VimEnter"
+  },
 
   -- Auto pairs
   {
     'windwp/nvim-autopairs',
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require('nvim-autopairs').setup()
     end
@@ -73,9 +72,10 @@ return {
   -- The file manager
   {
     "nvim-neo-tree/neo-tree.nvim",
+    event = "VimEnter",
     branch = "v2.x",
     dependencies = {
-      'nvim-tree/nvim-web-devicons',       -- for file icons
+      'nvim-tree/nvim-web-devicons', -- for file icons
       "MunifTanjim/nui.nvim",
       { 's1n7ax/nvim-window-picker', version = "v1.*" }
     }
@@ -95,6 +95,7 @@ return {
   -- The plugin to solve cutting problem
   {
     'gbprod/cutlass.nvim',
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("cutlass").setup {
         cut_key = 'x',
