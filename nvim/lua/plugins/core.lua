@@ -34,7 +34,7 @@ return {
   -- The search and replace plugin
   {
     'windwp/nvim-spectre',
-    event = { "BufReadPre", "BufNewFile" },
+    event = "VeryLazy",
     config = true
   },
 
@@ -50,7 +50,7 @@ return {
   -- The markdown previewer with web browser
   {
     "iamcco/markdown-preview.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = "VeryLazy",
     build = function() vim.fn["mkdp#util#install"]() end,
   },
 
@@ -63,7 +63,7 @@ return {
   -- Auto pairs
   {
     'windwp/nvim-autopairs',
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "InsertEnter" },
     config = function()
       require('nvim-autopairs').setup()
     end
@@ -95,7 +95,7 @@ return {
   -- The plugin to solve cutting problem
   {
     'gbprod/cutlass.nvim',
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "VimEnter" },
     config = function()
       require("cutlass").setup {
         cut_key = 'x',

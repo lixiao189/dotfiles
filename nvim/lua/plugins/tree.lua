@@ -1,5 +1,6 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
+  event = "VimEnter",
   branch = "v2.x",
   dependencies = {
     'nvim-tree/nvim-web-devicons',     -- for file icons

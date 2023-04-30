@@ -17,6 +17,7 @@ return {
   },
   {
     'stevearc/dressing.nvim',
+    event = "VimEnter",
     config = function()
       require('dressing').setup()
     end
@@ -25,6 +26,7 @@ return {
 
   {
     'nvim-tree/nvim-web-devicons',
+    event = "VimEnter",
     config = true
   },
 
