@@ -4,6 +4,7 @@ patch:
       ascii_mode: true # 开启默认英文
     com.microsoft.VSCode:
       ascii_mode: true
+      vim_mode: true
     com.apple.Spotlight:
       ascii_mode: true
     com.googlecode.iterm2:
