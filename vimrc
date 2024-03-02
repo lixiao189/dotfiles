@@ -29,7 +29,7 @@ Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'sheerun/vim-polyglot' " syntax highlight
 Plug 'ctrlpvim/ctrlp.vim' " Fuzz findings
-Plug 'vim-scripts/bufexplorer.zip'
+Plug 'jlanzarotta/bufexplorer'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive' " Git wrapper
