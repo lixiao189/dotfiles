@@ -1,8 +1,5 @@
 set -g fish_greeting
 
-#------------- default editor --------------------
-set -gx EDITOR "nvim" 
-
 #------------- path settings ---------------------
 set -gx PATH /opt/homebrew/bin $PATH
 set -gx PATH /opt/homebrew/sbin $PATH
@@ -10,7 +7,6 @@ set -gx PATH /opt/homebrew/opt/python@3.10/libexec/bin $PATH
 set -gx PATH github/copilot.vim $PATH
 
 #------------- command shortcuts -----------------
-alias nv nvim
 alias r ranger
 alias lg lazygit
 alias e exit
