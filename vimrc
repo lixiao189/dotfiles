@@ -25,6 +25,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin()
 Plug 'joshdick/onedark.vim' 
 Plug 'itchyny/lightline.vim'
+Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'sheerun/vim-polyglot' " syntax highlight
 Plug 'ctrlpvim/ctrlp.vim' " Fuzz findings
