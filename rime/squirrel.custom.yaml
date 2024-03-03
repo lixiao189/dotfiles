@@ -24,7 +24,7 @@ patch:
       vim_mode: true
     com.raycast.macos:
       ascii_mode: true
-    org.gnu.Emacs:
+    org.vim.MacVim:
       ascii_mode: true
       vim_mode: true
 
