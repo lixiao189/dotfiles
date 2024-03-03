@@ -48,6 +48,9 @@ curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install 
 # install tpm
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+# Setup vim
+ln -s ~/.dotfiles/vimrc ~/.vimrc
+
 # Setup the rime config file
 git clone https://github.com/iDvel/rime-ice.git
 ln -s ~/.dotfiles/rime/default.custom.yaml ~/Library/Rime
