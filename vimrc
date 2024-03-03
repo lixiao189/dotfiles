@@ -24,7 +24,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 " Plugins
 call plug#begin()
 Plug 'joshdick/onedark.vim' 
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'sheerun/vim-polyglot' " syntax highlight
@@ -67,12 +67,11 @@ let g:mapleader = "\<Space>"
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 set timeoutlen=500
 
-" Lightline
+" Airline
 set laststatus=2
 set noshowmode
-let g:lightline = {
-  \ 'colorscheme': 'onedark',
-  \ }
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_symbols_ascii = 1
 
 " NerdTree
 nnoremap <leader>e :NERDTreeToggle<CR>
