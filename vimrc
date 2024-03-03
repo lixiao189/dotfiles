@@ -91,8 +91,6 @@ function! CheckBackspace() abort
 endfunction
 nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>ac  <Plug>(coc-codeaction-cursor)
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -108,6 +106,8 @@ function! ShowDocumentation()
     call feedkeys('K', 'in')
   endif
 endfunction
+command! -nargs=0 Format :call CocActionAsync('format') " Add format command
+nmap <leader>f  :Format<CR>
 
 " Copilot
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
@@ -120,7 +120,7 @@ set background=dark
 let g:onedark_hide_endofbuffer=1
 let g:onedark_termcolors=256
 if has("gui_running")
-    set guifont=SF\ Mono:h13
+    set guifont=SF\ Mono:h12
     set guioptions-=r
     set guioptions-=L
 endif
