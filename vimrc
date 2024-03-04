@@ -30,6 +30,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'sheerun/vim-polyglot' " syntax highlight
+Plug 'charlespascoe/vim-go-syntax'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -63,6 +64,7 @@ set nowritebackup
 set updatetime=300
 set signcolumn=yes
 set timeoutlen=500
+set nocompatible
 
 " Indent settings
 set shiftwidth=4
