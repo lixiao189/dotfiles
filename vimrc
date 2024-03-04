@@ -31,8 +31,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'sheerun/vim-polyglot' " syntax highlight
 Plug 'tpope/vim-surround'
-Plug 'ctrlpvim/ctrlp.vim' " Fuzz findings
-Plug 'mileszs/ack.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -123,18 +123,16 @@ if has("gui_running")
     set guifont=SF\ Mono:h12
 endif
 
-" Ack
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
 " Keybindings 
 let g:mapleader = "\<Space>"
+nnoremap <silent> <c-p> :Files <CR>
 nnoremap <silent> <Esc> :let @/ = ""<CR>
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 let g:which_key_map = {}
 let g:which_key_map.e = 'file explorer'
 nnoremap <leader>e :NERDTreeToggle<CR>
+let g:which_key_map.a = 'find current word'
+nnoremap <silent> <Leader>a :Ag <C-R><C-W><CR>
 let g:which_key_map.b = { 'name' : '+buffer' }
 let g:which_key_map.c = { 'name' : '+comment' }
 let g:which_key_map.l = { 'name' : '+lsp' }
