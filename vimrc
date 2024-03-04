@@ -30,7 +30,9 @@ Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'sheerun/vim-polyglot' " syntax highlight
+Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim' " Fuzz findings
+Plug 'mileszs/ack.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -119,6 +121,11 @@ set background=dark
 let g:onedark_termcolors=256
 if has("gui_running")
     set guifont=SF\ Mono:h12
+endif
+
+" Ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
 endif
 
 " Keybindings 
