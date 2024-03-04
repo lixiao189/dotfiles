@@ -27,6 +27,8 @@ Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
+Plug 'easymotion/vim-easymotion'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'sheerun/vim-polyglot' " syntax highlight
 Plug 'ctrlpvim/ctrlp.vim' " Fuzz findings
 Plug 'jlanzarotta/bufexplorer'
@@ -34,7 +36,7 @@ Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive' " Git wrapper
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-commentary' " Add comments quickly
+Plug 'preservim/nerdcommenter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Auto complete
 Plug 'liuchengxu/vim-which-key'
 Plug 'github/copilot.vim'
@@ -52,30 +54,36 @@ set cul
 set incsearch  " Enable incremental search
 set hlsearch   " Enable highlight search
 set splitbelow
+set splitright
 set encoding=utf-8
 set nobackup
 set nowritebackup
 set updatetime=300
 set signcolumn=yes
+set timeoutlen=500
+
+" Indent settings
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set expandtab
+set smartindent
 
 " Git
 nmap ghs <Plug>(GitGutterStageHunk)
 nmap ghu <Plug>(GitGutterUndoHunk)
 nmap ghp <Plug>(GitGutterPreviewHunk)
 
-" WhichKey
-let g:mapleader = "\<Space>"
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-set timeoutlen=500
-
 " Airline
 set laststatus=2
 set noshowmode
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_symbols_ascii = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " NerdTree
-nnoremap <leader>e :NERDTreeToggle<CR>
+let g:loaded_netrw       = 1 " disable netrw
+let g:loaded_netrwPlugin = 1
 
 " Lsp settings
 let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets', 'coc-pairs']
@@ -90,15 +98,6 @@ function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-nmap <leader>rn <Plug>(coc-rename)
-nmap <leader>ac  <Plug>(coc-codeaction-cursor)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr> " Show all diagnostics
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr> " Find symbol of current document
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr> " Search workspace symbols
 nnoremap <silent> K :call ShowDocumentation()<CR>
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
@@ -108,7 +107,6 @@ function! ShowDocumentation()
   endif
 endfunction
 command! -nargs=0 Format :call CocActionAsync('format') " Add format command
-nmap <leader>f  :Format<CR>
 
 " Copilot
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
@@ -118,21 +116,40 @@ let g:copilot_no_tab_map = v:true
 colorscheme onedark
 set termguicolors
 set background=dark
-let g:onedark_hide_endofbuffer=1
 let g:onedark_termcolors=256
 if has("gui_running")
     set guifont=SF\ Mono:h12
-    set guioptions-=r
-    set guioptions-=L
 endif
 
-" Indent settings
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
-set expandtab
-set autoindent
-set smartindent
-
-" Key bindings
+" Keybindings 
+let g:mapleader = "\<Space>"
 nnoremap <silent> <Esc> :let @/ = ""<CR>
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+let g:which_key_map = {}
+let g:which_key_map.e = 'file explorer'
+nnoremap <leader>e :NERDTreeToggle<CR>
+let g:which_key_map.b = { 'name' : '+buffer' }
+let g:which_key_map.c = { 'name' : '+comment' }
+let g:which_key_map.l = { 'name' : '+lsp' }
+let g:which_key_map.l.n = 'rename'
+nmap <leader>ln <Plug>(coc-rename)
+let g:which_key_map.l.a = 'code action'
+nmap <leader>la  <Plug>(coc-codeaction-cursor)
+let g:which_key_map.l.f = 'format'
+nmap <leader>lf  :Format<CR>
+let g:which_key_map.l.d = 'diagnostics' 
+nnoremap <silent><nowait> <leader>ld  :<C-u>CocList diagnostics<cr> " Show all diagnostics
+let g:which_key_map.l.o = 'outline'
+nnoremap <silent><nowait> <leader>lo  :<C-u>CocList outline<cr> " Find symbol of current document
+let g:which_key_map.l.s = 'symbols'
+nnoremap <silent><nowait> <leader>ls  :<C-u>CocList -I symbols<cr> " Search workspace symbols
+let g:which_key_map.l.g = { 'name' : '+goto' }
+let g:which_key_map.l.g.d = 'definition'
+nmap <leader>lgd <Plug>(coc-definition)
+let g:which_key_map.l.g.t = 'type definition'
+nmap <leader>lgt <Plug>(coc-type-definition)
+let g:which_key_map.l.g.i = 'implementation'
+nmap <leader>lgi <Plug>(coc-implementation)
+let g:which_key_map.l.g.r = 'references'
+nmap <leader>lgr <Plug>(coc-references)
+call which_key#register('<Space>', "g:which_key_map")
