@@ -13,6 +13,7 @@ alias e exit
 alias ls "exa -l --icons"
 alias ts 'tmux source-file ~/.tmux.conf'
 alias diff colordiff
+alias zj "zellij --layout compact options --simplified-ui true"
 
 alias t 'tmux attach || tmux new-session'
 alias ta 'tmux attach -t'

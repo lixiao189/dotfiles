@@ -38,6 +38,7 @@ Plug 'tpope/vim-commentary' " Add comments quickly
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Auto complete
 Plug 'liuchengxu/vim-which-key'
 Plug 'github/copilot.vim'
+Plug 'imsnif/kdl.vim' " KDL lang support
 call plug#end()
 
 " Editor settings
