@@ -65,6 +65,7 @@ set updatetime=300
 set signcolumn=yes
 set timeoutlen=500
 set nocompatible
+set belloff=all
 
 " Indent settings
 set shiftwidth=4

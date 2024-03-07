@@ -1,4 +1,5 @@
 set -g fish_greeting
+set -gx EDITOR "vim"
 
 #------------- path settings ---------------------
 set -gx PATH /opt/homebrew/bin $PATH
