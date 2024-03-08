@@ -67,6 +67,11 @@ set timeoutlen=500
 set nocompatible
 set belloff=all
 
+" Render settings
+set nolist
+set lazyredraw
+set ttyfast
+
 " Indent settings
 set shiftwidth=4
 set tabstop=4
