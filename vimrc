@@ -97,7 +97,7 @@ let g:loaded_netrw       = 1 " disable netrw
 let g:loaded_netrwPlugin = 1
 
 " Lsp settings
-let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets', 'coc-pairs']
+let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets']
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
