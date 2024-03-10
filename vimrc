@@ -29,6 +29,7 @@ Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'LunarWatcher/auto-pairs'
 Plug 'sheerun/vim-polyglot' " syntax highlight
 Plug 'charlespascoe/vim-go-syntax'
 Plug 'tpope/vim-surround'
