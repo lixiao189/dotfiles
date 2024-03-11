@@ -68,11 +68,6 @@ set timeoutlen=500
 set nocompatible
 set belloff=all
 
-" Render settings
-set nolist
-set lazyredraw
-set ttyfast
-
 " Indent settings
 set shiftwidth=4
 set tabstop=4
@@ -118,6 +113,10 @@ function! ShowDocumentation()
   endif
 endfunction
 command! -nargs=0 Format :call CocActionAsync('format') " Add format command
+augroup mygroup
+  autocmd!
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 
 " Copilot
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
