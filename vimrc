@@ -66,6 +66,8 @@ set signcolumn=yes
 set timeoutlen=500
 set nocompatible
 set belloff=all
+set foldmethod=indent
+set foldlevel=100
 
 " Indent settings
 set shiftwidth=4
@@ -139,38 +141,40 @@ endif
 
 " Keybindings 
 let g:mapleader = "\<Space>"
-nnoremap <silent> <Esc> :let @/ = ""<CR>
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+nnoremap <leader>e :NERDTreeToggle<CR>
+let g:Lf_ShortcutF = "<leader>ff"
+nmap <unique> <leader>fr <Plug>LeaderfRgPrompt
+nmap <leader>ln <Plug>(coc-rename)
+nmap <leader>la  <Plug>(coc-codeaction-cursor)
+nmap <leader>lf  :Format<CR>
+nnoremap <silent><nowait> <leader>ld  :<C-u>CocList diagnostics<cr> " Show all diagnostics
+nnoremap <silent><nowait> <leader>lo  :<C-u>CocList outline<cr> " Find symbol of current document
+nnoremap <silent><nowait> <leader>ls  :<C-u>CocList -I symbols<cr> " Search workspace symbols
+nmap <leader>lgd <Plug>(coc-definition)
+nmap <leader>lgt <Plug>(coc-type-definition)
+nmap <leader>lgi <Plug>(coc-implementation)
+nmap <leader>lgr <Plug>(coc-references)
+
+" WhichKey
 let g:which_key_map = {}
+let g:which_key_map.e = 'file explorer'
 let g:which_key_map.f = { 'name' : '+leaderF' }
 let g:which_key_map.f.f = 'find file'
-let g:Lf_ShortcutF = "<leader>ff"
 let g:which_key_map.f.r = 'find regex'
-nmap <unique> <leader>fr <Plug>LeaderfRgPrompt
-let g:which_key_map.e = 'file explorer'
-nnoremap <leader>e :NERDTreeToggle<CR>
 let g:which_key_map.b = { 'name' : '+buffer' }
 let g:which_key_map.c = { 'name' : '+comment' }
 let g:which_key_map.l = { 'name' : '+lsp' }
 let g:which_key_map.l.n = 'rename'
-nmap <leader>ln <Plug>(coc-rename)
 let g:which_key_map.l.a = 'code action'
-nmap <leader>la  <Plug>(coc-codeaction-cursor)
 let g:which_key_map.l.f = 'format'
-nmap <leader>lf  :Format<CR>
 let g:which_key_map.l.d = 'diagnostics' 
-nnoremap <silent><nowait> <leader>ld  :<C-u>CocList diagnostics<cr> " Show all diagnostics
 let g:which_key_map.l.o = 'outline'
-nnoremap <silent><nowait> <leader>lo  :<C-u>CocList outline<cr> " Find symbol of current document
 let g:which_key_map.l.s = 'symbols'
-nnoremap <silent><nowait> <leader>ls  :<C-u>CocList -I symbols<cr> " Search workspace symbols
 let g:which_key_map.l.g = { 'name' : '+goto' }
 let g:which_key_map.l.g.d = 'definition'
-nmap <leader>lgd <Plug>(coc-definition)
 let g:which_key_map.l.g.t = 'type definition'
-nmap <leader>lgt <Plug>(coc-type-definition)
 let g:which_key_map.l.g.i = 'implementation'
-nmap <leader>lgi <Plug>(coc-implementation)
 let g:which_key_map.l.g.r = 'references'
-nmap <leader>lgr <Plug>(coc-references)
 call which_key#register('<Space>', "g:which_key_map")
+
