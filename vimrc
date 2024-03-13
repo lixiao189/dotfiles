@@ -66,6 +66,7 @@ set nowritebackup
 set updatetime=300
 set signcolumn=yes
 set timeoutlen=500
+set wildmenu
 set nocompatible
 set belloff=all
 set foldmethod=indent
