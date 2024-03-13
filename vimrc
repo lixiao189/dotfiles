@@ -23,7 +23,6 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 " Plugins
 call plug#begin()
-Plug 'joshdick/onedark.vim' 
 Plug 'lifepillar/vim-solarized8'
 Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
@@ -34,8 +33,7 @@ Plug 'LunarWatcher/auto-pairs'
 Plug 'sheerun/vim-polyglot' " syntax highlight
 Plug 'charlespascoe/vim-go-syntax'
 Plug 'tpope/vim-surround'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension'  }
 Plug 'jlanzarotta/bufexplorer'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -84,6 +82,9 @@ nmap ghp <Plug>(GitGutterPreviewHunk)
 " NerdTree
 let g:loaded_netrw       = 1 " disable netrw
 let g:loaded_netrwPlugin = 1
+
+" LeaderF
+let g:Lf_WindowPosition = 'popup'
 
 " LSP settings
 let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets']
@@ -138,14 +139,16 @@ endif
 
 " Keybindings 
 let g:mapleader = "\<Space>"
-nnoremap <silent> <c-p> :Files <CR>
 nnoremap <silent> <Esc> :let @/ = ""<CR>
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 let g:which_key_map = {}
+let g:which_key_map.f = { 'name' : '+leaderF' }
+let g:which_key_map.f.f = 'find file'
+let g:Lf_ShortcutF = "<leader>ff"
+let g:which_key_map.f.r = 'find regex'
+nmap <unique> <leader>fr <Plug>LeaderfRgPrompt
 let g:which_key_map.e = 'file explorer'
 nnoremap <leader>e :NERDTreeToggle<CR>
-let g:which_key_map.a = 'find current word'
-nnoremap <silent> <Leader>a :Ag <C-R><C-W><CR>
 let g:which_key_map.b = { 'name' : '+buffer' }
 let g:which_key_map.c = { 'name' : '+comment' }
 let g:which_key_map.l = { 'name' : '+lsp' }
