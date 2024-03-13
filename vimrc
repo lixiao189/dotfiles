@@ -23,7 +23,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 " Plugins
 call plug#begin()
-Plug 'lifepillar/vim-solarized8'
+Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'mhinz/vim-startify'
@@ -125,7 +125,7 @@ let g:copilot_no_tab_map = v:true
 " UI
 set background=dark
 set termguicolors
-autocmd vimenter * ++nested colorscheme solarized8
+colorscheme onedark
 set laststatus=2
 set noshowmode
 set showtabline=2
@@ -143,7 +143,7 @@ function! StatusDiagnostic() abort
   return join(msgs, ' '). get(g:, 'coc_status', '')
 endfunction
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'cocstatus', 'readonly', 'filename', 'modified' ] ]
