@@ -91,7 +91,7 @@ let g:loaded_netrwPlugin = 1
 let g:Lf_WindowPosition = 'popup'
 
 " LSP settings
-let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets']
+let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets', 'coc-yank']
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
@@ -128,6 +128,7 @@ autocmd vimenter * ++nested colorscheme solarized8
 set laststatus=2
 set noshowmode
 set showtabline=2
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
 function! StatusDiagnostic() abort
   let info = get(b:, 'coc_diagnostic_info', {})
   if empty(info) | return '' | endif
@@ -170,6 +171,7 @@ endif
 let g:mapleader = "\<Space>"
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 let g:Lf_ShortcutF = "<leader>ff"
 nmap <unique> <leader>fr <Plug>LeaderfRgPrompt
 nmap <leader>ln <Plug>(coc-rename)
@@ -186,6 +188,7 @@ nmap <leader>lgr <Plug>(coc-references)
 " WhichKey
 let g:which_key_map = {}
 let g:which_key_map.e = 'file explorer'
+let g:which_key_map.y = 'yank history'
 let g:which_key_map.f = { 'name' : '+leaderF' }
 let g:which_key_map.f.f = 'find file'
 let g:which_key_map.f.r = 'find regex'
