@@ -25,6 +25,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin()
 Plug 'lifepillar/vim-solarized8'
 Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
@@ -35,6 +36,7 @@ Plug 'charlespascoe/vim-go-syntax'
 Plug 'tpope/vim-surround'
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension'  }
 Plug 'jlanzarotta/bufexplorer'
+Plug 'rbgrouleff/bclose.vim'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive' " Git wrapper
@@ -125,6 +127,7 @@ set termguicolors
 autocmd vimenter * ++nested colorscheme solarized8
 set laststatus=2
 set noshowmode
+set showtabline=2
 function! StatusDiagnostic() abort
   let info = get(b:, 'coc_diagnostic_info', {})
   if empty(info) | return '' | endif
@@ -143,11 +146,22 @@ let g:lightline = {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'cocstatus', 'readonly', 'filename', 'modified' ] ]
       \ },
+      \ 'tabline': {
+      \   'left': [ ['buffers'] ],
+      \   'right': [ ['close'] ]
+      \ },
+      \ 'component_expand': {
+      \   'buffers': 'lightline#bufferline#buffers'
+      \ },
+      \ 'component_type': {
+      \   'buffers': 'tabsel'
+      \ },
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead',
       \   'cocstatus': 'StatusDiagnostic',
       \ },
       \ }
+let g:lightline#bufferline#show_number = 1
 if has("gui_running")
     set guifont=SF\ Mono:h12
 endif
