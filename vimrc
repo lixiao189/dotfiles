@@ -24,7 +24,8 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 " Plugins
 call plug#begin()
 Plug 'joshdick/onedark.vim' 
-Plug 'vim-airline/vim-airline'
+Plug 'lifepillar/vim-solarized8'
+Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
@@ -75,23 +76,16 @@ set softtabstop=4
 set expandtab
 set smartindent
 
-" Git
+" GIT
 nmap ghs <Plug>(GitGutterStageHunk)
 nmap ghu <Plug>(GitGutterUndoHunk)
 nmap ghp <Plug>(GitGutterPreviewHunk)
-
-" Airline
-set laststatus=2
-set noshowmode
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_symbols_ascii = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " NerdTree
 let g:loaded_netrw       = 1 " disable netrw
 let g:loaded_netrwPlugin = 1
 
-" Lsp settings
+" LSP settings
 let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets']
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
@@ -123,10 +117,21 @@ imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
 
 " UI
-colorscheme onedark
-set termguicolors
 set background=dark
-let g:onedark_termcolors=256
+set termguicolors
+autocmd vimenter * ++nested colorscheme solarized8
+set laststatus=2
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
 if has("gui_running")
     set guifont=SF\ Mono:h12
 endif
