@@ -63,7 +63,7 @@ set splitright
 set encoding=utf-8
 set nobackup
 set nowritebackup
-set updatetime=300
+set updatetime=100
 set signcolumn=yes
 set timeoutlen=500
 set wildmenu
@@ -79,10 +79,8 @@ set softtabstop=4
 set expandtab
 set smartindent
 
-" GIT
-nmap ghs <Plug>(GitGutterStageHunk)
-nmap ghu <Plug>(GitGutterUndoHunk)
-nmap ghp <Plug>(GitGutterPreviewHunk)
+" Autopairs 
+let g:AutoPairsMapBS = 1
 
 " NerdTree
 let g:loaded_netrw       = 1 " disable netrw
@@ -92,7 +90,7 @@ let g:loaded_netrwPlugin = 1
 let g:Lf_WindowPosition = 'popup'
 
 " LSP settings
-let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets', 'coc-yank']
+let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets']
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
@@ -172,9 +170,8 @@ endif
 let g:mapleader = "\<Space>"
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap <leader>e :NERDTreeToggle<CR>
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 let g:Lf_ShortcutF = "<leader>ff"
-nmap <unique> <leader>fr <Plug>LeaderfRgPrompt
+nmap <leader>fr <Plug>LeaderfRgPrompt
 nmap <leader>ln <Plug>(coc-rename)
 nmap <leader>la  <Plug>(coc-codeaction-cursor)
 nmap <leader>lf  :Format<CR>
@@ -189,10 +186,13 @@ nmap <leader>lgr <Plug>(coc-references)
 " WhichKey
 let g:which_key_map = {}
 let g:which_key_map.e = 'file explorer'
-let g:which_key_map.y = 'yank history'
 let g:which_key_map.f = { 'name' : '+leaderF' }
 let g:which_key_map.f.f = 'find file'
 let g:which_key_map.f.r = 'find regex'
+let g:which_key_map.h = { 'name' : '+hunks' }
+let g:which_key_map.h.s = 'stage'
+let g:which_key_map.h.u = 'undo'
+let g:which_key_map.h.p = 'preview'
 let g:which_key_map.b = { 'name' : '+buffer' }
 let g:which_key_map.c = { 'name' : '+comment' }
 let g:which_key_map.l = { 'name' : '+lsp' }
@@ -208,4 +208,7 @@ let g:which_key_map.l.g.t = 'type definition'
 let g:which_key_map.l.g.i = 'implementation'
 let g:which_key_map.l.g.r = 'references'
 call which_key#register('<Space>', "g:which_key_map")
+
+" Lang
+autocmd FIletype c,cpp setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
