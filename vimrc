@@ -40,7 +40,6 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive' " Git wrapper
-Plug 'airblade/vim-gitgutter'
 Plug 'preservim/nerdcommenter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Auto complete
 Plug 'liuchengxu/vim-which-key'
@@ -90,7 +89,7 @@ let g:loaded_netrwPlugin = 1
 let g:Lf_WindowPosition = 'popup'
 
 " LSP settings
-let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets']
+let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets', 'coc-git']
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
