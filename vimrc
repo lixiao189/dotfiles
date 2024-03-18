@@ -24,8 +24,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 " Plugins
 call plug#begin()
 Plug 'joshdick/onedark.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
+Plug 'vim-airline/vim-airline'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
@@ -34,7 +33,8 @@ Plug 'LunarWatcher/auto-pairs'
 Plug 'sheerun/vim-polyglot' " syntax highlight
 Plug 'charlespascoe/vim-go-syntax'
 Plug 'tpope/vim-surround'
-Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension'  }
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mileszs/ack.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'preservim/nerdtree'
@@ -53,7 +53,6 @@ syntax on
 set shortmess=atI
 set number
 set nowrap
-set relativenumber
 set mouse=a
 set cul
 set incsearch  " Enable incremental search
@@ -72,6 +71,9 @@ set belloff=all
 set foldmethod=indent
 set foldlevel=100
 
+" Leader key
+let g:mapleader = "\<Space>"
+
 " Indent settings
 set shiftwidth=4
 set tabstop=4
@@ -83,11 +85,30 @@ set cindent
 let g:AutoPairsMapBS = 1
 
 " NerdTree
+nnoremap <leader>e :NERDTreeToggle<CR>
 let g:loaded_netrw       = 1 " disable netrw
 let g:loaded_netrwPlugin = 1
 
-" LeaderF
-let g:Lf_WindowPosition = 'popup'
+" CtrlP
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
+let g:ctrlp_map = '<leader>ff'
+nnoremap <leader>fb :CtrlPBuffer<CR>
+nnoremap <leader>fm :CtrlPMRU<CR>
+
+" Ack
+let g:ackhighlight = 1
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+function! Search(string)
+  set shellpipe=>
+  execute "Ack! -i \"" . a:string . "\""
+  set shellpipe=2>&1\|tee
+endfunction
+nnoremap <leader>fs :call Search("")<left><left>
 
 " LSP settings
 let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets', 'coc-git']
@@ -115,6 +136,21 @@ augroup mygroup
   autocmd!
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
+nmap <leader>ln <Plug>(coc-rename)
+nmap <leader>la  <Plug>(coc-codeaction-cursor)
+nmap <leader>lf  :Format<CR>
+nnoremap <silent><nowait> <leader>ld  :<C-u>CocList diagnostics<cr> " Show all diagnostics
+nnoremap <silent><nowait> <leader>lo  :<C-u>CocList outline<cr> " Find symbol of current document
+nnoremap <silent><nowait> <leader>ls  :<C-u>CocList -I symbols<cr> " Search workspace symbols
+nmap <leader>lgd <Plug>(coc-definition)
+nmap <leader>lgt <Plug>(coc-type-definition)
+nmap <leader>lgi <Plug>(coc-implementation)
+nmap <leader>lgr <Plug>(coc-references)
+
+" Coc git
+nmap <leader>hs :CocCommand git.chunkStage<cr>
+nmap <leader>hu :CocCommand git.chunkUndo<cr>
+nmap <leader>hi :CocCommand git.chunkInfo<cr>
 
 " Copilot
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
@@ -128,75 +164,22 @@ set laststatus=2
 set noshowmode
 set showtabline=2
 autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
-function! StatusDiagnostic() abort
-  let info = get(b:, 'coc_diagnostic_info', {})
-  if empty(info) | return '' | endif
-  let msgs = []
-  if get(info, 'error', 0)
-    call add(msgs, 'E' . info['error'])
-  endif
-  if get(info, 'warning', 0)
-    call add(msgs, 'W' . info['warning'])
-  endif
-  return join(msgs, ' '). get(g:, 'coc_status', '')
-endfunction
-let g:lightline = {
-      \ 'colorscheme': 'onedark',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'tabline': {
-      \   'left': [ ['buffers'] ],
-      \   'right': [ ['close'] ]
-      \ },
-      \ 'component_expand': {
-      \   'buffers': 'lightline#bufferline#buffers'
-      \ },
-      \ 'component_type': {
-      \   'buffers': 'tabsel'
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead',
-      \   'cocstatus': 'StatusDiagnostic',
-      \ },
-      \ }
-let g:lightline#bufferline#show_number = 1
-if has("gui_running")
-    set guifont=SF\ Mono:h12
-endif
-
-" Keybindings 
-let g:mapleader = "\<Space>"
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-nnoremap <leader>e :NERDTreeToggle<CR>
-let g:Lf_ShortcutF = "<leader>ff"
-nmap <leader>fr <Plug>LeaderfRgPrompt
-nmap <leader>ln <Plug>(coc-rename)
-nmap <leader>la  <Plug>(coc-codeaction-cursor)
-nmap <leader>lf  :Format<CR>
-nnoremap <silent><nowait> <leader>ld  :<C-u>CocList diagnostics<cr> " Show all diagnostics
-nnoremap <silent><nowait> <leader>lo  :<C-u>CocList outline<cr> " Find symbol of current document
-nnoremap <silent><nowait> <leader>ls  :<C-u>CocList -I symbols<cr> " Search workspace symbols
-nmap <leader>lgd <Plug>(coc-definition)
-nmap <leader>lgt <Plug>(coc-type-definition)
-nmap <leader>lgi <Plug>(coc-implementation)
-nmap <leader>lgr <Plug>(coc-references)
-nmap <leader>hs :CocCommand git.chunkStage<cr>
-nmap <leader>hu :CocCommand git.chunkUndo<cr>
-nmap <leader>hi :CocCommand git.chunkInfo<cr>
+let g:airline_symbols_ascii = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " WhichKey
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 let g:which_key_map = {}
 let g:which_key_map.e = 'file explorer'
-let g:which_key_map.f = { 'name' : '+leaderF' }
+let g:which_key_map.f = { 'name' : '+find' }
 let g:which_key_map.f.f = 'find file'
-let g:which_key_map.f.r = 'find regex'
+let g:which_key_map.f.b = 'find buffer'
+let g:which_key_map.f.m = 'find MRU file'
+let g:which_key_map.f.s = 'find string'
 let g:which_key_map.h = { 'name' : '+hunks' }
 let g:which_key_map.h.s = 'stage'
 let g:which_key_map.h.u = 'undo'
 let g:which_key_map.h.i = 'info'
-let g:which_key_map.b = { 'name' : '+buffer' }
 let g:which_key_map.c = { 'name' : '+comment' }
 let g:which_key_map.l = { 'name' : '+lsp' }
 let g:which_key_map.l.n = 'rename'
