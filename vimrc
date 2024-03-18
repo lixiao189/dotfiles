@@ -38,6 +38,7 @@ Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension'  }
 Plug 'jlanzarotta/bufexplorer'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive' " Git wrapper
 Plug 'preservim/nerdcommenter'
@@ -76,7 +77,7 @@ set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 set expandtab
-set smartindent
+set cindent 
 
 " Autopairs 
 let g:AutoPairsMapBS = 1
@@ -181,6 +182,9 @@ nmap <leader>lgd <Plug>(coc-definition)
 nmap <leader>lgt <Plug>(coc-type-definition)
 nmap <leader>lgi <Plug>(coc-implementation)
 nmap <leader>lgr <Plug>(coc-references)
+nmap <leader>hs :CocCommand git.chunkStage<cr>
+nmap <leader>hu :CocCommand git.chunkUndo<cr>
+nmap <leader>hi :CocCommand git.chunkInfo<cr>
 
 " WhichKey
 let g:which_key_map = {}
@@ -191,7 +195,7 @@ let g:which_key_map.f.r = 'find regex'
 let g:which_key_map.h = { 'name' : '+hunks' }
 let g:which_key_map.h.s = 'stage'
 let g:which_key_map.h.u = 'undo'
-let g:which_key_map.h.p = 'preview'
+let g:which_key_map.h.i = 'info'
 let g:which_key_map.b = { 'name' : '+buffer' }
 let g:which_key_map.c = { 'name' : '+comment' }
 let g:which_key_map.l = { 'name' : '+lsp' }
