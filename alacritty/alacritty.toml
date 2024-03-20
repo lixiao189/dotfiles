@@ -37,8 +37,6 @@ decorations_theme_variant = "Dark"
 dynamic_padding = false
 dynamic_title = true
 option_as_alt = "Both"
-opacity = 0.90
-blur = true
 
 [window.dimensions]
 columns = 140
