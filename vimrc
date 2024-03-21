@@ -53,6 +53,7 @@ call plug#end()
 syntax on
 set shortmess=atI
 set number
+set noshowcmd noruler " Turn off this to improve nvim's performance
 set nowrap
 set mouse=a
 set cul
