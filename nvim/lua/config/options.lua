@@ -35,3 +35,9 @@ vim.opt.writebackup = false
 
 -- Turn on signcolumn
 vim.opt.signcolumn = "yes"
+
+-- Hightlight current line
+vim.opt.cursorline = true
+
+-- Don't show mode 
+vim.opt.showmode = false
