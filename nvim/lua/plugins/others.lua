@@ -64,11 +64,6 @@ return {
     },
 
     {
-        "aserowy/tmux.nvim",
-        config = true,
-    },
-
-    {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
         event = "InsertEnter",
