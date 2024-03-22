@@ -38,7 +38,7 @@ return {
         keyset("n", "K", '<CMD>lua _G.show_docs()<CR>', { silent = true })
 
         -- Remap keys for apply code actions at the cursor position.
-        keyset("n", "<leader>la", "<Plug>(coc-codeaction-cursor)", { silent = true, nowait = true, desc = "action"})
+        keyset("n", "<leader>la", "<Plug>(coc-codeaction-cursor)", { silent = true, nowait = true, desc = "action" })
 
         -- Add `:Format` command to format current buffer
         vim.api.nvim_create_user_command("Format", "call CocAction('format')", {})
@@ -67,11 +67,6 @@ return {
 
         -- Highlight the symbol and its references on a CursorHold event(cursor is idle)
         vim.api.nvim_create_augroup("CocGroup", {})
-        vim.api.nvim_create_autocmd("CursorHold", {
-            group = "CocGroup",
-            command = "silent call CocActionAsync('highlight')",
-            desc = "Highlight symbol under cursor on CursorHold"
-        })
 
         -- Update signature help on jump placeholder
         vim.api.nvim_create_autocmd("User", {
