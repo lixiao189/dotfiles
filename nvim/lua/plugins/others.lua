@@ -40,6 +40,13 @@ return {
     },
 
     {
+        "aserowy/tmux.nvim",
+        config = {
+            copy_sync = { enable = false },
+        }
+    },
+
+    {
         "nvim-tree/nvim-tree.lua",
         version = "*",
         lazy = false,
