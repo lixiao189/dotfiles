@@ -9,10 +9,10 @@ return {
             hop.hint_char1()
         end, { remap = true })
         vim.keymap.set({ 'n', 'v' }, "<leader><leader>j", function()
-            hop.hint_lines({ direction = directions.AFTER_CURSOR })
+            hop.hint_lines_skip_whitespace({ direction = directions.AFTER_CURSOR })
         end, { remap = true })
         vim.keymap.set({ 'n', 'v' }, "<leader><leader>k", function()
-            hop.hint_lines({ direction = directions.BEFORE_CURSOR })
+            hop.hint_lines_skip_whitespace({ direction = directions.BEFORE_CURSOR })
         end, { remap = true })
     end
 }
