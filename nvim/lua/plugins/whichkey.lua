@@ -18,9 +18,6 @@ return {
                 g = { name = "+goto" },
                 l = { name = "+list" }
             },
-            ["<space>"] = {
-                name = "+hop"
-            },
         }, { prefix = "<leader>" })
     end,
 }
