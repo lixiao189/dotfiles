@@ -13,6 +13,7 @@ return {
         wk.register({
             f = { name = "+find" },
             h = { name = "+hunks" },
+            t = { name = "+test" },
             l = {
                 name = "+lsp",
                 g = { name = "+goto" },
