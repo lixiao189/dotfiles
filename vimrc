@@ -23,7 +23,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 " Plugins
 call plug#begin()
-Plug 'joshdick/onedark.vim'
+Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
@@ -159,9 +159,9 @@ imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
 
 " UI
-set background=dark
 set termguicolors
-colorscheme onedark
+set background=dark
+colorscheme gruvbox
 set laststatus=2
 set noshowmode
 set showtabline=2
