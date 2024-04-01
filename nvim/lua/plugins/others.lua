@@ -34,9 +34,31 @@ return {
             options = {
                 icons_enabled = true,
                 section_separators = '',
-                component_separators = '' -- Disable the separator
+                component_separators = '', -- Disable the separator
+                disabled_filetypes = {
+                    statusline = { "NvimTree", "help" },
+                },
             },
+            sections = { lualine_x = { 'g:coc_status', 'encoding', 'fileformat', 'filetype' } },
             theme = "gruvbox-material"
+        }
+    },
+
+    {
+        'akinsho/bufferline.nvim',
+        version = "*",
+        dependencies = 'nvim-tree/nvim-web-devicons',
+        opts = {
+            options = {
+                diagnostics = "coc",
+                offsets = {
+                    {
+                        filetype = "NvimTree",
+                        text = "File Explorer",
+                        highlight = "Directory",
+                    }
+                }
+            }
         }
     },
 
@@ -64,7 +86,9 @@ return {
         },
         config = function()
             vim.keymap.set("n", "<leader>e", "<CMD>NvimTreeToggle<CR>",
-                { silent = true, noremap = true, desc = "Toggle file tree" })
+                { silent = true, noremap = true, desc = "Explorer NeoTree (root dir)" })
+            vim.keymap.set("n", "<leader>E", "<CMD>NvimTreeFindFileToggle<CR>",
+                { silent = true, noremap = true, desc = "Explorer NeoTree (cwd)" })
             require("nvim-tree").setup {
                 renderer = { group_empty = true }
             }
