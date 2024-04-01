@@ -1,6 +1,7 @@
 return {
     "neoclide/coc.nvim",
     branch = "release",
+    dependencies = { "rcarriga/nvim-notify" },
     config = function()
         vim.g.coc_global_extensions = { 'coc-marketplace', 'coc-snippets', 'coc-sumneko-lua' }
 
@@ -25,7 +26,7 @@ return {
         keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()',
             opts)
         keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
-        keyset('i' , '<CR>','v:lua.MUtils.completion_confirm()', opts)
+        keyset('i', '<CR>', 'v:lua.MUtils.completion_confirm()', opts)
         keyset("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)")
 
         keyset("n", "[g", "<Plug>(coc-diagnostic-prev)", { silent = true, desc = "Previous diagnostic" })
@@ -84,6 +85,41 @@ return {
             pattern = "CocJumpPlaceholder",
             command = "call CocActionAsync('showSignatureHelp')",
             desc = "Update signature help on jump placeholder"
+        })
+
+        local coc_status_record = {}
+
+        function CocStatusNotify(msg, level)
+            local notify_opts = {
+                title = "LSP Status",
+                timeout = 500,
+                hide_from_history = true,
+                on_close = ResetCocStatusRecord
+            }
+            -- if coc_status_record is not {} then add it to notify_opts to key called "replace"
+            if coc_status_record ~= {} then
+                notify_opts["replace"] = coc_status_record.id
+            end
+            coc_status_record = vim.notify(msg, level, notify_opts)
+        end
+
+        function ResetCocStatusRecord(_)
+            coc_status_record = {}
+        end
+
+        function StatusNotify()
+            local status = vim.g.coc_status or ""
+            local level = "info"
+            if status == "" then
+                return ""
+            end
+            CocStatusNotify(status, level)
+        end
+
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "CocStatusChange",
+            command = "call v:lua.StatusNotify()",
+            desc = "CocStatusChange"
         })
     end
 }
