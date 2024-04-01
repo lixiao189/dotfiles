@@ -1,4 +1,4 @@
-import = ["/Users/node/.config/alacritty/theme/one-dark.toml"]
+import = ["/Users/node/.config/alacritty/theme/gruvbox-material.toml"]
 
 [cursor.style]
 blinking = "Never"

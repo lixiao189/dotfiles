@@ -1,13 +1,13 @@
 return {
     "mg979/vim-visual-multi",
 
-    -- Onedark theme
     {
-        "olimorris/onedarkpro.nvim",
-        priority = 1000, -- Ensure it loads first
-        config = function()
-            vim.cmd("colorscheme onedark")
-        end,
+        "sainnhe/gruvbox-material",
+        priority = 1000,
+        config = function ()
+            vim.g.gruvbox_material_show_eob = 0
+            vim.cmd("colorscheme gruvbox-material")
+        end
     },
 
     {
@@ -35,7 +35,8 @@ return {
                 icons_enabled = true,
                 section_separators = '',
                 component_separators = '' -- Disable the separator
-            }
+            },
+            theme = "gruvbox-material"
         }
     },
 

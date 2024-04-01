@@ -23,7 +23,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 " Plugins
 call plug#begin()
-Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
 Plug 'vim-airline/vim-airline'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
@@ -159,15 +159,16 @@ imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
 
 " UI
+let g:airline_theme = 'gruvbox_material'
+let g:airline_symbols_ascii = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:gruvbox_material_show_eob = 0
 set termguicolors
 set background=dark
-colorscheme gruvbox
+colorscheme gruvbox-material
 set laststatus=2
 set noshowmode
 set showtabline=2
-autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
-let g:airline_symbols_ascii = 1
-let g:airline#extensions#tabline#enabled = 1
 
 " WhichKey
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>

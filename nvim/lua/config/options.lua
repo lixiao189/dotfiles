@@ -36,6 +36,9 @@ vim.opt.writebackup = false
 -- Turn on signcolumn
 vim.opt.signcolumn = "yes"
 
+-- Block cursor
+vim.opt.guicursor = "n-v-c-i:block"
+
 -- Hightlight current line
 vim.opt.cursorline = true
 
