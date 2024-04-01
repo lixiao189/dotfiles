@@ -4,7 +4,7 @@ return {
     {
         "sainnhe/gruvbox-material",
         priority = 1000,
-        config = function ()
+        config = function()
             vim.g.gruvbox_material_show_eob = 0
             vim.cmd("colorscheme gruvbox-material")
         end
@@ -65,7 +65,9 @@ return {
         config = function()
             vim.keymap.set("n", "<leader>e", "<CMD>NvimTreeToggle<CR>",
                 { silent = true, noremap = true, desc = "Toggle file tree" })
-            require("nvim-tree").setup {}
+            require("nvim-tree").setup {
+                renderer = { group_empty = true }
+            }
         end,
     },
 
