@@ -17,7 +17,7 @@ return {
         event = "InsertEnter",
         config = function()
             require('nvim-autopairs').setup {
-                disable_filetype = { "TelescopePrompt" , "vim" },
+                disable_filetype = { "TelescopePrompt", "vim" },
             }
         end
     },
@@ -33,7 +33,10 @@ return {
     -- Statusline
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        dependencies = {
+            'nvim-tree/nvim-web-devicons',
+            'arkav/lualine-lsp-progress'
+        },
         opts = {
             options = {
                 icons_enabled = true,
@@ -43,6 +46,7 @@ return {
                     statusline = { "NvimTree", "help" },
                 },
             },
+            sections = { lualine_c = { 'lsp_progress' } },
             theme = "gruvbox-material"
         }
     },
