@@ -8,15 +8,17 @@ return {
         vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Grep" })
         vim.keymap.set("n", "<leader>,", builtin.buffers, { desc = "Switch buffers" })
         vim.keymap.set("n", "<leader>g", builtin.git_status, { desc = "Git status" })
+
+        local actions = require "telescope.actions"
         require("telescope").setup({
             defaults = {
                 mappings = {
                     n = {
-                        ["<c-d>"] = require("telescope.actions").delete_buffer,
+                        ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
                     },
                     i = {
                         ["<C-h>"] = "which_key",
-                        ["<c-d>"] = require("telescope.actions").delete_buffer,
+                        ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
                     },
                 },
             },

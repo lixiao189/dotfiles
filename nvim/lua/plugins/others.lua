@@ -5,7 +5,9 @@ return {
         "sainnhe/gruvbox-material",
         priority = 1000,
         config = function()
+            vim.opt.background = "light"
             vim.g.gruvbox_material_show_eob = 0
+            vim.g.gruvbox_material_background = "medium"
             vim.cmd("colorscheme gruvbox-material")
         end
     },
@@ -14,7 +16,9 @@ return {
         'windwp/nvim-autopairs',
         event = "InsertEnter",
         config = function()
-            require('nvim-autopairs').setup { map_cr = false }
+            require('nvim-autopairs').setup {
+                disable_filetype = { "TelescopePrompt" , "vim" },
+            }
         end
     },
 
@@ -39,7 +43,6 @@ return {
                     statusline = { "NvimTree", "help" },
                 },
             },
-            sections = { lualine_x = { 'g:coc_status', 'encoding', 'fileformat', 'filetype' } },
             theme = "gruvbox-material"
         }
     },

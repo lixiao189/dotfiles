@@ -18,4 +18,7 @@ require("config.keymaps")
 require("config.autocmds")
 
 -- Load plugins
-require("lazy").setup("plugins")
+require("lazy").setup {
+    { import = "plugins" },
+    { import = "plugins.lsp" },
+}
