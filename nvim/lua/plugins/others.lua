@@ -2,13 +2,10 @@ return {
     "mg979/vim-visual-multi",
 
     {
-        "sainnhe/gruvbox-material",
-        priority = 1000,
-        config = function()
-            vim.opt.background = "light"
-            vim.g.gruvbox_material_show_eob = 0
-            vim.g.gruvbox_material_background = "medium"
-            vim.cmd("colorscheme gruvbox-material")
+        "olimorris/onedarkpro.nvim",
+        priority = 1000, -- Ensure it loads first
+        init = function()
+            vim.cmd("colorscheme onedark")
         end
     },
 
@@ -43,7 +40,6 @@ return {
                 },
             },
             sections = { lualine_c = { 'lsp_progress' } },
-            theme = "gruvbox-material"
         }
     },
 
