@@ -15,6 +15,8 @@ return {
                 "black",    -- python formatter
                 "clangd",   -- c/c++ language server
                 "lua_ls",   -- lua language server
+                "pylint",   -- python linter
+                "eslint_d", -- js linter
             },
         })
     end
