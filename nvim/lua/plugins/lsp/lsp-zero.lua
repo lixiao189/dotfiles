@@ -88,6 +88,7 @@ return {
                     "<cmd>lua vim.diagnostic.goto_next()<cr>",
                     { noremap = true, silent = true, desc = "Next diagnostic" }
                 )
+                vim.keymap.set('n', 'D', vim.diagnostic.open_float)
 
                 -- List
                 vim.keymap.set(
@@ -116,6 +117,9 @@ return {
                 hint = "⚑",
                 info = "»",
             })
+
+            -- Turn off diagnostic virtual text
+            vim.diagnostic.config { virtual_text = false }
 
             require("mason-lspconfig").setup({
                 automatic_installation = true,
