@@ -121,6 +121,12 @@ return {
                 automatic_installation = true,
                 handlers = {
                     lsp_zero.default_setup,
+                    -- Fix clangd lsp offset encoding error
+                    clangd = function()
+                        require("lspconfig").clangd.setup {
+                            capabilities = { offsetEncoding = { "utf-16" } }
+                        }
+                    end
                 },
             })
 
