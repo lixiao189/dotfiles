@@ -53,8 +53,8 @@ return {
             -- Improve the performance
             performance = {
                 max_view_entries = 10,
-                debounce = 10,
-                throttle = 10,
+                debounce = 5,
+                throttle = 5,
             },
             completion = {
                 completeopt = "menu,menuone,noinsert",
