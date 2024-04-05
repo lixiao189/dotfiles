@@ -50,9 +50,11 @@ return {
 
         cmp.setup({
             preselect = "item",
+            -- Improve the performance
             performance = {
                 max_view_entries = 10,
-                debounce = 150,
+                debounce = 10,
+                throttle = 10,
             },
             completion = {
                 completeopt = "menu,menuone,noinsert",
