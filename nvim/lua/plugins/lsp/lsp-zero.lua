@@ -17,6 +17,22 @@ return {
 
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
+
+            {
+                "nvimdev/lspsaga.nvim",
+                event = "LspAttach",
+                dependencies = {
+                    "nvim-treesitter/nvim-treesitter",
+                    "nvim-tree/nvim-web-devicons"
+                },
+                opts = {
+                    lightbulb = { virtual_text = false },
+                    beacon = { enable = true },
+                    ui = { code_action = "" },
+                    code_action = { keys = { quit = "<esc>" }, num_shortcut = false },
+                    rename = { keys = { quit = "<esc>" } }
+                }
+            }
         },
         config = function()
             local lsp_zero = require("lsp-zero")
@@ -24,31 +40,25 @@ return {
                 vim.keymap.set(
                     "n",
                     "<leader>lgd",
-                    "<cmd>lua vim.lsp.buf.definition()<cr>",
+                    "<cmd>Lspsaga peek_definition<cr>",
                     { noremap = true, silent = true, desc = "Go to definition" }
                 )
                 vim.keymap.set(
                     "n",
-                    "<leader>lgD",
-                    "<cmd>lua vim.lsp.buf.declaration()<cr>",
-                    { noremap = true, silent = true, desc = "Go to declaration" }
-                )
-                vim.keymap.set(
-                    "n",
                     "<leader>lgi",
-                    "<cmd>lua vim.lsp.buf.implementation()<cr>",
+                    "<cmd>Lspsaga finder imp<cr>",
                     { noremap = true, silent = true, desc = "Go to implementation" }
                 )
                 vim.keymap.set(
                     "n",
-                    "<leader>lgo",
-                    "<cmd>lua vim.lsp.buf.type_definition()<cr>",
+                    "<leader>lgt",
+                    "<cmd>Lspsaga peek_type_definition<cr>",
                     { noremap = true, silent = true, desc = "Go to type definition" }
                 )
                 vim.keymap.set(
                     "n",
                     "<leader>lgr",
-                    "<cmd>Telescope lsp_references<cr>",
+                    "<cmd>Lspsaga finder ref<cr>",
                     { noremap = true, silent = true, desc = "Go to references" }
                 )
                 vim.keymap.set(
@@ -60,32 +70,38 @@ return {
                 vim.keymap.set(
                     "n",
                     "<leader>ln",
-                    "<cmd>lua vim.lsp.buf.rename()<cr>",
+                    "<cmd>Lspsaga rename<cr>",
                     { noremap = true, silent = true, desc = "Rename" }
                 )
                 vim.keymap.set(
                     "n",
                     "<leader>la",
-                    "<cmd>lua vim.lsp.buf.code_action()<cr>",
+                    "<cmd>Lspsaga code_action<cr>",
                     { noremap = true, silent = true, desc = "Code action" }
+                )
+                vim.keymap.set(
+                    "n",
+                    "<leader>lo",
+                    "<cmd>Lspsaga outline<cr>",
+                    { noremap = true, silent = true, desc = "Toggle outline" }
                 )
 
                 vim.keymap.set(
                     "n",
                     "K",
-                    "<cmd>lua vim.lsp.buf.hover()<cr>",
+                    "<cmd>Lspsaga hover_doc<cr>",
                     { noremap = true, silent = true, desc = "Hover" }
                 )
                 vim.keymap.set(
                     "n",
                     "[d",
-                    "<cmd>lua vim.diagnostic.goto_prev()<cr>",
+                    "<cmd>Lspsaga diagnostic_jump_prev<cr>",
                     { noremap = true, silent = true, desc = "Previous diagnostic" }
                 )
                 vim.keymap.set(
                     "n",
                     "]d",
-                    "<cmd>lua vim.diagnostic.goto_next()<cr>",
+                    "<cmd>Lspsaga diagnostic_jump_next<cr>",
                     { noremap = true, silent = true, desc = "Next diagnostic" }
                 )
                 vim.keymap.set('n', 'D', vim.diagnostic.open_float)
