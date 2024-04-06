@@ -15,8 +15,6 @@ return {
     config = function()
         local lsp_zero = require("lsp-zero")
         local cmp = require("cmp")
-        local luasnip = require("luasnip")
-        local neotab = require("neotab")
         local cmp_action = lsp_zero.cmp_action()
 
         -- Add sources in cmp
@@ -69,16 +67,10 @@ return {
                 ["<C-u>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-d>"] = cmp.mapping.scroll_docs(4),
 
+                ['<C-e>'] = cmp.mapping.abort(),
+
                 -- Super tab
-                ["<Tab>"] = cmp.mapping(function()
-                    if cmp.visible() then
-                        cmp.select_next_item()
-                    elseif luasnip.expand_or_locally_jumpable() then
-                        luasnip.expand_or_jump()
-                    else
-                        neotab.tabout()
-                    end
-                end),
+                ["<Tab>"] = cmp_action.luasnip_supertab(),
                 ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
             },
             formatting = {
