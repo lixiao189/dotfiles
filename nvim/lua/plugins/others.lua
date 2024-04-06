@@ -134,5 +134,13 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         version = "*",
         config = true,
+    },
+
+    {
+        "szw/vim-maximizer",
+        config = function()
+            vim.keymap.set("n", "<leader>m", "<CMD>MaximizerToggle<CR>",
+                { silent = true, noremap = true, desc = "Maximize current window" })
+        end
     }
 }
