@@ -1,4 +1,4 @@
-import = ["/Users/node/.config/alacritty/theme/gruvbox-material.toml"]
+import = ["/Users/node/.config/alacritty/theme/one-dark.toml"]
 
 [cursor.style]
 blinking = "Never"
@@ -27,7 +27,7 @@ style = "Italic"
 
 [font.normal]
 family = "JetBrainsMono Nerd Font Mono"
-style = "Regular"
+style = "Light"
 
 [font.offset]
 y = 2
