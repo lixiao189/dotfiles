@@ -2,19 +2,6 @@ return {
     "mg979/vim-visual-multi",
 
     {
-        "olimorris/onedarkpro.nvim",
-        priority = 1000, -- Ensure it loads first
-        init = function()
-            vim.cmd("colorscheme onedark")
-        end,
-        opts = {
-            options = {
-                transparency = true
-            }
-        }
-    },
-
-    {
         'folke/todo-comments.nvim',
         event = 'VimEnter',
         dependencies = { 'nvim-lua/plenary.nvim' },
