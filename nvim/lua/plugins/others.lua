@@ -6,7 +6,12 @@ return {
         priority = 1000, -- Ensure it loads first
         init = function()
             vim.cmd("colorscheme onedark")
-        end
+        end,
+        opts = {
+            options = {
+                transparency = true
+            }
+        }
     },
 
     {
