@@ -89,13 +89,13 @@ return {
                     "n",
                     "<leader>llo",
                     "<cmd>Telescope lsp_document_symbols<cr>",
-                    { noremap = true, silent = true, desc = "List symbols" }
+                    { noremap = true, silent = true, desc = "List document symbols" }
                 )
                 vim.keymap.set(
                     "n",
                     "<leader>llO",
                     "<cmd>Telescope lsp_workspace_symbols<cr>",
-                    { noremap = true, silent = true, desc = "List symbols" }
+                    { noremap = true, silent = true, desc = "List workspace symbols" }
                 )
             end)
 
