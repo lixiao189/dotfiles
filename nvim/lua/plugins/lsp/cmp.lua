@@ -8,8 +8,6 @@ return {
         "hrsh7th/cmp-path",
 
         "L3MON4D3/LuaSnip",
-
-        "onsails/lspkind.nvim",
     },
     event = "LspAttach",
     config = function()
@@ -72,15 +70,6 @@ return {
                 -- Super tab
                 ["<Tab>"] = cmp_action.luasnip_supertab(),
                 ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
-            },
-            formatting = {
-                fields = { 'kind', 'abbr', 'menu' },
-                format = require('lspkind').cmp_format({
-                    mode = 'symbol',
-                    maxwidth = 50,
-                    ellipsis_char = '...',
-                }),
-                expandable_indicator = true,
             },
             snippet = {
                 expand = function(args)

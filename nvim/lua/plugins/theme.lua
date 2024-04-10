@@ -6,7 +6,5 @@ return {
         vim.cmd.colorscheme "catppuccin"
         vim.opt.background = "light"
     end,
-    opts = {
-        transparent_background = true
-    }
+    opts = {}
 }
