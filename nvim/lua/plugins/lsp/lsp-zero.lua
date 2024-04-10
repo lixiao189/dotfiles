@@ -19,19 +19,19 @@ return {
                 vim.keymap.set(
                     "n",
                     "<leader>lgd",
-                    vim.lsp.buf.definition,
+                    "<cmd>lua vim.lsp.buf.definition()<cr>",
                     { noremap = true, silent = true, desc = "Go to definition" }
                 )
                 vim.keymap.set(
                     "n",
-                    "<leader>lgd",
-                    vim.lsp.buf.declaration,
-                    { noremap = true, silent = true, desc = "Go to definition" }
+                    "<leader>lgD",
+                    "<cmd>lua vim.lsp.buf.declaration()<cr>",
+                    { noremap = true, silent = true, desc = "Go to declaration" }
                 )
                 vim.keymap.set(
                     "n",
                     "<leader>lgi",
-                    vim.lsp.buf.implementation,
+                    "<cmd>lua vim.lsp.buf.implementation()<cr>",
                     { noremap = true, silent = true, desc = "Go to implementation" }
                 )
                 vim.keymap.set(
