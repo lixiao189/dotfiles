@@ -42,12 +42,6 @@ return {
                 )
                 vim.keymap.set(
                     "n",
-                    "<C-k>",
-                    "<cmd>lua vim.lsp.buf.signature_help()<cr>",
-                    { noremap = true, silent = true, desc = "Show signature help" }
-                )
-                vim.keymap.set(
-                    "n",
                     "<leader>ln",
                     "<cmd>lua vim.lsp.buf.rename()<cr>",
                     { noremap = true, silent = true, desc = "Rename" }

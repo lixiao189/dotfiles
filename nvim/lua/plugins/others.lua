@@ -14,61 +14,6 @@ return {
         config = true
     },
 
-    -- Dashboard
-    {
-        'nvimdev/dashboard-nvim',
-        event = 'VimEnter',
-        opts = {},
-        dependencies = { { 'nvim-tree/nvim-web-devicons' } }
-    },
-
-    -- Statusline
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = {
-            'nvim-tree/nvim-web-devicons',
-        },
-        opts = {
-            options = {
-                icons_enabled = true,
-                section_separators = '',
-                component_separators = '', -- Disable the separator
-                disabled_filetypes = {
-                    statusline = { "NvimTree", "help" },
-                },
-            },
-        }
-    },
-
-    {
-        'akinsho/bufferline.nvim',
-        version = "*",
-        dependencies = 'nvim-tree/nvim-web-devicons',
-        opts = {
-            options = {
-                diagnostics = "coc",
-                offsets = {
-                    {
-                        filetype = "NvimTree",
-                        text = "File Explorer",
-                        highlight = "Directory",
-                    }
-                }
-            }
-        }
-    },
-
-    -- Vim notify
-    {
-        "rcarriga/nvim-notify",
-        init = function()
-            vim.notify = require("notify")
-        end,
-        opts = {
-            background_colour = "#000000",
-        }
-    },
-
     {
         "aserowy/tmux.nvim",
         config = {

@@ -39,8 +39,5 @@ vim.opt.signcolumn = "yes"
 -- Hightlight current line
 vim.opt.cursorline = true
 
--- Cursor settings
-vim.opt.guicursor = "n-v-i-c:block-Cursor"
-
 -- Don't show mode 
 vim.opt.showmode = false
