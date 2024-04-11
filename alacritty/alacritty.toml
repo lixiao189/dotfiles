@@ -1,4 +1,4 @@
-import = ["/Users/node/.config/alacritty/theme/catppuccin-latte.toml"]
+import = ["/Users/node/.config/alacritty/theme/oxocarbon.toml"]
 
 [cursor.style]
 blinking = "Never"
@@ -33,7 +33,7 @@ style = "Light"
 y = 2
 
 [window]
-decorations_theme_variant = "Light"
+decorations_theme_variant = "dark"
 dynamic_padding = false
 dynamic_title = true
 option_as_alt = "Both"
