@@ -31,6 +31,9 @@ return {
                 { name = "nvim_lua" },
                 { name = "path" },
             },
+            completion = {
+                completeopt = 'menu,menuone,noinsert'
+            },
             formatting = {
                 fields = {
                     -- cmp.ItemField.Kind,
