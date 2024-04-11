@@ -31,16 +31,6 @@ return {
                 { name = "nvim_lua" },
                 { name = "path" },
             },
-            completion = {
-                completeopt = 'menu,menuone,noinsert'
-            },
-            formatting = {
-                fields = {
-                    -- cmp.ItemField.Kind,
-                    cmp.ItemField.Abbr,
-                    cmp.ItemField.Menu,
-                },
-            },
             mapping = {
                 -- confirm completion item
                 ["<Enter>"] = cmp.mapping.confirm({ select = true }),
