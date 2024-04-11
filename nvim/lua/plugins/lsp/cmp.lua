@@ -16,36 +16,6 @@ return {
         local cmp_action = lsp_zero.cmp_action()
 
         -- Add sources in cmp
-        local preferred_sources = {
-            { name = "luasnip" },
-            { name = "nvim_lsp" },
-            { name = "nvim_lua" },
-            { name = "path" },
-        }
-        local function tooBig(bufnr)
-            local max_filesize = 10 * 1024 -- 100 KB
-            local check_stats = (vim.uv or vim.loop).fs_stat
-            local ok, stats = pcall(check_stats, vim.api.nvim_buf_get_name(bufnr))
-            if ok and stats and stats.size > max_filesize then
-                return true
-            else
-                return false
-            end
-        end
-        vim.api.nvim_create_autocmd("BufRead", {
-            group = vim.api.nvim_create_augroup("CmpBufferDisableGrp",
-                { clear = true }),
-            callback = function(ev)
-                local sources = preferred_sources
-                if not tooBig(ev.buf) then
-                    sources[#sources + 1] = { name = "buffer", keyword_length = 4 }
-                end
-                cmp.setup.buffer({
-                    sources = cmp.config.sources(sources),
-                })
-            end,
-        })
-
         cmp.setup({
             preselect = "item",
             -- Improve the performance
@@ -54,8 +24,19 @@ return {
                 debounce = 5,
                 throttle = 5,
             },
-            completion = {
-                completeopt = "menu,menuone,noinsert",
+            sources = {
+                { name = "nvim_lsp" },
+                { name = "luasnip" },
+                { name = "buffer" },
+                { name = "nvim_lua" },
+                { name = "path" },
+            },
+            formatting = {
+                fields = {
+                    -- cmp.ItemField.Kind,
+                    cmp.ItemField.Abbr,
+                    cmp.ItemField.Menu,
+                },
             },
             mapping = {
                 -- confirm completion item
