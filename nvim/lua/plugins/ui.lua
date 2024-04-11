@@ -17,6 +17,8 @@ return {
         init = function()
             vim.opt.background = "dark" -- set this to dark or light
             vim.cmd.colorscheme "oxocarbon"
+            -- Change color of status lines which is not-current windows.
+            vim.api.nvim_set_hl(0, "StatusLineNC", { fg = "#161616", bg = "#161616" })
         end
     },
 
