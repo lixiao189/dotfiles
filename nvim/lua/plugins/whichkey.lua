@@ -14,11 +14,7 @@ return {
             f = { name = "+find" },
             h = { name = "+hunks" },
             t = { name = "+test" },
-            l = {
-                name = "+lsp",
-                g = { name = "+goto" },
-                l = { name = "+list" }
-            },
+            l = { name = "+lsp" },
         }, { prefix = "<leader>" })
     end,
 }

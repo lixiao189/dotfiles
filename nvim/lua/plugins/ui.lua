@@ -14,7 +14,7 @@ return {
     {
         "nyoom-engineering/oxocarbon.nvim",
         priority = 1000,
-        init = function ()
+        init = function()
             vim.opt.background = "dark" -- set this to dark or light
             vim.cmd.colorscheme "oxocarbon"
         end
@@ -40,7 +40,7 @@ return {
                 section_separators = '',
                 component_separators = '', -- Disable the separator
                 disabled_filetypes = {
-                    statusline = { "NvimTree", "help" },
+                    statusline = { "NvimTree", "help", "aerial" },
                 },
             },
         }

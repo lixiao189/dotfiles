@@ -16,48 +16,53 @@ return {
         config = function()
             local lsp_zero = require("lsp-zero")
             lsp_zero.on_attach(function(_, _)
+                -- Goto
                 vim.keymap.set(
                     "n",
-                    "<leader>lgd",
+                    "gd",
                     "<cmd>lua vim.lsp.buf.definition()<cr>",
                     { noremap = true, silent = true, desc = "Go to definition" }
                 )
                 vim.keymap.set(
                     "n",
-                    "<leader>lgD",
+                    "gD",
                     "<cmd>lua vim.lsp.buf.declaration()<cr>",
                     { noremap = true, silent = true, desc = "Go to declaration" }
                 )
                 vim.keymap.set(
                     "n",
-                    "<leader>lgi",
+                    "gi",
                     "<cmd>lua vim.lsp.buf.implementation()<cr>",
                     { noremap = true, silent = true, desc = "Go to implementation" }
                 )
                 vim.keymap.set(
                     "n",
-                    "<leader>lgr",
+                    "gr",
                     "<cmd>lua vim.lsp.buf.references()<cr>",
                     { noremap = true, silent = true, desc = "Go to references" }
                 )
+
                 vim.keymap.set(
                     "n",
                     "<leader>ln",
                     "<cmd>lua vim.lsp.buf.rename()<cr>",
                     { noremap = true, silent = true, desc = "Rename" }
                 )
+
                 vim.keymap.set(
                     "n",
                     "<leader>la",
                     "<cmd>lua vim.lsp.buf.code_action()<cr>",
                     { noremap = true, silent = true, desc = "Code action" }
                 )
+
                 vim.keymap.set(
                     "n",
                     "K",
                     "<cmd>lua vim.lsp.buf.hover()<cr>",
                     { noremap = true, silent = true, desc = "Hover" }
                 )
+
                 vim.keymap.set(
                     "n",
                     "[d",
@@ -75,19 +80,19 @@ return {
                 -- List
                 vim.keymap.set(
                     "n",
-                    "<leader>lld",
+                    "<leader>ld",
                     "<cmd>Telescope diagnostics<cr>",
                     { noremap = true, silent = true, desc = "List diagnostics" }
                 )
                 vim.keymap.set(
                     "n",
-                    "<leader>llo",
+                    "<leader>lo",
                     "<cmd>Telescope lsp_document_symbols<cr>",
                     { noremap = true, silent = true, desc = "List document symbols" }
                 )
                 vim.keymap.set(
                     "n",
-                    "<leader>llO",
+                    "<leader>lO",
                     "<cmd>Telescope lsp_workspace_symbols<cr>",
                     { noremap = true, silent = true, desc = "List workspace symbols" }
                 )
