@@ -9,11 +9,18 @@ return {
         -- Other adapters here
         "nvim-neotest/neotest-go",
     },
+    event = {
+        "BufReadPre",
+        "BufNewFile",
+    },
     config = function()
-        -- Keybindings 
-        vim.api.nvim_set_keymap("n", "<leader>ts", "<cmd>Neotest summary<CR>", { noremap = true, silent = true, desc = "summary panel" })
-        vim.api.nvim_set_keymap("n", "<leader>tr", "<cmd>Neotest run<CR>", { noremap = true, silent = true, desc = "run test" })
-        vim.api.nvim_set_keymap("n", "<leader>to", "<cmd>Neotest output-panel<CR>", { noremap = true, silent = true, desc = "summary panel" })
+        -- Keybindings
+        vim.api.nvim_set_keymap("n", "<leader>ts", "<cmd>Neotest summary<CR>",
+            { noremap = true, silent = true, desc = "summary panel" })
+        vim.api.nvim_set_keymap("n", "<leader>tr", "<cmd>Neotest run<CR>",
+            { noremap = true, silent = true, desc = "run test" })
+        vim.api.nvim_set_keymap("n", "<leader>to", "<cmd>Neotest output-panel<CR>",
+            { noremap = true, silent = true, desc = "summary panel" })
 
         require("neotest").setup({
             adapters = {

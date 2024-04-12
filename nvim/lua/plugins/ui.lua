@@ -14,10 +14,13 @@ return {
     {
         "EdenEast/nightfox.nvim",
         priority = 1000,
-        init = function ()
+        init = function()
             vim.cmd("colorscheme carbonfox")
         end
     },
+
+    -- Icons
+    { "nvim-tree/nvim-web-devicons", lazy = true },
 
     -- Dashboard
     {
@@ -30,6 +33,10 @@ return {
     -- Statusline
     {
         'nvim-lualine/lualine.nvim',
+        event = {
+            "BufReadPre",
+            "BufNewFile",
+        },
         dependencies = {
             'nvim-tree/nvim-web-devicons',
         },
@@ -39,7 +46,7 @@ return {
                 section_separators = '',
                 component_separators = '', -- Disable the separator
                 disabled_filetypes = {
-                    statusline = { "NvimTree", "help", "aerial" },
+                    statusline = { "NvimTree", "help", "aerial", "dashboard" },
                 },
             },
         }
@@ -49,6 +56,7 @@ return {
     {
         'akinsho/bufferline.nvim',
         version = "*",
+        event = "VimEnter",
         dependencies = 'nvim-tree/nvim-web-devicons',
         opts = {
             options = {
@@ -75,6 +83,10 @@ return {
     -- VS code like winbar
     {
         "utilyre/barbecue.nvim",
+        event = {
+            "BufReadPre",
+            "BufNewFile",
+        },
         name = "barbecue",
         version = "*",
         dependencies = {
@@ -84,5 +96,19 @@ return {
         opts = {
             -- configurations go here
         },
-    }
+    },
+
+    -- Indent lines
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        event = {
+            "BufReadPre",
+            "BufNewFile",
+        },
+        main = "ibl",
+        opts = {
+            scope = { enabled = false },
+            exclude = { filetypes = { "dashboard" } }
+        }
+    },
 }

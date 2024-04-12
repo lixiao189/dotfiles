@@ -4,6 +4,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         "nvim-tree/nvim-web-devicons"
     },
+    event = "LspAttach",
     config = function()
         require("aerial").setup({
             layout = { min_width = 30 },

@@ -16,6 +16,7 @@ return {
 
     {
         "aserowy/tmux.nvim",
+        event = "VeryLazy",
         config = {
             copy_sync = { enable = false },
         }
@@ -24,7 +25,7 @@ return {
     {
         "nvim-tree/nvim-tree.lua",
         version = "*",
-        lazy = false,
+        event = "VeryLazy",
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
@@ -37,16 +38,6 @@ return {
                 renderer = { group_empty = true }
             }
         end,
-    },
-
-    -- Indent lines
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        main = "ibl",
-        opts = {
-            scope = { enabled = false },
-            exclude = { filetypes = { "dashboard" } }
-        }
     },
 
     {
