@@ -12,46 +12,10 @@ return {
         opts = {}
     },
     {
-        "nyoom-engineering/oxocarbon.nvim",
+        "EdenEast/nightfox.nvim",
         priority = 1000,
-        init = function()
-            vim.opt.background = "dark" -- set this to dark or light
-            vim.cmd.colorscheme "oxocarbon"
-            -- Change color of status lines which is not-current windows.
-            vim.api.nvim_set_hl(0, "StatusLineNC", { fg = "#161616", bg = "#161616" })
-
-            vim.api.nvim_set_hl(0, "CmpItemKindField", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindProperty", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindEvent", { bg = "NONE" })
-
-            vim.api.nvim_set_hl(0, "CmpItemKindText", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindEnum", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = "NONE" })
-
-            vim.api.nvim_set_hl(0, "CmpItemKindConstant", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindConstructor", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindReference", { bg = "NONE" })
-
-            vim.api.nvim_set_hl(0, "CmpItemKindFunction", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindStruct", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindClass", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindModule", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindOperator", { bg = "NONE" })
-
-            vim.api.nvim_set_hl(0, "CmpItemKindVariable", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindFile", { bg = "NONE" })
-
-            vim.api.nvim_set_hl(0, "CmpItemKindUnit", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindSnippet", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindFolder", { bg = "NONE" })
-
-            vim.api.nvim_set_hl(0, "CmpItemKindMethod", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindValue", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindEnumMember", { bg = "NONE" })
-
-            vim.api.nvim_set_hl(0, "CmpItemKindInterface", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindColor", { bg = "NONE" })
-            vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter", { bg = "NONE" })
+        init = function ()
+            vim.cmd("colorscheme carbonfox")
         end
     },
 
@@ -88,7 +52,7 @@ return {
         dependencies = 'nvim-tree/nvim-web-devicons',
         opts = {
             options = {
-                diagnostics = "coc",
+                diagnostics = "nvim_lsp",
                 offsets = {
                     {
                         filetype = "NvimTree",
