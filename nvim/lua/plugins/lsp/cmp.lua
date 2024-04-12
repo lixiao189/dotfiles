@@ -17,12 +17,14 @@ return {
 
         -- Add sources in cmp
         cmp.setup({
-            preselect = "item",
             -- Improve the performance
             performance = {
                 max_view_entries = 10,
                 debounce = 5,
                 throttle = 5,
+            },
+            completion = {
+                completeopt = "menu,menuone,noinsert",
             },
             sources = {
                 { name = "nvim_lsp" },

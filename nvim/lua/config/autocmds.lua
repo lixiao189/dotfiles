@@ -1,5 +1,8 @@
 vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = { "*.cpp", "*.c", "*.h", "*.hpp" },
+    pattern = {
+        "*.cpp", "*.c", "*.h", "*.hpp",
+        "*.vue", "*.js", "*.html", "*.css"
+    },
     callback = function()
         vim.opt.shiftwidth = 2
         vim.opt.tabstop = 2

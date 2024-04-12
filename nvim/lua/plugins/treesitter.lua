@@ -1,12 +1,18 @@
 return {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
+    dependencies = {
+        { "windwp/nvim-ts-autotag", lazy = true }
+    },
     config = function()
         require('nvim-treesitter.configs').setup {
             ensure_installed = { "lua", "vim", "vimdoc", "query" },
             highlight = {
                 enable = true,
                 additional_vim_regex_highlighting = false,
+            },
+            autotag = {
+                enable = true,
             },
             incremental_selection = {
                 enable = true,
