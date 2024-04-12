@@ -122,6 +122,15 @@ return {
                         require("lspconfig").clangd.setup {
                             capabilities = { offsetEncoding = { "utf-16" } }
                         }
+                    end,
+                    volar = function()
+                        require("lspconfig").volar.setup {
+                            init_options = {
+                                vue = {
+                                    hybridMode = false,
+                                },
+                            },
+                        }
                     end
                 },
             })
