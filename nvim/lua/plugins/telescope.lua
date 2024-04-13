@@ -21,7 +21,16 @@ return {
                         ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
                     },
                 },
-
+                file_ignore_patterns = {
+                    ".git/",
+                    "node_modules/",
+                    "vendor/",
+                    "target/",
+                    ".cache/",
+                    ".vscode/",
+                    ".idea/",
+                    ".DS_Store",
+                },
                 sorting_strategy = "ascending",
                 layout_config = {
                     horizontal = {
