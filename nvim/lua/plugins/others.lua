@@ -18,12 +18,12 @@ return {
         "ojroques/nvim-bufdel",
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            vim.keymap.set("n", "<leader>d", "<CMD>BufDel<CR>",
-                { silent = true, noremap = true, desc = "Delete buffer" })
-
             require('bufdel').setup {
                 quit = false,
             }
+
+            vim.keymap.set("n", "<leader>d", "<CMD>BufDel<CR>",
+                { silent = true, noremap = true, desc = "Delete buffer" })
         end
     },
 

@@ -11,10 +11,9 @@ return {
         }
         local wk = require("which-key")
         wk.register({
-            f = { name = "+find" },
-            h = { name = "+hunks" },
-            t = { name = "+test" },
-            l = { name = "+lsp" },
+            h = "+hunks",
+            t = "+test",
+            l = "+lsp",
         }, { prefix = "<leader>" })
     end,
 }
