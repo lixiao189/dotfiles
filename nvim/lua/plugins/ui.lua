@@ -54,13 +54,17 @@ return {
 
     -- Buffer line
     {
-        'akinsho/bufferline.nvim',
+        "akinsho/bufferline.nvim",
         version = "*",
         event = "VimEnter",
-        dependencies = 'nvim-tree/nvim-web-devicons',
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+            "ojroques/nvim-bufdel",
+        },
         opts = {
             options = {
                 diagnostics = "nvim_lsp",
+                close_command = "BufDel",
                 offsets = {
                     {
                         filetype = "NvimTree",
