@@ -15,6 +15,19 @@ return {
     },
 
     {
+        "ojroques/nvim-bufdel",
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            vim.keymap.set("n", "<leader>d", "<CMD>BufDel<CR>",
+                { silent = true, noremap = true, desc = "Delete buffer" })
+
+            require('bufdel').setup {
+                quit = false,
+            }
+        end
+    },
+
+    {
         "aserowy/tmux.nvim",
         event = "VeryLazy",
         config = {
@@ -67,6 +80,7 @@ return {
 
     {
         "szw/vim-maximizer",
+        event = { "BufReadPre", "BufNewFile" },
         config = function()
             vim.keymap.set("n", "<leader>m", "<CMD>MaximizerToggle<CR>",
                 { silent = true, noremap = true, desc = "Maximize current window" })
