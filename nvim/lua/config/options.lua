@@ -27,7 +27,7 @@ vim.g.loaded_netrwPlugin = 1
 -- Improve performance
 vim.opt.showcmd = false
 vim.opt.ruler = false
-vim.opt.updatetime = 200
+vim.opt.updatetime = 100
 
 -- Turn off backup
 vim.opt.backup = false
@@ -39,5 +39,8 @@ vim.opt.signcolumn = "yes"
 -- Hightlight current line
 vim.opt.cursorline = true
 
--- Don't show mode 
+-- Don't show mode
 vim.opt.showmode = false
+
+-- No wrap
+vim.opt.wrap = false
