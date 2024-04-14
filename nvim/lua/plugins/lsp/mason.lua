@@ -15,6 +15,7 @@ return {
                 "black",    -- python formatter
                 "clangd",   -- c/c++ language server
                 "volar",    -- vue language server
+                "jdtls",    -- java language server
                 "lua_ls",   -- lua language server
                 "pylint",   -- python linter
                 "eslint_d", -- js linter
