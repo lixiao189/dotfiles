@@ -123,7 +123,6 @@ return {
                             capabilities = { offsetEncoding = { "utf-16" } }
                         }
                     end,
-                    jdtls = lsp_zero.noop,
                     volar = function()
                         require("lspconfig").volar.setup {
                             filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
