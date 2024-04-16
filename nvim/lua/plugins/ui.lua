@@ -17,9 +17,6 @@ return {
         init = function()
             vim.cmd("colorscheme carbonfox")
         end,
-        opts = {
-            options = { transparent = true }
-        }
     },
 
     -- Icons
