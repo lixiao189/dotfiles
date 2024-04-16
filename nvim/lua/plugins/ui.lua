@@ -16,7 +16,10 @@ return {
         priority = 1000,
         init = function()
             vim.cmd("colorscheme carbonfox")
-        end
+        end,
+        opts = {
+            options = { transparent = true }
+        }
     },
 
     -- Icons
