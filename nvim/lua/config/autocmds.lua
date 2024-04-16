@@ -1,7 +1,7 @@
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = {
         "*.cpp", "*.c", "*.h", "*.hpp",
-        "*.vue", "*.js", "*.html", "*.css", "json"
+        "*.vue", "*.js", "*.jsx", "*.html", "*.css", "*.json", "*.ts", "*.tsx",
     },
     callback = function()
         vim.opt.shiftwidth = 2
