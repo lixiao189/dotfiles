@@ -103,6 +103,13 @@ return {
                 )
             end)
 
+            -- Disabnle semantic tokens highlight
+            lsp_zero.set_server_config({
+                on_init = function(client)
+                    client.server_capabilities.semanticTokensProvider = nil
+                end,
+            })
+
             lsp_zero.set_sign_icons({
                 error = "✘",
                 warn = "▲",
