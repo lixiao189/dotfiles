@@ -11,6 +11,12 @@ return {
             return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
         end
 
+        function _G.next_char_is_pair()
+            local col = vim.fn.col('.')
+            local next_char = vim.fn.getline('.'):sub(col, col)
+            return next_char ~= nil and next_char:match('[)%]}>\'"`]') ~= nil
+        end
+
         local npairs = require('nvim-autopairs')
         _G.MUtils = {}
         MUtils.completion_confirm = function()
@@ -23,11 +29,15 @@ return {
 
         local keyset = vim.keymap.set
         local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
-        keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()',
-            opts)
+        keyset("i", "<TAB>", [[coc#pum#visible() ? coc#_select_confirm() :]] ..
+            [[coc#expandableOrJumpable() ?]] ..
+            [["\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :]] ..
+            [[v:lua.next_char_is_pair() ? "\<Right>" :]] ..
+            [[v:lua.check_back_space() ? "\<TAB>" :]] ..
+            [[coc#refresh()]], opts)
         keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
         keyset('i', '<CR>', 'v:lua.MUtils.completion_confirm()', opts)
-        keyset("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)")
+        vim.g.coc_snippet_next = "<tab>"
 
         keyset("n", "[g", "<Plug>(coc-diagnostic-prev)", { silent = true, desc = "Previous diagnostic" })
         keyset("n", "]g", "<Plug>(coc-diagnostic-next)", { silent = true, desc = "Next diagnostic" })
