@@ -101,5 +101,13 @@ return {
             vim.keymap.set("n", "<leader>m", "<CMD>MaximizerToggle<CR>",
                 { silent = true, noremap = true, desc = "Maximize current window" })
         end
+    },
+
+    {
+        'brenoprata10/nvim-highlight-colors',
+        event = { "BufReadPre", "BufNewFile" },
+        opts = {
+            enable_tailwind = true,
+        }
     }
 }
