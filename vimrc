@@ -113,7 +113,7 @@ endfunction
 nnoremap <leader>fs :call Search("")<left><left>
 
 " LSP settings
-let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets', 'coc-git']
+let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets']
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :

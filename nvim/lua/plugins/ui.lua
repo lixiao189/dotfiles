@@ -15,8 +15,11 @@ return {
         "EdenEast/nightfox.nvim",
         priority = 1000,
         init = function()
-            vim.cmd("colorscheme carbonfox")
+            vim.cmd("colorscheme terafox")
         end,
+        opts = {
+            options = { transparent = true }
+        }
     },
 
     -- Icons
