@@ -32,6 +32,14 @@ return {
     },
 
     {
+        "Asheq/close-buffers.vim",
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            vim.keymap.set("n", "Q", "<CMD>Bdelete menu<CR>", { silent = true, noremap = true })
+        end
+    },
+
+    {
         "aserowy/tmux.nvim",
         event = "VeryLazy",
         config = {
