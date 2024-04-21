@@ -22,6 +22,11 @@ function ya
 	end
 	rm -f -- "$tmp"
 end
+function ide
+    tmux split-window -v -l 30%
+    tmux split-window -h -l 66%
+    tmux split-window -h -l 50%
+end
 
 #------------- brew settings ---------------------
 set -gx HOMEBREW_BREW_GIT_REMOTE "https://mirrors.ustc.edu.cn/brew.git"
