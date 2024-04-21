@@ -19,15 +19,11 @@ return {
     },
 
     {
-        "ojroques/nvim-bufdel",
+        "rbgrouleff/bclose.vim",
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            require('bufdel').setup {
-                quit = false,
-            }
-
-            vim.keymap.set("n", "<leader>d", "<CMD>BufDel<CR>",
-                { silent = true, noremap = true, desc = "Delete buffer" })
+            vim.keymap.set("n", "<leader>d", "<CMD>Bclose<CR>",
+                { silent = true, noremap = true })
         end
     },
 
