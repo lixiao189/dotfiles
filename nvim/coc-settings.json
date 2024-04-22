@@ -3,5 +3,6 @@
   "Lua.runtime.path": ["lua/?.lua", "lua/?/init.lua"],
   "Lua.diagnostics.globals": ["vim"],
   "Lua.workspace.checkThirdParty": false,
-  "Lua.workspace.library": ["$VIMRUNTIME", "./lua"]
+  "Lua.workspace.library": ["$VIMRUNTIME", "./lua"],
+  "git.enableGutters": false
 }

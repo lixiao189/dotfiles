@@ -3,7 +3,7 @@ return {
     branch = "release",
     dependencies = { "rcarriga/nvim-notify" },
     config = function()
-        vim.g.coc_global_extensions = { 'coc-marketplace', 'coc-snippets', 'coc-sumneko-lua' }
+        vim.g.coc_global_extensions = { 'coc-marketplace', 'coc-snippets', 'coc-git', 'coc-sumneko-lua' }
 
         -- Autocomplete
         function _G.check_back_space()
