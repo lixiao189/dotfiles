@@ -27,6 +27,7 @@ return {
                     "node_modules/",
                     "vendor/",
                     "target/",
+                    "dist/",
                     ".cache/",
                     ".vscode/",
                     ".idea/",
