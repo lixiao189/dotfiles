@@ -4,11 +4,11 @@ return {
     config = function()
         require('hop').setup()
         local hop = require('hop')
-        vim.keymap.set({ 'n', 'v' }, 'S', function()
+        vim.keymap.set({ 'n', 'v' }, 'gs', function()
             hop.hint_char1()
-        end, { remap = true })
-        vim.keymap.set({ 'n', 'v' }, "L", function()
+        end, { remap = true, silent = true, noremap = true, desc = "Go to char" })
+        vim.keymap.set({ 'n', 'v' }, "gl", function()
             hop.hint_lines()
-        end, { remap = true })
+        end, { remap = true, silent = true, noremap = true, desc = "Go to line" })
     end
 }
