@@ -1,7 +1,7 @@
 return {
     "neoclide/coc.nvim",
     branch = "release",
-    dependencies = { "rcarriga/nvim-notify" },
+    dependencies = { "rcarriga/nvim-notify", "honza/vim-snippets" },
     config = function()
         vim.g.coc_global_extensions = { 'coc-marketplace', 'coc-snippets', 'coc-git', 'coc-sumneko-lua' }
 
