@@ -52,6 +52,7 @@ return {
                     statusline = { "NvimTree", "help", "aerial", "dashboard" },
                 },
             },
+            sections = { lualine_c = { 'filename', 'g:coc_status' } }
         }
     },
 
