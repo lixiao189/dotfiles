@@ -51,6 +51,9 @@ return {
                 disabled_filetypes = {
                     statusline = { "NvimTree", "help", "aerial", "dashboard" },
                 },
+                refresh = {
+                    statusline = 100,
+                }
             },
             sections = { lualine_c = { 'filename', 'g:coc_status' } }
         }
