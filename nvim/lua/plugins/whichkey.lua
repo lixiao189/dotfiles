@@ -14,6 +14,7 @@ return {
             h = "+hunks",
             t = "+test",
             l = "+lsp",
+            s = "+search",
         }, { prefix = "<leader>" })
     end,
 }
