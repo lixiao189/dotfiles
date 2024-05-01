@@ -15,7 +15,7 @@ return {
         "EdenEast/nightfox.nvim",
         priority = 1000,
         init = function()
-            vim.cmd("colorscheme terafox")
+            vim.cmd("colorscheme nightfox")
         end,
         opts = {
             options = { transparent = true }
