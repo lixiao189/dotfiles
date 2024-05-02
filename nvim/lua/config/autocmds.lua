@@ -1,5 +1,6 @@
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = {
+        "*.c", "*.h", "*.hpp", "*.cpp", "*.cc",
         "*.vue", "*.js", "*.jsx", "*.html", "*.css", "*.json", "*.ts", "*.tsx", "*.less",
     },
     callback = function()
