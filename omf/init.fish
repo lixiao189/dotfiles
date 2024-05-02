@@ -10,7 +10,9 @@ set -gx PATH github/copilot.vim $PATH
 #------------- command shortcuts -----------------
 alias lg lazygit
 alias e exit
-alias ls "exa -l --icons"
+alias ls "exa --icons"
+alias ll "exa -l --icons"
+alias la "exa -la --icons"
 alias ts 'tmux source-file ~/.tmux.conf'
 alias diff colordiff
 alias zj "zellij --layout compact options --simplified-ui true"
