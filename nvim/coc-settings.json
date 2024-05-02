@@ -6,5 +6,6 @@
   "Lua.workspace.library": ["$VIMRUNTIME", "./lua"],
   "git.enableGutters": false,
   "tsserver.implicitProjectConfig.experimentalDecorators": true,
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "clangd.arguments": ["--fallback-style=microsoft"]
 }
