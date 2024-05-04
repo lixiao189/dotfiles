@@ -1,4 +1,4 @@
-import = ["/Users/node/.config/alacritty/theme/oxocarbon.toml"]
+import = ["/Users/node/.config/alacritty/theme/nightfox.toml"]
 
 [cursor.style]
 blinking = "Never"
@@ -37,6 +37,8 @@ decorations_theme_variant = "dark"
 dynamic_padding = false
 dynamic_title = true
 option_as_alt = "Both"
+opacity = 0.80
+blur = true
 
 [window.dimensions]
 columns = 140
