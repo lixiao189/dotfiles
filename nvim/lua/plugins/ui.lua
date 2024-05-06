@@ -15,7 +15,7 @@ return {
         opts = {
             options = {
                 transparency = true,
-                lualine_transparency = false
+                lualine_transparency = true
             }
         }
     },
