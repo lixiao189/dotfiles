@@ -16,6 +16,21 @@ return {
             options = {
                 transparency = true,
                 lualine_transparency = true
+            },
+            styles = {
+                types = "NONE",
+                methods = "bold",
+                numbers = "NONE",
+                strings = "NONE",
+                comments = "NONE",
+                keywords = "bold",
+                constants = "NONE",
+                functions = "bold",
+                operators = "NONE",
+                variables = "NONE",
+                parameters = "NONE",
+                conditionals = "NONE",
+                virtual_text = "NONE",
             }
         }
     },
