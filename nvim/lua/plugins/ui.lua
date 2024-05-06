@@ -79,7 +79,7 @@ return {
                         highlight = "Directory",
                     }
                 },
-                separator_style = {'', ''},
+                separator_style = {' ', ' '},
             }
         }
     },
