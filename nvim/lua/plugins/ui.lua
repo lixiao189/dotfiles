@@ -23,13 +23,13 @@ return {
                 numbers = "NONE",
                 strings = "NONE",
                 comments = "NONE",
-                keywords = "bold",
+                keywords = "NONE",
                 constants = "NONE",
                 functions = "bold",
                 operators = "NONE",
                 variables = "NONE",
                 parameters = "NONE",
-                conditionals = "bold",
+                conditionals = "NONE",
                 virtual_text = "NONE",
             }
         }
