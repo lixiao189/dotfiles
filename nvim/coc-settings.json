@@ -7,6 +7,5 @@
   "git.enableGutters": false,
   "tsserver.implicitProjectConfig.experimentalDecorators": true,
   "snippets.ultisnips.pythonPrompt": false,
-  "clangd.arguments": ["--fallback-style=Google"],
   "clangd.disableSnippetCompletion": true
 }
