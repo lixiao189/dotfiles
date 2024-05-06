@@ -78,7 +78,8 @@ return {
                         text = "File Explorer",
                         highlight = "Directory",
                     }
-                }
+                },
+                separator_style = {'', ''},
             }
         }
     },
