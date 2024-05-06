@@ -29,7 +29,7 @@ return {
                 operators = "NONE",
                 variables = "NONE",
                 parameters = "NONE",
-                conditionals = "NONE",
+                conditionals = "bold",
                 virtual_text = "NONE",
             }
         }
