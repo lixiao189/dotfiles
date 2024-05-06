@@ -1,4 +1,4 @@
-import = ["/Users/node/.config/alacritty/theme/nightfox.toml"]
+import = ["/Users/node/.config/alacritty/theme/one-dark.toml"]
 
 [cursor.style]
 blinking = "Never"
