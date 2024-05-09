@@ -36,6 +36,9 @@ vim.opt.writebackup = false
 -- Turn on signcolumn
 vim.opt.signcolumn = "yes"
 
+-- Vim cursor
+vim.opt.guicursor = "n-v-c-i:block"
+
 -- Don't show mode
 vim.opt.showmode = false
 
