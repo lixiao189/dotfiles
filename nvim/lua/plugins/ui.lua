@@ -1,45 +1,14 @@
 return {
-    -- Theme
-    {
-        "catppuccin/nvim",
-        name = "catppuccin",
-        event = "VeryLazy",
-        opts = {}
-    },
-    {
-        "olimorris/onedarkpro.nvim",
-        priority = 1000,
-        init = function()
-            vim.cmd("colorscheme onedark")
-        end,
-        opts = {
-            options = {
-                transparency = true,
-                lualine_transparency = true
-            },
-            styles = {
-                types = "NONE",
-                methods = "bold",
-                numbers = "NONE",
-                strings = "NONE",
-                comments = "NONE",
-                keywords = "bold",
-                constants = "NONE",
-                functions = "bold",
-                operators = "NONE",
-                variables = "NONE",
-                parameters = "NONE",
-                conditionals = "bold",
-                virtual_text = "NONE",
-            }
-        }
-    },
     {
         "EdenEast/nightfox.nvim",
         event = "VeryLazy",
+        priority = 1000,
         opts = {
             options = { transparent = true }
-        }
+        },
+        init = function()
+            vim.cmd("colorscheme nightfox")
+        end,
     },
 
     -- Icons
@@ -78,40 +47,34 @@ return {
     },
 
     {
-        'romgrk/barbar.nvim',
+        'akinsho/bufferline.nvim',
         dependencies = {
-            'lewis6991/gitsigns.nvim',
             'nvim-tree/nvim-web-devicons',
         },
-        init = function()
-            vim.g.barbar_auto_setup = false
-        end,
+        version = "*",
         config = function()
-            require 'barbar'.setup {
-                animation = false,
-                icons = {
-                    buffer_index = true,
-                }
+            require("bufferline").setup {
+                options = {
+                    numbers = "ordinal",
+                    diagnostics = "coc",
+                    separator_style = { "", "" },
+                },
             }
 
             local map = vim.api.nvim_set_keymap
             local opts = { noremap = true, silent = true }
-            -- Re-order to previous/next
-            map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
-            map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
             -- Goto buffer in position...
-            map('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
-            map('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', opts)
-            map('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
-            map('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', opts)
-            map('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', opts)
-            map('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', opts)
-            map('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', opts)
-            map('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
-            map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
-            map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
+            map('n', '<A-1>', '<Cmd>BufferLineGoToBuffer 1<CR>', opts)
+            map('n', '<A-2>', '<Cmd>BufferLineGoToBuffer 2<CR>', opts)
+            map('n', '<A-3>', '<Cmd>BufferLineGoToBuffer 3<CR>', opts)
+            map('n', '<A-4>', '<Cmd>BufferLineGoToBuffer 4<CR>', opts)
+            map('n', '<A-5>', '<Cmd>BufferLineGoToBuffer 5<CR>', opts)
+            map('n', '<A-6>', '<Cmd>BufferLineGoToBuffer 6<CR>', opts)
+            map('n', '<A-7>', '<Cmd>BufferLineGoToBuffer 7<CR>', opts)
+            map('n', '<A-8>', '<Cmd>BufferLineGoToBuffer 8<CR>', opts)
+            map('n', '<A-9>', '<Cmd>BufferLineGoToBuffer 9<CR>', opts)
+            map('n', '<A-0>', '<Cmd>BufferLineGoToBuffer -1<CR>', opts)
         end,
-        version = '^1.0.0',
     },
 
     -- Vim notify
