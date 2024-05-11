@@ -4,7 +4,15 @@ return {
         event = "VeryLazy",
         priority = 1000,
         opts = {
-            options = { transparent = true }
+            options = {
+                transparent = true,
+                styles = {
+                    comments = "italic",
+                    keywords = "bold",
+                    types = "bold",
+                    functions = "bold",
+                }
+            }
         },
         init = function()
             vim.cmd("colorscheme nightfox")
