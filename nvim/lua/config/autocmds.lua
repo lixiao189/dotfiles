@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = {
-        "*.lua", "*.go"
+        "*.lua", "*.go", "*.java", "*.py", "*.xml"
     },
     callback = function()
         vim.opt.shiftwidth = 4
