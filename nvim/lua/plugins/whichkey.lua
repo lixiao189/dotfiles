@@ -7,14 +7,16 @@ return {
     end,
     config = function()
         require("which-key").setup {
-            layout = { align = "center" }
+            layout = { align = "center" },
+            icons = { mappings = false }
         }
         local wk = require("which-key")
-        wk.register({
-            h = "+hunks",
-            t = "+test",
-            l = "+lsp",
-            s = "+search",
-        }, { prefix = "<leader>" })
+        wk.add({
+            { "<leader>h", group = "+hunks" },
+            { "<leader>t", group = "+test" },
+            { "<leader>l", group = "+lsp" },
+            { "<leader>s", group = "+search" },
+            { "<leader>b", group = "+buffer" }
+        })
     end,
 }
