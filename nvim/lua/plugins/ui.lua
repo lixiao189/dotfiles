@@ -16,7 +16,7 @@ return {
                 }
             })
 
-            vim.cmd('colorscheme github_light_default')
+            vim.cmd('colorscheme github_light')
         end,
     },
 
