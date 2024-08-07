@@ -15,7 +15,7 @@ return {
             }
         },
         init = function()
-            vim.cmd("colorscheme nightfox")
+            vim.cmd("colorscheme dayfox")
         end,
     },
 
