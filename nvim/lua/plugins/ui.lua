@@ -106,8 +106,26 @@ return {
         },
         main = "ibl",
         opts = {
-            scope = { enabled = false },
+            scope = {
+                enabled = true,
+                show_start = false,
+                show_end = false
+            },
             exclude = { filetypes = { "alpha" } }
         }
     },
+
+    -- Highlight the outer pair
+    {
+        "utilyre/sentiment.nvim",
+        version = "*",
+        event = "VeryLazy", -- keep for lazy loading
+        opts = {
+            -- config
+        },
+        init = function()
+            -- `matchparen.vim` needs to be disabled manually in case of lazy loading
+            vim.g.loaded_matchparen = 1
+        end,
+    }
 }
