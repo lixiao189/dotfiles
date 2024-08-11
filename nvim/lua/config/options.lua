@@ -41,3 +41,6 @@ vim.opt.showmode = false
 
 -- No wrap
 vim.opt.wrap = false
+
+-- Cursor type
+vim.opt.guicursor = "n-v-i-c:block"
