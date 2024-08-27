@@ -1,4 +1,4 @@
-import = ["/Users/node/.config/alacritty/theme/github_dark_dimmed.toml"]
+import = ["/Users/node/.config/alacritty/theme/everforest_dark.toml"]
 
 [cursor.style]
 blinking = "Never"
