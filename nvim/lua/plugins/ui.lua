@@ -1,22 +1,14 @@
 return {
     {
-        'projekt0n/github-nvim-theme',
-        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+        "neanias/everforest-nvim",
+        version = false,
+        lazy = false,
         priority = 1000, -- make sure to load this before all the other start plugins
+        -- Optional; default configuration will be used if setup isn't called.
         config = function()
-            require('github-theme').setup({
-                options = {
-                    transparent = false,
-                    styles = {
-                        comments = 'italic',
-                        keywords = 'bold',
-                        functions = 'bold',
-                        types = 'bold',
-                    }
-                }
+            require("everforest").setup({
             })
-
-            vim.cmd('colorscheme github_dark_dimmed')
+            vim.cmd("colorscheme everforest")
         end,
     },
 
