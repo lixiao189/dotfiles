@@ -8,6 +8,7 @@ return {
         config = function()
             require("everforest").setup({
             })
+            vim.opt.background = "light"
             vim.cmd("colorscheme everforest")
         end,
     },
