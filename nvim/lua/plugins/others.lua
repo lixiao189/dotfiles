@@ -62,15 +62,12 @@ return {
     },
 
     {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        opts = {
-            suggestion = {
-                auto_trigger = true,
-                keymap = { accept = "<C-J>" }
+        "supermaven-inc/supermaven-nvim",
+        config = function()
+            require("supermaven-nvim").setup{
+                log_level = "warn"
             }
-        }
+        end,
     },
 
     {
