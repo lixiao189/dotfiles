@@ -62,15 +62,6 @@ return {
     },
 
     {
-        "supermaven-inc/supermaven-nvim",
-        config = function()
-            require("supermaven-nvim").setup{
-                log_level = "warn"
-            }
-        end,
-    },
-
-    {
         'numToStr/Comment.nvim',
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
