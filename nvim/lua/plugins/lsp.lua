@@ -28,7 +28,14 @@ return {
 
             local keyset = vim.keymap.set
             local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
-            keyset('i', '<CR>', 'v:lua.MUtils.completion_confirm()', opts)
+
+            keyset("i", "<tab>", "coc#pum#visible() ? coc#_select_confirm() :" ..
+                "coc#expandableOrJumpable() ? \"<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])<CR>\" : " ..
+                "v:lua.check_back_space() ? \"<TAB>\" : " ..
+                "coc#refresh()", opts)
+            vim.g.coc_snippet_next = "<tab>"
+
+            keyset("i", "<CR>", "v:lua.MUtils.completion_confirm()", opts)
 
             keyset("n", "[d", "<Plug>(coc-diagnostic-prev)", { silent = true, desc = "Previous diagnostic" })
             keyset("n", "]d", "<Plug>(coc-diagnostic-next)", { silent = true, desc = "Next diagnostic" })
