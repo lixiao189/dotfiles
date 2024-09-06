@@ -45,7 +45,6 @@ Plug 'tpope/vim-fugitive' " Git wrapper
 Plug 'preservim/nerdcommenter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Auto complete
 Plug 'liuchengxu/vim-which-key'
-Plug 'github/copilot.vim'
 Plug 'imsnif/kdl.vim' " KDL lang support
 call plug#end()
 
@@ -115,16 +114,18 @@ nnoremap <leader>fs :call Search("")<left><left>
 " LSP settings
 let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets']
 inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#pum#visible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ CheckBackspace() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
 nnoremap <silent> K :call ShowDocumentation()<CR>
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
@@ -133,30 +134,36 @@ function! ShowDocumentation()
     call feedkeys('K', 'in')
   endif
 endfunction
+
 command! -nargs=0 Format :call CocActionAsync('format') " Add format command
+
 augroup mygroup
   autocmd!
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
+
 nmap <leader>ln <Plug>(coc-rename)
 nmap <leader>la  <Plug>(coc-codeaction-cursor)
 nmap <leader>lf  :Format<CR>
+
 nnoremap <silent><nowait> <leader>ld  :<C-u>CocList diagnostics<cr> " Show all diagnostics
 nnoremap <silent><nowait> <leader>lo  :<C-u>CocList outline<cr> " Find symbol of current document
 nnoremap <silent><nowait> <leader>ls  :<C-u>CocList -I symbols<cr> " Search workspace symbols
-nmap <leader>lgd <Plug>(coc-definition)
-nmap <leader>lgt <Plug>(coc-type-definition)
-nmap <leader>lgi <Plug>(coc-implementation)
-nmap <leader>lgr <Plug>(coc-references)
+
+" GoTo code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Coc git
 nmap <leader>hs :CocCommand git.chunkStage<cr>
 nmap <leader>hu :CocCommand git.chunkUndo<cr>
 nmap <leader>hi :CocCommand git.chunkInfo<cr>
-
-" Copilot
-imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
 
 " UI
 let g:airline_theme = 'gruvbox_material'
