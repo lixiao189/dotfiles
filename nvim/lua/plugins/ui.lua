@@ -1,16 +1,12 @@
 return {
     {
-        "neanias/everforest-nvim",
-        version = false,
+        'sainnhe/gruvbox-material',
         lazy = false,
-        priority = 1000, -- make sure to load this before all the other start plugins
-        -- Optional; default configuration will be used if setup isn't called.
+        priority = 1000,
         config = function()
-            require("everforest").setup({
-            })
-            vim.opt.background = "dark"
-            vim.cmd("colorscheme everforest")
-        end,
+            vim.g.gruvbox_material_enable_italic = true
+            vim.cmd.colorscheme('gruvbox-material')
+        end
     },
 
     -- Icons

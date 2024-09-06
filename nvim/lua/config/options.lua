@@ -44,6 +44,9 @@ vim.opt.wrap = false
 -- Highlight current line 
 vim.opt.cursorline = true
 
+-- Cursor type
+vim.opt.guicursor = "n-v-i-c:block-Cursor"
+
 -- CLipboard over ssh
 local ssh_connection = vim.fn.getenv("SSH_CONNECTION")
 if ssh_connection ~= vim.NIL then

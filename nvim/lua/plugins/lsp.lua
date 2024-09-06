@@ -29,7 +29,7 @@ return {
             local keyset = vim.keymap.set
             local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
 
-            keyset("i", "<tab>", "coc#pum#visible() ? coc#_select_confirm() :" ..
+            keyset("i", "<tab>",
                 "coc#expandableOrJumpable() ? \"<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])<CR>\" : " ..
                 "v:lua.check_back_space() ? \"<TAB>\" : " ..
                 "coc#refresh()", opts)
