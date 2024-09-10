@@ -1,4 +1,5 @@
 patch:
+  "menu/page_size": 8 # 候选词个数
   ascii_composer:
     good_old_caps_lock: true # true | false
     switch_key:
