@@ -36,8 +36,8 @@ return {
             local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
 
             keyset("i", "<tab>",
-                "coc#expandableOrJumpable() ? \"<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])<CR>\" : " ..
                 "v:lua.next_char_is_pair() ? \"<Right>\" : " ..
+                "coc#expandableOrJumpable() ? \"<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])<CR>\" : " ..
                 "v:lua.check_back_space() ? \"<TAB>\" : " ..
                 "coc#refresh()", opts)
             vim.g.coc_snippet_next = "<tab>"
