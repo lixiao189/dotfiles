@@ -19,7 +19,7 @@ return {
             function _G.next_char_is_pair()
                 local col = vim.fn.col('.') - 1
                 local next_char = vim.fn.getline('.'):sub(col + 1, col + 1)
-                return next_char:match("[%)%]}>\"'`]") ~= nil
+                return next_char:match("[%)%]}>\"';`]") ~= nil
             end
 
             local npairs = require('nvim-autopairs')
@@ -36,8 +36,8 @@ return {
             local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
 
             keyset("i", "<tab>",
-                "v:lua.next_char_is_pair() ? \"<Right>\" : " ..
                 "coc#expandableOrJumpable() ? \"<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])<CR>\" : " ..
+                "v:lua.next_char_is_pair() ? \"<Right>\" : " ..
                 "v:lua.check_back_space() ? \"<TAB>\" : " ..
                 "coc#refresh()", opts)
             vim.g.coc_snippet_next = "<tab>"
