@@ -7,7 +7,7 @@ return {
             vim.g.gruvbox_material_enable_italic = true
             vim.g.gruvbox_material_foreground = "original"
             vim.g.gruvbox_material_statusline_style = "original"
-            vim.opt.background="light"
+            vim.opt.background="dark"
             vim.cmd.colorscheme('gruvbox-material')
         end
     },
