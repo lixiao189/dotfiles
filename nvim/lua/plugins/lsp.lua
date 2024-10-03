@@ -1,6 +1,6 @@
 return {
     -- IDE-like breadcrumbs
-    'Bekaboo/dropbar.nvim',
+    -- 'Bekaboo/dropbar.nvim',
 
     -- Lsp plugins
     {
