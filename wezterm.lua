@@ -15,6 +15,7 @@ config.initial_rows = 28
 config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
 config.font_size = 15
 config.line_height = 1.2
+config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 
 -- Tab bar settings
 config.hide_tab_bar_if_only_one_tab = true
