@@ -45,7 +45,6 @@ return {
                     statusline = 100,
                 }
             },
-            sections = { lualine_c = { 'filename', 'g:coc_status' } }
         }
     },
 
