@@ -23,5 +23,8 @@ config.hide_tab_bar_if_only_one_tab = true
 -- FPS settings
 config.max_fps = 255
 
+-- Not quit 
+config.quit_when_all_windows_are_closed = false
+
 -- and finally, return the configuration to wezterm
 return config
