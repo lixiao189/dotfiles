@@ -1,10 +1,16 @@
 return {
     {
-        'Mofiqul/dracula.nvim',
+        'catppuccin/nvim',
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd[[colorscheme dracula]]
+            require("catppuccin").setup {
+                background = { -- :h background
+                    light = "latte",
+                    dark = "macchiato",
+                },
+            }
+            vim.cmd [[colorscheme catppuccin]]
         end
     },
 

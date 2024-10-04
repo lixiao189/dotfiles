@@ -35,6 +35,7 @@ esac
 ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/alacritty ~/.config/alacritty
 ln -s ~/.dotfiles/nvim ~/.config/nvim
+ln -s ~/.dotfiles/wezterm.lua ~/.wezterm.lua
 ln -s ~/.dotfiles/karabiner ~/.config/karabiner
 ln -s ~/.dotfiles/ranger ~/.config/ranger
 ln -s ~/.dotfiles/omf/ ~/.config/omf
