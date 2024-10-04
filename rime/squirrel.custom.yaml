@@ -2,6 +2,9 @@ patch:
   app_options:
     com.apple.Spotlight:
       ascii_mode: true # 开启默认英文
+    com.github.wez.wezterm:
+      ascii_mode: true
+      vim_mode: true
     com.microsoft.VSCode:
       ascii_mode: true
       vim_mode: true
