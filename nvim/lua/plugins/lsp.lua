@@ -42,9 +42,16 @@ return {
             }
 
             -- Keymap for snippet
+            local function is_pair()
+                local col = vim.fn.col('.') - 1
+                local next_char = vim.fn.getline('.'):sub(col + 1, col + 1)
+                return next_char:match("[%)%]}>\"';`]") ~= nil
+            end
             vim.keymap.set({ 'i', 's' }, '<Tab>', function()
                 if vim.snippet.active({ direction = 1 }) then
                     return '<cmd>lua vim.snippet.jump(1)<cr>'
+                elseif is_pair() then -- Tabout
+                    vim.api.nvim_input('<Right>')
                 else
                     return '<Tab>'
                 end
