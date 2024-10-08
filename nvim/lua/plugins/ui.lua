@@ -1,16 +1,11 @@
 return {
     {
-        'catppuccin/nvim',
+        "EdenEast/nightfox.nvim",
         lazy = false,
         priority = 1000,
         config = function()
-            require("catppuccin").setup {
-                background = { -- :h background
-                    light = "latte",
-                    dark = "macchiato",
-                },
-            }
-            vim.cmd [[colorscheme catppuccin]]
+            require("nightfox").setup()
+            vim.cmd [[colorscheme carbonfox]]
         end
     },
 

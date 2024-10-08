@@ -20,6 +20,7 @@ return {
     {
         "hrsh7th/nvim-cmp",
         event = { "BufReadPre", "BufNewFile" },
+        dependencies = { "windwp/nvim-autopairs" },
         config = function()
             local cmp = require("cmp")
             cmp.setup {
@@ -40,6 +41,13 @@ return {
                     { name = 'buffer' },
                 })
             }
+
+            --Settings for nvim autopairs
+            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+            cmp.event:on(
+                'confirm_done',
+                cmp_autopairs.on_confirm_done()
+            )
 
             -- Keymap for snippet
             local function is_pair()
