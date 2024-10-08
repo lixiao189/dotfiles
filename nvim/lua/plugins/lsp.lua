@@ -82,10 +82,14 @@ return {
         },
         config = function()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
+            local on_attach = function(client)
+                client.server_capabilities.semanticTokensProvider = nil
+            end
             require("mason-lspconfig").setup_handlers {
                 function(server_name)
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities,
+                        on_attach = on_attach,
                     }
                 end,
             }
