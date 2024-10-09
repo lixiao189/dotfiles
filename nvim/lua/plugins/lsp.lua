@@ -144,6 +144,7 @@ return {
 
     {
         "zbirenbaum/copilot.lua",
+        cmd = { "Copilot" },
         event = { "BufReadPre", "BufNewFile" },
         dependencies = { "hrsh7th/nvim-cmp" },
         config = function()
