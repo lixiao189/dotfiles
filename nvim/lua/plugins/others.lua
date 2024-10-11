@@ -53,9 +53,9 @@ return {
         "nvim-tree/nvim-tree.lua",
         version = "*",
         event = "VeryLazy",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-        },
+        -- dependencies = {
+        --     "nvim-tree/nvim-web-devicons",
+        -- },
         config = function()
             vim.keymap.set("n", "<leader>e", "<CMD>NvimTreeToggle<CR>",
                 { silent = true, noremap = true, desc = "Explorer NeoTree (root dir)" })
@@ -109,11 +109,14 @@ return {
         }
     },
 
-    {
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {},
-        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }
-    },
+    -- {
+    --     'MeanderingProgrammer/render-markdown.nvim',
+    --     opts = {},
+    --     dependencies = {
+    --         'nvim-treesitter/nvim-treesitter',
+    --         'nvim-tree/nvim-web-devicons'
+    --     }
+    -- },
 
     -- lazy.nvim
     -- {

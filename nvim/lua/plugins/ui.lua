@@ -1,24 +1,15 @@
 return {
-    {
-        "savq/melange-nvim",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.opt.termguicolors = true
-            vim.opt.background = "light"
-            vim.cmd.colorscheme 'melange'
-        end,
-    },
-
     -- Icons
-    { "nvim-tree/nvim-web-devicons", lazy = true },
+    -- { "nvim-tree/nvim-web-devicons", lazy = true },
 
     -- Dashboard
     {
         'goolord/alpha-nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        -- dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
-            require 'alpha'.setup(require 'alpha.themes.startify'.config)
+            local startify = require("alpha.themes.startify")
+            startify.file_icons.enabled = false
+            require 'alpha'.setup(startify.config)
         end
     },
 
@@ -26,12 +17,12 @@ return {
     {
         'nvim-lualine/lualine.nvim',
         event = "VeryLazy",
-        dependencies = {
-            'nvim-tree/nvim-web-devicons',
-        },
+        -- dependencies = {
+        --     'nvim-tree/nvim-web-devicons',
+        -- },
         opts = {
             options = {
-                icons_enabled = true,
+                icons_enabled = false,
                 section_separators = '',
                 component_separators = '', -- Disable the separator
                 disabled_filetypes = {
@@ -46,9 +37,9 @@ return {
 
     {
         'akinsho/bufferline.nvim',
-        dependencies = {
-            'nvim-tree/nvim-web-devicons',
-        },
+        -- dependencies = {
+        --     'nvim-tree/nvim-web-devicons',
+        -- },
         version = "*",
         config = function()
             require("bufferline").setup {
