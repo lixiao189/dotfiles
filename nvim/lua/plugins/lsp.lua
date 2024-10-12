@@ -7,11 +7,18 @@ return {
         "williamboman/mason.nvim",
         dependencies = {
             "williamboman/mason-lspconfig.nvim",
+            "WhoIsSethDaniel/mason-tool-installer.nvim",
         },
         config = function()
             require("mason").setup()
             require("mason-lspconfig").setup {
                 ensure_installed = { "lua_ls" }
+            }
+            require("mason-tool-installer").setup {
+                ensure_installed = {
+                    "isort", -- python formatter
+                    "black", -- python formatter
+                },
             }
         end
     },
@@ -131,7 +138,11 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             local conform = require("conform")
-            conform.setup()
+            conform.setup {
+                formatters_by_ft = {
+                    python = { "isort", "black" },
+                }
+            }
             vim.keymap.set({ "n", "v" }, "<leader>lf", function()
                 conform.format({
                     lsp_fallback = true,
