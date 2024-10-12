@@ -1,20 +1,16 @@
 return {
-    -- Icons
-    -- { "nvim-tree/nvim-web-devicons", lazy = true },
-
     {
-        "arzg/vim-colors-xcode",
+        "tanvirtin/monokai.nvim",
         priority = 1000,
         lazy = false,
         config = function ()
-            vim.cmd[[colorscheme xcode]]
+            vim.cmd[[colorscheme monokai]]
         end
     },
 
     -- Dashboard
     {
         'goolord/alpha-nvim',
-        -- dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
             local startify = require("alpha.themes.startify")
             startify.file_icons.enabled = false
@@ -26,9 +22,6 @@ return {
     {
         'nvim-lualine/lualine.nvim',
         event = "VeryLazy",
-        -- dependencies = {
-        --     'nvim-tree/nvim-web-devicons',
-        -- },
         opts = {
             options = {
                 icons_enabled = false,
@@ -46,9 +39,6 @@ return {
 
     {
         'akinsho/bufferline.nvim',
-        -- dependencies = {
-        --     'nvim-tree/nvim-web-devicons',
-        -- },
         version = "*",
         config = function()
             require("bufferline").setup {
@@ -76,17 +66,6 @@ return {
         end,
     },
 
-    -- Vim notify
-    -- {
-    --     "rcarriga/nvim-notify",
-    --     init = function()
-    --         vim.notify = require("notify")
-    --     end,
-    --     config = function()
-    --         require("notify").setup { background_colour = "#000000", }
-    --     end
-    -- },
-
     -- Indent lines
     {
         "lukas-reineke/indent-blankline.nvim",
@@ -104,18 +83,4 @@ return {
             exclude = { filetypes = { "alpha" } }
         }
     },
-
-    -- Highlight the outer pair
-    {
-        "utilyre/sentiment.nvim",
-        version = "*",
-        event = "VeryLazy", -- keep for lazy loading
-        opts = {
-            -- config
-        },
-        init = function()
-            -- `matchparen.vim` needs to be disabled manually in case of lazy loading
-            vim.g.loaded_matchparen = 1
-        end,
-    }
 }

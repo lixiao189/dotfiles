@@ -53,9 +53,6 @@ return {
         "nvim-tree/nvim-tree.lua",
         version = "*",
         event = "VeryLazy",
-        -- dependencies = {
-        --     "nvim-tree/nvim-web-devicons",
-        -- },
         config = function()
             require("nvim-tree").setup {
                 renderer = {
@@ -128,15 +125,6 @@ return {
             enable_tailwind = true,
         }
     },
-
-    -- {
-    --     'MeanderingProgrammer/render-markdown.nvim',
-    --     opts = {},
-    --     dependencies = {
-    --         'nvim-treesitter/nvim-treesitter',
-    --         'nvim-tree/nvim-web-devicons'
-    --     }
-    -- },
 
     -- lazy.nvim
     -- {
