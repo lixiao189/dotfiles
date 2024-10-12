@@ -19,6 +19,25 @@ require("config.keybind")
 
 -- Load plugins
 require("lazy").setup {
-    { import = "plugins" },
-    { import = "plugins.lsp" },
+    ui = {
+        icons = {
+            cmd = "",
+            config = "",
+            event = "",
+            ft = "",
+            init = "",
+            keys = "",
+            plugin = "",
+            runtime = "",
+            require = "",
+            source = "",
+            start = "",
+            task = "",
+            lazy = "",
+        },
+    },
+    spec = {
+        -- import your plugins
+        { import = "plugins" },
+    },
 }
