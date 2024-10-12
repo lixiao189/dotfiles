@@ -85,7 +85,8 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
-            "williamboman/mason-lspconfig.nvim"
+            "williamboman/mason-lspconfig.nvim",
+            "nvim-telescope/telescope.nvim"
         },
         config = function()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -106,6 +107,8 @@ return {
                 desc = 'LSP Actions',
                 callback = function(ev)
                     local opts = { noremap = true, silent = true, buffer = ev.bufnr }
+                    local builtin = require('telescope.builtin')
+
                     opts.desc = "Go to declaration"
                     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
                     opts.desc = "Go to definition"
@@ -118,6 +121,12 @@ return {
                     vim.keymap.set('n', '<space>ln', vim.lsp.buf.rename, opts)
                     opts.desc = "Lsp actions"
                     vim.keymap.set('n', '<space>la', vim.lsp.buf.code_action, opts)
+                    opts.desc = "Lsp diagnostics"
+                    vim.keymap.set('n', '<space>ld', builtin.diagnostics, opts)
+                    opts.desc = "Lsp document symbols"
+                    vim.keymap.set('n', '<space>lo', builtin.lsp_document_symbols, opts)
+                    opts.desc = "Lsp workspace symbols"
+                    vim.keymap.set('n', '<space>ls', builtin.lsp_workspace_symbols, opts)
                 end,
             })
 
