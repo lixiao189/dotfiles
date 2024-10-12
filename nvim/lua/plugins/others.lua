@@ -57,13 +57,33 @@ return {
         --     "nvim-tree/nvim-web-devicons",
         -- },
         config = function()
+            require("nvim-tree").setup {
+                renderer = {
+                    group_empty = true,
+                    icons = {
+                        show = {
+                            file = false,
+                            folder = false
+                        },
+                        glyphs = {
+                            folder = {
+                                arrow_closed = "+",
+                                arrow_open = "~"
+                            },
+                            git = {
+                                unstaged = "✹",
+                                staged = "✚",
+                                unmerged = "═",
+                                deleted = "✖"
+                            }
+                        }
+                    }
+                }
+            }
             vim.keymap.set("n", "<leader>e", "<CMD>NvimTreeToggle<CR>",
                 { silent = true, noremap = true, desc = "Explorer NeoTree (root dir)" })
             vim.keymap.set("n", "<leader>E", "<CMD>NvimTreeFindFileToggle<CR>",
                 { silent = true, noremap = true, desc = "Explorer NeoTree (cwd)" })
-            require("nvim-tree").setup {
-                renderer = { group_empty = true }
-            }
         end,
     },
 

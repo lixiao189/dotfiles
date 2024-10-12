@@ -2,6 +2,15 @@ return {
     -- Icons
     -- { "nvim-tree/nvim-web-devicons", lazy = true },
 
+    {
+        "arzg/vim-colors-xcode",
+        priority = 1000,
+        lazy = false,
+        config = function ()
+            vim.cmd[[colorscheme xcode]]
+        end
+    },
+
     -- Dashboard
     {
         'goolord/alpha-nvim',
@@ -45,8 +54,9 @@ return {
             require("bufferline").setup {
                 options = {
                     numbers = "ordinal",
-                    diagnostics = "coc",
                     separator_style = { "", "" },
+                    buffer_close_icon = '󰅖',
+                    close_icon = '󰅖'
                 },
             }
 
@@ -67,15 +77,15 @@ return {
     },
 
     -- Vim notify
-    {
-        "rcarriga/nvim-notify",
-        init = function()
-            vim.notify = require("notify")
-        end,
-        config = function()
-            require("notify").setup { background_colour = "#000000", }
-        end
-    },
+    -- {
+    --     "rcarriga/nvim-notify",
+    --     init = function()
+    --         vim.notify = require("notify")
+    --     end,
+    --     config = function()
+    --         require("notify").setup { background_colour = "#000000", }
+    --     end
+    -- },
 
     -- Indent lines
     {
