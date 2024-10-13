@@ -67,20 +67,20 @@ return {
     },
 
     -- Indent lines
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        event = {
-            "BufReadPre",
-            "BufNewFile",
-        },
-        main = "ibl",
-        opts = {
-            scope = {
-                enabled = true,
-                show_start = false,
-                show_end = false
-            },
-            exclude = { filetypes = { "alpha" } }
-        }
-    },
+    -- {
+    --     "lukas-reineke/indent-blankline.nvim",
+    --     event = {
+    --         "BufReadPre",
+    --         "BufNewFile",
+    --     },
+    --     main = "ibl",
+    --     opts = {
+    --         scope = {
+    --             enabled = true,
+    --             show_start = false,
+    --             show_end = false
+    --         },
+    --         exclude = { filetypes = { "alpha" } }
+    --     }
+    -- },
 }
