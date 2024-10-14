@@ -24,11 +24,13 @@ return {
 
     -- Cmp plugin
     {
-        "hrsh7th/nvim-cmp",
-        event = { "BufReadPre", "BufNewFile" },
+        "yioneko/nvim-cmp",
+        branch = "perf",
+        event = "InsertEnter",
         dependencies = { "windwp/nvim-autopairs" },
         config = function()
             local cmp = require("cmp")
+
             cmp.setup {
                 performance = {
                     max_view_entries = 10,
@@ -44,7 +46,7 @@ return {
                 sources = cmp.config.sources({
                     { name = 'nvim_lsp' },
                 }, {
-                    { name = 'buffer' },
+                    { name = 'buffer', keyword_length = 4 },
                 })
             }
 
@@ -187,11 +189,6 @@ return {
                     html = { "prettier" },
                     json = { "prettier" },
                     yaml = { "prettier" },
-                },
-                format_on_save = {
-                    lsp_fallback = true,
-                    async = true,
-                    timeout_ms = 1000,
                 },
             }
             vim.keymap.set({ "n", "v" }, "<leader>lf", function()
