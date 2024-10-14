@@ -3,7 +3,7 @@ return {
     run = ':TSUpdate',
     config = function()
         require('nvim-treesitter.configs').setup {
-            ensure_installed = { "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
+            ensure_installed = { "lua", "markdown", "markdown_inline", "swift" },
             highlight = {
                 enable = true,
                 disable = function(_, buf)
@@ -16,7 +16,8 @@ return {
                 additional_vim_regex_highlighting = false,
             },
             indent = {
-                enable = true
+                enable = true,
+                disable = { "swift" }
             },
             incremental_selection = {
                 enable = true,
