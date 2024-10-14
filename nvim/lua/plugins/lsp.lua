@@ -12,12 +12,11 @@ return {
         config = function()
             require("mason").setup()
             require("mason-lspconfig").setup {
-                ensure_installed = { "lua_ls" }
+                ensure_installed = { "lua_ls", "pyright", "ruff_lsp" }
             }
             require("mason-tool-installer").setup {
                 ensure_installed = {
-                    "isort", -- python formatter
-                    "black", -- python formatter
+                    "prettier"
                 },
             }
         end
@@ -90,17 +89,47 @@ return {
         },
         config = function()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            local on_attach = function(client)
-                client.server_capabilities.semanticTokensProvider = nil
-            end
+            local on_attach = function(client) client.server_capabilities.semanticTokensProvider = nil end
+            local lspconfig = require("lspconfig")
+
             require("mason-lspconfig").setup_handlers {
                 function(server_name)
-                    require("lspconfig")[server_name].setup {
+                    lspconfig[server_name].setup {
                         capabilities = capabilities,
                         on_attach = on_attach,
                     }
                 end,
+
+                ["pyright"] = function()
+                    lspconfig.pyright.setup {
+                        settings = {
+                            pyright = {
+                                -- Using Ruff's import organizer
+                                disableOrganizeImports = true,
+                            },
+                            python = {
+                                analysis = {
+                                    -- Ignore all files for analysis to exclusively use Ruff for linting
+                                    ignore = { '*' },
+                                },
+                            },
+                        },
+                    }
+                end
             }
+
+            -- configure Swift serve here since it is not installed via Mason
+            lspconfig.sourcekit.setup({
+                -- capabilities = capabilities,
+                capabilities = {
+                    workspace = {
+                        didChangeWatchedFiles = {
+                            dynamicRegistration = true,
+                        },
+                    },
+                },
+                on_attach = on_attach,
+            })
 
             -- Keymap for lsp
             vim.api.nvim_create_autocmd('LspAttach', {
@@ -149,8 +178,21 @@ return {
             local conform = require("conform")
             conform.setup {
                 formatters_by_ft = {
-                    python = { "isort", "black" },
-                }
+                    markdown = { "prettier" },
+                    javascript = { "prettier" },
+                    typescript = { "prettier" },
+                    javascriptreact = { "prettier" },
+                    typescriptreact = { "prettier" },
+                    css = { "prettier" },
+                    html = { "prettier" },
+                    json = { "prettier" },
+                    yaml = { "prettier" },
+                },
+                format_on_save = {
+                    lsp_fallback = true,
+                    async = true,
+                    timeout_ms = 1000,
+                },
             }
             vim.keymap.set({ "n", "v" }, "<leader>lf", function()
                 conform.format({
