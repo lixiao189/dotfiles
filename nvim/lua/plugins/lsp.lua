@@ -16,7 +16,7 @@ return {
             }
             require("mason-tool-installer").setup {
                 ensure_installed = {
-                    "prettier"
+                    "prettierd"
                 },
             }
         end
@@ -180,15 +180,20 @@ return {
             local conform = require("conform")
             conform.setup {
                 formatters_by_ft = {
-                    markdown = { "prettier" },
-                    javascript = { "prettier" },
-                    typescript = { "prettier" },
-                    javascriptreact = { "prettier" },
-                    typescriptreact = { "prettier" },
-                    css = { "prettier" },
-                    html = { "prettier" },
-                    json = { "prettier" },
-                    yaml = { "prettier" },
+                    markdown = { "prettierd" },
+                    javascript = { "prettierd" },
+                    typescript = { "prettierd" },
+                    javascriptreact = { "prettierd" },
+                    typescriptreact = { "prettierd" },
+                    css = { "prettierd" },
+                    html = { "prettierd" },
+                    json = { "prettierd" },
+                    yaml = { "prettierd" },
+                },
+                format_on_save = {
+                    lsp_fallback = true,
+                    async = false,
+                    timeout_ms = 1000,
                 },
             }
             vim.keymap.set({ "n", "v" }, "<leader>lf", function()
