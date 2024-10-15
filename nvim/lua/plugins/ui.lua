@@ -3,8 +3,8 @@ return {
         "navarasu/onedark.nvim",
         priority = 1000,
         lazy = false,
-        config = function ()
-            vim.cmd[[colorscheme onedark]]
+        config = function()
+            vim.cmd [[colorscheme onedark]]
         end
     },
 
@@ -30,9 +30,6 @@ return {
                 disabled_filetypes = {
                     statusline = { "NvimTree", "help", "alpha" },
                 },
-                refresh = {
-                    statusline = 100,
-                }
             },
         }
     },
