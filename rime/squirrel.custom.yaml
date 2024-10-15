@@ -16,6 +16,9 @@ patch:
       vim_mode: true
     com.apple.Spotlight:
       ascii_mode: true
+    net.kovidgoyal.kitty:
+      ascii_mode: true
+      vim_mode: true
     com.googlecode.iterm2:
       ascii_mode: true
       vim_mode: true
