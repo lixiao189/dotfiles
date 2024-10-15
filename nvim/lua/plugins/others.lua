@@ -108,30 +108,4 @@ return {
         version = "*",
         config = true,
     },
-
-    {
-        "szw/vim-maximizer",
-        event = { "BufReadPre", "BufNewFile" },
-        config = function()
-            vim.keymap.set("n", "<leader>m", "<CMD>MaximizerToggle<CR>",
-                { silent = true, noremap = true, desc = "Maximize current window" })
-        end
-    },
-
-    {
-        'brenoprata10/nvim-highlight-colors',
-        event = { "BufReadPre", "BufNewFile" },
-        opts = {
-            enable_tailwind = true,
-        }
-    },
-
-    -- lazy.nvim
-    -- {
-    --     "m4xshen/hardtime.nvim",
-    --     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    --     opts = {
-    --         disable_mouse = false
-    --     }
-    -- },
 }

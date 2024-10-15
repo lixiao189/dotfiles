@@ -24,7 +24,6 @@
   "nui.nvim": { "branch": "main", "commit": "b58e2bfda5cea347c9d58b7f11cf3012c7b3953f" },
   "nvim-autopairs": { "branch": "master", "commit": "ee297f215e95a60b01fde33275cc3c820eddeebe" },
   "nvim-cmp": { "branch": "perf", "commit": "6c3d595f3223c1ae7392d4fde1626355439af6c1" },
-  "nvim-highlight-colors": { "branch": "main", "commit": "a411550ef85cae467b889ba7d1a96bd78332d90e" },
   "nvim-lspconfig": { "branch": "master", "commit": "b1de227da4ca6baf6ba865bec75917e4b4053844" },
   "nvim-nio": { "branch": "master", "commit": "a428f309119086dc78dd4b19306d2d67be884eee" },
   "nvim-notify": { "branch": "master", "commit": "fbef5d32be8466dd76544a257d3f3dce20082a07" },
@@ -43,7 +42,6 @@
   "telescope.nvim": { "branch": "master", "commit": "6312868392331c9c0f22725041f1ec2bef57c751" },
   "tmux.nvim": { "branch": "main", "commit": "65ee9d6e6308afcd7d602e1320f727c5be63a947" },
   "todo-comments.nvim": { "branch": "main", "commit": "ae0a2afb47cf7395dc400e5dc4e05274bf4fb9e0" },
-  "vim-maximizer": { "branch": "master", "commit": "2e54952fe91e140a2e69f35f22131219fcd9c5f1" },
   "vim-visual-multi": { "branch": "master", "commit": "a6975e7c1ee157615bbc80fc25e4392f71c344d4" },
   "which-key.nvim": { "branch": "main", "commit": "8badb359f7ab8711e2575ef75dfe6fbbd87e4821" }
 }
