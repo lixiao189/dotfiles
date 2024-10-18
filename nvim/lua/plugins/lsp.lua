@@ -33,7 +33,7 @@ return {
 
             cmp.setup {
                 performance = {
-                    max_view_entries = 10,
+                    max_view_entries = 20,
                     debounce = 5,
                     throttle = 5,
                 },
