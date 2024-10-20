@@ -27,7 +27,8 @@ vim.g.loaded_netrwPlugin = 1
 -- Improve performance
 vim.opt.showcmd = false
 vim.opt.ruler = false
-vim.opt.updatetime = 30
+vim.opt.updatetime = 100
+vim.opt.pumheight = 10
 
 -- Turn off backup
 vim.opt.backup = false
@@ -46,7 +47,7 @@ vim.opt.wrap = false
 vim.opt.cursorline = true
 
 -- Cursor type
-vim.opt.guicursor = "n-v-i-c:block-Cursor"
+-- vim.opt.guicursor = "n-v-i-c:block-Cursor"
 
 -- CLipboard over ssh
 local ssh_connection = vim.fn.getenv("SSH_CONNECTION")

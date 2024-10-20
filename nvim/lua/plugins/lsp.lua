@@ -1,6 +1,5 @@
 return {
     -- IDE-like breadcrumbs
-    -- 'Bekaboo/dropbar.nvim',
 
     -- Lsp installer
     {
@@ -33,7 +32,6 @@ return {
 
             cmp.setup {
                 performance = {
-                    max_view_entries = 20,
                     debounce = 5,
                     throttle = 5,
                 },
