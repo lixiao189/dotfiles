@@ -4,7 +4,6 @@ return {
         priority = 1000,
         lazy = false,
         config = function()
-            vim.opt.background = "light"
             vim.g.gruvbox_material_background = "hard"
             vim.cmd.colorscheme('gruvbox-material')
         end
