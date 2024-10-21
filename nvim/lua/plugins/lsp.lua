@@ -1,6 +1,4 @@
 return {
-    -- IDE-like breadcrumbs
-
     -- Lsp installer
     {
         "williamboman/mason.nvim",
@@ -23,18 +21,16 @@ return {
 
     -- Cmp plugin
     {
-        "yioneko/nvim-cmp",
-        branch = "perf",
+        "hrsh7th/nvim-cmp",
         event = "InsertEnter",
-        dependencies = { "windwp/nvim-autopairs" },
+        dependencies = {
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-nvim-lsp"
+        },
         config = function()
             local cmp = require("cmp")
 
             cmp.setup {
-                performance = {
-                    debounce = 5,
-                    throttle = 5,
-                },
                 completion = {
                     completeopt = 'menu,menuone,noinsert'
                 },
@@ -44,16 +40,9 @@ return {
                 sources = cmp.config.sources({
                     { name = 'nvim_lsp' },
                 }, {
-                    { name = 'buffer', keyword_length = 4 },
+                    { name = 'buffer' },
                 })
             }
-
-            --Settings for nvim autopairs
-            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-            cmp.event:on(
-                'confirm_done',
-                cmp_autopairs.on_confirm_done()
-            )
 
             -- Keymap for snippet
             local function is_pair()
