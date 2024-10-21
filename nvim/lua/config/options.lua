@@ -27,7 +27,7 @@ vim.g.loaded_netrwPlugin = 1
 -- Improve performance
 vim.opt.showcmd = false
 vim.opt.ruler = false
-vim.opt.updatetime = 200
+vim.opt.updatetime = 100
 vim.opt.pumheight = 10
 
 -- Turn off backup
