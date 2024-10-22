@@ -29,17 +29,15 @@ return {
         },
         config = function()
             vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
-
             local cmp = require("cmp")
-
+            local defaults = require("cmp.config.default")()
+            local auto_select = true
             cmp.setup {
-                performance = {
-                    debounce = 5,
-                    throttle = 5,
-                },
+                auto_brackets = {}, -- configure any filetype to auto add brackets
                 completion = {
-                    completeopt = 'menu,menuone,noinsert'
+                    completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
                 },
+                preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
                 mapping = cmp.mapping.preset.insert({
                     ["<CR>"] = cmp.mapping.confirm()
                 }),
@@ -53,6 +51,7 @@ return {
                         hl_group = "CmpGhostText",
                     },
                 },
+                sorting = defaults.sorting,
                 formatting = {
                     format = function(_, item)
                         local widths = {
