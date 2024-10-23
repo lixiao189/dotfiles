@@ -1,22 +1,12 @@
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = {
-        "*.c", "*.h", "*.hpp", "*.cpp", "*.cc",
-        "*.vue", "*.js", "*.jsx", "*.html", "*.css", "*.json", "*.ts", "*.tsx", "*.less",
-    },
-    callback = function()
-        vim.opt.shiftwidth = 2
-        vim.opt.tabstop = 2
-        vim.opt.softtabstop = 2
-    end
-})
+-- This file is automatically loaded by lazyvim.config.init.
+local function augroup(name)
+  return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
+end
 
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = {
-        "*.lua", "*.go", "*.java", "*.py", "*.xml"
-    },
-    callback = function()
-        vim.opt.shiftwidth = 4
-        vim.opt.tabstop = 4
-        vim.opt.softtabstop = 4
-    end
+-- Highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup("highlight_yank"),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
