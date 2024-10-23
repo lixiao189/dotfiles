@@ -1,10 +1,11 @@
 return {
   {
-    "folke/tokyonight.nvim",
+    "d11wtq/macvim256.vim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd [[colorscheme tokyonight]]
+      vim.opt.guicursor = "n-v-i-c:block-Cursor"
+      vim.cmd [[colorscheme macvim256]]
     end
   },
 
