@@ -3,8 +3,11 @@ return {
     "d11wtq/macvim256.vim",
     lazy = false,
     priority = 1000,
-    config = function()
+    init = function()
+      vim.opt.background = "light"
       vim.opt.guicursor = "n-v-i-c:block-Cursor"
+    end,
+    config = function()
       vim.cmd [[colorscheme macvim256]]
     end
   },
