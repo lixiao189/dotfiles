@@ -62,28 +62,13 @@ return {
     "nvim-tree/nvim-tree.lua",
     version = "*",
     event = "VeryLazy",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons"
+    },
     config = function()
       require("nvim-tree").setup {
         renderer = {
           group_empty = true,
-          icons = {
-            show = {
-              file = false,
-              folder = false
-            },
-            glyphs = {
-              folder = {
-                arrow_closed = "+",
-                arrow_open = "~"
-              },
-              git = {
-                unstaged = "✹",
-                staged = "✚",
-                unmerged = "═",
-                deleted = "✖"
-              }
-            }
-          }
         }
       }
       vim.keymap.set("n", "<leader>e", "<CMD>NvimTreeToggle<CR>",

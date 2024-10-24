@@ -1,14 +1,11 @@
 return {
   {
-    "d11wtq/macvim256.vim",
+    "craftzdog/solarized-osaka.nvim",
     lazy = false,
     priority = 1000,
-    init = function()
-      vim.opt.background = "light"
-      vim.opt.guicursor = "n-v-i-c:block-Cursor"
-    end,
+    opts = {},
     config = function()
-      vim.cmd [[colorscheme macvim256]]
+      vim.cmd [[colorscheme solarized-osaka]]
     end
   },
 
