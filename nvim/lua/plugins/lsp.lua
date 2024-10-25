@@ -9,7 +9,7 @@ return {
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup {
-        ensure_installed = { "lua_ls", "pyright", "ruff_lsp" }
+        ensure_installed = { "lua_ls", "pyright", "ruff_lsp", "marksman" }
       }
       require("mason-tool-installer").setup {
         ensure_installed = {
