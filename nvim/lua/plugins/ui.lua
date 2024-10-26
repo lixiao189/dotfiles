@@ -5,6 +5,7 @@ return {
     priority = 1000,
     opts = {},
     config = function()
+      vim.opt.background = "light"
       vim.cmd [[colorscheme solarized]]
     end
   },
