@@ -51,14 +51,6 @@ return {
   },
 
   {
-    "aserowy/tmux.nvim",
-    event = "VeryLazy",
-    config = {
-      copy_sync = { enable = false },
-    }
-  },
-
-  {
     "nvim-tree/nvim-tree.lua",
     version = "*",
     event = "VeryLazy",
