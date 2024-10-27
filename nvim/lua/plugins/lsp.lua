@@ -9,11 +9,11 @@ return {
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup {
-        ensure_installed = { "lua_ls", "pyright", "ruff_lsp", "marksman" }
+        ensure_installed = { "lua_ls", "marksman" }
       }
       require("mason-tool-installer").setup {
         ensure_installed = {
-          "prettierd"
+          "prettierd",
         },
       }
     end
@@ -113,23 +113,6 @@ return {
             on_attach = on_attach,
           }
         end,
-
-        ["pyright"] = function()
-          lspconfig.pyright.setup {
-            settings = {
-              pyright = {
-                -- Using Ruff's import organizer
-                disableOrganizeImports = true,
-              },
-              python = {
-                analysis = {
-                  -- Ignore all files for analysis to exclusively use Ruff for linting
-                  ignore = { '*' },
-                },
-              },
-            },
-          }
-        end
       }
 
       -- configure Swift serve here since it is not installed via Mason
