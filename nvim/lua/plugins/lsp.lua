@@ -14,6 +14,7 @@ return {
       require("mason-tool-installer").setup {
         ensure_installed = {
           "prettierd",
+          "ruff"
         },
       }
     end
@@ -113,6 +114,9 @@ return {
             on_attach = on_attach,
           }
         end,
+        ["ruff"] = function()
+          -- Do nothing
+        end
       }
 
       -- configure Swift serve here since it is not installed via Mason
@@ -184,6 +188,7 @@ return {
           html = { "prettierd" },
           json = { "prettierd" },
           yaml = { "prettierd" },
+          python = { "ruff_format", "ruff_organize_imports" },
         },
         format_on_save = {
           lsp_fallback = true,
