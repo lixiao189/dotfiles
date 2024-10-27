@@ -1,12 +1,11 @@
 return {
   {
-    "shaunsingh/solarized.nvim",
+    "olimorris/onedarkpro.nvim",
     lazy = false,
     priority = 1000,
     opts = {},
     config = function()
-      vim.opt.background = "light"
-      vim.cmd [[colorscheme solarized]]
+      vim.cmd [[colorscheme onedark_dark]]
     end
   },
 
