@@ -31,6 +31,9 @@ return {
     config = function()
       local cmp = require("cmp")
       cmp.setup {
+        completion = {
+          completeopt = "menu,menuone,noinsert",
+        },
         performance = {
           debounce = 5,
           throttle = 5,
