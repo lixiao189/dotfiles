@@ -31,6 +31,10 @@ return {
     config = function()
       local cmp = require("cmp")
       cmp.setup {
+        performance = {
+          debounce = 5,
+          throttle = 5,
+        },
         mapping = cmp.mapping.preset.insert({
           ["<CR>"] = cmp.mapping.confirm({
             select = true
