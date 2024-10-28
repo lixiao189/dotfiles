@@ -1,15 +1,11 @@
 return {
   {
-    "EdenEast/nightfox.nvim",
+    'sainnhe/gruvbox-material',
     lazy = false,
     priority = 1000,
     config = function()
-      require("nightfox").setup {
-        options = {
-          transparent = true
-        }
-      }
-      vim.cmd [[colorscheme carbonfox]]
+      vim.g.gruvbox_material_foreground = "original"
+      vim.cmd.colorscheme('gruvbox-material')
     end
   },
 
