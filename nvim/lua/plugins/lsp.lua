@@ -65,8 +65,6 @@ return {
               end
             end
 
-            item.menu = ""
-
             return item
           end,
         },
