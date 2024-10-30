@@ -22,12 +22,14 @@ return {
 
   -- Cmp plugin
   {
-    "hrsh7th/nvim-cmp",
+    "iguanacucumber/magazine.nvim",
+    name = "nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lsp"
+      { "iguanacucumber/mag-nvim-lsp",                   name = "cmp-nvim-lsp" },
+      { "iguanacucumber/mag-nvim-lua",                   name = "cmp-nvim-lua" },
+      { "iguanacucumber/mag-buffer",                     name = "cmp-buffer" },
+      { "https://codeberg.org/FelipeLema/cmp-async-path" }
     },
     config = function()
       local cmp = require("cmp")
@@ -46,7 +48,7 @@ return {
         }),
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
-          { name = 'path' },
+          { name = 'async_path' },
         }, {
           { name = 'buffer' },
         }),
