@@ -1,4 +1,17 @@
 return {
+  -- Supermaven AI
+  {
+    "zbirenbaum/copilot.lua",
+    config = function()
+      require("copilot").setup {
+        suggestion = {
+          auto_trigger = true,
+        }
+      }
+    end,
+  },
+
+
   -- Lsp installer
   {
     "williamboman/mason.nvim",
@@ -29,10 +42,13 @@ return {
       { "iguanacucumber/mag-nvim-lsp",                   name = "cmp-nvim-lsp" },
       { "iguanacucumber/mag-nvim-lua",                   name = "cmp-nvim-lua" },
       { "iguanacucumber/mag-buffer",                     name = "cmp-buffer" },
-      { "https://codeberg.org/FelipeLema/cmp-async-path" }
+      { "https://codeberg.org/FelipeLema/cmp-async-path" },
+      { "zbirenbaum/copilot.lua", }
     },
     config = function()
       local cmp = require("cmp")
+      local suggestion = require("copilot.suggestion")
+
       cmp.setup {
         completion = {
           completeopt = "menu,menuone,noinsert",
@@ -79,7 +95,9 @@ return {
       vim.keymap.set({ 'i', 's' }, '<Tab>', function()
         if vim.snippet.active({ direction = 1 }) then
           return '<cmd>lua vim.snippet.jump(1)<cr>'
-        elseif is_pair() then -- Tabout
+        elseif suggestion.is_visible() then -- Copilot
+          suggestion.accept()
+        elseif is_pair() then               -- Tabout
           vim.api.nvim_input('<Right>')
         else
           return '<Tab>'
