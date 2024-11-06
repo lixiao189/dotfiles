@@ -30,7 +30,7 @@ return {
         section_separators = '',
         component_separators = '', -- Disable the separator
         disabled_filetypes = {
-          statusline = { "NvimTree", "help", "alpha" },
+          statusline = { "NvimTree", "help", "alpha", "toggleterm" },
         },
       },
     }
