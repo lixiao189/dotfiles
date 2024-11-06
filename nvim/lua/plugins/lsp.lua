@@ -1,7 +1,19 @@
 return {
-  -- Supermaven AI
+  -- Copilot AI
   {
     "zbirenbaum/copilot.lua",
+    dependencies = {
+      "AndreM222/copilot-lualine",
+      {
+        "nvim-lualine/lualine.nvim",
+        config = function(_, opts)
+          opts.sections = {
+            lualine_x = { 'copilot', 'encoding', 'fileformat', 'filetype' },
+          }
+          require("lualine").setup(opts)
+        end
+      }
+    },
     config = function()
       require("copilot").setup {
         suggestion = {

@@ -1,12 +1,12 @@
 return {
   {
-    'sainnhe/gruvbox-material',
+    'oxfist/night-owl.nvim',
     lazy = false,
     priority = 1000,
     config = function()
-      vim.g.gruvbox_material_foreground = "mix"
-      vim.g.gruvbox_material_background = "hard"
-      vim.cmd.colorscheme('gruvbox-material')
+      -- load the colorscheme here
+      require("night-owl").setup()
+      vim.cmd.colorscheme("night-owl")
     end
   },
 
@@ -26,7 +26,7 @@ return {
     event = "VeryLazy",
     opts = {
       options = {
-        icons_enabled = false,
+        icons_enabled = true,
         section_separators = '',
         component_separators = '', -- Disable the separator
         disabled_filetypes = {
