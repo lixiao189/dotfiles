@@ -32,6 +32,9 @@ return {
         disabled_filetypes = {
           statusline = { "NvimTree", "help", "alpha", "toggleterm" },
         },
+        refresh = {
+          statusline = 200,
+        }
       },
     }
   },
