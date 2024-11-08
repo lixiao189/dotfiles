@@ -45,9 +45,6 @@ vim.opt.wrap = false
 -- Highlight current line
 vim.opt.cursorline = true
 
--- Change the gui cursor shape
-vim.opt.guicursor = "n-v-c-i:block"
-
 -- disable some default providers
 vim.g.loaded_node_provider = 0
 vim.g.loaded_python3_provider = 0
