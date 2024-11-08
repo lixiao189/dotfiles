@@ -65,10 +65,6 @@ return {
         completion = {
           completeopt = "menu,menuone,noinsert",
         },
-        performance = {
-          debounce = 5,
-          throttle = 5,
-        },
         mapping = cmp.mapping.preset.insert({
           ["<CR>"] = cmp.mapping.confirm({
             select = true
