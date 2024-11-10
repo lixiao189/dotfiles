@@ -1,3 +1,6 @@
+-- Disable welcome messages
+vim.opt.shortmess:append("sI")
+
 -- enable line number and relative line number
 vim.opt.number = true
 vim.opt.relativenumber = true
