@@ -125,11 +125,14 @@ return {
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "williamboman/mason-lspconfig.nvim",
-      "nvim-telescope/telescope.nvim"
+      "nvim-telescope/telescope.nvim",
+      "microsoft/python-type-stubs",
     },
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
-      local on_attach = function(client) client.server_capabilities.semanticTokensProvider = nil end
+      local on_attach = function(client)
+        client.server_capabilities.semanticTokensProvider = nil
+      end
       local lspconfig = require("lspconfig")
 
       require("mason-lspconfig").setup_handlers {
@@ -150,7 +153,8 @@ return {
               },
               python = {
                 analysis = {
-                  -- Ignore all files for analysis to exclusively use Ruff for linting
+                  stubPath = "$HOME/Documents/typings",
+                  diagnosticMode = 'openFilesOnly',
                   ignore = { '*' },
                 },
               },
