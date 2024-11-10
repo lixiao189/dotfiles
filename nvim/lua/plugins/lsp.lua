@@ -34,12 +34,11 @@ return {
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup {
-        ensure_installed = { "lua_ls", "marksman" }
+        ensure_installed = { "lua_ls", "marksman", "pyright", "ruff" }
       }
       require("mason-tool-installer").setup {
         ensure_installed = {
           "prettierd",
-          "ruff"
         },
       }
     end
@@ -140,19 +139,19 @@ return {
             on_attach = on_attach,
           }
         end,
-        ["ruff"] = function()
-          -- Do nothing
-        end,
         ["pyright"] = function()
           lspconfig.pyright.setup {
             capabilities = capabilities,
             on_attach = on_attach,
             settings = {
+              pyright = {
+                -- Using Ruff's import organizer
+                disableOrganizeImports = true,
+              },
               python = {
                 analysis = {
-                  autoSearchPaths = true,
-                  useLibraryCodeForTypes = true,
-                  diagnosticMode = 'openFilesOnly',
+                  -- Ignore all files for analysis to exclusively use Ruff for linting
+                  ignore = { '*' },
                 },
               },
             },
@@ -229,7 +228,6 @@ return {
           html = { "prettierd" },
           json = { "prettierd" },
           yaml = { "prettierd" },
-          python = { "ruff_format", "ruff_organize_imports" },
         },
         format_on_save = {
           lsp_fallback = true,
