@@ -66,14 +66,12 @@ return {
               if cmp.is_in_snippet() then
                 return cmp.snippet_forward()
               elseif suggestion.is_visible() then -- Copilot
-                suggestion.accept()
+                return suggestion.accept()
               elseif is_pair() then               -- Tabout
-                vim.api.nvim_input('<Right>')
-              else
-                local key = vim.api.nvim_replace_termcodes("<Tab>", true, false, true)
-                vim.api.nvim_feedkeys(key, "n", true)
+                return vim.api.nvim_input('<Right>')
               end
             end,
+            'fallback',
           },
           ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
         },
@@ -86,6 +84,12 @@ return {
             border = "border",
           },
         },
+        sources = {
+          -- list of enabled providers
+          completion = {
+            enabled_providers = { 'lsp', 'path', 'snippets' },
+          }
+        }
       }
     end
   },
