@@ -44,77 +44,49 @@ return {
     end
   },
 
-  -- Cmp plugin
+  -- Blink Cmp plugin
   {
-    "iguanacucumber/magazine.nvim",
-    name = "nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-      { "iguanacucumber/mag-nvim-lsp",                   name = "cmp-nvim-lsp" },
-      { "iguanacucumber/mag-nvim-lua",                   name = "cmp-nvim-lua" },
-      { "iguanacucumber/mag-buffer",                     name = "cmp-buffer" },
-      { "https://codeberg.org/FelipeLema/cmp-async-path" },
-      { "zbirenbaum/copilot.lua", }
-    },
+    'saghen/blink.cmp',
+    lazy = false,
+    version = 'v0.*',
     config = function()
-      local cmp = require("cmp")
-      local suggestion = require("copilot.suggestion")
-
-      cmp.setup {
-        completion = {
-          completeopt = "menu,menuone,noinsert",
-        },
-        mapping = cmp.mapping.preset.insert({
-          ["<CR>"] = cmp.mapping.confirm({
-            select = true
-          })
-        }),
-        sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'async_path' },
-        }, {
-          { name = 'buffer' },
-        }),
-        formatting = {
-          format = function(_, item)
-            local widths = {
-              abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 40,
-              menu = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30,
-            }
-
-            for key, width in pairs(widths) do
-              if item[key] and vim.fn.strdisplaywidth(item[key]) > width then
-                item[key] = vim.fn.strcharpart(item[key], 0, width - 1) .. "…"
-              end
-            end
-
-            return item
-          end,
-        },
-      }
-
       -- Keymap for snippet
+      local suggestion = require("copilot.suggestion")
       local function is_pair()
         local col = vim.fn.col('.') - 1
         local next_char = vim.fn.getline('.'):sub(col + 1, col + 1)
         return next_char:match("[%)%]}>\"';`]") ~= nil
       end
-      vim.keymap.set({ 'i', 's' }, '<Tab>', function()
-        if vim.snippet.active({ direction = 1 }) then
-          return '<cmd>lua vim.snippet.jump(1)<cr>'
-        elseif suggestion.is_visible() then -- Copilot
-          suggestion.accept()
-        elseif is_pair() then               -- Tabout
-          vim.api.nvim_input('<Right>')
-        else
-          return '<Tab>'
-        end
-      end, { expr = true })
-      vim.keymap.set({ 'i', 's' }, '<S-Tab>', function()
-        if vim.snippet.active({ direction = -1 }) then
-          return '<cmd>lua vim.snippet.jump(-1)<cr>'
-        end
-      end, { expr = true })
+
+      require("blink.cmp").setup {
+        keymap = {
+          preset = 'enter',
+          ['<Tab>'] = {
+            function(cmp)
+              if cmp.is_in_snippet() then
+                return cmp.snippet_forward()
+              elseif suggestion.is_visible() then -- Copilot
+                suggestion.accept()
+              elseif is_pair() then               -- Tabout
+                vim.api.nvim_input('<Right>')
+              else
+                local key = vim.api.nvim_replace_termcodes("<Tab>", true, false, true)
+                vim.api.nvim_feedkeys(key, "n", true)
+              end
+            end,
+          },
+          ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+        },
+        windows = {
+          documentation = {
+            auto_show = true,
+            auto_show_delay_ms = 50,
+          },
+          signature_help = {
+            border = "border",
+          },
+        },
+      }
     end
   },
 
@@ -123,13 +95,12 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
+      "saghen/blink.cmp",
       "williamboman/mason-lspconfig.nvim",
       "nvim-telescope/telescope.nvim",
-      "microsoft/python-type-stubs",
     },
     config = function()
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
       local on_attach = function(client)
         client.server_capabilities.semanticTokensProvider = nil
       end
@@ -153,8 +124,6 @@ return {
               },
               python = {
                 analysis = {
-                  stubPath = "$HOME/Documents/typings",
-                  diagnosticMode = 'openFilesOnly',
                   ignore = { '*' },
                 },
               },
