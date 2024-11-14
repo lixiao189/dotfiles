@@ -1,4 +1,14 @@
 return {
+  {
+    "d11wtq/macvim256.vim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.opt.background = "light"
+      vim.cmd("colorscheme macvim256")
+    end
+  },
+
   -- Dashboard
   {
     'goolord/alpha-nvim',
