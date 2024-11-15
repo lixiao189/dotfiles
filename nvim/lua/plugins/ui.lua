@@ -1,11 +1,11 @@
 return {
   {
-    "d11wtq/macvim256.vim",
+    "navarasu/onedark.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.opt.background = "light"
-      vim.cmd("colorscheme macvim256")
+      vim.opt.background = "dark"
+      vim.cmd("colorscheme onedark")
     end
   },
 
