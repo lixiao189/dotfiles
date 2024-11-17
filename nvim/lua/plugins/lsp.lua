@@ -76,10 +76,6 @@ return {
           ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
         },
         windows = {
-          documentation = {
-            auto_show = true,
-            auto_show_delay_ms = 50,
-          },
           signature_help = {
             border = "border",
           },
@@ -104,7 +100,8 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     config = function()
-      local capabilities = require('blink.cmp').get_lsp_capabilities()
+      local cmp = require("blink.cmp")
+      local capabilities = cmp.get_lsp_capabilities()
       local on_attach = function(client)
         client.server_capabilities.semanticTokensProvider = nil
       end
@@ -139,13 +136,13 @@ return {
       -- configure Swift serve here since it is not installed via Mason
       lspconfig.sourcekit.setup({
         -- capabilities = capabilities,
-        capabilities = {
+        capabilities = cmp.get_lsp_capabilities({
           workspace = {
             didChangeWatchedFiles = {
               dynamicRegistration = true,
             },
           },
-        },
+        }),
         on_attach = on_attach,
       })
 

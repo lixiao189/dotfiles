@@ -16,7 +16,7 @@ return {
       },
       indent = {
         enable = true,
-        disable = { "swift" }
+        -- disable = { "swift" }
       },
       incremental_selection = {
         enable = true,
