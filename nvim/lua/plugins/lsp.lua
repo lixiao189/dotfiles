@@ -75,17 +75,6 @@ return {
           },
           ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
         },
-        windows = {
-          signature_help = {
-            border = "border",
-          },
-        },
-        sources = {
-          -- list of enabled providers
-          completion = {
-            enabled_providers = { 'lsp', 'path', 'snippets' },
-          }
-        }
       }
     end
   },
