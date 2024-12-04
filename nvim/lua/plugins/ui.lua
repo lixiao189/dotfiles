@@ -4,6 +4,9 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
+      require('onedark').setup {
+        style = 'darker'
+      }
       vim.opt.background = "dark"
       vim.cmd("colorscheme onedark")
     end

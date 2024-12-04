@@ -75,6 +75,11 @@ return {
           },
           ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
         },
+        completion = {
+          trigger = {
+            show_on_trigger_character = false
+          }
+        }
       }
     end
   },
