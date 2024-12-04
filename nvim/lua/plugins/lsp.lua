@@ -63,7 +63,7 @@ return {
           preset = 'enter',
           ['<Tab>'] = {
             function(cmp)
-              if cmp.is_in_snippet() then
+              if cmp.snippet_active() then
                 return cmp.snippet_forward()
               elseif suggestion.is_visible() then -- Copilot
                 return suggestion.accept()
