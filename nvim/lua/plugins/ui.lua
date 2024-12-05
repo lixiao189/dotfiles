@@ -1,14 +1,13 @@
 return {
   {
-    "navarasu/onedark.nvim",
+    "zenbones-theme/zenbones.nvim",
+    dependencies = "rktjmp/lush.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      require('onedark').setup {
-        style = 'darker'
-      }
-      vim.opt.background = "dark"
-      vim.cmd("colorscheme onedark")
+      vim.opt.guicursor = "n-v-i-c:block-Cursor"
+      vim.opt.background = "light"
+      vim.cmd("colorscheme zenwritten")
     end
   },
 
