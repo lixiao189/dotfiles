@@ -63,10 +63,10 @@ return {
           preset = 'enter',
           ['<Tab>'] = {
             function(cmp)
-              if cmp.snippet_active() then
-                return cmp.snippet_forward()
-              elseif suggestion.is_visible() then -- Copilot
+              if suggestion.is_visible() then -- Copilot
                 return suggestion.accept()
+              elseif cmp.snippet_active() then -- Snippet
+                return cmp.snippet_forward()
               elseif is_pair() then               -- Tabout
                 return vim.api.nvim_input('<Right>')
               end
@@ -196,11 +196,6 @@ return {
           html = { "prettierd" },
           json = { "prettierd" },
           yaml = { "prettierd" },
-        },
-        format_on_save = {
-          lsp_fallback = true,
-          async = false,
-          timeout_ms = 1000,
         },
       }
       vim.keymap.set({ "n", "v" }, "<leader>lf", function()
