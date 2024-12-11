@@ -59,15 +59,20 @@ return {
       end
 
       require("blink.cmp").setup {
+        sources = {
+          providers = {
+            buffer = { enabled = false }
+          }
+        },
         keymap = {
           preset = 'enter',
           ['<Tab>'] = {
             function(cmp)
-              if suggestion.is_visible() then -- Copilot
+              if suggestion.is_visible() then  -- Copilot
                 return suggestion.accept()
               elseif cmp.snippet_active() then -- Snippet
                 return cmp.snippet_forward()
-              elseif is_pair() then               -- Tabout
+              elseif is_pair() then            -- Tabout
                 return vim.api.nvim_input('<Right>')
               end
             end,
@@ -75,11 +80,6 @@ return {
           },
           ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
         },
-        completion = {
-          trigger = {
-            show_on_trigger_character = false
-          }
-        }
       }
     end
   },
@@ -176,8 +176,6 @@ return {
       )
     end
   },
-
-  { "j-hui/fidget.nvim", opts = {} },
 
   -- Formatter
   {
