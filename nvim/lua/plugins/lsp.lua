@@ -13,4 +13,8 @@ return {
       inlay_hints = { enabled = false },
     },
   },
+  {
+    "rafamadriz/friendly-snippets",
+    enabled = false,
+  },
 }
