@@ -1,9 +1,9 @@
 return {
-  "ellisonleao/gruvbox.nvim",
+  { "bluz71/vim-nightfly-colors", name = "nightfly" },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      colorscheme = "nightfly",
     },
   },
 }
