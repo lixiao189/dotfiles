@@ -1,9 +1,14 @@
 return {
-  { "bluz71/vim-nightfly-colors", name = "nightfly" },
+  {
+    "ellisonleao/gruvbox.nvim",
+    opts = {
+      transparent_mode = true,
+    },
+  },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "nightfly",
+      colorscheme = "gruvbox",
     },
   },
 }
