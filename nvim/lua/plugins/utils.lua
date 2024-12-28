@@ -30,4 +30,10 @@ return {
       { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste image" },
     },
   },
+
+  -- Turn off the words highlight
+  {
+    "folke/snacks.nvim",
+    opts = { words = { enabled = false } },
+  },
 }
