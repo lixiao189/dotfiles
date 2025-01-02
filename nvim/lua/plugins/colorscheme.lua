@@ -1,11 +1,11 @@
 return {
   {
-    "maxmx03/solarized.nvim",
+    "navarasu/onedark.nvim",
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "solarized",
+      colorscheme = "onedark",
     },
   },
 }
