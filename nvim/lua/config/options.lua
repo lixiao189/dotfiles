@@ -6,3 +6,4 @@ vim.g.autoformat = false -- Disable autoformat
 vim.g.ai_cmp = false -- Disable ai in cmp nvim
 vim.opt.spelllang = { "en", "cjk" } -- Add cjk to spelllang
 vim.opt.clipboard = "" -- Set clipboard to empty
+vim.opt.list = false
