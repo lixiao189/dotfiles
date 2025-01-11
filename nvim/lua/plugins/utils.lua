@@ -1,15 +1,12 @@
 return {
   {
     "kawre/leetcode.nvim",
-    build = ":TSUpdate html",
     cmd = "Leet",
     dependencies = {
-      "ibhagwan/fzf-lua",
       "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
     },
     opts = {
-      lang = "rust",
+      lang = "python",
       cn = { -- leetcode.cn
         enabled = true, ---@type boolean
         translator = true, ---@type boolean

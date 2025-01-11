@@ -1,5 +1,4 @@
 return {
-  "saghen/blink.cmp",
   {
     "neovim/nvim-lspconfig",
     opts = {
