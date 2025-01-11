@@ -7,4 +7,4 @@ vim.g.ai_cmp = false -- Disable ai in cmp nvim
 vim.opt.spelllang = { "en", "cjk" } -- Add cjk to spelllang
 vim.opt.clipboard = "" -- Set clipboard to empty
 vim.opt.list = false
-vim.opt.guicursor = "n-v-i-c:block-Cursor"
+-- vim.opt.guicursor = "n-v-i-c:block-Cursor"
