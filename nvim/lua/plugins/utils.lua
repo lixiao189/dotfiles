@@ -6,7 +6,7 @@ return {
       "nvim-lua/plenary.nvim",
     },
     opts = {
-      lang = "python",
+      lang = "cpp",
       cn = { -- leetcode.cn
         enabled = true, ---@type boolean
         translator = true, ---@type boolean
