@@ -1,9 +1,9 @@
 return {
-  "bluz71/vim-nightfly-colors",
+  "blazkowolf/gruber-darker.nvim",
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "nightfly",
+      colorscheme = "gruber-darker",
     },
   },
 }
