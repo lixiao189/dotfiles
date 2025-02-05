@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local, undefined-field
 return {
   {
     "kawre/leetcode.nvim",
@@ -61,6 +62,30 @@ return {
       options = {
         component_separators = { left = "|", right = "|" },
         section_separators = { left = "", right = "" },
+      },
+    },
+  },
+
+  -- Change the neovim treesitter keybinding
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      highlight = {
+        enable = true,
+        disable = function(lang, buf)
+          local max_filesize = 100 * 1024 -- 100 KB
+          local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+          if ok and stats and stats.size > max_filesize then
+            return true
+          end
+        end,
+        additional_vim_regex_highlighting = false,
+      },
+      incremental_selection = {
+        keymaps = {
+          init_selection = "<enter>",
+          node_incremental = "<enter>",
+        },
       },
     },
   },
