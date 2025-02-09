@@ -1,3 +1,4 @@
+[general]
 import = ["/Users/node/.config/alacritty/theme/one-dark.toml"]
 
 [cursor.style]
