@@ -66,6 +66,16 @@ return {
     },
   },
 
+  -- Turn off the signature help
+  {
+    "folke/noice.nvim",
+    opts = {
+      lsp = {
+        signature = { enabled = false },
+      },
+    },
+  },
+
   -- Change the neovim treesitter keybinding
   {
     "nvim-treesitter/nvim-treesitter",
