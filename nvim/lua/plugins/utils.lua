@@ -49,12 +49,6 @@ return {
     },
   },
 
-  -- Turn off the words highlight
-  {
-    "folke/snacks.nvim",
-    opts = { words = { enabled = false } },
-  },
-
   -- Remove the separators
   {
     "nvim-lualine/lualine.nvim",
