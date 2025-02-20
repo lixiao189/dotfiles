@@ -1,51 +1,31 @@
-" Install node
-if executable('node') == 0
-    silent execute '!curl -sL install-node.vercel.app/lts | bash'
-endif
-
 " Init plugin manager
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Install vim-plug if not found
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-endif
-
-" Run PlugInstall if there are missing plugins
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source $MYVIMRC
-\| endif
-
 " Plugins
 call plug#begin()
-Plug 'sainnhe/gruvbox-material'
+Plug 'bluz71/vim-nightfly-colors'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'vim-airline/vim-airline'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'LunarWatcher/auto-pairs'
-Plug 'sheerun/vim-polyglot' " syntax highlight
-Plug 'charlespascoe/vim-go-syntax'
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'mileszs/ack.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'preservim/nerdtree'
-Plug 'ryanoasis/vim-devicons'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-fugitive' " Git wrapper
 Plug 'preservim/nerdcommenter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Auto complete
 Plug 'liuchengxu/vim-which-key'
-Plug 'imsnif/kdl.vim' " KDL lang support
+
+Plug 'wuelnerdotexe/vim-astro'
 call plug#end()
 
 " Editor settings
@@ -89,27 +69,6 @@ let g:AutoPairsMapBS = 1
 nnoremap <leader>e :NERDTreeToggle<CR>
 let g:loaded_netrw       = 1 " disable netrw
 let g:loaded_netrwPlugin = 1
-
-" CtrlP
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    \ }
-let g:ctrlp_map = '<leader>ff'
-nnoremap <leader>fb :CtrlPBuffer<CR>
-nnoremap <leader>fm :CtrlPMRU<CR>
-
-" Ack
-let g:ackhighlight = 1
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-function! Search(string)
-  set shellpipe=>
-  execute "Ack! -i \"" . a:string . "\""
-  set shellpipe=2>&1\|tee
-endfunction
-nnoremap <leader>fs :call Search("")<left><left>
 
 " LSP settings
 let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets']
@@ -166,13 +125,11 @@ nmap <leader>hu :CocCommand git.chunkUndo<cr>
 nmap <leader>hi :CocCommand git.chunkInfo<cr>
 
 " UI
-let g:airline_theme = 'gruvbox_material'
 let g:airline_symbols_ascii = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:gruvbox_material_show_eob = 0
 set termguicolors
 set background=dark
-colorscheme gruvbox-material
+silent! colorscheme nightfly
 set laststatus=2
 set noshowmode
 set showtabline=2
@@ -203,8 +160,9 @@ let g:which_key_map.l.g.d = 'definition'
 let g:which_key_map.l.g.t = 'type definition'
 let g:which_key_map.l.g.i = 'implementation'
 let g:which_key_map.l.g.r = 'references'
-call which_key#register('<Space>', "g:which_key_map")
+silent! call which_key#register('<Space>', "g:which_key_map")
 
 " Lang
 autocmd FIletype c,cpp setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+let g:astro_typescript = 'enable' " Astro lang settings
 
