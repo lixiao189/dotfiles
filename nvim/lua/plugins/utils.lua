@@ -60,6 +60,16 @@ return {
     },
   },
 
+  -- Always show the bufferline
+  {
+    "akinsho/bufferline.nvim",
+    opts = {
+      options = {
+        always_show_bufferline = true,
+      },
+    },
+  },
+
   -- Turn off the signature help
   {
     "folke/noice.nvim",
