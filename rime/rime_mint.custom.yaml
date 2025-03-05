@@ -1,6 +1,8 @@
 patch:
+  "codeLengthLimit_processor": 60 # 增加输入长度限制
+
   # 语言模型
-  "grammar/language": wanxiang-lts-zh-hans
+  "grammar/language": amz-v2n3m1-zh-hans
   "grammar/collocation_max_length": 5
   "grammar/collocation_min_length": 2
 
@@ -8,6 +10,7 @@ patch:
   "translator/contextual_suggestions": true
   "translator/max_homophones": 7
   "translator/max_homographs": 7
+  "translator/enable_user_dict": false
 
   # 关闭全角半角切换
   "key_binder/bindings":
