@@ -70,6 +70,16 @@ return {
     },
   },
 
+  -- Disable highlight in I mode
+  {
+    "folke/snacks.nvim",
+    opts = {
+      words = {
+        modes = { "n", "c" },
+      },
+    },
+  },
+
   -- Change the neovim treesitter keybinding
   {
     "nvim-treesitter/nvim-treesitter",
