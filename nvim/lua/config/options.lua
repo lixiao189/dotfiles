@@ -7,10 +7,6 @@ vim.g.ai_cmp = false -- Disable ai in cmp nvim
 vim.opt.spelllang = { "en", "cjk" } -- Add cjk to spelllang
 vim.opt.clipboard = "" -- Set clipboard to empty
 vim.opt.list = false
-vim.g.snacks_animate = false -- Disable the animation
-vim.opt.guicursor = "n-v-i-c:block-Cursor"
 
 -- Better performance
 vim.lsp.set_log_level("off")
-vim.g.matchparen_timeout = 2
-vim.g.matchparen_insert_timeout = 2
