@@ -8,7 +8,7 @@ endif
 " Plugins
 call plug#begin()
 Plug 'bluz71/vim-nightfly-colors'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'Donaldttt/fuzzyy'
 Plug 'vim-airline/vim-airline'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
