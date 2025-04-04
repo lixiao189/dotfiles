@@ -1,9 +1,16 @@
 return {
+  {
+    "sainnhe/gruvbox-material",
+    init = function ()
+      vim.g.gruvbox_material_better_performance = 1
+      vim.g.gruvbox_material_background = "hard"
+    end
+  },
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight-night",
+      colorscheme = "gruvbox-material",
     },
   },
 }
