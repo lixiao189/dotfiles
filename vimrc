@@ -7,7 +7,7 @@ endif
 
 " Plugins
 call plug#begin()
-Plug 'bluz71/vim-nightfly-colors'
+Plug 'sainnhe/gruvbox-material'
 Plug 'Donaldttt/fuzzyy'
 Plug 'vim-airline/vim-airline'
 Plug 'mhinz/vim-startify'
@@ -129,7 +129,9 @@ let g:airline_symbols_ascii = 1
 let g:airline#extensions#tabline#enabled = 1
 set termguicolors
 set background=dark
-silent! colorscheme nightfly
+let g:gruvbox_material_better_performance = 1
+let g:gruvbox_material_background = "hard"
+silent! colorscheme gruvbox-material
 set laststatus=2
 set noshowmode
 set showtabline=2
