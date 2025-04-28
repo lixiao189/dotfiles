@@ -2,6 +2,10 @@ return {
   -- Swift lang
   "keith/swift.vim",
   {
+    "rafamadriz/friendly-snippets",
+    enabled = false,
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = {
       inlay_hints = { enabled = false },
