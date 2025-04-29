@@ -13,6 +13,13 @@ return {
         sourcekit = {
           mason = false,
         },
+        gopls = {
+          settings = {
+            gopls = {
+              semanticTokens = false, -- Turn off semantic token highlight
+            },
+          },
+        },
       },
     },
   },
