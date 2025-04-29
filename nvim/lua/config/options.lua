@@ -5,7 +5,6 @@
 vim.g.ai_cmp = false -- Disable ai in cmp nvim
 vim.opt.clipboard = "" -- Set clipboard to empty
 vim.opt.list = false
-vim.opt.guicursor = "n-v-i-c:block-Cursor"
 
 -- Better performance
 vim.g.autoformat = false -- Disable autoformat
