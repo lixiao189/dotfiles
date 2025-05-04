@@ -9,7 +9,6 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       inlay_hints = { enabled = false },
-      document_highlight = { enabled = false },
       servers = {
         sourcekit = {
           mason = false,
@@ -33,9 +32,9 @@ return {
     },
   },
   {
-    'saghen/blink.cmp',
+    "saghen/blink.cmp",
     opts = {
-      fuzzy = { implementation = "lua" }
-    }
-  }
+      fuzzy = { implementation = "lua" },
+    },
+  },
 }
