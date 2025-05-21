@@ -9,6 +9,4 @@ vim.opt.list = false
 -- Better performance
 vim.g.autoformat = false -- Disable autoformat
 vim.lsp.set_log_level("off")
-if vim.env.SSH_TTY then
-  vim.g.snacks_animate = false -- Disable all animations in ssh
-end
+vim.g.snacks_animate = false -- Disable all animations in ssh
