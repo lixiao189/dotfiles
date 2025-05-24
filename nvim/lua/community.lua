@@ -8,6 +8,7 @@ return {
 
   -- editing support
   { import = "astrocommunity.editing-support.conform-nvim" },
+  { import = "astrocommunity.editing-support.neogen" },
 
   -- lang
   { import = "astrocommunity.pack.lua" },
