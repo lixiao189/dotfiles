@@ -10,6 +10,9 @@ return {
   { import = "astrocommunity.editing-support.conform-nvim" },
   { import = "astrocommunity.editing-support.neogen" },
 
+  -- Turn off luasnip
+  { import = "astrocommunity.snippet.nvim-snippets" },
+
   -- lang
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.cpp" },
