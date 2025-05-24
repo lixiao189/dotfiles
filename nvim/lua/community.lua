@@ -6,6 +6,9 @@
 return {
   "AstroNvim/astrocommunity",
 
+  -- editing support
+  { import = "astrocommunity.editing-support.conform-nvim" },
+
   -- lang
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.cpp" },
@@ -17,6 +20,7 @@ return {
 
   -- Utils
   { import = "astrocommunity.fuzzy-finder.snacks-picker" },
+  { import = "astrocommunity.recipes.picker-lsp-mappings" },
   { import = "astrocommunity.terminal-integration.vim-tmux-navigator" },
   { import = "astrocommunity.markdown-and-latex.markview-nvim" },
   { import = "astrocommunity.media.img-clip-nvim" },
