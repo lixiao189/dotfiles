@@ -7,7 +7,7 @@ return {
   "AstroNvim/astrocommunity",
 
   -- editing support
-  { import = "astrocommunity.editing-support.conform-nvim" },
+  -- { import = "astrocommunity.editing-support.conform-nvim" },
   { import = "astrocommunity.editing-support.neogen" },
 
   -- Turn off luasnip
