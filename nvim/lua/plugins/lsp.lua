@@ -28,4 +28,13 @@ return {
       end
     end,
   },
+
+  -- Neogen snippet system 切换
+  {
+    "danymat/neogen",
+    optional = true,
+    opts = {
+      snippet_engine = "nvim",
+    },
+  },
 }
