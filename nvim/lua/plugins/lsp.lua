@@ -12,6 +12,11 @@ return {
       completion = {
         list = { selection = { preselect = true, auto_insert = false } },
         documentation = { auto_show = false },
+        trigger = {
+          show_on_blocked_trigger_characters = { " ", "\n", "\t", ":" },
+          show_on_accept_on_trigger_character = false,
+          show_on_insert_on_trigger_character = false,
+        },
       },
     },
   },
