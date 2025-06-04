@@ -6,6 +6,7 @@ return {
       options = {
         opt = {
           clipboard = "",
+          guicursor = "n-v-i-c:block-Cursor",
         },
       },
       mappings = {
