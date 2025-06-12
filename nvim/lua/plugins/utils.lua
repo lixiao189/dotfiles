@@ -1,22 +1,6 @@
 ---@diagnostic disable: unused-local, undefined-field
 return {
   {
-    "kawre/leetcode.nvim",
-    cmd = "Leet",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    opts = {
-      lang = "cpp",
-      cn = { -- leetcode.cn
-        enabled = true, ---@type boolean
-        translator = true, ---@type boolean
-        translate_problems = true, ---@type boolean
-      },
-    },
-  },
-
-  {
     "HakonHarnes/img-clip.nvim",
     event = "VeryLazy",
     opts = {
@@ -56,14 +40,6 @@ return {
       lsp = {
         signature = { enabled = false },
       },
-    },
-  },
-
-  -- Disable highlight in I mode
-  {
-    "folke/snacks.nvim",
-    opts = {
-      words = { enabled = false },
     },
   },
 
