@@ -31,4 +31,21 @@ return {
       },
     },
   },
+  {
+    "saghen/blink.cmp",
+    opts = {
+      completion = {
+        documentation = {
+          auto_show = false,
+        },
+        menu = {
+          border = "rounded",
+          winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+          draw = {
+            treesitter = {}, -- Do not use treesitter in menu
+          },
+        },
+      },
+    },
+  },
 }
