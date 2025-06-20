@@ -1,22 +1,6 @@
 ---@diagnostic disable: unused-local, undefined-field
 return {
   {
-    "kawre/leetcode.nvim",
-    cmd = "Leet",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    opts = {
-      lang = "cpp",
-      cn = { -- leetcode.cn
-        enabled = true, ---@type boolean
-        translator = true, ---@type boolean
-        translate_problems = true, ---@type boolean
-      },
-    },
-  },
-
-  {
     "HakonHarnes/img-clip.nvim",
     event = "VeryLazy",
     opts = {
@@ -46,24 +30,6 @@ return {
       { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
       { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
       { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
-    },
-  },
-
-  -- Turn off the signature help
-  {
-    "folke/noice.nvim",
-    opts = {
-      lsp = {
-        signature = { enabled = false },
-      },
-    },
-  },
-
-  -- Disable highlight in I mode
-  {
-    "folke/snacks.nvim",
-    opts = {
-      words = { enabled = false },
     },
   },
 

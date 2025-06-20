@@ -7,6 +7,5 @@ vim.opt.clipboard = "" -- Set clipboard to empty
 vim.opt.list = false
 
 -- Better performance
-vim.g.autoformat = false -- Disable autoformat
 vim.lsp.set_log_level("off")
 vim.g.snacks_animate = false -- Disable all animations in ssh

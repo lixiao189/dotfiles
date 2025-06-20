@@ -2,23 +2,12 @@ return {
   -- Swift lang
   "keith/swift.vim",
   {
-    "rafamadriz/friendly-snippets",
-    enabled = false,
-  },
-  {
     "neovim/nvim-lspconfig",
     opts = {
       inlay_hints = { enabled = false },
       servers = {
         sourcekit = {
           mason = false,
-        },
-        gopls = {
-          settings = {
-            gopls = {
-              semanticTokens = false, -- Turn off semantic token highlight
-            },
-          },
         },
       },
     },
@@ -29,12 +18,6 @@ return {
       formatters_by_ft = {
         swift = { "swiftformat" }, -- Install with brew
       },
-    },
-  },
-  {
-    "saghen/blink.cmp",
-    opts = {
-      fuzzy = { implementation = "lua" },
     },
   },
 }
