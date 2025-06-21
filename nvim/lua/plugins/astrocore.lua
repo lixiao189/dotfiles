@@ -12,5 +12,11 @@ return {
         -- configure global vim variables (vim.g)
       },
     },
+    mappings = {
+      n = {
+        ["<S-l>"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
+        ["<S-h>"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
+      },
+    },
   },
 }

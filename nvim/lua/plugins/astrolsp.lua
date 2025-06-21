@@ -13,5 +13,8 @@ return {
         enabled = false,
       },
     },
+    formatting = {
+      disabled = { "lua_ls", "vtsls", "astro-language-server" }, -- Use none-ls format buffer
+    },
   },
 }
