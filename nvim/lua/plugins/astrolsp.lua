@@ -1,20 +1,23 @@
----@type LazySpec
 return {
-  "AstroNvim/astrolsp",
-  ---@type AstroLSPOpts
-  opts = {
-    features = {
-      semantic_tokens = false, -- enable/disable semantic token highlighting
-    },
-    -- customize language server configuration options passed to `lspconfig`
-    ---@diagnostic disable: missing-fields
-    config = {
-      emmet_ls = {
-        enabled = false,
+  -- Disable none-ls for some annoying bugs
+  {
+    "nvimtools/none-ls.nvim",
+    enabled = false,
+  },
+  {
+    "AstroNvim/astrolsp",
+    ---@type AstroLSPOpts
+    opts = {
+      features = {
+        semantic_tokens = false, -- enable/disable semantic token highlighting
       },
-    },
-    formatting = {
-      disabled = { "lua_ls", "vtsls", "astro-language-server" }, -- Use none-ls format buffer
+      -- customize language server configuration options passed to `lspconfig`
+      ---@diagnostic disable: missing-fields
+      config = {
+        emmet_ls = {
+          enabled = false,
+        },
+      },
     },
   },
 }

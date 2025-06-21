@@ -17,4 +17,6 @@ return {
   { import = "astrocommunity.motion.mini-ai" },
   { import = "astrocommunity.motion.mini-surround" },
   { import = "astrocommunity.motion.flash-nvim" },
+  { import = "astrocommunity.editing-support.conform-nvim" },
+  { import = "astrocommunity.lsp.nvim-lint" },
 }
