@@ -9,6 +9,7 @@ return {
 
   -- Utils
   { import = "astrocommunity.editing-support.conform-nvim" },
+  { import = "astrocommunity.editing-support.neogen" },
   { import = "astrocommunity.lsp.nvim-lint" },
   { import = "astrocommunity.motion.mini-ai" },
   { import = "astrocommunity.motion.mini-surround" },
