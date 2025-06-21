@@ -6,6 +6,9 @@ return {
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.cpp" },
   { import = "astrocommunity.pack.python-ruff" },
+  { import = "astrocommunity.pack.typescript" },
+  { import = "astrocommunity.pack.astro" },
+  { import = "astrocommunity.pack.tailwindcss" },
 
   -- Utils
   { import = "astrocommunity.editing-support.conform-nvim" },
