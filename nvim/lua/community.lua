@@ -14,7 +14,6 @@ return {
   -- Utils
   { import = "astrocommunity.recipes.picker-lsp-mappings" },
   { import = "astrocommunity.editing-support.neogen" },
-  { import = "astrocommunity.motion.mini-ai" },
   { import = "astrocommunity.motion.mini-surround" },
   { import = "astrocommunity.motion.flash-nvim" },
   { import = "astrocommunity.editing-support.conform-nvim" },

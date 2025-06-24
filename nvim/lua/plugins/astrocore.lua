@@ -7,6 +7,7 @@ return {
     options = {
       opt = { -- vim.opt.<key>
         clipboard = "",
+        fileencodings = "utf-8,gbk",
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
