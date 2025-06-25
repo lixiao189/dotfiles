@@ -15,7 +15,10 @@ return {
       list = { selection = { preselect = true, auto_insert = false } },
       documentation = { auto_show = false },
       trigger = {
-        show_on_blocked_trigger_characters = { " ", "\n", "\t", ";", ":" },
+        show_on_blocked_trigger_characters = function(_)
+          if vim.bo.filetype == "go" then return { " ", "\n", "\t", ":", ";" } end
+          return { " ", "\n", "\t", ";" }
+        end,
       },
     },
   },
