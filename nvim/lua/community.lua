@@ -1,3 +1,5 @@
+local function is_ssh() return os.getenv "SSH_TTY" ~= nil or os.getenv "SSH_CONNECTION" ~= nil end
+
 ---@type LazySpec
 return {
   "AstroNvim/astrocommunity",
@@ -12,6 +14,7 @@ return {
   { import = "astrocommunity.pack.tailwindcss" },
 
   -- Utils
+  { import = "astrocommunity.markdown-and-latex.markdown-preview-nvim", cond = function() return not is_ssh() end },
   { import = "astrocommunity.recipes.picker-lsp-mappings" },
   { import = "astrocommunity.editing-support.neogen" },
   { import = "astrocommunity.motion.mini-surround" },
