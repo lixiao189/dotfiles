@@ -21,4 +21,5 @@ return {
   { import = "astrocommunity.motion.flash-nvim" },
   { import = "astrocommunity.editing-support.conform-nvim" },
   { import = "astrocommunity.snippet.nvim-snippets" },
+  { import = "astrocommunity.terminal-integration.vim-tmux-navigator" },
 }
