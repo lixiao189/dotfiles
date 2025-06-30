@@ -1,5 +1,7 @@
+---@type LazySpec
 return {
   "saghen/blink.cmp",
+  opoptional = true,
   opts = {
     keymap = {
       ["<Tab>"] = {

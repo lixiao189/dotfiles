@@ -12,8 +12,11 @@ return {
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.astro" },
   { import = "astrocommunity.pack.tailwindcss" },
+  { import = "astrocommunity.pack.markdown" },
 
   -- Utils
+  { import = "astrocommunity.media.img-clip-nvim" },
+  { import = "astrocommunity.completion.nvim-cmp" },
   { import = "astrocommunity.markdown-and-latex.markdown-preview-nvim", cond = function() return not is_ssh() end },
   { import = "astrocommunity.recipes.picker-lsp-mappings" },
   { import = "astrocommunity.editing-support.neogen" },
