@@ -1,6 +1,9 @@
 ---@type LazySpec
 return {
   "saghen/blink.cmp",
+  version = "v1.*",
+  branch = "main",
+  commit = "e84b7d9",
   opoptional = true,
   opts = {
     keymap = {
@@ -22,6 +25,9 @@ return {
           return { " ", "\n", "\t", ";" }
         end,
       },
+    },
+    fuzzy = {
+      implementation = "lua",
     },
   },
 }
