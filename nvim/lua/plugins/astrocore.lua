@@ -6,7 +6,6 @@ return {
     -- vim options can be configured here
     options = {
       opt = { -- vim.opt.<key>
-        updatetime = 100,
         clipboard = "",
         fileencodings = "utf-8,gbk",
       },

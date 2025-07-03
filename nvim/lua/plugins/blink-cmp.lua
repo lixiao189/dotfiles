@@ -3,7 +3,7 @@ return {
   "saghen/blink.cmp",
   version = "v1.*",
   branch = "main",
-  commit = "e84b7d9",
+  commit = "47820df",
   opoptional = true,
   opts = {
     keymap = {

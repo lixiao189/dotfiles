@@ -16,7 +16,7 @@ return {
 
   -- Utils
   { import = "astrocommunity.media.img-clip-nvim" },
-  { import = "astrocommunity.markdown-and-latex.markdown-preview-nvim", cond = function() return not is_ssh() end },
+  { import = "astrocommunity.markdown-and-latex.markdown-preview-nvim", cond = not is_ssh() },
   { import = "astrocommunity.recipes.picker-lsp-mappings" },
   { import = "astrocommunity.editing-support.neogen" },
   { import = "astrocommunity.motion.mini-surround" },
