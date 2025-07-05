@@ -13,6 +13,7 @@ return {
   { import = "astrocommunity.pack.astro" },
   { import = "astrocommunity.pack.tailwindcss" },
   { import = "astrocommunity.pack.markdown" },
+  { import = "astrocommunity.pack.rust" },
 
   -- Utils
   { import = "astrocommunity.snippet.mini-snippets" },
