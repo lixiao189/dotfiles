@@ -32,17 +32,4 @@ return {
       { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
     },
   },
-
-  -- Change the neovim treesitter keybinding
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = {
-      incremental_selection = {
-        keymaps = {
-          init_selection = "<enter>",
-          node_incremental = "<enter>",
-        },
-      },
-    },
-  },
 }
