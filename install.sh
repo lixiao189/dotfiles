@@ -39,6 +39,7 @@ ln -s ~/.dotfiles/wezterm.lua ~/.wezterm.lua
 ln -s ~/.dotfiles/karabiner ~/.config/karabiner
 ln -s ~/.dotfiles/ranger ~/.config/ranger
 ln -s ~/.dotfiles/omf/ ~/.config/omf
+ln -s ~/.dotfiles/mpv/ ~/.config/mpv
 
 # Install devicons for ranger 
 git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
