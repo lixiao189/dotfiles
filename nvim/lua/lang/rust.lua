@@ -1,3 +1,8 @@
+-- Install when cargo is installed
+if vim.fn.executable("cargo") == 0 then
+  return {}
+end
+
 return {
   {
     "Saecki/crates.nvim",

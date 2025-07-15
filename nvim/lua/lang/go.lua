@@ -1,3 +1,8 @@
+-- Enable when golang is installed
+if vim.fn.executable("go") == 0 then
+  return {}
+end
+
 local gopls = {}
 gopls = require("utils.lang").extend_capabilities(gopls)
 vim.lsp.enable("gopls")

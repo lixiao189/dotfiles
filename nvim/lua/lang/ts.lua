@@ -1,3 +1,8 @@
+-- Install when node is installed
+if vim.fn.executable("node") then
+  return {}
+end
+
 vim.lsp.enable("vtsls")
 
 return {

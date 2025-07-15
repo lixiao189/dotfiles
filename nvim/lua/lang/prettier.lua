@@ -1,3 +1,7 @@
+if vim.fn.executable("node") then
+  return {}
+end
+
 local supported = {
   "css",
   "graphql",
