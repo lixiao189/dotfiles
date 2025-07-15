@@ -3,32 +3,12 @@
 # Install the dependencies on Mac
 case $(uname) in
     Darwin)
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-     
-        brew tap --custom-remote --force-auto-update homebrew/cask https://github.com/Homebrew/homebrew-cask
-        brew install git
-        brew tap homebrew/cask-fonts
-        brew install font-caskaydia-cove-nerd-font
-
-        brew install iterm2
-        brew install karabiner-elements
-       
-        brew install tree-sitter
         brew install nvim
-        brew install fish 
         brew install tmux
-        brew install ranger
-        brew install exa
-     
-        brew install python@3.11 
-        brew install node
+				brew install yazi
         brew install ripgrep
-        brew install gnu-sed 
-        brew install entr
-        brew install dust
-        brew install dog
-        brew install colordiff
         brew install lazygit
+				brew install imagemagick
     ;;
 esac
 

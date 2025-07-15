@@ -59,5 +59,6 @@ vim.o.tabstop = 2
 -- Performance
 vim.lsp.set_log_level("off")
 vim.loader.enable()
+vim.g.snacks_animate = false
 
 -- vim: ts=2 sts=2 sw=2 et
