@@ -1,5 +1,5 @@
 -- Install when node is installed
-if vim.fn.executable("node") then
+if vim.fn.executable("node") == 0 then
   return {}
 end
 
