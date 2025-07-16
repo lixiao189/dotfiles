@@ -21,7 +21,7 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     optional = true,
     opts = {
-      ensure_installed = { "lua-language-server", "stylua" },
+      ensure_installed = { "ruff", "pyright" },
     },
   },
 }
