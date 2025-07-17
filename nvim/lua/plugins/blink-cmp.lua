@@ -4,7 +4,6 @@ return {
     event = "VimEnter",
     version = "1.*",
     dependencies = {
-      { "echasnovski/mini.snippets", opts = {} },
       "folke/lazydev.nvim",
     },
     --- @module 'blink.cmp'
@@ -29,7 +28,6 @@ return {
         },
       },
 
-      snippets = { preset = "mini_snippets" },
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },
     },
