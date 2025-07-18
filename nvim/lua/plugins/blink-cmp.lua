@@ -48,6 +48,22 @@ return {
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },
     },
+    config = function(_, opts)
+      require("blink.cmp").setup(opts)
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "BlinkCmpMenuOpen",
+        callback = function()
+          vim.b.copilot_suggestion_hidden = true
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "BlinkCmpMenuClose",
+        callback = function()
+          vim.b.copilot_suggestion_hidden = false
+        end,
+      })
+    end,
   },
 }
 -- vim: ts=2 sts=2 sw=2 et
