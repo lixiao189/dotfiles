@@ -12,7 +12,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function(_, _)
-      vim.lsp.config("vtsls", vtsls)
+      vim.lsp.enable("vtsls")
     end,
   },
 }
