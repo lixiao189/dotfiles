@@ -3,11 +3,6 @@ if vim.fn.executable("go") == 0 then
   return {}
 end
 
-local gopls = {}
-gopls = require("utils.lang").extend_capabilities(gopls)
-vim.lsp.enable("gopls")
-vim.lsp.config("gopls", gopls)
-
 return {
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -24,5 +19,14 @@ return {
         go = { "goimports", "gofumpt" },
       },
     },
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = function(_, _)
+      local gopls = {}
+      gopls = require("utils.lang").extend_capabilities(gopls)
+      vim.lsp.config("gopls", gopls)
+      vim.lsp.enable("gopls")
+    end,
   },
 }

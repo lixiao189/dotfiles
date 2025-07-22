@@ -1,16 +1,3 @@
-local lua_ls = {
-  settings = {
-    Lua = {
-      completion = {
-        callSnippet = "Replace",
-      },
-    },
-  },
-}
-lua_ls = require("utils.lang").extend_capabilities(lua_ls)
-vim.lsp.enable("lua_ls")
-vim.lsp.config("lua_ls", lua_ls)
-
 return {
   {
     "folke/lazydev.nvim",
@@ -40,5 +27,22 @@ return {
         lua = { "stylua" },
       },
     },
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = function(_, _)
+      local lua_ls = {
+        settings = {
+          Lua = {
+            completion = {
+              callSnippet = "Replace",
+            },
+          },
+        },
+      }
+      lua_ls = require("utils.lang").extend_capabilities(lua_ls)
+      vim.lsp.config("lua_ls", lua_ls)
+      vim.lsp.enable("lua_ls")
+    end,
   },
 }

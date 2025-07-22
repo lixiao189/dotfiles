@@ -3,7 +3,6 @@ if os.getenv("SSH_TTY") ~= nil then
   return {}
 end
 
-vim.lsp.enable("marksman")
 return {
   -- Markdown preview
   {
@@ -74,5 +73,14 @@ return {
       -- suggested keymap
       { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
     },
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = function(_, _)
+      local marksman = {}
+      marksman = require("utils.lang").extend_capabilities(marksman)
+      vim.lsp.config("marksman", marksman)
+      vim.lsp.enable("marksman")
+    end,
   },
 }
