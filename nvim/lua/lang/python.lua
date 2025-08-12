@@ -23,8 +23,18 @@ return {
           },
         },
       }
-      pyright = require("utils.lang").extend_capabilities(pyright)
+
+      local ruff = {
+        on_attach = function(client, _buffer)
+          -- Disable hover in favor of Pyright
+          client.server_capabilities.hoverProvider = false
+        end,
+      }
+
       vim.lsp.enable("ruff")
+      vim.lsp.config("ruff", ruff)
+
+      pyright = require("utils.lang").extend_capabilities(pyright)
       vim.lsp.enable("pyright")
       vim.lsp.config("pyright", pyright)
     end,
