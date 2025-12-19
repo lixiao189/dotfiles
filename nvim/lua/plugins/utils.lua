@@ -33,15 +33,32 @@ return {
     },
   },
 
-  -- Change the neovim treesitter keybinding
   {
-    "nvim-treesitter/nvim-treesitter",
+    "folke/flash.nvim",
+    optional = true,
+    keys = {
+      -- Simulate nvim-treesitter incremental selection
+      {
+        "<enter>",
+        mode = { "n", "o", "x" },
+        function()
+          require("flash").treesitter({
+            actions = {
+              ["<enter>"] = "next",
+              ["<BS>"] = "prev",
+            },
+          })
+        end,
+        desc = "Treesitter Incremental Selection",
+      },
+    },
+  },
+  {
+    "folke/snacks.nvim",
+    optional = true,
     opts = {
-      incremental_selection = {
-        keymaps = {
-          init_selection = "<enter>",
-          node_incremental = "<enter>",
-        },
+      words = {
+        enabled = false,
       },
     },
   },
