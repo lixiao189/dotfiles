@@ -1,6 +1,5 @@
 return {
-  -- Swift lang
-  "keith/swift.vim",
+  -- Swift lang lsp
   {
     "neovim/nvim-lspconfig",
     optional = true,
@@ -10,15 +9,6 @@ return {
         sourcekit = {
           mason = false,
         },
-      },
-    },
-  },
-  {
-    "stevearc/conform.nvim",
-    optional = true,
-    opts = {
-      formatters_by_ft = {
-        swift = { "swiftformat" }, -- Install with brew
       },
     },
   },
