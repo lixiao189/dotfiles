@@ -7,8 +7,8 @@ return {
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.go" },
 
-
   { import = "astrocommunity.motion.flash-nvim" },
   { import = "astrocommunity.motion.mini-ai" },
   { import = "astrocommunity.editing-support.neogen" },
+  { import = "astrocommunity.motion.mini-surround" },
 }
