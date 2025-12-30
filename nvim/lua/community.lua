@@ -20,4 +20,5 @@ return {
   { import = "astrocommunity.editing-support.neogen" },
   { import = "astrocommunity.motion.mini-surround" },
   { import = "astrocommunity.completion.copilot-lua", cond = is_local() },
+  { import = "astrocommunity.markdown-and-latex.markdown-preview-nvim", cond = is_local() },
 }
