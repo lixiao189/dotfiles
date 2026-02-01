@@ -8,7 +8,8 @@ endif
 " Plugins
 call plug#begin()
 Plug 'lifepillar/vim-solarized8'
-Plug 'Donaldttt/fuzzyy'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
@@ -135,6 +136,10 @@ set showtabline=2
 
 " WhichKey
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+nnoremap <silent> <leader>ff :Files<CR>
+nnoremap <silent> <leader>fb :Buffers<CR>
+nnoremap <silent> <leader>fm :History<CR>
+nnoremap <silent> <leader>fs :Rg<CR>
 let g:which_key_map = {}
 let g:which_key_map.e = 'file explorer'
 let g:which_key_map.f = { 'name' : '+find' }
