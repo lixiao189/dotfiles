@@ -15,13 +15,14 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
-Plug 'LunarWatcher/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'preservim/nerdcommenter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Auto complete
@@ -71,7 +72,7 @@ let g:loaded_netrw       = 1 " disable netrw
 let g:loaded_netrwPlugin = 1
 
 " LSP settings
-let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets', 'coc-git']
+let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets']
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
@@ -115,14 +116,16 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" Use `[d` and `]d` to navigate diagnostics
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
-" Coc git
-nmap <leader>gs :CocCommand git.chunkStage<cr>
-nmap <leader>gr :CocCommand git.chunkUndo<cr>
-nmap <leader>gi :CocCommand git.chunkInfo<cr>
+" Git gutter
+nmap ]g <Plug>(GitGutterNextHunk)
+nmap [g <Plug>(GitGutterPrevHunk)
+nmap <leader>gs <Plug>(GitGutterStageHunk)
+nmap <leader>gr <Plug>(GitGutterUndoHunk)
+nmap <leader>gp <Plug>(GitGutterPreviewHunk)
 
 " UI
 let g:airline_symbols_ascii = 1
@@ -147,10 +150,10 @@ let g:which_key_map.f.f = 'find file'
 let g:which_key_map.f.b = 'find buffer'
 let g:which_key_map.f.m = 'find MRU file'
 let g:which_key_map.f.s = 'find string'
-let g:which_key_map.h = { 'name' : '+hunks' }
-let g:which_key_map.h.s = 'stage'
-let g:which_key_map.h.u = 'undo'
-let g:which_key_map.h.i = 'info'
+let g:which_key_map.g = { 'name' : '+git' }
+let g:which_key_map.g.s = 'stage hunk'
+let g:which_key_map.g.r = 'reset hunk'
+let g:which_key_map.g.p = 'preview'
 let g:which_key_map.c = { 'name' : '+comment' }
 let g:which_key_map.l = { 'name' : '+lsp' }
 let g:which_key_map.l.n = 'rename'
