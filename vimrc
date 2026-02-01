@@ -21,6 +21,7 @@ Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'rbgrouleff/bclose.vim'
+Plug 'vim-scripts/BufOnly.vim'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
@@ -126,6 +127,8 @@ nmap <silent> ]d <Plug>(coc-diagnostic-next)
 " Buffer
 nnoremap ]b :bnext<CR>
 nnoremap [b :bprevious<CR>
+nnoremap <leader>c :Bclose<CR>
+nnoremap <leader>bc :BufOnly<CR>
 
 " Git gutter
 nmap ]g <Plug>(GitGutterNextHunk)
