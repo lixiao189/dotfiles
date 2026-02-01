@@ -13,6 +13,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
+Plug 'tpope/vim-commentary'
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
@@ -25,7 +26,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'preservim/nerdcommenter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Auto complete
 Plug 'liuchengxu/vim-which-key'
 call plug#end()
@@ -34,10 +34,12 @@ call plug#end()
 syntax on
 set shortmess=atI
 set number
+set relativenumber
 set noshowcmd noruler " Turn off this to improve nvim's performance
 set nowrap
 set mouse=a
 set cul
+set clipboard=unnamedplus
 set incsearch  " Enable incremental search
 set hlsearch   " Enable highlight search
 set splitbelow
@@ -73,7 +75,7 @@ let g:loaded_netrw       = 1 " disable netrw
 let g:loaded_netrwPlugin = 1
 
 " LSP settings
-let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets']
+let g:coc_global_extensions = [ 'coc-marketplace', 'coc-snippets', 'coc-clangd', 'coc-json', 'coc-pyright' ]
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
@@ -121,12 +123,22 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> [d <Plug>(coc-diagnostic-prev)
 nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
+" Buffer
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprevious<CR>
+
 " Git gutter
 nmap ]g <Plug>(GitGutterNextHunk)
 nmap [g <Plug>(GitGutterPrevHunk)
 nmap <leader>gs <Plug>(GitGutterStageHunk)
 nmap <leader>gr <Plug>(GitGutterUndoHunk)
 nmap <leader>gp <Plug>(GitGutterPreviewHunk)
+
+" Clear search highlight on Esc
+nnoremap <silent> <Esc> :nohlsearch<CR><Esc>
+
+" VIM easymotion
+nmap <S-s> <Plug>(easymotion-sn)
 
 " UI
 let g:airline_symbols_ascii = 1
@@ -155,7 +167,7 @@ let g:which_key_map.g = { 'name' : '+git' }
 let g:which_key_map.g.s = 'stage hunk'
 let g:which_key_map.g.r = 'reset hunk'
 let g:which_key_map.g.p = 'preview'
-let g:which_key_map.c = { 'name' : '+comment' }
+let g:which_key_map.b = { 'name' : '+buffer' }
 let g:which_key_map.l = { 'name' : '+lsp' }
 let g:which_key_map.l.n = 'rename'
 let g:which_key_map.l.a = 'code action'
