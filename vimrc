@@ -157,8 +157,8 @@ set showtabline=2
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap <silent> <leader>ff :Files<CR>
 nnoremap <silent> <leader>fb :Buffers<CR>
-nnoremap <silent> <leader>fm :History<CR>
-nnoremap <silent> <leader>fs :Rg<CR>
+nnoremap <silent> <leader>fs :History<CR>
+nnoremap <silent> <leader>fw :Rg<CR>
 let g:which_key_map = {}
 let g:which_key_map.e = 'file explorer'
 let g:which_key_map.f = { 'name' : '+find' }
