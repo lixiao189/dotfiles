@@ -7,9 +7,10 @@ endif
 
 " Plugins
 call plug#begin()
-Plug 'sainnhe/gruvbox-material'
+Plug 'lifepillar/vim-solarized8'
 Plug 'Donaldttt/fuzzyy'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
@@ -24,8 +25,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'preservim/nerdcommenter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Auto complete
 Plug 'liuchengxu/vim-which-key'
-
-Plug 'wuelnerdotexe/vim-astro'
 call plug#end()
 
 " Editor settings
@@ -60,9 +59,9 @@ set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 set expandtab
-set cindent 
+set cindent
 
-" Autopairs 
+" Autopairs
 let g:AutoPairsMapBS = 1
 
 " NerdTree
@@ -71,7 +70,7 @@ let g:loaded_netrw       = 1 " disable netrw
 let g:loaded_netrwPlugin = 1
 
 " LSP settings
-let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets']
+let g:coc_global_extensions = ['coc-marketplace', 'coc-snippets', 'coc-git']
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
@@ -120,18 +119,16 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Coc git
-nmap <leader>hs :CocCommand git.chunkStage<cr>
-nmap <leader>hu :CocCommand git.chunkUndo<cr>
-nmap <leader>hi :CocCommand git.chunkInfo<cr>
+nmap <leader>gs :CocCommand git.chunkStage<cr>
+nmap <leader>gr :CocCommand git.chunkUndo<cr>
+nmap <leader>gi :CocCommand git.chunkInfo<cr>
 
 " UI
 let g:airline_symbols_ascii = 1
 let g:airline#extensions#tabline#enabled = 1
 set termguicolors
 set background=dark
-let g:gruvbox_material_better_performance = 1
-let g:gruvbox_material_background = "hard"
-silent! colorscheme gruvbox-material
+silent! colorscheme solarized8
 set laststatus=2
 set noshowmode
 set showtabline=2
@@ -154,7 +151,7 @@ let g:which_key_map.l = { 'name' : '+lsp' }
 let g:which_key_map.l.n = 'rename'
 let g:which_key_map.l.a = 'code action'
 let g:which_key_map.l.f = 'format'
-let g:which_key_map.l.d = 'diagnostics' 
+let g:which_key_map.l.d = 'diagnostics'
 let g:which_key_map.l.o = 'outline'
 let g:which_key_map.l.s = 'symbols'
 let g:which_key_map.l.g = { 'name' : '+goto' }
@@ -166,5 +163,3 @@ silent! call which_key#register('<Space>', "g:which_key_map")
 
 " Lang
 autocmd FIletype c,cpp setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-let g:astro_typescript = 'enable' " Astro lang settings
-
