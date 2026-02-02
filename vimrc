@@ -56,6 +56,7 @@ set nocompatible
 set belloff=all
 set foldmethod=indent
 set foldlevel=100
+set pumheight=10
 
 " Leader key
 let g:mapleader = "\<Space>"

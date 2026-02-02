@@ -1,0 +1,6 @@
+{
+  "snippets.ultisnips.pythonPrompt": false,
+  "inlayHint.enable": false,
+  "inlayHint.enableParameter": false,
+  "suggest.enableFloat": false
+}
