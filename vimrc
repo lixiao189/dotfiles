@@ -56,7 +56,6 @@ set nocompatible
 set belloff=all
 set foldmethod=indent
 set foldlevel=100
-set pumheight=10
 
 " Leader key
 let g:mapleader = "\<Space>"
@@ -160,13 +159,25 @@ nnoremap <silent> <leader>ff :Files<CR>
 nnoremap <silent> <leader>fb :Buffers<CR>
 nnoremap <silent> <leader>fs :History<CR>
 nnoremap <silent> <leader>fw :Rg<CR>
+nnoremap <silent> <leader>fg :GFiles<CR>
+nnoremap <silent> <leader>fl :BLines<CR>
+nnoremap <silent> <leader>fc :Commands<CR>
+nnoremap <silent> <leader>fh :Helptags<CR>
+nnoremap <silent> <leader>fm :Marks<CR>
+nnoremap <silent> <leader>ft :Tags<CR>
 let g:which_key_map = {}
 let g:which_key_map.e = 'file explorer'
 let g:which_key_map.f = { 'name' : '+find' }
 let g:which_key_map.f.f = 'find file'
 let g:which_key_map.f.b = 'find buffer'
-let g:which_key_map.f.m = 'find MRU file'
-let g:which_key_map.f.s = 'find string'
+let g:which_key_map.f.s = 'find MRU file'
+let g:which_key_map.f.w = 'find string'
+let g:which_key_map.f.g = 'find git file'
+let g:which_key_map.f.l = 'find line'
+let g:which_key_map.f.c = 'find command'
+let g:which_key_map.f.h = 'find help'
+let g:which_key_map.f.m = 'find mark'
+let g:which_key_map.f.t = 'find tag'
 let g:which_key_map.g = { 'name' : '+git' }
 let g:which_key_map.g.s = 'stage hunk'
 let g:which_key_map.g.r = 'reset hunk'
