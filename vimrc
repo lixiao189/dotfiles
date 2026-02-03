@@ -161,12 +161,27 @@ set laststatus=2
 set noshowmode
 set showtabline=2
 
+" Fzf.vim
+command! -nargs=? -complete=dir FilesNoHidden call fzf#vim#files(<q-args>, {'source': 'rg --files -g "!.git/*"'})
+command! -nargs=? -complete=dir FilesHidden call fzf#vim#files(<q-args>, {'source': 'rg --files --hidden --follow -g "!.git/*"'})
+function! s:rg_with_cmd(cmd, prompt, query) abort
+  let l:query = a:query ==# '' ? input(a:prompt) : a:query
+  if l:query ==# ''
+    return
+  endif
+  call fzf#vim#grep(a:cmd . ' ' . shellescape(l:query), 1, fzf#vim#with_preview(), 0)
+endfunction
+command! -nargs=* RgNoHidden call s:rg_with_cmd('rg --column --line-number --no-heading --color=always --smart-case -g "!.git/*"', 'RgNoHidden> ', <q-args>)
+command! -nargs=* RgHidden call s:rg_with_cmd('rg --column --line-number --no-heading --color=always --smart-case --hidden --follow -g "!.git/*"', 'RgHidden> ', <q-args>)
+
 " WhichKey
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-nnoremap <silent> <leader>ff :Files<CR>
+nnoremap <silent> <leader>ff :FilesNoHidden<CR>
+nnoremap <silent> <leader>fF :FilesHidden<CR>
 nnoremap <silent> <leader>fb :Buffers<CR>
 nnoremap <silent> <leader>fs :History<CR>
-nnoremap <silent> <leader>fw :Rg<CR>
+nnoremap <silent> <leader>fw :RgNoHidden<CR>
+nnoremap <silent> <leader>fW :RgHidden<CR>
 nnoremap <silent> <leader>fg :GFiles<CR>
 nnoremap <silent> <leader>fl :BLines<CR>
 nnoremap <silent> <leader>fc :Commands<CR>
@@ -176,10 +191,12 @@ nnoremap <silent> <leader>ft :Tags<CR>
 let g:which_key_map = {}
 let g:which_key_map.e = 'file explorer'
 let g:which_key_map.f = { 'name' : '+find' }
-let g:which_key_map.f.f = 'find file'
+let g:which_key_map.f.f = 'find file (no hidden)'
+let g:which_key_map.f.F = 'find file (hidden)'
 let g:which_key_map.f.b = 'find buffer'
 let g:which_key_map.f.s = 'find MRU file'
-let g:which_key_map.f.w = 'find string'
+let g:which_key_map.f.w = 'find string (no hidden)'
+let g:which_key_map.f.W = 'find string (hidden)'
 let g:which_key_map.f.g = 'find git file'
 let g:which_key_map.f.l = 'find line'
 let g:which_key_map.f.c = 'find command'
