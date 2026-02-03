@@ -165,11 +165,14 @@ set showtabline=2
 command! -nargs=? -complete=dir FilesNoHidden call fzf#vim#files(<q-args>, {'source': 'rg --files -g "!.git/*"'})
 command! -nargs=? -complete=dir FilesHidden call fzf#vim#files(<q-args>, {'source': 'rg --files --hidden --follow -g "!.git/*"'})
 function! s:rg_with_cmd(cmd, prompt, query) abort
-  let l:query = a:query ==# '' ? input(a:prompt) : a:query
+  let l:query = a:query
   if l:query ==# ''
+    let l:reload = a:cmd . ' -- {q}'
+    let l:opts = fzf#vim#with_preview({'options': ['--prompt', a:prompt, '--phony', '--query', '', '--bind', 'change:reload:' . l:reload]})
+    call fzf#vim#grep('printf ""', 1, l:opts, 0)
     return
   endif
-  call fzf#vim#grep(a:cmd . ' ' . shellescape(l:query), 1, fzf#vim#with_preview(), 0)
+  call fzf#vim#grep(a:cmd . ' ' . shellescape(l:query), 1, fzf#vim#with_preview({'options': ['--prompt', a:prompt]}), 0)
 endfunction
 command! -nargs=* RgNoHidden call s:rg_with_cmd('rg --column --line-number --no-heading --color=always --smart-case -g "!.git/*"', 'RgNoHidden> ', <q-args>)
 command! -nargs=* RgHidden call s:rg_with_cmd('rg --column --line-number --no-heading --color=always --smart-case --hidden --follow -g "!.git/*"', 'RgHidden> ', <q-args>)
