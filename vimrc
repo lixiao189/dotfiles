@@ -16,7 +16,6 @@ Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-commentary'
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
-Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jlanzarotta/bufexplorer'
@@ -68,9 +67,6 @@ set softtabstop=4
 set expandtab
 set cindent
 
-" Autopairs
-let g:AutoPairsMapBS = 1
-
 " NerdTree
 nnoremap <leader>e :NERDTreeToggle<CR>
 let g:loaded_netrw       = 1 " disable netrw
@@ -78,13 +74,14 @@ let g:loaded_netrwPlugin = 1
 
 " LSP settings
 let g:coc_global_extensions = [
-      \ 'coc-marketplace',
-      \ 'coc-snippets',
-      \ 'coc-clangd',
-      \ 'coc-json',
-      \ 'coc-pyright',
-      \ 'coc-rust-analyzer'
-      \ ]
+    \ 'coc-marketplace',
+    \ 'coc-snippets',
+    \ 'coc-clangd',
+    \ 'coc-json',
+    \ 'coc-pairs',
+    \ 'coc-pyright',
+    \ 'coc-rust-analyzer'
+    \ ]
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
@@ -114,7 +111,7 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-nmap <leader>ln <Plug>(coc-rename)
+nmap <leader>lr <Plug>(coc-rename)
 nmap <leader>la  <Plug>(coc-codeaction-cursor)
 nmap <leader>lf  :Format<CR>
 
@@ -131,6 +128,10 @@ nmap <silent> gr <Plug>(coc-references)
 " Use `[d` and `]d` to navigate diagnostics
 nmap <silent> [d <Plug>(coc-diagnostic-prev)
 nmap <silent> ]d <Plug>(coc-diagnostic-next)
+
+" Auto pairs
+autocmd FileType markdown let b:coc_pairs_disabled = ['`']
+autocmd FileType rust let b:coc_pairs_disabled = ["'"]
 
 " Buffer
 nnoremap ]b :bnext<CR>
