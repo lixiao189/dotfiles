@@ -48,6 +48,7 @@ set splitright
 set encoding=utf-8
 set nobackup
 set nowritebackup
+set noswapfile
 set updatetime=100
 set signcolumn=yes
 set timeoutlen=500
@@ -76,7 +77,14 @@ let g:loaded_netrw       = 1 " disable netrw
 let g:loaded_netrwPlugin = 1
 
 " LSP settings
-let g:coc_global_extensions = [ 'coc-marketplace', 'coc-snippets', 'coc-clangd', 'coc-json', 'coc-pyright' ]
+let g:coc_global_extensions = [
+      \ 'coc-marketplace',
+      \ 'coc-snippets',
+      \ 'coc-clangd',
+      \ 'coc-json',
+      \ 'coc-pyright',
+      \ 'coc-rust-analyzer'
+      \ ]
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
