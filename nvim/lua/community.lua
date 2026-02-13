@@ -2,6 +2,7 @@
 return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.recipes.picker-lsp-mappings" },
+  { import = "astrocommunity.recipes.vscode" },
 
   -- Lang
   { import = "astrocommunity.pack.lua" },
