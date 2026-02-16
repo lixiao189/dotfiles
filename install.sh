@@ -51,7 +51,9 @@ curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Setup vim
-ln -s ~/.dotfiles/vimrc ~/.vimrc
+mkdir -p ~/.vim
+ln -s ~/.dotfiles/vimrc ~/.vim/vimrc
+ln -s ~/.dotfiles/coc-settings.json ~/.vim/coc-settings.json
 
 # Setup the rime config file
 git clone https://github.com/iDvel/rime-ice.git
