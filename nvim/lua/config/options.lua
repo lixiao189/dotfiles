@@ -6,8 +6,6 @@ vim.g.ai_cmp = false -- Disable ai in cmp nvim
 vim.opt.clipboard = "" -- Set clipboard to empty
 vim.opt.list = false
 
-vim.opt.guicursor = "n-v-i-c:block-Cursor" -- Cursor shape
-
 -- Better performance
 vim.lsp.set_log_level("off")
 vim.g.snacks_animate = false -- Disable all animations in ssh
