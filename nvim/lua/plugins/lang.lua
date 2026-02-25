@@ -8,6 +8,7 @@ return {
       servers = {
         sourcekit = {
           mason = false,
+          filetypes = { "swift", "objc", "objcpp" },
         },
       },
     },

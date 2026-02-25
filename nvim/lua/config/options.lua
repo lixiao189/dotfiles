@@ -3,7 +3,6 @@
 -- Add any additional options here
 
 vim.g.ai_cmp = false -- Disable ai in cmp nvim
-vim.opt.clipboard = "" -- Set clipboard to empty
 vim.opt.list = false
 
 -- Better performance
