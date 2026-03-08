@@ -8,3 +8,8 @@ vim.opt.list = false
 -- Better performance
 vim.lsp.set_log_level("off")
 vim.g.snacks_animate = false -- Disable all animations in ssh
+
+-- Vs code config
+if vim.g.vscode then
+  vim.opt.showmode = true
+end
