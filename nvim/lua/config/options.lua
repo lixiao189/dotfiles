@@ -6,7 +6,7 @@ vim.g.ai_cmp = false -- Disable ai in cmp nvim
 vim.opt.list = false
 
 -- Better performance
-vim.lsp.set_log_level("off")
+vim.lsp.log.set_level("off")
 vim.g.snacks_animate = false -- Disable all animations in ssh
 
 -- Vs code config
