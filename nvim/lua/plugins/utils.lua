@@ -33,6 +33,19 @@ return {
     },
   },
 
+  -- Async run
+  {
+    "skywind3000/asyncrun.vim",
+    cmd = { "AsyncRun", "AsyncStop", "AsyncReset" },
+    init = function()
+      vim.g.asyncrun_open = 10
+    end,
+    keys = {
+      -- suggested keymap
+      { "<leader>r", ":AsyncRun ", desc = "Async run command" },
+    },
+  },
+
   {
     "folke/flash.nvim",
     optional = true,
