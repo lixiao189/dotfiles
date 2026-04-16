@@ -4,6 +4,7 @@
 
 vim.g.ai_cmp = false -- Disable ai in cmp nvim
 vim.opt.list = false
+vim.g.autoformat = false -- Disable auto format
 
 -- Better performance
 vim.lsp.log.set_level("off")
