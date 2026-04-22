@@ -46,13 +46,4 @@ return {
       },
     },
   },
-  {
-    "folke/snacks.nvim",
-    optional = true,
-    opts = {
-      words = {
-        enabled = false,
-      },
-    },
-  },
 }
