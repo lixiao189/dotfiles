@@ -111,13 +111,13 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-nmap <leader>lr <Plug>(coc-rename)
-nmap <leader>la  <Plug>(coc-codeaction-cursor)
-nmap <leader>lf  :Format<CR>
+nmap <leader>cr <Plug>(coc-rename)
+nmap <leader>ca <Plug>(coc-codeaction-cursor)
+nmap <leader>cf :Format<CR>
 
-nnoremap <silent><nowait> <leader>ld  :<C-u>CocList diagnostics<cr> " Show all diagnostics
-nnoremap <silent><nowait> <leader>lo  :<C-u>CocList outline<cr> " Find symbol of current document
-nnoremap <silent><nowait> <leader>ls  :<C-u>CocList -I symbols<cr> " Search workspace symbols
+nnoremap <silent><nowait> <leader>cd :<C-u>CocList diagnostics<cr> " Show all diagnostics
+nnoremap <silent><nowait> <leader>cs :<C-u>CocList outline<cr> " Find symbols in the current document
+nnoremap <silent><nowait> <leader>sS :<C-u>CocList -I symbols<cr> " Search workspace symbols
 
 " GoTo code navigation
 nmap <silent> gd <Plug>(coc-definition)
@@ -136,8 +136,12 @@ autocmd FileType rust let b:coc_pairs_disabled = ["'"]
 " Buffer
 nnoremap ]b :bnext<CR>
 nnoremap [b :bprevious<CR>
-nnoremap <leader>c :Bclose<CR>
-nnoremap <leader>bc :BufOnly<CR>
+nnoremap <S-l> :bnext<CR>
+nnoremap <S-h> :bprevious<CR>
+nnoremap <leader>bb :buffer #<CR>
+nnoremap <leader>bd :Bclose<CR>
+nnoremap <leader>bo :BufOnly<CR>
+nnoremap <leader>bD :bdelete!<CR>
 
 " Git gutter
 nmap ]g <Plug>(GitGutterNextHunk)
@@ -150,6 +154,7 @@ nmap <leader>gp <Plug>(GitGutterPreviewHunk)
 nnoremap <silent> <Esc> :nohlsearch<CR><Esc>
 
 " VIM easymotion
+let g:EasyMotion_do_mapping = 0
 nmap <S-s> <Plug>(easymotion-sn)
 
 " UI
@@ -180,44 +185,78 @@ command! -nargs=* RgHidden call s:rg_with_cmd('rg --column --line-number --no-he
 
 " WhichKey
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+nnoremap <silent> <leader><Space> :FilesNoHidden<CR>
+nnoremap <silent> <leader>, :Buffers<CR>
+nnoremap <silent> <leader>/ :RgNoHidden<CR>
+nnoremap <silent> <leader>: :History:<CR>
+nnoremap <silent> <leader>fb :Buffers<CR>
+nnoremap <silent> <leader>fB :Buffers<CR>
 nnoremap <silent> <leader>ff :FilesNoHidden<CR>
 nnoremap <silent> <leader>fF :FilesHidden<CR>
-nnoremap <silent> <leader>fb :Buffers<CR>
-nnoremap <silent> <leader>fs :History<CR>
-nnoremap <silent> <leader>fw :RgNoHidden<CR>
-nnoremap <silent> <leader>fW :RgHidden<CR>
 nnoremap <silent> <leader>fg :GFiles<CR>
-nnoremap <silent> <leader>fl :BLines<CR>
-nnoremap <silent> <leader>fc :Commands<CR>
-nnoremap <silent> <leader>fh :Helptags<CR>
-nnoremap <silent> <leader>fm :Marks<CR>
-nnoremap <silent> <leader>ft :Tags<CR>
+nnoremap <silent> <leader>fr :History<CR>
+nnoremap <silent> <leader>fR :History<CR>
+nnoremap <silent> <leader>fp :FilesNoHidden<CR>
+nnoremap <silent> <leader>fe :NERDTreeToggle<CR>
+nnoremap <silent> <leader>fE :NERDTreeToggle<CR>
+nnoremap <silent> <leader>sb :BLines<CR>
+nnoremap <silent> <leader>sB :Lines<CR>
+nnoremap <silent> <leader>sc :History:<CR>
+nnoremap <silent> <leader>sC :Commands<CR>
+nnoremap <silent> <leader>sd :CocList diagnostics<CR>
+nnoremap <silent> <leader>sD :CocList diagnostics<CR>
+nnoremap <silent> <leader>sg :RgNoHidden<CR>
+nnoremap <silent> <leader>sG :RgHidden<CR>
+nnoremap <silent> <leader>sh :Helptags<CR>
+nnoremap <silent> <leader>sk :Maps<CR>
+nnoremap <silent> <leader>sl :lopen<CR>
+nnoremap <silent> <leader>sm :Marks<CR>
+nnoremap <silent> <leader>sM :Helptags<CR>
+nnoremap <silent> <leader>sq :copen<CR>
+nnoremap <silent> <leader>sw :RgNoHidden <C-r><C-w><CR>
+nnoremap <silent> <leader>sW :RgHidden <C-r><C-w><CR>
 let g:which_key_map = {}
+let g:which_key_map['?'] = 'show keymaps'
 let g:which_key_map.e = 'file explorer'
 let g:which_key_map.f = { 'name' : '+find' }
-let g:which_key_map.f.f = 'find file (no hidden)'
-let g:which_key_map.f.F = 'find file (hidden)'
-let g:which_key_map.f.b = 'find buffer'
-let g:which_key_map.f.s = 'find MRU file'
-let g:which_key_map.f.w = 'find string (no hidden)'
-let g:which_key_map.f.W = 'find string (hidden)'
+let g:which_key_map.f.b = 'buffers'
+let g:which_key_map.f.B = 'buffers (all)'
+let g:which_key_map.f.c = 'find config file'
+let g:which_key_map.f.e = 'explorer (root dir)'
+let g:which_key_map.f.E = 'explorer (cwd)'
+let g:which_key_map.f.f = 'find file (root dir)'
+let g:which_key_map.f.F = 'find file (cwd)'
 let g:which_key_map.f.g = 'find git file'
-let g:which_key_map.f.l = 'find line'
-let g:which_key_map.f.c = 'find command'
-let g:which_key_map.f.h = 'find help'
-let g:which_key_map.f.m = 'find mark'
-let g:which_key_map.f.t = 'find tag'
+let g:which_key_map.f.p = 'projects'
+let g:which_key_map.f.r = 'recent'
+let g:which_key_map.f.R = 'recent (cwd)'
+let g:which_key_map.s = { 'name' : '+search' }
+let g:which_key_map.s.b = 'buffer lines'
+let g:which_key_map.s.B = 'grep open buffers'
+let g:which_key_map.s.c = 'command history'
+let g:which_key_map.s.C = 'commands'
+let g:which_key_map.s.d = 'diagnostics'
+let g:which_key_map.s.D = 'buffer diagnostics'
+let g:which_key_map.s.g = 'grep (root dir)'
+let g:which_key_map.s.G = 'grep (cwd)'
+let g:which_key_map.s.h = 'help pages'
+let g:which_key_map.s.k = 'keymaps'
+let g:which_key_map.s.l = 'location list'
+let g:which_key_map.s.m = 'marks'
+let g:which_key_map.s.M = 'man pages'
+let g:which_key_map.s.q = 'quickfix list'
+let g:which_key_map.s.w = 'word (root dir)'
+let g:which_key_map.s.W = 'word (cwd)'
 let g:which_key_map.g = { 'name' : '+git' }
 let g:which_key_map.g.s = 'stage hunk'
 let g:which_key_map.g.r = 'reset hunk'
 let g:which_key_map.g.p = 'preview'
 let g:which_key_map.b = { 'name' : '+buffer' }
 let g:which_key_map.l = { 'name' : '+lsp' }
-let g:which_key_map.l.n = 'rename'
+let g:which_key_map.l.r = 'rename'
 let g:which_key_map.l.a = 'code action'
 let g:which_key_map.l.f = 'format'
 let g:which_key_map.l.d = 'diagnostics'
-let g:which_key_map.l.o = 'outline'
 let g:which_key_map.l.s = 'symbols'
 let g:which_key_map.l.g = { 'name' : '+goto' }
 let g:which_key_map.l.g.d = 'definition'
