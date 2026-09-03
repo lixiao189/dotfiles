@@ -1,6 +1,13 @@
 ---@diagnostic disable: unused-local, undefined-field
 return {
   {
+    "snacks.nvim",
+    opts = {
+      words = { enabled = false },
+    },
+  },
+
+  {
     "HakonHarnes/img-clip.nvim",
     event = "VeryLazy",
     opts = {
