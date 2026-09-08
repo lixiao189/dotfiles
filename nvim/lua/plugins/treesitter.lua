@@ -3,6 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       highlight = { enable = false },
+      indent = { disable = { "c", "cpp", "objc", "objcpp" } }, -- For performance
     },
   },
 
