@@ -1,0 +1,94 @@
+# Ghostty config
+# Reload: Cmd+Shift+,   |   Open this file: Cmd+,
+# Theme preview: ghostty +list-themes
+
+# -----------------------------------------------------------------------------
+# Theme
+# Follows the macOS appearance. Preview others with `ghostty +list-themes`.
+# -----------------------------------------------------------------------------
+theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+background-opacity = 0.94
+background-blur = true
+background-opacity-cells = true
+unfocused-split-opacity = 0.85
+minimum-contrast = 1.1
+
+# -----------------------------------------------------------------------------
+# Font
+# Maple Mono NF CN covers Latin + CJK and ships Nerd Font icons.
+# -----------------------------------------------------------------------------
+font-family = Maple Mono NF CN
+font-size = 14
+font-feature = calt
+font-feature = liga
+font-feature = ss01
+font-feature = ss02
+adjust-cell-height = 15%
+grapheme-width-method = unicode
+
+# -----------------------------------------------------------------------------
+# Cursor
+# Neovim insert mode requests a bar (CSI 6 q). The default bar is 1px and
+# hard to see. adjust-cursor-thickness is an adjustment, not an absolute
+# size: an integer adds that many pixels, a percent scales the current
+# thickness. https://ghostty.org/docs/config/reference
+# -----------------------------------------------------------------------------
+cursor-style = block
+cursor-style-blink = false
+adjust-cursor-thickness = 2
+
+# -----------------------------------------------------------------------------
+# Window
+# -----------------------------------------------------------------------------
+window-theme = auto
+window-padding-x = 8
+window-padding-y = 6
+window-padding-balance = true
+window-save-state = always
+window-inherit-working-directory = true
+window-inherit-font-size = true
+window-colorspace = display-p3
+macos-titlebar-style = tabs
+macos-titlebar-proxy-icon = visible
+macos-option-as-alt = true
+macos-window-shadow = true
+confirm-close-surface = true
+quit-after-last-window-closed = true
+resize-overlay = never
+quick-terminal-position = top
+quick-terminal-autohide = true
+
+# -----------------------------------------------------------------------------
+# Shell integration + SSH
+# ssh-env:     remote TERM falls back to xterm-256color and COLORTERM /
+#              TERM_PROGRAM are forwarded (remote sshd must Allow those).
+# ssh-terminfo: install Ghostty's terminfo on the remote with `tic` when
+#              missing, then keep TERM=xterm-ghostty. Needs `tic` remotely.
+#              Cache: `ghostty +ssh-cache`
+# sudo:        wrap sudo so the terminfo still resolves.
+# -----------------------------------------------------------------------------
+shell-integration = detect
+shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo,path
+
+# -----------------------------------------------------------------------------
+# Clipboard, mouse, scrollback
+# -----------------------------------------------------------------------------
+clipboard-read = allow
+clipboard-write = allow
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = true
+copy-on-select = clipboard
+mouse-hide-while-typing = true
+mouse-scroll-multiplier = precision:1,discrete:3
+scrollback-limit-lines = 100000
+scrollback-limit-bytes = 100000000
+app-notifications = clipboard-copy,config-reload
+
+# -----------------------------------------------------------------------------
+# Keybinds (defaults kept; these are additions)
+# Cmd+`            quick terminal
+# Cmd+\            split right is already Cmd+D; Cmd+Shift+D splits down
+# -----------------------------------------------------------------------------
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+keybind = cmd+shift+enter=toggle_split_zoom
+keybind = shift+enter=text:\n

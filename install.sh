@@ -1,66 +1,51 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Bootstrap a macOS machine from ~/.dotfiles. Safe to re-run.
+set -euo pipefail
 
-# Install the dependencies on Mac
-case $(uname) in
-    Darwin)
+DOTFILES="${DOTFILES:-$HOME/.dotfiles}"
+
+link() { # link <source> <target>
+    mkdir -p "$(dirname "$2")"
+    ln -sfn "$1" "$2"
+    echo "linked $2 -> $1"
+}
+
+install_packages() {
+    if ! command -v brew >/dev/null; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-     
-        brew tap --custom-remote --force-auto-update homebrew/cask https://github.com/Homebrew/homebrew-cask
-        brew install git
-        brew tap homebrew/cask-fonts
-        brew install font-caskaydia-cove-nerd-font
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
 
-        brew install iterm2
-        brew install karabiner-elements
-       
-        brew install tree-sitter
-        brew install nvim
-        brew install fish 
-        brew install zoxide fzf fd
-        brew install tmux
-        brew install ranger
-        brew install exa
-     
-        brew install python@3.11 
-        brew install node
-        brew install ripgrep
-        brew install gnu-sed 
-        brew install entr
-        brew install dust
-        brew install dog
-        brew install colordiff
-        brew install lazygit
-    ;;
-esac
+    brew install git neovim vim zoxide fzf fd ripgrep fnm lazygit tree-sitter \
+        font-jetbrains-mono-nerd-font
+    brew install --cask wezterm ghostty squirrel-app
+}
 
-ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/alacritty ~/.config/alacritty
-ln -s ~/.dotfiles/nvim ~/.config/nvim
-ln -s ~/.dotfiles/wezterm.lua ~/.wezterm.lua
-ln -s ~/.dotfiles/karabiner ~/.config/karabiner
-ln -s ~/.dotfiles/ranger ~/.config/ranger
-ln -s ~/.dotfiles/omf/ ~/.config/omf
-ln -s ~/.dotfiles/mpv/ ~/.config/mpv
+install_packages_if_darwin() {
+    [[ $(uname) == Darwin ]] || { echo "only macOS is supported" >&2; exit 1; }
+    install_packages
+}
 
-# Install devicons for ranger 
-git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
+link_configs() {
+    link "$DOTFILES/nvim"          ~/.config/nvim
+    link "$DOTFILES/ghostty"       ~/.config/ghostty
+    link "$DOTFILES/wezterm.lua"   ~/.wezterm.lua
+    link "$DOTFILES/vimrc"         ~/.vim/vimrc
+    link "$DOTFILES/coc-settings.json" ~/.vim/coc-settings.json
+    link "$DOTFILES/zsh/zshrc"     ~/.zshrc
+    link "$DOTFILES/zsh/zprofile"  ~/.zprofile
+}
 
-# oh my fish installation
-curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+setup_rime() {
+    local ice=~/.local/share/rime-ice
+    [[ -d $ice ]] || git clone --depth 1 https://github.com/iDvel/rime-ice.git "$ice"
+    mkdir -p ~/Library/Rime
+    rsync -a --exclude .git "$ice"/ ~/Library/Rime/
+    link "$DOTFILES/rime/default.custom.yaml"  ~/Library/Rime/default.custom.yaml
+    link "$DOTFILES/rime/squirrel.custom.yaml" ~/Library/Rime/squirrel.custom.yaml
+}
 
-# install tpm
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-# Setup vim
-mkdir -p ~/.vim
-ln -s ~/.dotfiles/vimrc ~/.vim/vimrc
-ln -s ~/.dotfiles/coc-settings.json ~/.vim/coc-settings.json
-
-# Setup the rime config file
-git clone https://github.com/iDvel/rime-ice.git
-ln -s ~/.dotfiles/rime/default.custom.yaml ~/Library/Rime
-ln -s ~/.dotfiles/rime/squirrel.custom.yaml ~/Library/Rime
-
-# Setup zsh (zinit bootstraps itself on first shell start)
-ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
-ln -sf ~/.dotfiles/zsh/zprofile ~/.zprofile
+install_packages_if_darwin
+link_configs
+setup_rime
+# zsh plugins (zinit) bootstrap themselves on first shell start.
