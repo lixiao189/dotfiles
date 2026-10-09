@@ -33,7 +33,6 @@ link_configs() {
     link "$DOTFILES/vimrc"         ~/.vim/vimrc
     link "$DOTFILES/coc-settings.json" ~/.vim/coc-settings.json
     link "$DOTFILES/zsh/zshrc"     ~/.zshrc
-    link "$DOTFILES/zsh/zprofile"  ~/.zprofile
 }
 
 setup_rime() {
