@@ -1,0 +1,41 @@
+# ~/.zprofile — login shells only: environment and PATH. Interactive setup lives in zshrc.
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Homebrew
+export HOMEBREW_NO_ENV_HINTS=1
+export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
+
+# PATH: keep entries unique; first entry wins.
+typeset -U path PATH
+path=(
+  $HOME/.local/bin
+  $HOME/.cargo/bin
+  $HOME/go/bin
+  $HOME/.bun/bin
+  /opt/homebrew/opt/rustup/bin
+  /opt/homebrew/opt/python@3.14/libexec/bin
+  /opt/homebrew/opt/llvm/bin
+  /opt/homebrew/opt/flex/bin
+  /opt/homebrew/opt/bison/bin
+  /opt/homebrew/opt/curl/bin
+  $path
+  "$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+)
+
+# Toolchains
+(( $+commands[fnm] )) && eval "$(fnm env --use-on-cd --shell zsh)"
+[[ -r ~/.orbstack/shell/init.zsh ]] && source ~/.orbstack/shell/init.zsh 2>/dev/null
+
+# Brew C/C++ headers and libs
+export CPATH=/opt/homebrew/include
+export LIBRARY_PATH=/opt/homebrew/lib
+
+# Claude Code
+export CLAUDE_CODE_ATTRIBUTION_HEADER=false
+export CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=true
+
+# Proxy (uncomment when needed)
+# export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=http://127.0.0.1:7890

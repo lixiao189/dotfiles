@@ -16,6 +16,7 @@ case $(uname) in
         brew install tree-sitter
         brew install nvim
         brew install fish 
+        brew install zoxide fzf fd
         brew install tmux
         brew install ranger
         brew install exa
@@ -59,3 +60,7 @@ ln -s ~/.dotfiles/coc-settings.json ~/.vim/coc-settings.json
 git clone https://github.com/iDvel/rime-ice.git
 ln -s ~/.dotfiles/rime/default.custom.yaml ~/Library/Rime
 ln -s ~/.dotfiles/rime/squirrel.custom.yaml ~/Library/Rime
+
+# Setup zsh (zinit bootstraps itself on first shell start)
+ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
+ln -sf ~/.dotfiles/zsh/zprofile ~/.zprofile

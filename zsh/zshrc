@@ -1,0 +1,78 @@
+# ~/.zshrc — interactive shells. Symlinked from ~/.dotfiles/zsh/zshrc.
+# Environment/PATH lives in zprofile; plugins are declared below (zinit).
+
+# Resolve the real directory of this file (follows the ~/.zshrc symlink).
+ZDOTDIR_REAL=${${(%):-%x}:A:h}
+_cache=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
+[[ -d $_cache ]] || mkdir -p $_cache
+
+# ── Options ────────────────────────────────────────────────────────────
+setopt AUTO_CD AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT
+setopt EXTENDED_GLOB INTERACTIVE_COMMENTS NO_BEEP NO_FLOW_CONTROL
+setopt COMPLETE_IN_WORD ALWAYS_TO_END
+
+# ── History ────────────────────────────────────────────────────────────
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+setopt EXTENDED_HISTORY SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS HIST_VERIFY
+
+# ── Plugins (zinit; bootstraps itself on first run) ───────────────────
+export EDITOR=nvim VISUAL=nvim
+ZVM_INIT_MODE=sourcing            # initialise zsh-vi-mode immediately, no precmd hook
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=200
+
+# zsh-vi-mode overwrites keybindings on init; set fzf's (Ctrl-R/T, Alt-C) here.
+zvm_after_init() {
+  (( $+commands[fzf] )) && source <(fzf --zsh)
+}
+
+ZINIT_HOME=${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git
+if [[ ! -r $ZINIT_HOME/zinit.zsh ]]; then
+  command mkdir -p ${ZINIT_HOME:h}
+  command git clone https://github.com/zdharma-continuum/zinit.git $ZINIT_HOME
+fi
+source $ZINIT_HOME/zinit.zsh
+
+zinit light zsh-users/zsh-completions
+zinit light jeffreytse/zsh-vi-mode
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-syntax-highlighting   # keep last
+
+# ── Completion (after plugins so zsh-completions is on fpath) ──────────
+autoload -Uz compinit
+# Full rebuild at most once a day; otherwise trust the dump (-C).
+if [[ -n $_cache/zcompdump(#qN.mh+24) ]]; then
+  compinit -d $_cache/zcompdump
+else
+  compinit -C -d $_cache/zcompdump
+fi
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%F{8}-- %d --%f'
+zstyle ':completion:*' use-cache yes
+zstyle ':completion:*' cache-path $_cache/zcompcache
+zstyle ':completion:*' special-dirs true
+zmodload zsh/complist
+bindkey -M menuselect '^[[Z' reverse-menu-complete
+
+zinit cdreplay -q
+
+# ── Tools ──────────────────────────────────────────────────────────────
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"      # z / zi
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+
+# ── Prompt, aliases ────────────────────────────────────────────────────
+source $ZDOTDIR_REAL/prompt.zsh
+source $ZDOTDIR_REAL/aliases.zsh
+
+# Machine-local overrides (not tracked).
+[[ -r ~/.zshrc.local ]] && source ~/.zshrc.local
+
+unset _cache
