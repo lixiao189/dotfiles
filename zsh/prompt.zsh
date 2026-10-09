@@ -1,7 +1,8 @@
 # Native zsh prompt, single line (no framework):
-#   user@host ~/path branch[+*?][:action] (venv) ✦jobs exit >
-# Git info via vcs_info: branch plus status markers — + staged, * unstaged,
-# ? untracked. Colours use %F/%f so zsh counts widths correctly. Root gets '#'.
+#   user@host ~/path branch[*][ ↑N][:action] (venv) ✦jobs exit >
+# Git info via vcs_info: branch, '*' if anything is uncommitted, '↑N' for
+# unpushed commits. Colours use %F/%f so zsh counts widths correctly. Root
+# gets '#'.
 
 autoload -Uz add-zsh-hook vcs_info
 
@@ -11,18 +12,19 @@ setopt PROMPT_SUBST TRANSIENT_RPROMPT
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr '%F{green}+%f'
-zstyle ':vcs_info:*' unstagedstr '%F{yellow}*%f'
-zstyle ':vcs_info:git:*' formats ' %F{magenta}%b%f%c%u%m'
-zstyle ':vcs_info:git:*' actionformats ' %F{magenta}%b%f%c%u%m:%F{red}%a%f'
-zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
+zstyle ':vcs_info:*' check-for-changes false
+zstyle ':vcs_info:git:*' formats ' %F{magenta}%b%m%f'
+zstyle ':vcs_info:git:*' actionformats ' %F{magenta}%b%m%f:%F{red}%a%f'
+zstyle ':vcs_info:git*+set-message:*' hooks git-status
 
-# Append '?' (via %m) when the work tree has untracked files.
-+vi-git-untracked() {
-  [[ $(command git rev-parse --is-inside-work-tree 2>/dev/null) == true ]] &&
-    [[ -n $(command git ls-files --others --exclude-standard --directory --no-empty-directory 2>/dev/null | head -n1) ]] &&
-    hook_com[misc]+='%F{red}?%f'
+# Append (via %m) '*' for any uncommitted change (staged, unstaged or
+# untracked) and ' ↑N' for commits the upstream doesn't have yet.
++vi-git-status() {
+  local ahead
+  [[ -n $(command git status --porcelain 2>/dev/null | head -n1) ]] && hook_com[misc]+='*'
+  ahead=$(command git rev-list --count '@{upstream}..HEAD' 2>/dev/null)
+  (( ahead )) && hook_com[misc]+=" ↑${ahead}"
+  return 0   # a non-zero return would skip the remaining hooks
 }
 
 _prompt_precmd() {
@@ -41,8 +43,8 @@ add-zsh-hook precmd  _prompt_precmd
 # Continuation / selection prompts.
 PROMPT2='%F{8}...%f '
 
-# Colour scheme: user@host blue, path white, branch magenta (+ staged green,
-# * unstaged yellow, ? untracked red), venv cyan,
+# Colour scheme: user@host blue, path white, branch and its
+# status magenta, venv cyan,
 # background job count yellow, non-zero exit code red; the prompt symbol is
 # green on success and red after a failed command.
 PROMPT='%B%F{blue}%n@%m%f%b %B%F{white}%3~%f%b${vcs_info_msg_0_}'
