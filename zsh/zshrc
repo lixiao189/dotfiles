@@ -9,14 +9,17 @@ _cache=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
 # ── Options ────────────────────────────────────────────────────────────
 setopt AUTO_CD AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT
 setopt EXTENDED_GLOB INTERACTIVE_COMMENTS NO_BEEP NO_FLOW_CONTROL
-setopt COMPLETE_IN_WORD ALWAYS_TO_END
+setopt COMPLETE_IN_WORD ALWAYS_TO_END AUTO_MENU AUTO_PARAM_SLASH
+setopt PUSHD_TO_HOME CD_SILENT NO_CLOBBER LONG_LIST_JOBS NOTIFY
+setopt NO_NOMATCH               # pass unmatched globs through (e.g. pip install foo[bar])
+WORDCHARS=${WORDCHARS//[\/.=-]/}   # Ctrl-W stops at path/flag separators
 
 # ── History ────────────────────────────────────────────────────────────
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 setopt EXTENDED_HISTORY SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE
-setopt HIST_REDUCE_BLANKS HIST_VERIFY
+setopt HIST_REDUCE_BLANKS HIST_VERIFY HIST_SAVE_NO_DUPS HIST_FIND_NO_DUPS HIST_FCNTL_LOCK
 
 # ── Plugins (zinit; bootstraps itself on first run) ───────────────────
 export EDITOR=nvim VISUAL=nvim
@@ -25,11 +28,6 @@ ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=200
 
-# zsh-vi-mode overwrites keybindings on init; set fzf's (Ctrl-R/T, Alt-C) here.
-zvm_after_init() {
-  (( $+commands[fzf] )) && source <(fzf --zsh)
-}
-
 ZINIT_HOME=${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git
 if [[ ! -r $ZINIT_HOME/zinit.zsh ]]; then
   command mkdir -p ${ZINIT_HOME:h}
@@ -37,12 +35,11 @@ if [[ ! -r $ZINIT_HOME/zinit.zsh ]]; then
 fi
 source $ZINIT_HOME/zinit.zsh
 
+zinit ice blockf
 zinit light zsh-users/zsh-completions
 zinit light jeffreytse/zsh-vi-mode
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-syntax-highlighting   # keep last
 
-# ── Completion (after plugins so zsh-completions is on fpath) ──────────
+# ── Completion (after zsh-completions is on fpath, before widget plugins) ──
 autoload -Uz compinit
 # Full rebuild at most once a day; otherwise trust the dump (-C).
 if [[ -n $_cache/zcompdump(#qN.mh+24) ]]; then
@@ -54,19 +51,30 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' group-name ''
+zstyle ':completion:*' verbose yes
 zstyle ':completion:*:descriptions' format '%F{8}-- %d --%f'
+zstyle ':completion:*:warnings' format '%F{red}no matches%f'
 zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' cache-path $_cache/zcompcache
 zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:*:*:users' ignored-patterns '_*'
 zmodload zsh/complist
 bindkey -M menuselect '^[[Z' reverse-menu-complete
+
+# Deferred (turbo): loads right after the first prompt is drawn.
+zinit ice wait lucid atload'_zsh_autosuggest_start'
+zinit light zsh-users/zsh-autosuggestions
+zinit ice wait lucid
+zinit light zsh-users/zsh-syntax-highlighting   # keep last
 
 zinit cdreplay -q
 
 # ── Tools ──────────────────────────────────────────────────────────────
-(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"      # z / zi
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
-export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+# z: frecency directory jumping (rupa/z; pure shell, data in ~/.z).
+zinit ice wait lucid pick"z.sh"
+zinit light rupa/z
 
 # ── Prompt, aliases ────────────────────────────────────────────────────
 source $ZDOTDIR_REAL/prompt.zsh
