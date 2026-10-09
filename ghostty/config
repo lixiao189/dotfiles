@@ -19,19 +19,10 @@ minimum-contrast = 1.1
 # -----------------------------------------------------------------------------
 font-family = Maple Mono NF CN
 font-size = 14
-font-feature = calt
-font-feature = liga
-font-feature = ss01
-font-feature = ss02
 adjust-cell-height = 15%
-grapheme-width-method = unicode
 
 # -----------------------------------------------------------------------------
 # Cursor
-# Neovim insert mode requests a bar (CSI 6 q). The default bar is 1px and
-# hard to see. adjust-cursor-thickness is an adjustment, not an absolute
-# size: an integer adds that many pixels, a percent scales the current
-# thickness. https://ghostty.org/docs/config/reference
 # -----------------------------------------------------------------------------
 cursor-style = block
 cursor-style-blink = false
@@ -68,20 +59,6 @@ quick-terminal-autohide = true
 # -----------------------------------------------------------------------------
 shell-integration = detect
 shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo,path
-
-# -----------------------------------------------------------------------------
-# Clipboard, mouse, scrollback
-# -----------------------------------------------------------------------------
-clipboard-read = allow
-clipboard-write = allow
-clipboard-trim-trailing-spaces = true
-clipboard-paste-protection = true
-copy-on-select = clipboard
-mouse-hide-while-typing = true
-mouse-scroll-multiplier = precision:1,discrete:3
-scrollback-limit-lines = 100000
-scrollback-limit-bytes = 100000000
-app-notifications = clipboard-copy,config-reload
 
 # -----------------------------------------------------------------------------
 # Keybinds (defaults kept; these are additions)
