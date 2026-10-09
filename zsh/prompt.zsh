@@ -1,7 +1,7 @@
-# Native zsh prompt, single line (no framework, no external processes):
-#   user@host ~/path branch[:action] (venv) ✦jobs exit >
-# Git info via vcs_info reading .git directly (no dirty check, so big repos stay
-# fast). Colours use %F/%f so zsh counts widths correctly. Root gets '#'.
+# Native zsh prompt, single line (no framework):
+#   user@host ~/path branch[+*?][:action] (venv) ✦jobs exit >
+# Git info via vcs_info: branch plus status markers — + staged, * unstaged,
+# ? untracked. Colours use %F/%f so zsh counts widths correctly. Root gets '#'.
 
 autoload -Uz add-zsh-hook vcs_info
 
@@ -11,9 +11,19 @@ setopt PROMPT_SUBST TRANSIENT_RPROMPT
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' check-for-changes false
-zstyle ':vcs_info:git:*' formats ' %F{magenta}%b%f'
-zstyle ':vcs_info:git:*' actionformats ' %F{magenta}%b%f:%F{red}%a%f'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr '%F{green}+%f'
+zstyle ':vcs_info:*' unstagedstr '%F{yellow}*%f'
+zstyle ':vcs_info:git:*' formats ' %F{magenta}%b%f%c%u%m'
+zstyle ':vcs_info:git:*' actionformats ' %F{magenta}%b%f%c%u%m:%F{red}%a%f'
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
+
+# Append '?' (via %m) when the work tree has untracked files.
++vi-git-untracked() {
+  [[ $(command git rev-parse --is-inside-work-tree 2>/dev/null) == true ]] &&
+    [[ -n $(command git ls-files --others --exclude-standard --directory --no-empty-directory 2>/dev/null | head -n1) ]] &&
+    hook_com[misc]+='%F{red}?%f'
+}
 
 _prompt_precmd() {
   local rc=$?
@@ -31,7 +41,8 @@ add-zsh-hook precmd  _prompt_precmd
 # Continuation / selection prompts.
 PROMPT2='%F{8}...%f '
 
-# Colour scheme: user@host blue, path white, branch magenta, venv cyan,
+# Colour scheme: user@host blue, path white, branch magenta (+ staged green,
+# * unstaged yellow, ? untracked red), venv cyan,
 # background job count yellow, non-zero exit code red; the prompt symbol is
 # green on success and red after a failed command.
 PROMPT='%B%F{blue}%n@%m%f%b %B%F{white}%3~%f%b${vcs_info_msg_0_}'
