@@ -7,7 +7,7 @@ endif
 
 " Plugins
 call plug#begin()
-Plug 'lifepillar/vim-solarized8'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
@@ -158,11 +158,29 @@ let g:EasyMotion_do_mapping = 0
 nmap <S-s> <Plug>(easymotion-sn)
 
 " UI
+" Same palette as Ghostty: Latte in a light terminal, Mocha in a dark one.
+" Editor background stays transparent so the terminal opacity shows through.
 let g:airline_symbols_ascii = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = 'catppuccin'
 set termguicolors
 set background=dark
-silent! colorscheme solarized8
+let g:catppuccin_flavour = 'mocha'
+if $COLORFGBG =~# '^\d\{1,3\};15$'
+  set background=light
+  let g:catppuccin_flavour = 'latte'
+endif
+silent! colorscheme catppuccin
+highlight Normal ctermbg=NONE guibg=NONE
+highlight NonText ctermbg=NONE guibg=NONE
+highlight LineNr ctermbg=NONE guibg=NONE
+highlight SignColumn ctermbg=NONE guibg=NONE
+highlight EndOfBuffer ctermbg=NONE guibg=NONE
+highlight NormalNC ctermbg=NONE guibg=NONE
+highlight StatusLine ctermbg=NONE guibg=NONE
+highlight StatusLineNC ctermbg=NONE guibg=NONE
+highlight TabLine ctermbg=NONE guibg=NONE
+highlight TabLineFill ctermbg=NONE guibg=NONE
 set laststatus=2
 set noshowmode
 set showtabline=2
