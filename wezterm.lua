@@ -14,10 +14,10 @@ local p = dark
 	or { base = "#eff1f5", mantle = "#e6e9ef", surface0 = "#ccd0da", text = "#4c4f69", subtext = "#6c6f85", overlay = "#9ca0b0" }
 
 -- Rendering. WebGpu uses Metal on macOS and is the faster path on Apple GPUs.
--- animation_fps only affects cursor blinks and easing, so keep it well below max_fps.
+-- Nothing animates, so animation_fps stays at its minimum.
 config.front_end = "WebGpu"
 config.max_fps = 120
-config.animation_fps = 30
+config.animation_fps = 1
 config.unicode_version = 15
 
 -- Font. Same face Ghostty uses: Latin + CJK + Nerd Font icons in one family.
@@ -46,6 +46,8 @@ config.colors = {
 }
 config.inactive_pane_hsb = { saturation = 0.9, brightness = dark and 0.8 or 0.95 }
 config.default_cursor_style = "SteadyBlock"
+-- Never blink, even when an app asks for it.
+config.cursor_blink_rate = 0
 -- Bar/underline cursors (e.g. from vim insert mode) default to ~1px; thicken them.
 config.cursor_thickness = "1pt"
 
