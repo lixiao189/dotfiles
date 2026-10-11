@@ -43,7 +43,6 @@ macos-titlebar-proxy-icon = visible
 macos-option-as-alt = true
 macos-window-shadow = true
 confirm-close-surface = true
-quit-after-last-window-closed = true
 resize-overlay = never
 quick-terminal-position = top
 quick-terminal-autohide = true
