@@ -37,8 +37,20 @@ _prompt_precmd() {
 }
 _prompt_title_preexec() { print -Pn "\e]2;${1[1,40]//[[:cntrl:]]/} — %~\a" }
 
+# Report cwd to the terminal (OSC 7), percent-encoded.
+_prompt_osc7() {
+  setopt localoptions extendedglob no_multibyte
+  local c hex url
+  for c in ${(s::)PWD}; do
+    if [[ $c == [A-Za-z0-9/._~-] ]]; then url+=$c
+    else printf -v hex '%%%02X' "'$c"; url+=$hex; fi
+  done
+  print -n "\e]7;file://${HOST}${url}\e\\"
+}
+
 add-zsh-hook preexec _prompt_title_preexec
 add-zsh-hook precmd  _prompt_precmd
+add-zsh-hook precmd  _prompt_osc7
 
 # Continuation / selection prompts.
 PROMPT2='%F{8}...%f '
