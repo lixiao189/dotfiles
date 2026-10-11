@@ -79,7 +79,7 @@ config.show_new_tab_button_in_tab_bar = false
 config.status_update_interval = 2000
 
 -- Behavior
-config.quit_when_all_windows_are_closed = false
+config.quit_when_all_windows_are_closed = true
 config.audible_bell = "Disabled"
 config.scrollback_lines = 20000
 config.enable_scroll_bar = false
