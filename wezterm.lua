@@ -16,7 +16,6 @@ local p = dark
 -- Rendering. WebGpu uses Metal on macOS and is the faster path on Apple GPUs.
 -- animation_fps only affects cursor blinks and easing, so keep it well below max_fps.
 config.front_end = "WebGpu"
-config.webgpu_power_preference = "HighPerformance"
 config.max_fps = 120
 config.animation_fps = 30
 config.unicode_version = 15
