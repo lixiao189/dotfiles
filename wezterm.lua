@@ -48,6 +48,8 @@ config.colors = {
 config.inactive_pane_hsb = { saturation = 0.9, brightness = dark and 0.8 or 0.95 }
 config.default_cursor_style = "SteadyBlock"
 config.force_reverse_video_cursor = true
+-- Bar/underline cursors (e.g. from vim insert mode) default to ~1px; thicken them.
+config.cursor_thickness = "1pt"
 
 -- Window. macOS paints the native titlebar with a translucent material and
 -- there is no config to make that solid (wezterm/wezterm#4433). Drawing our own
