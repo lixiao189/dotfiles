@@ -14,6 +14,7 @@ local servers = {
   neocmake = {},
   pyright = {},
   ruff = {},
+  rust_analyzer = {},
   sourcekit = { mason = false }, -- ships with Xcode
   taplo = {},
   vtsls = {},
@@ -21,7 +22,8 @@ local servers = {
 }
 
 -- Formatters / linters used by conform.nvim.
-local tools = { "stylua", "shfmt", "gofumpt", "goimports", "prettier" }
+-- rustfmt is left out: it ships with rustup and mason's package is deprecated.
+local tools = { "stylua", "shfmt", "gofumpt", "goimports", "prettier", "clang-format" }
 
 vim.diagnostic.config({
   underline = true,
@@ -168,6 +170,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "<leader>sS", function()
       Snacks.picker.lsp_workspace_symbols()
     end, "LSP Workspace Symbols", "workspace/symbol")
+
+    if client.name == "clangd" then
+      map("n", "<leader>ch", "<cmd>LspClangdSwitchSourceHeader<cr>", "Switch Source/Header (C/C++)")
+    end
 
     if client:supports_method("textDocument/documentColor", buf) then
       vim.lsp.document_color.enable(true, { bufnr = buf })
