@@ -97,7 +97,6 @@ require("snacks").setup({
     sections = {
       { section = "header" },
       { section = "keys", gap = 1, padding = 1 },
-      { section = "recent_files", icon = "\u{f15c} ", title = "Recent Files", indent = 2, padding = 1, limit = 5 },
     },
   },
   explorer = { enabled = true, replace_netrw = true },
