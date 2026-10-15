@@ -35,6 +35,11 @@ require("catppuccin").setup({
       SnacksNotifierBorderDebug = { link = "FloatBorder" },
       SnacksNotifierBorderTrace = { link = "FloatBorder" },
       SnacksIndentScope = { fg = c.surface2 },
+      -- which-key
+      WhichKeyNormal = { bg = none },
+      WhichKeyBorder = { link = "FloatBorder" },
+      WhichKeyTitle = { link = "FloatTitle" },
+      WhichKeySeparator = { fg = c.surface2 },
       -- Buffer line: text only, no blocks or underline
       MiniTablineFill = { bg = none },
       MiniTablineCurrent = { fg = c.text, bg = none, style = { "bold" } },

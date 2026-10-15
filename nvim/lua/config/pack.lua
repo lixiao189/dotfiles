@@ -11,8 +11,9 @@ end
 local gh = M.gh
 vim.pack.add({
   { src = gh("catppuccin/nvim"), name = "catppuccin" },
-  gh("nvim-mini/mini.nvim"), -- ai, pairs, surround, clue, icons, statusline, tabline, hipatterns
+  gh("nvim-mini/mini.nvim"), -- ai, pairs, surround, icons, statusline, tabline, hipatterns
   gh("folke/snacks.nvim"), -- picker, explorer, dashboard, notifier, terminal, lazygit, toggles
+  gh("folke/which-key.nvim"),
   gh("folke/flash.nvim"),
   gh("MagicDuck/grug-far.nvim"),
   gh("neovim/nvim-lspconfig"),
