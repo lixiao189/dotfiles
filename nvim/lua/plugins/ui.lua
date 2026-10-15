@@ -132,7 +132,7 @@ require("snacks").setup({
   },
   quickfile = { enabled = false },
   scope = { enabled = true },
-  scroll = { enabled = true },
+  scroll = { enabled = false }, -- no-op with animations off
   statuscolumn = { enabled = true },
   words = { enabled = false },
 })

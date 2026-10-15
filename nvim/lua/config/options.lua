@@ -13,6 +13,42 @@ local opt = vim.opt
 opt.autowrite = true
 -- Sync with system clipboard, except over SSH where OSC 52 is used on demand
 opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus"
+
+-- Async pbcopy: the stock provider blocks ~7ms on every yank/delete.
+if vim.fn.has("mac") == 1 then
+  local last, pending, running = nil, nil, false
+  local function flush()
+    if running or not pending then
+      return
+    end
+    running, pending = true, nil
+    vim.system({ "pbcopy" }, { stdin = last.text }, function()
+      running = false
+      vim.schedule(flush)
+    end)
+  end
+  local function copy(lines, regtype)
+    last = { text = table.concat(lines, "\n"), lines = lines, regtype = regtype }
+    pending = true
+    flush()
+  end
+  local function paste()
+    -- Copy still in flight
+    if pending or running then
+      return { last.lines, last.regtype }
+    end
+    local text = vim.system({ "pbpaste" }):wait().stdout or ""
+    if last and text == last.text then
+      return { last.lines, last.regtype }
+    end
+    return vim.split(text, "\n", { plain = true })
+  end
+  vim.g.clipboard = {
+    name = "pbcopy-async",
+    copy = { ["+"] = copy, ["*"] = copy },
+    paste = { ["+"] = paste, ["*"] = paste },
+  }
+end
 opt.completeopt = { "menuone", "noinsert", "popup", "fuzzy" }
 opt.conceallevel = 2
 opt.confirm = true
@@ -55,6 +91,7 @@ opt.splitkeep = "screen"
 opt.splitright = true
 opt.tabstop = 2
 opt.timeoutlen = 300
+opt.ttimeoutlen = 10
 opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200

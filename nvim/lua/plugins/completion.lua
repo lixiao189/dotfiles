@@ -4,7 +4,8 @@
 -- <Tab>/<S-Tab> select or jump snippet placeholders, <CR>/<C-y> accept, <C-Space> triggers, <C-e> cancels.
 
 vim.o.autocomplete = true
-vim.o.complete = ".^5,w^5,b^5,u^5"
+-- No `u`: it reads unloaded buffers from disk on every keystroke.
+vim.o.complete = ".^5,w^5,b^5"
 vim.o.pumborder = "single"
 
 local trigger_chars = {}

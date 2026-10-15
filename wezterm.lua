@@ -54,6 +54,8 @@ config.front_end = "WebGpu"
 config.max_fps = 120
 config.animation_fps = 1
 config.unicode_version = 15
+-- Don't hold output 3ms to batch frames; it delays every keystroke echo.
+config.mux_output_parser_coalesce_delay_ms = 0
 
 -- Font. Same face Ghostty uses: Latin + CJK + Nerd Font icons in one family.
 config.font_size = 14
