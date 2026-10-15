@@ -23,4 +23,3 @@ require("plugins.git")
 
 require("config.keymaps")
 require("config.autocmds")
-require("config.session")

@@ -90,7 +90,6 @@ require("snacks").setup({
           desc = "Config",
           action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
         },
-        { icon = "\u{f1b8} ", key = "s", desc = "Restore Session", action = ":lua require('config.session').load()" },
         { icon = "󰒲 ", key = "u", desc = "Update Plugins", action = ":PackUpdate" },
         { icon = "\u{f08b} ", key = "q", desc = "Quit", action = ":qa" },
       },
