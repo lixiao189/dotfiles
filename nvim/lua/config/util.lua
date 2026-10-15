@@ -4,10 +4,13 @@ M.root_markers = { ".git", "lua" }
 
 --- Root directory like LazyVim: LSP workspace folder containing the file -> root markers -> cwd.
 ---@param buf? integer
+---@return string
 function M.root(buf)
-  buf = (buf == nil or buf == 0) and vim.api.nvim_get_current_buf() or buf
-  local path = vim.api.nvim_buf_get_name(buf)
-  path = path ~= "" and vim.fs.normalize(vim.uv.fs_realpath(path) or path) or nil
+  if not buf or buf == 0 then
+    buf = vim.api.nvim_get_current_buf()
+  end
+  local name = vim.api.nvim_buf_get_name(buf)
+  local path = name ~= "" and vim.fs.normalize(vim.uv.fs_realpath(name) or name) or nil
   if path then
     for _, client in ipairs(vim.lsp.get_clients({ bufnr = buf })) do
       local roots = vim.tbl_map(function(ws)
@@ -23,7 +26,7 @@ function M.root(buf)
       end
     end
   end
-  return vim.fs.root(buf, M.root_markers) or vim.uv.cwd()
+  return vim.fs.root(buf, M.root_markers) or vim.fn.getcwd()
 end
 
 --- Format the buffer with conform (falls back to LSP).

@@ -115,7 +115,7 @@ require("snacks").setup({
     sources = {
       -- Slim borderless sidebar: no search box until `/`, project name as a header.
       explorer = {
-        layout = { preset = "sidebar", preview = false, hidden = { "input" }, layout = { width = 30, min_width = 30 } },
+        layout = { preset = "sidebar", hidden = { "input", "preview" }, layout = { width = 30, min_width = 30 } },
         win = {
           list = {
             wo = {

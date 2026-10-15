@@ -15,7 +15,7 @@ return {
     for _, p in ipairs(vim.pack.get(nil, { info = false })) do
       library[#library + 1] = p.path
     end
-    client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua or {}, {
+    client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua --[[@as table?]] or {}, {
       runtime = { version = "LuaJIT", path = { "lua/?.lua", "lua/?/init.lua" } },
       workspace = { checkThirdParty = false, library = library },
     })

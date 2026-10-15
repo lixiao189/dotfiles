@@ -74,7 +74,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return
     end
     -- Trigger on identifier characters too, not only the server's `.`/`:` etc.
-    local provider = client.server_capabilities.completionProvider
+    local provider = assert(client.server_capabilities.completionProvider)
     provider.triggerCharacters = vim.list.unique(vim.list_extend(provider.triggerCharacters or {}, trigger_chars))
     vim.lsp.completion.enable(true, client.id, ev.buf, {
       autotrigger = true,

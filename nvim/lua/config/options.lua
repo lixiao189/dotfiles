@@ -16,12 +16,14 @@ opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus"
 
 -- Async pbcopy: the stock provider blocks ~7ms on every yank/delete.
 if vim.fn.has("mac") == 1 then
-  local last, pending, running = nil, nil, false
+  ---@type { text: string, lines: string[], regtype: string }?
+  local last
+  local pending, running = false, false
   local function flush()
-    if running or not pending then
+    if running or not pending or not last then
       return
     end
-    running, pending = true, nil
+    running, pending = true, false
     vim.system({ "pbcopy" }, { stdin = last.text }, function()
       running = false
       vim.schedule(flush)
@@ -34,7 +36,7 @@ if vim.fn.has("mac") == 1 then
   end
   local function paste()
     -- Copy still in flight
-    if pending or running then
+    if last and (pending or running) then
       return { last.lines, last.regtype }
     end
     local text = vim.system({ "pbpaste" }):wait().stdout or ""
