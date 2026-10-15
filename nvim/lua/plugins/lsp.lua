@@ -172,6 +172,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client:supports_method("textDocument/documentColor", buf) then
       vim.lsp.document_color.enable(true, { bufnr = buf })
     end
+    if client:supports_method("textDocument/foldingRange", buf) then
+      for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+        vim.wo[win][0].foldmethod = "expr"
+        vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+      end
+    end
     if client:supports_method("textDocument/linkedEditingRange", buf) then
       vim.lsp.linked_editing_range.enable(true, { client_id = client.id })
     end

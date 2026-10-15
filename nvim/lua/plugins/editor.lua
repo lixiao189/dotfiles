@@ -1,15 +1,9 @@
--- Text objects (LazyVim's mini.ai setup). `an`/`in` stay native: treesitter/LSP incremental selection.
+-- Text objects (LazyVim's mini.ai setup). `an`/`in` stay native: LSP incremental selection.
 local ai = require("mini.ai")
 ai.setup({
   n_lines = 500,
   mappings = { around_next = "", inside_next = "" },
   custom_textobjects = {
-    o = ai.gen_spec.treesitter({
-      a = { "@block.outer", "@conditional.outer", "@loop.outer" },
-      i = { "@block.inner", "@conditional.inner", "@loop.inner" },
-    }),
-    f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
-    c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),
     t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
     d = { "%f[%d]%d+" },
     e = {

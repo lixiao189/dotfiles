@@ -6,20 +6,6 @@ function M.gh(repo)
   return "https://github.com/" .. repo
 end
 
--- Build hooks. Must be registered before the first vim.pack.add() so they also run on install.
-vim.api.nvim_create_autocmd("PackChanged", {
-  group = vim.api.nvim_create_augroup("config_pack", { clear = true }),
-  callback = function(ev)
-    local name, kind = ev.data.spec.name, ev.data.kind
-    if name == "nvim-treesitter" and kind == "update" then
-      if not ev.data.active then
-        vim.cmd.packadd("nvim-treesitter")
-      end
-      vim.cmd("TSUpdate")
-    end
-  end,
-})
-
 -- All plugins, added in one call so the first start asks for confirmation once.
 -- Configuration lives in lua/plugins/*.lua.
 local gh = M.gh
@@ -29,8 +15,6 @@ vim.pack.add({
   gh("folke/snacks.nvim"), -- picker, explorer, dashboard, notifier, terminal, lazygit, toggles
   gh("folke/flash.nvim"),
   gh("MagicDuck/grug-far.nvim"),
-  gh("nvim-treesitter/nvim-treesitter"),
-  { src = gh("nvim-treesitter/nvim-treesitter-textobjects"), version = "main" },
   gh("neovim/nvim-lspconfig"),
   gh("mason-org/mason.nvim"),
   gh("stevearc/conform.nvim"),

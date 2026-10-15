@@ -203,7 +203,6 @@ Snacks.toggle
 Snacks.toggle
   .option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" })
   :map("<leader>uA")
-Snacks.toggle.treesitter():map("<leader>uT")
 Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
 Snacks.toggle.dim():map("<leader>uD")
 Snacks.toggle.animate():map("<leader>ua")
@@ -278,10 +277,6 @@ map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 
 -- highlights under cursor
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
-map("n", "<leader>uI", function()
-  vim.treesitter.inspect_tree()
-  vim.api.nvim_input("I")
-end, { desc = "Inspect Tree" })
 
 -- terminal
 map("n", "<leader>fT", function()
@@ -400,26 +395,9 @@ end, { desc = "Search and Replace" })
 map({ "n", "x", "o" }, "s", function()
   require("flash").jump()
 end, { desc = "Flash" })
-map({ "n", "x", "o" }, "S", function()
-  require("flash").treesitter()
-end, { desc = "Flash Treesitter" })
 map("o", "r", function()
   require("flash").remote()
 end, { desc = "Remote Flash" })
-map({ "o", "x" }, "R", function()
-  require("flash").treesitter_search()
-end, { desc = "Treesitter Search" })
 map("c", "<c-s>", function()
   require("flash").toggle()
 end, { desc = "Toggle Flash Search" })
-local function ts_select()
-  require("flash").treesitter({ actions = { ["<c-space>"] = "next", ["<CR>"] = "next", ["<BS>"] = "prev" } })
-end
-map({ "n", "x", "o" }, "<c-space>", ts_select, { desc = "Treesitter Incremental Selection" })
--- <CR> also starts incremental selection in normal file buffers (quickfix etc. keep <CR>)
-map({ "n", "x", "o" }, "<CR>", function()
-  if vim.bo.buftype ~= "" or vim.fn.getcmdwintype() ~= "" then
-    return vim.api.nvim_feedkeys(vim.keycode("<CR>"), "n", false)
-  end
-  ts_select()
-end, { desc = "Treesitter Incremental Selection" })
