@@ -15,6 +15,48 @@ end
 
 local group = vim.api.nvim_create_augroup("config_completion", { clear = true })
 
+-- 0: case-sensitive prefix match, 1: case-insensitive prefix match, 2: anything else (fuzzy)
+local function prefix_rank(item, prefix)
+  local text = item.filterText or item.label
+  if vim.startswith(text, prefix) then
+    return 0
+  elseif vim.startswith(text:lower(), prefix:lower()) then
+    return 1
+  end
+  return 2
+end
+
+-- Per-sort cache: the prefix is read once and each item ranked once, then cleared
+-- on the next tick (after table.sort returns) so the next sort sees the new prefix.
+local sort_prefix, sort_keys
+local function sort_key(entry)
+  local key = sort_keys[entry]
+  if not key then
+    local item = vim.tbl_get(entry, "user_data", "nvim", "lsp", "completion_item") or { label = entry.word }
+    key = { prefix_rank(item, sort_prefix), item.sortText or item.label }
+    sort_keys[entry] = key
+  end
+  return key
+end
+
+-- Servers like clangd rank case-insensitively (`name` puts NAME_MAX above namespace);
+-- prefer items matching the typed case, then fall back to the server's sortText.
+local function compare_items(a, b)
+  if not sort_prefix then
+    local col = vim.api.nvim_win_get_cursor(0)[2]
+    sort_prefix = vim.api.nvim_get_current_line():sub(1, col):match("[%w_]*$")
+    sort_keys = {}
+    vim.schedule(function()
+      sort_prefix, sort_keys = nil, nil
+    end)
+  end
+  local ka, kb = sort_key(a), sort_key(b)
+  if ka[1] ~= kb[1] then
+    return ka[1] < kb[1]
+  end
+  return ka[2] < kb[2]
+end
+
 -- No word popup in prompts (picker search box, vim.ui.input).
 vim.api.nvim_create_autocmd("FileType", {
   group = group,
@@ -36,6 +78,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     provider.triggerCharacters = vim.list.unique(vim.list_extend(provider.triggerCharacters or {}, trigger_chars))
     vim.lsp.completion.enable(true, client.id, ev.buf, {
       autotrigger = true,
+      cmp = compare_items,
       convert = function(item)
         -- Drop the argument list from function labels, the popup shows it already
         return { abbr = item.label:gsub("%b()", "") }
