@@ -14,6 +14,7 @@ require("config.options")
 require("config.pack")
 
 require("plugins.ui")
+require("plugins.statusline")
 require("plugins.editor")
 require("plugins.lsp")
 require("plugins.completion")

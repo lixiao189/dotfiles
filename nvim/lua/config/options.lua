@@ -33,7 +33,7 @@ opt.linebreak = true
 opt.list = false
 opt.mouse = "a"
 opt.number = true
-opt.pumblend = 10
+opt.pumblend = 0 -- blending paints an opaque layer over the translucent terminal
 opt.pumheight = 10
 opt.pummaxwidth = 60
 opt.relativenumber = true
@@ -60,7 +60,7 @@ opt.undolevels = 10000
 opt.updatetime = 200
 opt.virtualedit = "block"
 opt.wildmode = "longest:full,full"
-opt.winborder = "rounded"
+opt.winborder = "single"
 opt.winminwidth = 5
 opt.wrap = false
 

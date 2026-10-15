@@ -5,15 +5,26 @@
 
 vim.o.autocomplete = true
 vim.o.complete = ".^5,w^5,b^5,u^5"
-vim.o.pumborder = "rounded"
+vim.o.pumborder = "single"
 
 local trigger_chars = {}
 for c in ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"):gmatch(".") do
   trigger_chars[#trigger_chars + 1] = c
 end
 
+local group = vim.api.nvim_create_augroup("config_completion", { clear = true })
+
+-- No word popup in prompts (picker search box, vim.ui.input).
+vim.api.nvim_create_autocmd("FileType", {
+  group = group,
+  pattern = { "snacks_picker_input", "snacks_input" },
+  callback = function(ev)
+    vim.bo[ev.buf].autocomplete = false
+  end,
+})
+
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("config_completion", { clear = true }),
+  group = group,
   callback = function(ev)
     local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
     if not client:supports_method("textDocument/completion", ev.buf) then

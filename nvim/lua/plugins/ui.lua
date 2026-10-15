@@ -6,6 +6,46 @@ require("catppuccin").setup({
   transparent_background = true,
   float = { transparent = true, solid = false },
   term_colors = true,
+  -- Flat UI for a translucent terminal: no opaque fills, quiet grey borders and titles.
+  custom_highlights = function(c)
+    local none = c.none
+    return {
+      FloatBorder = { fg = c.surface2, bg = none },
+      FloatTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
+      FloatFooter = { fg = c.overlay1, bg = none },
+      Pmenu = { fg = c.overlay2, bg = none },
+      PmenuBorder = { fg = c.surface2, bg = none },
+      PmenuKind = { fg = c.blue, bg = none },
+      PmenuExtra = { fg = c.overlay1, bg = none },
+      PmenuSbar = { bg = none },
+      PmenuThumb = { bg = c.surface1 },
+      WinSeparator = { fg = c.surface0 },
+      -- Picker
+      SnacksPickerTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
+      SnacksPickerInputTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
+      SnacksPickerListTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
+      SnacksPickerPreviewTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
+      SnacksPickerPrompt = { fg = c.blue },
+      SnacksPickerTree = { fg = c.surface1 },
+      SnacksPickerListCursorLine = { bg = c.surface0 },
+      -- Notifications: severity colour stays on the icon/title only
+      SnacksNotifierBorderInfo = { link = "FloatBorder" },
+      SnacksNotifierBorderWarn = { link = "FloatBorder" },
+      SnacksNotifierBorderError = { link = "FloatBorder" },
+      SnacksNotifierBorderDebug = { link = "FloatBorder" },
+      SnacksNotifierBorderTrace = { link = "FloatBorder" },
+      SnacksIndentScope = { fg = c.surface2 },
+      -- Buffer line: text only, no blocks or underline
+      MiniTablineFill = { bg = none },
+      MiniTablineCurrent = { fg = c.text, bg = none, style = { "bold" } },
+      MiniTablineVisible = { fg = c.subtext0, bg = none },
+      MiniTablineHidden = { fg = c.overlay1, bg = none },
+      MiniTablineModifiedCurrent = { fg = c.peach, bg = none, style = { "bold" } },
+      MiniTablineModifiedVisible = { fg = c.peach, bg = none },
+      MiniTablineModifiedHidden = { fg = c.peach, bg = none },
+      MiniTablineTabpagesection = { fg = c.overlay1, bg = none },
+    }
+  end,
   lsp_styles = {
     underlines = {
       errors = { "undercurl" },
@@ -32,7 +72,6 @@ vim.api.nvim_create_autocmd("OptionSet", {
 require("mini.icons").setup()
 MiniIcons.mock_nvim_web_devicons()
 
-require("mini.statusline").setup()
 require("mini.tabline").setup() -- buffer line
 
 require("snacks").setup({
@@ -65,8 +104,32 @@ require("snacks").setup({
   explorer = { enabled = true, replace_netrw = true },
   indent = { enabled = true },
   input = { enabled = true },
-  notifier = { enabled = true },
-  picker = { enabled = true },
+  notifier = { enabled = true, style = "compact" },
+  picker = {
+    enabled = true,
+    -- No dimming backdrop: it covers the translucent background with a solid layer.
+    layout = {
+      preset = function()
+        return vim.o.columns >= 120 and "default" or "vertical"
+      end,
+      layout = { backdrop = false },
+    },
+    sources = {
+      -- Slim borderless sidebar: no search box until `/`, project name as a header.
+      explorer = {
+        layout = { preset = "sidebar", preview = false, hidden = { "input" }, layout = { width = 30, min_width = 30 } },
+        win = {
+          list = {
+            wo = {
+              winbar = "%#StlExplorerHeader#  \u{f07c}  %{toupper(fnamemodify(getcwd(), ':t'))}",
+              statuscolumn = " ",
+              cursorline = true,
+            },
+          },
+        },
+      },
+    },
+  },
   quickfile = { enabled = false },
   scope = { enabled = true },
   scroll = { enabled = true },
