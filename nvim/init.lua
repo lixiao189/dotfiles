@@ -1,5 +1,5 @@
 -- Neovim >= 0.12 config built on native features:
---   vim.pack (plugins), vim.lsp.config/enable (LSP), vim.lsp.completion (completion),
+--   vim.pack (plugins), vim.lsp.config/enable (LSP), nvim-cmp + vim.snippet (completion),
 --   LSP semantic tokens/folds/selection, ui2 (messages/cmdline).
 -- Keymaps follow LazyVim: https://www.lazyvim.org/keymaps
 

@@ -1,128 +1,149 @@
--- Completion without blink.cmp/nvim-cmp:
---   * LSP buffers: vim.lsp.completion with autotrigger (snippets via vim.snippet, auto-imports, docs popup).
---   * Other buffers: 'autocomplete' with buffer words.
--- <Tab>/<S-Tab> select or jump snippet placeholders, <CR>/<C-y> accept, <C-Space> triggers, <C-e> cancels.
+-- Completion on nvim-cmp, tuned for typing latency:
+--   * Sources: LSP + path; buffer words only when those have nothing (visible, non-huge buffers).
+--   * Snippets expand with the native vim.snippet, no snippet engine.
+--   * No ghost text, no locality comparator, capped entry count, short fetch timeout.
+--   * Windows draw over the translucent terminal: no fill, no blend, single borders.
+-- Keys follow VS Code: the first item (or the server's preselected one) is highlighted, <CR>/<Tab>
+-- accept it, <Up>/<Down> (<C-n>/<C-p>) move, <C-Space> triggers, <C-e> cancels;
+-- <Tab>/<S-Tab> jump snippet placeholders when the menu is closed.
 
-vim.o.autocomplete = true
--- No `u`: it reads unloaded buffers from disk on every keystroke.
-vim.o.complete = ".^5,w^5,b^5"
+local cmp = require("cmp")
+local compare = cmp.config.compare
+
+-- 'pumborder' still styles the cmdline popup menu.
 vim.o.pumborder = "single"
 
-local trigger_chars = {}
-for c in ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"):gmatch(".") do
-  trigger_chars[#trigger_chars + 1] = c
-end
-
-local group = vim.api.nvim_create_augroup("config_completion", { clear = true })
-
--- 0: case-sensitive prefix match, 1: case-insensitive prefix match, 2: anything else (fuzzy)
-local function prefix_rank(item, prefix)
-  local text = item.filterText or item.label
-  if vim.startswith(text, prefix) then
-    return 0
-  elseif vim.startswith(text:lower(), prefix:lower()) then
-    return 1
-  end
-  return 2
-end
-
--- Per-sort cache: the prefix is read once and each item ranked once, then cleared
--- on the next tick (after table.sort returns) so the next sort sees the new prefix.
-local sort_prefix, sort_keys
-local function sort_key(entry)
-  local key = sort_keys[entry]
-  if not key then
-    local item = vim.tbl_get(entry, "user_data", "nvim", "lsp", "completion_item") or { label = entry.word }
-    key = { prefix_rank(item, sort_prefix), item.sortText or item.label }
-    sort_keys[entry] = key
-  end
-  return key
-end
+vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
 
 -- Servers like clangd rank case-insensitively (`name` puts NAME_MAX above namespace);
--- prefer items matching the typed case, then fall back to the server's sortText.
-local function compare_items(a, b)
-  if not sort_prefix then
-    local col = vim.api.nvim_win_get_cursor(0)[2]
-    sort_prefix = vim.api.nvim_get_current_line():sub(1, col):match("[%w_]*$")
-    sort_keys = {}
-    vim.schedule(function()
-      sort_prefix, sort_keys = nil, nil
-    end)
+-- prefer items that start with the typed text in the same case.
+local function case_match(entry)
+  local input = entry.context.cursor_before_line:sub(entry:get_offset())
+  return vim.startswith(entry:get_filter_text(), input)
+end
+local function compare_case(a, b)
+  local ca, cb = case_match(a), case_match(b)
+  if ca ~= cb then
+    return ca
   end
-  local ka, kb = sort_key(a), sort_key(b)
-  if ka[1] ~= kb[1] then
-    return ka[1] < kb[1]
-  end
-  return ka[2] < kb[2]
 end
 
--- No word popup in prompts (picker search box, vim.ui.input).
-vim.api.nvim_create_autocmd("FileType", {
-  group = group,
-  pattern = { "snacks_picker_input", "snacks_input" },
-  callback = function(ev)
-    vim.bo[ev.buf].autocomplete = false
-  end,
-})
-
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = group,
-  callback = function(ev)
-    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
-    if not client:supports_method("textDocument/completion", ev.buf) then
-      return
+local max_buffer_size = 1024 * 1024
+local function visible_buffers()
+  local bufs = {}
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if
+      vim.bo[buf].buftype == ""
+      and vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf)) < max_buffer_size
+    then
+      bufs[buf] = true
     end
-    -- Trigger on identifier characters too, not only the server's `.`/`:` etc.
-    local provider = assert(client.server_capabilities.completionProvider)
-    provider.triggerCharacters = vim.list.unique(vim.list_extend(provider.triggerCharacters or {}, trigger_chars))
-    vim.lsp.completion.enable(true, client.id, ev.buf, {
-      autotrigger = true,
-      cmp = compare_items,
-      convert = function(item)
-        -- Drop the argument list from function labels, the popup shows it already
-        return { abbr = item.label:gsub("%b()", "") }
-      end,
-    })
-    -- LSP drives the popup here; avoid two competing menus.
-    vim.bo[ev.buf].autocomplete = false
-  end,
-})
-
-local function pum_selected()
-  return vim.fn.pumvisible() == 1 and vim.fn.complete_info({ "selected" }).selected ~= -1
+  end
+  return vim.tbl_keys(bufs)
 end
 
-vim.keymap.set("i", "<C-Space>", function()
-  if next(vim.lsp.get_clients({ bufnr = 0, method = "textDocument/completion" })) then
-    vim.lsp.completion.get()
-  else
-    vim.api.nvim_feedkeys(vim.keycode("<C-n>"), "n", false)
-  end
-end, { desc = "Trigger completion" })
+local function truncate(s, max)
+  return vim.fn.strchars(s) > max and vim.fn.strcharpart(s, 0, max - 1) .. "…" or s
+end
 
-vim.keymap.set("i", "<CR>", function()
-  if pum_selected() then
-    return vim.keycode("<C-y>")
-  end
-  -- MiniPairs.cr() returns already-escaped keys
-  return (vim.fn.pumvisible() == 1 and vim.keycode("<C-e>") or "") .. MiniPairs.cr()
-end, { expr = true, replace_keycodes = false, desc = "Accept completion / newline" })
+local disabled_filetypes = { bigfile = true, snacks_picker_input = true, snacks_input = true }
 
-vim.keymap.set({ "i", "s" }, "<Tab>", function()
-  if vim.fn.pumvisible() == 1 then
-    return "<C-n>"
-  elseif vim.snippet.active({ direction = 1 }) then
-    return "<Cmd>lua vim.snippet.jump(1)<CR>"
-  end
-  return "<Tab>"
-end, { expr = true, desc = "Next completion / snippet placeholder" })
+local function bordered(winhighlight)
+  return cmp.config.window.bordered({ border = "single", winhighlight = winhighlight, winblend = 0 })
+end
 
-vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
-  if vim.fn.pumvisible() == 1 then
-    return "<C-p>"
-  elseif vim.snippet.active({ direction = -1 }) then
-    return "<Cmd>lua vim.snippet.jump(-1)<CR>"
-  end
-  return "<S-Tab>"
-end, { expr = true, desc = "Prev completion / snippet placeholder" })
+cmp.setup({
+  enabled = function()
+    return vim.bo.buftype ~= "prompt" and not disabled_filetypes[vim.bo.filetype]
+  end,
+  performance = {
+    debounce = 20,
+    throttle = 20,
+    fetching_timeout = 200,
+    confirm_resolve_timeout = 80,
+    async_budget = 1,
+    max_view_entries = 50,
+  },
+  preselect = cmp.PreselectMode.Item,
+  completion = { completeopt = "menu,menuone,noinsert" },
+  snippet = {
+    expand = function(args)
+      vim.snippet.expand(args.body)
+    end,
+  },
+  sources = cmp.config.sources({
+    { name = "nvim_lsp" },
+    { name = "path" },
+  }, {
+    {
+      name = "buffer",
+      keyword_length = 3,
+      option = { get_bufnrs = visible_buffers, max_indexed_line_length = 512 },
+    },
+  }),
+  sorting = {
+    comparators = {
+      compare.offset,
+      compare.exact,
+      compare_case,
+      compare.score,
+      compare.recently_used,
+      compare.sort_text,
+      compare.length,
+      compare.order,
+    },
+  },
+  formatting = {
+    fields = { "kind", "abbr", "menu" },
+    format = function(entry, item)
+      item.kind = (MiniIcons.get("lsp", item.kind or "Text"))
+      -- Drop the argument list from function labels, the docs window shows it already
+      item.abbr = truncate((item.abbr:gsub("%b()", "")), 40)
+      local details = entry.completion_item.labelDetails
+      item.menu = details and (details.description or details.detail) or nil
+      item.menu = item.menu and truncate(vim.trim(item.menu), 20)
+      return item
+    end,
+  },
+  window = {
+    completion = bordered("Normal:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:None"),
+    documentation = bordered("Normal:NormalFloat,FloatBorder:FloatBorder,Search:None"),
+  },
+  experimental = { ghost_text = false },
+  mapping = {
+    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i" }),
+    ["<C-e>"] = cmp.mapping(cmp.mapping.abort(), { "i" }),
+    ["<C-y>"] = cmp.mapping(cmp.mapping.confirm({ select = true }), { "i" }),
+    ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
+    ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
+    ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
+    ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
+    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i" }),
+    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i" }),
+    -- Accept the highlighted item; with the menu closed fall through to mini.pairs' <CR>.
+    ["<CR>"] = cmp.mapping(function(fallback)
+      if cmp.visible() and cmp.get_selected_entry() then
+        cmp.confirm()
+      else
+        fallback()
+      end
+    end, { "i" }),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() and cmp.get_selected_entry() then
+        cmp.confirm()
+      elseif vim.snippet.active({ direction = 1 }) then
+        vim.snippet.jump(1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if vim.snippet.active({ direction = -1 }) then
+        vim.snippet.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+  },
+})

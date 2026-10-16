@@ -19,6 +19,7 @@ require("catppuccin").setup({
       PmenuExtra = { fg = c.overlay1, bg = none },
       PmenuSbar = { bg = none },
       PmenuThumb = { bg = c.surface1 },
+      CmpItemMenu = { fg = c.overlay1 },
       WinSeparator = { fg = c.surface0 },
       -- Picker
       SnacksPickerTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
