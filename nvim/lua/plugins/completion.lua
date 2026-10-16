@@ -1,11 +1,5 @@
--- Completion on nvim-cmp, tuned for typing latency:
---   * Sources: LSP + path; buffer words only when those have nothing (visible, non-huge buffers).
---   * Snippets expand with the native vim.snippet, no snippet engine.
---   * No ghost text, no locality comparator, capped entry count, short fetch timeout.
---   * Windows draw over the translucent terminal: no fill, no blend, single borders.
--- Keys follow VS Code: the first item (or the server's preselected one) is highlighted, <CR>/<Tab>
--- accept it, <Up>/<Down> (<C-n>/<C-p>) move, <C-Space> triggers, <C-e> cancels;
--- <Tab>/<S-Tab> jump snippet placeholders when the menu is closed.
+-- nvim-cmp tuned for low input lag, styled for the translucent terminal.
+-- VS Code keys: <CR>/<Tab> accept, <Up>/<Down> move, <C-Space> triggers or toggles details.
 
 local cmp = require("cmp")
 local compare = cmp.config.compare
@@ -15,8 +9,7 @@ vim.o.pumborder = "single"
 
 vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
 
--- Servers like clangd rank case-insensitively (`name` puts NAME_MAX above namespace);
--- prefer items that start with the typed text in the same case.
+-- Prefer items matching the typed case (clangd ranks case-insensitively).
 local function case_match(entry)
   local input = entry.context.cursor_before_line:sub(entry:get_offset())
   return vim.startswith(entry:get_filter_text(), input)
@@ -98,7 +91,7 @@ cmp.setup({
     fields = { "kind", "abbr", "menu" },
     format = function(entry, item)
       item.kind = (MiniIcons.get("lsp", item.kind or "Text"))
-      -- Drop the argument list from function labels, the docs window shows it already
+      -- Drop argument lists from labels
       item.abbr = truncate((item.abbr:gsub("%b()", "")), 40)
       local details = entry.completion_item.labelDetails
       item.menu = details and (details.description or details.detail) or nil
@@ -110,9 +103,19 @@ cmp.setup({
     completion = bordered("Normal:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:None"),
     documentation = bordered("Normal:NormalFloat,FloatBorder:FloatBorder,Search:None"),
   },
+  -- Details only on demand (<C-Space>)
+  view = { docs = { auto_open = false } },
   experimental = { ghost_text = false },
   mapping = {
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i" }),
+    ["<C-Space>"] = cmp.mapping(function()
+      if not cmp.visible() then
+        cmp.complete()
+      elseif cmp.visible_docs() then
+        cmp.close_docs()
+      else
+        cmp.open_docs()
+      end
+    end, { "i" }),
     ["<C-e>"] = cmp.mapping(cmp.mapping.abort(), { "i" }),
     ["<C-y>"] = cmp.mapping(cmp.mapping.confirm({ select = true }), { "i" }),
     ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
@@ -121,7 +124,7 @@ cmp.setup({
     ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i" }),
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i" }),
-    -- Accept the highlighted item; with the menu closed fall through to mini.pairs' <CR>.
+    -- Otherwise fall through to mini.pairs' <CR>
     ["<CR>"] = cmp.mapping(function(fallback)
       if cmp.visible() and cmp.get_selected_entry() then
         cmp.confirm()
