@@ -7,8 +7,8 @@ local act = wezterm.action
 -- reading it once here is enough to follow light/dark switches live.
 local dark = not wezterm.gui or wezterm.gui.get_appearance():find("Dark") ~= nil
 
--- Catppuccin Latte / Mocha base tones. The tab bar doubles as the titlebar, so
--- everything in it sits on `base` to blend into the terminal background.
+-- Catppuccin Latte / Mocha base tones. The tab bar doubles as the titlebar and
+-- sits on solid `mantle`, with the active tab raised to `surface0`.
 local p = dark
 		and {
 			base = "#1e1e2e",
@@ -40,14 +40,6 @@ local p = dark
 local OPACITY = dark and 0.82 or 0.88
 local BLUR = 40
 
--- `#rrggbb` -> `rgba(r,g,b,a)`. Chrome (tab bar, titlebar) is painted with
--- explicit colors that ignore window_background_opacity, so it needs its own
--- alpha to frost along with the terminal instead of sitting on top as a slab.
-local function glass(hex, alpha)
-	local r, g, b = hex:match("#(%x%x)(%x%x)(%x%x)")
-	return string.format("rgba(%d,%d,%d,%s)", tonumber(r, 16), tonumber(g, 16), tonumber(b, 16), alpha or OPACITY)
-end
-
 -- Rendering. WebGpu uses Metal on macOS and is the faster path on Apple GPUs.
 -- Nothing animates, so animation_fps stays at its minimum.
 config.front_end = "WebGpu"
@@ -78,12 +70,15 @@ config.char_select_fg_color = p.text
 config.colors = {
 	split = p.surface1,
 	compose_cursor = p.peach,
+	-- The fancy tab bar paints each tab's background on the tab *and* again
+	-- behind its title text, so translucent colors stack into uneven patches.
+	-- Everything here is opaque so every layer lands on the same color.
 	tab_bar = {
-		background = glass(p.base),
-		inactive_tab_edge = glass(p.base, 0),
-		active_tab = { bg_color = glass(p.surface0, 0.9), fg_color = p.text, intensity = "Bold" },
-		inactive_tab = { bg_color = glass(p.base, 0), fg_color = p.overlay },
-		inactive_tab_hover = { bg_color = glass(p.surface0, 0.5), fg_color = p.subtext },
+		background = p.mantle,
+		inactive_tab_edge = p.mantle,
+		active_tab = { bg_color = p.surface0, fg_color = p.text, intensity = "Bold" },
+		inactive_tab = { bg_color = p.mantle, fg_color = p.overlay },
+		inactive_tab_hover = { bg_color = p.surface0, fg_color = p.subtext },
 	},
 }
 config.inactive_pane_hsb = { saturation = 0.9, brightness = dark and 0.75 or 0.95 }
@@ -93,8 +88,8 @@ config.cursor_blink_rate = 0
 -- Bar/underline cursors (e.g. from vim insert mode) default to ~1px; thicken them.
 config.cursor_thickness = "1pt"
 
--- Window. The titlebar is drawn by WezTerm (integrated buttons) so it can
--- share the same frosted tint as the terminal instead of the native material.
+-- Window. The titlebar is drawn by WezTerm (integrated buttons) as a solid
+-- `mantle` strip so it reads as one uniform bar above the frosted terminal.
 config.initial_rows = 28
 config.initial_cols = 90
 config.window_padding = { left = 12, right = 12, top = 8, bottom = 4 }
@@ -104,8 +99,11 @@ config.integrated_title_buttons = { "Close", "Hide", "Maximize" }
 config.window_frame = {
 	font = wezterm.font({ family = "Maple Mono NF CN", weight = "Medium" }),
 	font_size = 12,
-	active_titlebar_bg = glass(p.base),
-	inactive_titlebar_bg = glass(p.mantle),
+	-- Opaque on purpose: the fancy tab bar paints this on the bar and again on
+	-- each nested group (left status, tabs, right status), so any alpha stacks
+	-- into darker blocks. Matches tab_bar.background so the bar is one color.
+	active_titlebar_bg = p.mantle,
+	inactive_titlebar_bg = p.mantle,
 	border_left_width = 0,
 	border_right_width = 0,
 	border_top_height = 0,
