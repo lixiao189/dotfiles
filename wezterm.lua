@@ -122,7 +122,7 @@ config.adjust_window_size_when_changing_font_size = false
 config.use_fancy_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = false
 config.show_new_tab_button_in_tab_bar = false
--- The status only shows workspace and cwd; refreshing it faster buys nothing.
+-- The status only shows a non-default workspace; refreshing it faster buys nothing.
 config.status_update_interval = 2000
 
 -- Behavior
@@ -197,13 +197,9 @@ local LEFT_STATUS = wezterm.format({ { Text = "  " } })
 -- Setting a status repaints the tab bar on the GUI thread, which competes with
 -- keystroke rendering. Only push it when the text actually changed.
 local last_status = {}
-wezterm.on("update-status", function(window, pane)
-	local cwd = pane:get_current_working_dir()
-	local path = cwd and cwd.file_path or ""
-	local name = path:match("([^/]+)/?$") or path
+wezterm.on("update-status", function(window)
 	local workspace = window:active_workspace()
-	local prefix = workspace ~= "default" and (nf.cod_layers .. " " .. workspace .. "   ") or ""
-	local right = prefix .. nf.md_folder_outline .. " " .. name .. "  "
+	local right = workspace ~= "default" and (nf.cod_layers .. " " .. workspace .. "  ") or ""
 
 	local id = window:window_id()
 	if last_status[id] == right then
