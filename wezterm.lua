@@ -37,15 +37,14 @@ local p = dark
 local OPACITY = dark and 0.82 or 0.88
 local BLUR = 40
 
--- WebGpu uses Metal on macOS. Nothing animates, so animation_fps stays minimal.
+-- Performance
 config.front_end = "WebGpu"
 config.max_fps = 120
 config.animation_fps = 1
 config.unicode_version = 15
--- Don't batch output for 3ms; it delays every keystroke echo.
 config.mux_output_parser_coalesce_delay_ms = 0
 
--- Latin + CJK + Nerd Font icons, same face Ghostty uses.
+-- Font
 config.font_size = 14
 config.line_height = 1.05
 config.font = wezterm.font_with_fallback({
@@ -56,7 +55,7 @@ config.font = wezterm.font_with_fallback({
 config.bold_brightens_ansi_colors = "BrightAndBold"
 config.anti_alias_custom_block_glyphs = true
 
--- Latte in light mode, Mocha in dark mode.
+-- Theme
 config.color_scheme = dark and "Catppuccin Mocha" or "Catppuccin Latte"
 config.command_palette_bg_color = p.mantle
 config.command_palette_fg_color = p.text
@@ -81,8 +80,7 @@ config.cursor_blink_rate = 0 -- ignore app blink requests
 -- Bar/underline cursors (e.g. vim insert) default to ~1px.
 config.cursor_thickness = "1pt"
 
--- TITLE|RESIZE is the native macOS titlebar. RESIZE alone drops it;
--- INTEGRATED_BUTTONS draws the traffic lights inside the tab bar.
+-- Window config
 config.initial_rows = 28
 config.initial_cols = 90
 config.window_padding = { left = 12, right = 12, top = 8, bottom = 4 }
@@ -105,13 +103,14 @@ config.text_background_opacity = 1.0
 config.native_macos_fullscreen_mode = true
 config.adjust_window_size_when_changing_font_size = false
 
--- Traffic lights are in the native titlebar, so a lone tab can hide.
+-- Tabbar
 config.use_fancy_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = true
 config.show_new_tab_button_in_tab_bar = false
 -- Status only shows a non-default workspace.
 config.status_update_interval = 2000
 
+-- General
 config.quit_when_all_windows_are_closed = false
 config.audible_bell = "Disabled"
 config.scrollback_lines = 20000
@@ -130,7 +129,7 @@ config.skip_close_confirmation_for_processes_named = {
 	"powershell.exe",
 }
 
--- SUPER so Neovim/shell bindings stay intact. Unset keys keep WezTerm defaults.
+-- Key bindings
 config.keys = {
 	{ key = "k", mods = "SUPER", action = act.ClearScrollback("ScrollbackAndViewport") },
 	{ key = "K", mods = "SUPER", action = act.ClearScrollback("ScrollbackOnly") },
