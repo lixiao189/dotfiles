@@ -168,31 +168,16 @@ config.keys = {
 	{ key = "l", mods = "SUPER|SHIFT", action = act.AdjustPaneSize({ "Right", 3 }) },
 }
 
--- Left-align "<index> <title>" and leave the spare cells blank on the right,
--- under the fancy tab bar's close button (floated to the tab's right edge).
--- Short titles still get TAB_MIN_WIDTH so tabs aren't stubby. The index takes
--- the accent color on the active tab; a zoomed pane gets a magnifier so it's
--- obvious other panes are hidden.
-local TAB_MIN_WIDTH = 18
-local nf = wezterm.nerdfonts
+-- Fancy mode ignores tab_max_width and sizes each tab to its title, so pin every
+-- tab to the width WezTerm offers (max_width). Titles stay left, spare cells right.
 wezterm.on("format-tab-title", function(tab, _, _, _, _, max_width)
-	local title = tab.tab_title ~= "" and tab.tab_title or tab.active_pane.title
-	local index = tostring(tab.tab_index + 1)
-	local zoom = tab.active_pane.is_zoomed and (" " .. nf.md_magnify) or ""
-	local reserved = wezterm.column_width(index) + wezterm.column_width(zoom) + 3
-	title = wezterm.truncate_right(title, math.max(0, max_width - reserved))
-	local body_width = wezterm.column_width(index) + 1 + wezterm.column_width(title) + wezterm.column_width(zoom)
-	local width = math.min(math.max(TAB_MIN_WIDTH, body_width + 2), max_width)
-	return {
-		{ Text = " " },
-		{ Foreground = { Color = tab.is_active and p.accent or p.overlay } },
-		{ Text = index .. " " },
-		"ResetAttributes",
-		{ Text = title .. zoom .. string.rep(" ", width - body_width - 1) },
-	}
+	local title = (tab.tab_title ~= "" and tab.tab_title or tab.active_pane.title)
+	title = string.format("%d: %s", tab.tab_index + 1, title)
+	return wezterm.pad_right(wezterm.truncate_right(title, max_width), max_width)
 end)
 
 -- The native traffic lights overlap the first tab; a left status pushes tabs clear of them.
+local nf = wezterm.nerdfonts
 local LEFT_STATUS = wezterm.format({ { Text = "  " } })
 
 -- Setting a status repaints the tab bar on the GUI thread, which competes with
