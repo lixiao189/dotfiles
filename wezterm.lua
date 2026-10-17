@@ -168,9 +168,11 @@ config.keys = {
 	{ key = "l", mods = "SUPER|SHIFT", action = act.AdjustPaneSize({ "Right", 3 }) },
 }
 
--- Center "<index> <title>" in at least TAB_MIN_WIDTH cells so short titles
--- don't make stubby tabs. The index takes the accent color on the active tab;
--- a zoomed pane gets a magnifier so it's obvious other panes are hidden.
+-- Left-align "<index> <title>" and leave the spare cells blank on the right,
+-- under the fancy tab bar's close button (floated to the tab's right edge).
+-- Short titles still get TAB_MIN_WIDTH so tabs aren't stubby. The index takes
+-- the accent color on the active tab; a zoomed pane gets a magnifier so it's
+-- obvious other panes are hidden.
 local TAB_MIN_WIDTH = 18
 local nf = wezterm.nerdfonts
 wezterm.on("format-tab-title", function(tab, _, _, _, _, max_width)
@@ -178,16 +180,15 @@ wezterm.on("format-tab-title", function(tab, _, _, _, _, max_width)
 	local index = tostring(tab.tab_index + 1)
 	local zoom = tab.active_pane.is_zoomed and (" " .. nf.md_magnify) or ""
 	local reserved = wezterm.column_width(index) + wezterm.column_width(zoom) + 3
-	title = wezterm.truncate_right(title, max_width - reserved)
+	title = wezterm.truncate_right(title, math.max(0, max_width - reserved))
 	local body_width = wezterm.column_width(index) + 1 + wezterm.column_width(title) + wezterm.column_width(zoom)
 	local width = math.min(math.max(TAB_MIN_WIDTH, body_width + 2), max_width)
-	local left = math.floor((width - body_width) / 2)
 	return {
-		{ Text = string.rep(" ", left) },
+		{ Text = " " },
 		{ Foreground = { Color = tab.is_active and p.accent or p.overlay } },
 		{ Text = index .. " " },
 		"ResetAttributes",
-		{ Text = title .. zoom .. string.rep(" ", width - body_width - left) },
+		{ Text = title .. zoom .. string.rep(" ", width - body_width - 1) },
 	}
 end)
 
