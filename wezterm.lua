@@ -7,8 +7,8 @@ local act = wezterm.action
 -- reading it once here is enough to follow light/dark switches live.
 local dark = not wezterm.gui or wezterm.gui.get_appearance():find("Dark") ~= nil
 
--- Catppuccin Latte / Mocha base tones. The tab bar doubles as the titlebar and
--- sits on solid `mantle`, with the active tab raised to `surface0`.
+-- Catppuccin Latte / Mocha base tones. The tab bar sits on solid `mantle`,
+-- with the active tab raised to `surface0`. The titlebar itself is native.
 local p = dark
 		and {
 			base = "#1e1e2e",
@@ -88,14 +88,13 @@ config.cursor_blink_rate = 0
 -- Bar/underline cursors (e.g. from vim insert mode) default to ~1px; thicken them.
 config.cursor_thickness = "1pt"
 
--- Window. The titlebar is drawn by WezTerm (integrated buttons) as a solid
--- `mantle` strip so it reads as one uniform bar above the frosted terminal.
+-- Window. TITLE|RESIZE is the macOS native titlebar (traffic lights,
+-- centered window title, system drag region). RESIZE alone drops the titlebar.
+-- INTEGRATED_BUTTONS would take that over and draw the buttons inside the tab bar.
 config.initial_rows = 28
 config.initial_cols = 90
 config.window_padding = { left = 12, right = 12, top = 8, bottom = 4 }
-config.window_decorations = "INTEGRATED_BUTTONS|RESIZE|MACOS_FORCE_ENABLE_SHADOW"
-config.integrated_title_button_style = "MacOsNative"
-config.integrated_title_buttons = { "Close", "Hide", "Maximize" }
+config.window_decorations = "TITLE|RESIZE|MACOS_FORCE_ENABLE_SHADOW"
 config.window_frame = {
 	font = wezterm.font({ family = "Maple Mono NF CN", weight = "Medium" }),
 	font_size = 12,
@@ -117,10 +116,10 @@ config.text_background_opacity = 1.0
 config.native_macos_fullscreen_mode = true
 config.adjust_window_size_when_changing_font_size = false
 
--- Tab bar. INTEGRATED_BUTTONS live in it, so hiding it with one tab leaves the
--- traffic lights floating over the first terminal row.
+-- Tab bar. Traffic lights live in the native titlebar now, so a single tab no
+-- longer has to stay visible just to keep the buttons off the first row.
 config.use_fancy_tab_bar = true
-config.hide_tab_bar_if_only_one_tab = false
+config.hide_tab_bar_if_only_one_tab = true
 config.show_new_tab_button_in_tab_bar = false
 -- The status only shows a non-default workspace; refreshing it faster buys nothing.
 config.status_update_interval = 2000
@@ -174,29 +173,6 @@ wezterm.on("format-tab-title", function(tab, _, _, _, _, max_width)
 	local title = (tab.tab_title ~= "" and tab.tab_title or tab.active_pane.title)
 	title = string.format("%d: %s", tab.tab_index + 1, title)
 	return wezterm.pad_right(wezterm.truncate_right(title, max_width), max_width)
-end)
-
--- The native traffic lights overlap the first tab; a left status pushes tabs clear of them.
-local nf = wezterm.nerdfonts
-local LEFT_STATUS = wezterm.format({ { Text = "  " } })
-
--- Setting a status repaints the tab bar on the GUI thread, which competes with
--- keystroke rendering. Only push it when the text actually changed.
-local last_status = {}
-wezterm.on("update-status", function(window)
-	local workspace = window:active_workspace()
-	local right = workspace ~= "default" and (nf.cod_layers .. " " .. workspace .. "  ") or ""
-
-	local id = window:window_id()
-	if last_status[id] == right then
-		return
-	end
-	last_status[id] = right
-	window:set_left_status(LEFT_STATUS)
-	window:set_right_status(wezterm.format({
-		{ Foreground = { Color = p.subtext } },
-		{ Text = right },
-	}))
 end)
 
 return config
