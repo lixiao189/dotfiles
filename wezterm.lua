@@ -42,7 +42,6 @@ config.front_end = "WebGpu"
 config.max_fps = 120
 config.animation_fps = 1
 config.unicode_version = 15
-config.mux_output_parser_coalesce_delay_ms = 0
 
 -- Font
 config.font_size = 14
