@@ -1,4 +1,4 @@
--- Text objects (LazyVim's mini.ai setup). `an`/`in` stay native: LSP incremental selection.
+-- Text objects (LazyVim's mini.ai setup). `an`/`in` stay native.
 local ai = require("mini.ai")
 ai.setup({
   n_lines = 500,

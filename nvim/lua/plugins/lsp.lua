@@ -1,6 +1,8 @@
 -- Native LSP: nvim-lspconfig only provides `lsp/<server>.lua` configs, overrides live in
 -- `after/lsp/<server>.lua`, and servers are enabled with vim.lsp.enable().
 -- mason.nvim installs missing servers/tools automatically (like LazyVim).
+-- Highlighting and folds are treesitter; don't ask servers for semantic tokens.
+vim.lsp.semantic_tokens.enable(false)
 
 -- Servers to enable. Installed with mason when not found on $PATH (except `mason = false`).
 ---@type table<string, {mason?: boolean}>
@@ -177,12 +179,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     if client:supports_method("textDocument/documentColor", buf) then
       vim.lsp.document_color.enable(true, { bufnr = buf })
-    end
-    if client:supports_method("textDocument/foldingRange", buf) then
-      for _, win in ipairs(vim.fn.win_findbuf(buf)) do
-        vim.wo[win][0].foldmethod = "expr"
-        vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
-      end
     end
     if client:supports_method("textDocument/linkedEditingRange", buf) then
       vim.lsp.linked_editing_range.enable(true, { client_id = client.id })
