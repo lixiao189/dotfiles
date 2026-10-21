@@ -1,10 +1,5 @@
--- Native LSP: nvim-lspconfig only provides `lsp/<server>.lua` configs, overrides live in
--- `after/lsp/<server>.lua`, and servers are enabled with vim.lsp.enable().
--- mason.nvim installs missing servers/tools automatically (like LazyVim).
--- Highlighting and folds are treesitter; don't ask servers for semantic tokens.
 vim.lsp.semantic_tokens.enable(false)
 
--- Servers to enable. Installed with mason when not found on $PATH (except `mason = false`).
 ---@type table<string, {mason?: boolean}>
 local servers = {
   bashls = {},
@@ -23,8 +18,7 @@ local servers = {
   yamlls = {},
 }
 
--- Formatters / linters used by conform.nvim.
--- rustfmt is left out: it ships with rustup and mason's package is deprecated.
+-- rustfmt ships with rustup; mason's package is deprecated.
 local tools = { "stylua", "shfmt", "gofumpt", "goimports", "prettier", "clang-format" }
 
 vim.diagnostic.config({
@@ -61,10 +55,8 @@ for name, opts in pairs(servers) do
 end
 vim.lsp.enable(to_enable)
 
--- Install missing servers/tools in the background, enabling each server once it is ready.
 local registry = require("mason-registry")
 registry.refresh(vim.schedule_wrap(function()
-  -- lspconfig name -> mason package, from the registry's own metadata
   local lsp_to_pkg = {}
   for _, spec in ipairs(registry.get_all_package_specs()) do
     local lspconfig = vim.tbl_get(spec, "neovim", "lspconfig")
@@ -117,7 +109,6 @@ registry.refresh(vim.schedule_wrap(function()
   end
 end))
 
--- Buffer-local LSP keymaps (LazyVim). Nvim's own defaults (grn, gra, grr, gri, grt, gO, K, an/in) stay.
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("config_lsp_attach", { clear = true }),
   callback = function(ev)

@@ -1,17 +1,14 @@
--- LazyVim keymaps: https://www.lazyvim.org/keymaps
 local util = require("config.util")
 local map = vim.keymap.set
 local function root()
   return util.root()
 end
 
--- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
--- windows
 map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
 map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
@@ -24,7 +21,6 @@ map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
 
--- move lines
 map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
 map("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
 map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
@@ -32,7 +28,6 @@ map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
 map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
 map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
--- buffers
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
@@ -68,7 +63,6 @@ map("n", "<leader>br", function()
   delete_side(false)
 end, { desc = "Delete Buffers to the Right" })
 
--- Clear search and stop snippet on escape
 map({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
   if vim.snippet.active() then
@@ -97,20 +91,16 @@ map("i", ";", ";<c-g>u")
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 
--- better indenting
 map("x", "<", "<gv")
 map("x", ">", ">gv")
 
--- comments (gc is built in)
 map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
 map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
 
--- plugins / files
 map("n", "<leader>l", "<cmd>PackUpdate<cr>", { desc = "Update Plugins (vim.pack)" })
 map("n", "<leader>L", "<cmd>help news<cr>", { desc = "Neovim News" })
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
--- location / quickfix
 map("n", "<leader>xl", function()
   local ok, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
   if not ok and err then
@@ -125,7 +115,6 @@ map("n", "<leader>xq", function()
 end, { desc = "Quickfix List" })
 map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
--- trouble.nvim replacements: native quickfix/location lists
 map("n", "<leader>xx", function()
   vim.diagnostic.setqflist()
 end, { desc = "Diagnostics (Quickfix)" })
@@ -133,7 +122,6 @@ map("n", "<leader>xX", function()
   vim.diagnostic.setloclist()
 end, { desc = "Buffer Diagnostics (Location List)" })
 
--- diagnostics
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 local function diag_jump(count, severity)
   return function()
@@ -147,7 +135,6 @@ map("n", "[e", diag_jump(-1, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diag_jump(1, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diag_jump(-1, "WARN"), { desc = "Prev Warning" })
 
--- todo comments (todo-comments.nvim replacement)
 local todo_keywords = { "TODO", "FIX", "FIXME", "BUG", "HACK", "WARN", "PERF", "NOTE" }
 local todo_vim_re = [[\v<(]] .. table.concat(todo_keywords, "|") .. [[)>]]
 map("n", "]t", function()
@@ -170,7 +157,6 @@ map("n", "<leader>xt", function()
   vim.cmd.copen()
 end, { desc = "Todo (Quickfix)" })
 
--- toggles
 local function toggle_autoformat(buffer)
   return Snacks.toggle({
     name = "Auto Format (" .. (buffer and "Buffer" or "Global") .. ")",
@@ -217,7 +203,6 @@ map("n", "<leader>dps", function()
   Snacks.profiler.scratch()
 end, { desc = "Profiler Scratch Buffer" })
 
--- git
 map("n", "<leader>gg", function()
   Snacks.lazygit({ cwd = root() })
 end, { desc = "Lazygit (Root Dir)" })
@@ -272,13 +257,10 @@ map("n", "<leader>gP", function()
   Snacks.picker.gh_pr({ state = "all" })
 end, { desc = "GitHub Pull Requests (all)" })
 
--- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 
--- highlights under cursor
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 
--- terminal
 map("n", "<leader>fT", function()
   Snacks.terminal()
 end, { desc = "Terminal (cwd)" })
@@ -292,7 +274,6 @@ map({ "n", "t" }, "<c-_>", function()
   Snacks.terminal(nil, { cwd = root() })
 end, { desc = "which_key_ignore" })
 
--- tabs
 map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
 map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
 map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
@@ -301,7 +282,6 @@ map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
--- snacks: picker / explorer / notifier / scratch
 local P = function(name, opts)
   return function()
     local o = type(opts) == "function" and opts() or opts
@@ -337,7 +317,6 @@ end, { desc = "Explorer (Root Dir)" })
 map("n", "<leader>fE", function()
   Snacks.explorer()
 end, { desc = "Explorer (cwd)" })
--- find
 map("n", "<leader>fb", P("buffers"), { desc = "Buffers" })
 map("n", "<leader>fB", P("buffers", { hidden = true, nofile = true }), { desc = "Buffers (all)" })
 map("n", "<leader>fc", P("files", { cwd = vim.fn.stdpath("config") }), { desc = "Find Config File" })
@@ -347,7 +326,6 @@ map("n", "<leader>fg", P("git_files"), { desc = "Find Files (git-files)" })
 map("n", "<leader>fp", P("projects"), { desc = "Projects" })
 map("n", "<leader>fr", P("recent"), { desc = "Recent" })
 map("n", "<leader>fR", P("recent", { filter = { cwd = true } }), { desc = "Recent (cwd)" })
--- search
 map("n", '<leader>s"', P("registers"), { desc = "Registers" })
 map("n", "<leader>s/", P("search_history"), { desc = "Search History" })
 map("n", "<leader>sa", P("autocmds"), { desc = "Autocmds" })
@@ -384,14 +362,12 @@ map({ "n", "x" }, "<leader>sw", P("grep_word", root_opts), { desc = "Visual sele
 map({ "n", "x" }, "<leader>sW", P("grep_word"), { desc = "Visual selection or word (cwd)" })
 map("n", "<leader>uC", P("colorschemes"), { desc = "Colorschemes" })
 
--- search and replace
 map({ "n", "x" }, "<leader>sr", function()
   local grug = require("grug-far")
   local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
   grug.open({ transient = true, prefills = { filesFilter = ext and ext ~= "" and "*." .. ext or nil } })
 end, { desc = "Search and Replace" })
 
--- flash
 map({ "n", "x", "o" }, "s", function()
   require("flash").jump()
 end, { desc = "Flash" })

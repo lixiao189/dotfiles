@@ -1,4 +1,3 @@
--- Highlighting and folds. nvim-treesitter only installs parsers and queries.
 local ensure_installed = {
   "bash",
   "c",
@@ -26,8 +25,6 @@ local ensure_installed = {
   "xml",
   "yaml",
 }
-local no_ts_indent = { c = true, cpp = true, objc = true, objcpp = true } -- slow; use cindent
-
 local ts = require("nvim-treesitter")
 local installed = {}
 for _, lang in ipairs(ts.get_installed()) do
@@ -62,7 +59,7 @@ local function attach(buf, lang)
     vim.wo[win][0].foldmethod = "expr"
     vim.wo[win][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
   end
-  if not no_ts_indent[vim.bo[buf].filetype] and vim.treesitter.query.get(lang, "indents") then
+  if vim.treesitter.query.get(lang, "indents") then
     vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end
 end

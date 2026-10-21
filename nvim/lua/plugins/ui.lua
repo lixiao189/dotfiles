@@ -6,7 +6,6 @@ require("catppuccin").setup({
   transparent_background = true,
   float = { transparent = true, solid = false },
   term_colors = true,
-  -- Flat UI for a translucent terminal: no opaque fills, quiet grey borders and titles.
   custom_highlights = function(c)
     local none = c.none
     return {
@@ -21,7 +20,6 @@ require("catppuccin").setup({
       PmenuThumb = { bg = c.surface1 },
       CmpItemMenu = { fg = c.overlay1 },
       WinSeparator = { fg = c.surface0 },
-      -- Picker
       SnacksPickerTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
       SnacksPickerInputTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
       SnacksPickerListTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
@@ -29,19 +27,16 @@ require("catppuccin").setup({
       SnacksPickerPrompt = { fg = c.blue },
       SnacksPickerTree = { fg = c.surface1 },
       SnacksPickerListCursorLine = { bg = c.surface0 },
-      -- Notifications: severity colour stays on the icon/title only
       SnacksNotifierBorderInfo = { link = "FloatBorder" },
       SnacksNotifierBorderWarn = { link = "FloatBorder" },
       SnacksNotifierBorderError = { link = "FloatBorder" },
       SnacksNotifierBorderDebug = { link = "FloatBorder" },
       SnacksNotifierBorderTrace = { link = "FloatBorder" },
       SnacksIndentScope = { fg = c.surface2 },
-      -- which-key
       WhichKeyNormal = { bg = none },
       WhichKeyBorder = { link = "FloatBorder" },
       WhichKeyTitle = { link = "FloatTitle" },
       WhichKeySeparator = { fg = c.surface2 },
-      -- Buffer line: text only, no blocks or underline
       MiniTablineFill = { bg = none },
       MiniTablineCurrent = { fg = c.text, bg = none, style = { "bold" } },
       MiniTablineVisible = { fg = c.subtext0, bg = none },
@@ -65,7 +60,6 @@ local function apply_colorscheme()
   vim.cmd.colorscheme(vim.o.background == "light" and "catppuccin-latte" or "catppuccin-mocha")
 end
 apply_colorscheme()
--- The TUI re-detects the terminal background (e.g. system appearance change).
 vim.api.nvim_create_autocmd("OptionSet", {
   pattern = "background",
   callback = function()
@@ -78,7 +72,7 @@ vim.api.nvim_create_autocmd("OptionSet", {
 require("mini.icons").setup()
 MiniIcons.mock_nvim_web_devicons()
 
-require("mini.tabline").setup() -- buffer line
+require("mini.tabline").setup()
 
 require("snacks").setup({
   bigfile = { enabled = true },
@@ -119,7 +113,6 @@ require("snacks").setup({
       layout = { backdrop = false },
     },
     sources = {
-      -- Slim borderless sidebar: no search box until `/`, project name as a header.
       explorer = {
         layout = { preset = "sidebar", hidden = { "input", "preview" }, layout = { width = 30, min_width = 30 } },
         win = {

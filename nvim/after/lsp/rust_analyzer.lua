@@ -8,7 +8,6 @@ return {
         loadOutDirsFromCheck = true,
         buildScripts = { enable = true },
       },
-      -- Run clippy instead of `cargo check` on save.
       check = { command = "clippy" },
       procMacro = { enable = true },
       files = {

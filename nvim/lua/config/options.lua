@@ -1,9 +1,8 @@
--- Mostly LazyVim's defaults: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 vim.g.autoformat = false -- format on save (toggle with <leader>uf / <leader>uF)
-vim.g.snacks_animate = false -- no animations (smooth scroll etc.)
+vim.g.snacks_animate = false
 
 -- Native message/cmdline UI (replaces noice.nvim): no "Press ENTER", highlighted cmdline, `g<` pager.
 require("vim._core.ui2").enable({})

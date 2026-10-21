@@ -1,4 +1,3 @@
--- Thin helpers around the built-in plugin manager (:h vim.pack).
 local M = {}
 
 ---@param repo string "owner/name"
@@ -20,8 +19,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
   end,
 })
 
--- All plugins, added in one call so the first start asks for confirmation once.
--- Configuration lives in lua/plugins/*.lua.
+-- One call, so the first start asks for confirmation once.
 local gh = M.gh
 vim.pack.add({
   { src = gh("catppuccin/nvim"), name = "catppuccin" },

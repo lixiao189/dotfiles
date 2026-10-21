@@ -1,8 +1,3 @@
--- Neovim >= 0.12 config built on native features:
---   vim.pack (plugins), vim.lsp.config/enable (LSP), nvim-cmp + vim.snippet (completion),
---   vim.treesitter (highlight/folds), ui2 (messages/cmdline).
--- Keymaps follow LazyVim: https://www.lazyvim.org/keymaps
-
 if vim.fn.has("nvim-0.12") == 0 then
   vim.api.nvim_echo({ { "This config requires Neovim >= 0.12", "ErrorMsg" } }, true, {})
   return

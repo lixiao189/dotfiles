@@ -1,4 +1,3 @@
--- Text objects (LazyVim's mini.ai setup). `an`/`in` stay native.
 local ai = require("mini.ai")
 ai.setup({
   n_lines = 500,
@@ -36,7 +35,6 @@ require("mini.surround").setup({
   },
 })
 
--- TODO/FIXME/HACK/NOTE highlighting (todo-comments.nvim) and hex colors.
 local hipatterns = require("mini.hipatterns")
 local function keyword(word, hl)
   return { pattern = "%f[%w]()" .. word .. "()%f[%W]", group = hl }
@@ -54,7 +52,6 @@ hipatterns.setup({
   },
 })
 
--- Key hints.
 require("which-key").setup({
   preset = "helix",
   delay = 300,

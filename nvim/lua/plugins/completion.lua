@@ -1,10 +1,6 @@
--- nvim-cmp tuned for low input lag, styled for the translucent terminal.
--- VS Code keys: <CR>/<Tab> accept, <Up>/<Down> move, <C-Space> triggers or toggles details.
-
 local cmp = require("cmp")
 local compare = cmp.config.compare
 
--- 'pumborder' still styles the cmdline popup menu.
 vim.o.pumborder = "single"
 
 vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
@@ -91,7 +87,6 @@ cmp.setup({
     fields = { "kind", "abbr", "menu" },
     format = function(entry, item)
       item.kind = (MiniIcons.get("lsp", item.kind or "Text"))
-      -- Drop argument lists from labels
       item.abbr = truncate((item.abbr:gsub("%b()", "")), 40)
       local details = entry.completion_item.labelDetails
       item.menu = details and (details.description or details.detail) or nil
@@ -103,7 +98,6 @@ cmp.setup({
     completion = bordered("Normal:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:None"),
     documentation = bordered("Normal:NormalFloat,FloatBorder:FloatBorder,Search:None"),
   },
-  -- Details only on demand (<C-Space>)
   view = { docs = { auto_open = false } },
   experimental = { ghost_text = false },
   mapping = {

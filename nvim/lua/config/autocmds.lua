@@ -3,7 +3,6 @@ local function augroup(name)
 end
 local autocmd = vim.api.nvim_create_autocmd
 
--- Reload files changed outside of Nvim
 autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
   callback = function()
@@ -20,7 +19,6 @@ autocmd("TextYankPost", {
   end,
 })
 
--- Equalize splits when the terminal is resized
 autocmd("VimResized", {
   group = augroup("resize_splits"),
   callback = function()
@@ -30,7 +28,6 @@ autocmd("VimResized", {
   end,
 })
 
--- Go to last cursor position when opening a buffer
 autocmd("BufReadPost", {
   group = augroup("last_loc"),
   callback = function(ev)
@@ -46,7 +43,6 @@ autocmd("BufReadPost", {
   end,
 })
 
--- Close some filetypes with <q>
 autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
@@ -73,7 +69,6 @@ autocmd("FileType", {
   end,
 })
 
--- Make it easier to close man-files when opened inline
 autocmd("FileType", {
   group = augroup("man_unlisted"),
   pattern = "man",
@@ -90,7 +85,6 @@ autocmd("FileType", {
   end,
 })
 
--- Fix conceallevel for json files
 autocmd("FileType", {
   group = augroup("json_conceal"),
   pattern = { "json", "jsonc", "json5" },
@@ -99,7 +93,6 @@ autocmd("FileType", {
   end,
 })
 
--- Auto create missing parent directories when saving a file
 autocmd("BufWritePre", {
   group = augroup("auto_create_dir"),
   callback = function(ev)

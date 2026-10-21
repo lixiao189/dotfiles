@@ -2,7 +2,6 @@ local M = {}
 
 M.root_markers = { ".git", "lua" }
 
---- Root directory like LazyVim: LSP workspace folder containing the file -> root markers -> cwd.
 ---@param buf? integer
 ---@return string
 function M.root(buf)
@@ -29,7 +28,6 @@ function M.root(buf)
   return vim.fs.root(buf, M.root_markers) or vim.fn.getcwd()
 end
 
---- Format the buffer with conform (falls back to LSP).
 function M.format(opts)
   require("conform").format(vim.tbl_extend("force", { lsp_format = "fallback", timeout_ms = 3000 }, opts or {}))
 end

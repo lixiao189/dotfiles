@@ -1,5 +1,3 @@
--- Global statusline on mini.statusline: plain coloured text on a transparent bar
--- (mode, branch, diff, file | diagnostics, LSP, filetype, position).
 local statusline = require("mini.statusline")
 
 local modes = {
