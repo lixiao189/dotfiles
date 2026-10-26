@@ -60,12 +60,3 @@ quick-terminal-autohide = true
 # -----------------------------------------------------------------------------
 shell-integration = detect
 shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo,path
-
-# -----------------------------------------------------------------------------
-# Keybinds (defaults kept; these are additions)
-# Cmd+`            quick terminal
-# Cmd+\            split right is already Cmd+D; Cmd+Shift+D splits down
-# -----------------------------------------------------------------------------
-keybind = global:cmd+grave_accent=toggle_quick_terminal
-keybind = cmd+shift+enter=toggle_split_zoom
-keybind = shift+enter=text:\n
