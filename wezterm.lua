@@ -38,7 +38,7 @@ local OPACITY = dark and 0.82 or 0.88
 local BLUR = 40
 
 -- Performance
-config.front_end = "WebGpu"
+config.front_end = "OpenGL"
 config.max_fps = 120
 config.animation_fps = 1
 config.unicode_version = 15
@@ -47,7 +47,12 @@ config.unicode_version = 15
 config.font_size = 14
 config.line_height = 1.05
 config.font = wezterm.font_with_fallback({
-	{ family = "Maple Mono NF CN", weight = "Regular" },
+	{
+		family = "Maple Mono NF CN",
+		weight = "Regular",
+		-- Ligatures reshape the current line on every keystroke.
+		harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+	},
 	{ family = "PingFang SC", weight = "Regular" },
 	"Apple Color Emoji",
 })
