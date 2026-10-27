@@ -39,10 +39,26 @@ vim.diagnostic.config({
 
 require("mason").setup()
 
+-- nvim-lspconfig uses a cmd function for these so a project-local
+-- node_modules/.bin binary can win. The function still spawns this
+-- program when no local binary exists, so check that binary instead of
+-- treating every function cmd as already installed.
+local fn_cmd_bin = {
+  jsonls = "vscode-json-language-server",
+  yamlls = "yaml-language-server",
+}
+
 ---@param name string
 local function executable(name)
   local cmd = vim.lsp.config[name] and vim.lsp.config[name].cmd
-  return type(cmd) == "function" or (type(cmd) == "table" and vim.fn.executable(cmd[1]) == 1)
+  if type(cmd) == "table" then
+    return vim.fn.executable(cmd[1]) == 1
+  end
+  if type(cmd) == "function" then
+    local bin = fn_cmd_bin[name]
+    return bin ~= nil and vim.fn.executable(bin) == 1
+  end
+  return false
 end
 
 local to_enable, to_install = {}, {}
