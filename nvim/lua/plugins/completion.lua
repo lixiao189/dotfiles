@@ -5,33 +5,6 @@ vim.o.pumborder = "single"
 
 vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
 
--- Prefer items matching the typed case (clangd ranks case-insensitively).
-local function case_match(entry)
-  local input = entry.context.cursor_before_line:sub(entry:get_offset())
-  return vim.startswith(entry:get_filter_text(), input)
-end
-local function compare_case(a, b)
-  local ca, cb = case_match(a), case_match(b)
-  if ca ~= cb then
-    return ca
-  end
-end
-
-local max_buffer_size = 1024 * 1024
-local function visible_buffers()
-  local bufs = {}
-  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-    local buf = vim.api.nvim_win_get_buf(win)
-    if
-      vim.bo[buf].buftype == ""
-      and vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf)) < max_buffer_size
-    then
-      bufs[buf] = true
-    end
-  end
-  return vim.tbl_keys(bufs)
-end
-
 local function truncate(s, max)
   return vim.fn.strchars(s) > max and vim.fn.strcharpart(s, 0, max - 1) .. "…" or s
 end
@@ -47,11 +20,12 @@ cmp.setup({
     return vim.bo.buftype ~= "prompt" and not disabled_filetypes[vim.bo.filetype]
   end,
   performance = {
-    debounce = 20,
-    throttle = 20,
+    debounce = 10,
+    throttle = 10,
     fetching_timeout = 200,
+    filtering_context_budget = 5000,
     confirm_resolve_timeout = 80,
-    async_budget = 1,
+    async_budget = 10,
     max_view_entries = 50,
   },
   preselect = cmp.PreselectMode.Item,
@@ -65,17 +39,12 @@ cmp.setup({
     { name = "nvim_lsp" },
     { name = "path" },
   }, {
-    {
-      name = "buffer",
-      keyword_length = 3,
-      option = { get_bufnrs = visible_buffers, max_indexed_line_length = 512 },
-    },
+    { name = "buffer" },
   }),
   sorting = {
     comparators = {
       compare.offset,
       compare.exact,
-      compare_case,
       compare.score,
       compare.recently_used,
       compare.sort_text,
