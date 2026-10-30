@@ -61,6 +61,7 @@ opt.foldmethod = "indent"
 opt.foldtext = ""
 opt.formatoptions = "jqlnt" -- no auto comment leader on <CR>/o/O
 opt.grepprg = "rg --vimgrep"
+opt.hlsearch = true
 opt.ignorecase = true
 opt.jumpoptions = "view"
 opt.laststatus = 3
