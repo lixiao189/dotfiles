@@ -1,7 +1,5 @@
-local M = {}
-
 ---@param repo string "owner/name"
-function M.gh(repo)
+local function gh(repo)
   return "https://github.com/" .. repo
 end
 
@@ -20,7 +18,6 @@ vim.api.nvim_create_autocmd("PackChanged", {
 })
 
 -- One call, so the first start asks for confirmation once.
-local gh = M.gh
 vim.pack.add({
   { src = gh("catppuccin/nvim"), name = "catppuccin" },
   gh("nvim-mini/mini.nvim"), -- ai, pairs, surround, icons, statusline, tabline, hipatterns
@@ -68,5 +65,3 @@ vim.api.nvim_create_user_command("PackClean", function()
     vim.pack.del(unused)
   end
 end, { desc = "Delete plugins that are no longer added" })
-
-return M

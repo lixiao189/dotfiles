@@ -1,8 +1,6 @@
 local util = require("config.util")
 local map = vim.keymap.set
-local function root()
-  return util.root()
-end
+local root = util.root
 
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
@@ -354,10 +352,7 @@ map(
 )
 map("n", "<leader>sq", P("qflist"), { desc = "Quickfix List" })
 map("n", "<leader>sR", P("resume"), { desc = "Resume" })
-map("n", "<leader>su", function()
-  vim.cmd.packadd("nvim.undotree")
-  require("undotree").open()
-end, { desc = "Undotree" })
+map("n", "<leader>su", "<cmd>packadd nvim.undotree<cr><cmd>Undotree<cr>", { desc = "Undotree" })
 map({ "n", "x" }, "<leader>sw", P("grep_word", root_opts), { desc = "Visual selection or word (Root Dir)" })
 map({ "n", "x" }, "<leader>sW", P("grep_word"), { desc = "Visual selection or word (cwd)" })
 map("n", "<leader>uC", P("colorschemes"), { desc = "Colorschemes" })

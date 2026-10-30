@@ -20,7 +20,7 @@ ai.setup({
 })
 
 require("mini.pairs").setup({
-  modes = { insert = true, command = true, terminal = false },
+  modes = { command = true },
 })
 
 require("mini.surround").setup({
@@ -55,8 +55,8 @@ hipatterns.setup({
 require("which-key").setup({
   preset = "helix",
   delay = 300,
-  -- Translucent terminal: no blending, borders match 'winborder'; colours come from ui.lua.
-  win = { border = "single", wo = { winblend = 0 } },
+  -- Translucent terminal: no blending. Border is "single" like 'winborder'.
+  win = { border = "single" },
   spec = {
     { "<Leader><Tab>", group = "tabs" },
     { "<Leader>b", group = "buffer" },

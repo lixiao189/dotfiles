@@ -1,19 +1,9 @@
+local bar = { text = "▎" }
+local del = { text = "\u{f0da}" }
+
 require("gitsigns").setup({
-  signs = {
-    add = { text = "▎" },
-    change = { text = "▎" },
-    delete = { text = "\u{f0da}" },
-    topdelete = { text = "\u{f0da}" },
-    changedelete = { text = "▎" },
-    untracked = { text = "▎" },
-  },
-  signs_staged = {
-    add = { text = "▎" },
-    change = { text = "▎" },
-    delete = { text = "\u{f0da}" },
-    topdelete = { text = "\u{f0da}" },
-    changedelete = { text = "▎" },
-  },
+  signs = { add = bar, change = bar, delete = del, topdelete = del, changedelete = bar, untracked = bar },
+  signs_staged = { add = bar, change = bar, delete = del, topdelete = del, changedelete = bar },
   on_attach = function(buf)
     local gs = package.loaded.gitsigns
     local function map(mode, l, r, desc)

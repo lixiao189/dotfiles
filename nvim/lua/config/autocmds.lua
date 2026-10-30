@@ -50,13 +50,10 @@ autocmd("FileType", {
     "gitsigns-blame",
     "grug-far",
     "help",
-    "lspinfo",
     "nvim-pack",
     "nvim-undotree",
-    "notify",
     "qf",
     "query",
-    "startuptime",
   },
   callback = function(ev)
     vim.bo[ev.buf].buflisted = false

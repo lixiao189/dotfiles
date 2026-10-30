@@ -34,8 +34,8 @@ require("conform").setup({
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 vim.keymap.set({ "n", "x" }, "<leader>cf", function()
-  util.format()
+  require("conform").format()
 end, { desc = "Format" })
 vim.keymap.set({ "n", "x" }, "<leader>cF", function()
-  util.format({ formatters = { "injected" }, timeout_ms = 3000 })
+  require("conform").format({ formatters = { "injected" } })
 end, { desc = "Format Injected Langs" })

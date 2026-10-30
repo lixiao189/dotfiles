@@ -1,8 +1,6 @@
 local cmp = require("cmp")
 local compare = cmp.config.compare
 
-vim.o.pumborder = "single"
-
 vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
 
 local function truncate(s, max)
@@ -12,7 +10,8 @@ end
 local disabled_filetypes = { bigfile = true, snacks_picker_input = true, snacks_input = true }
 
 local function bordered(winhighlight)
-  return cmp.config.window.bordered({ border = "single", winhighlight = winhighlight, winblend = 0 })
+  -- Border comes from 'winborder'.
+  return cmp.config.window.bordered({ winhighlight = winhighlight })
 end
 
 cmp.setup({
@@ -24,11 +23,9 @@ cmp.setup({
     throttle = 10,
     fetching_timeout = 200,
     filtering_context_budget = 5000,
-    confirm_resolve_timeout = 80,
     async_budget = 10,
     max_view_entries = 50,
   },
-  preselect = cmp.PreselectMode.Item,
   completion = { completeopt = "menu,menuone,noinsert" },
   snippet = {
     expand = function(args)
@@ -68,7 +65,6 @@ cmp.setup({
     documentation = bordered("Normal:NormalFloat,FloatBorder:FloatBorder,Search:None"),
   },
   view = { docs = { auto_open = false } },
-  experimental = { ghost_text = false },
   mapping = {
     ["<C-Space>"] = cmp.mapping(function()
       if not cmp.visible() then

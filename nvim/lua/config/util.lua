@@ -28,10 +28,6 @@ function M.root(buf)
   return vim.fs.root(buf, M.root_markers) or vim.fn.getcwd()
 end
 
-function M.format(opts)
-  require("conform").format(vim.tbl_extend("force", { lsp_format = "fallback", timeout_ms = 3000 }, opts or {}))
-end
-
 ---@param buf? integer
 function M.autoformat_enabled(buf)
   local b = vim.b[buf or 0].autoformat
