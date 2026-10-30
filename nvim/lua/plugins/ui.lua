@@ -2,7 +2,7 @@
 -- Neovim ships its own colors/catppuccin.vim, so load the plugin's per-flavour scheme explicitly.
 require("catppuccin").setup({
   transparent_background = true,
-  float = { transparent = true },
+  float = { transparent = true, solid = false },
   term_colors = true,
   custom_highlights = function(c)
     local none = c.none
