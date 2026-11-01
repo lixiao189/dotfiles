@@ -68,6 +68,7 @@ map({ "i", "n", "s" }, "<esc>", function()
   end
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
+map("i", "jk", "<Esc>", { remap = true, desc = "Exit insert mode" })
 map(
   "n",
   "<leader>ur",
