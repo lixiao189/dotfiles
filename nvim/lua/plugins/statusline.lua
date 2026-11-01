@@ -84,10 +84,167 @@ local function diagnostics()
   return table.concat(parts, " ")
 end
 
+-- vim.lsp.status() consumes the progress ring buffer, so the next redraw would be
+-- empty. Cache work-done progress and keep it on the bar until the server says end.
+local frames = {
+  "\u{280b}",
+  "\u{2819}",
+  "\u{2839}",
+  "\u{2838}",
+  "\u{283c}",
+  "\u{2834}",
+  "\u{2826}",
+  "\u{2827}",
+  "\u{2807}",
+  "\u{280f}",
+}
+local frame = 1
+---@type table<integer, table<integer|string, {title: string, message: string?, percentage: number?}>>
+local lsp_active = {}
+local lsp_timer ---@type uv.uv_timer_t?
+
+local function lsp_busy()
+  for _, tokens in pairs(lsp_active) do
+    if next(tokens) then
+      return true
+    end
+  end
+  return false
+end
+
+local function stop_lsp_timer()
+  if not lsp_timer then
+    return
+  end
+  lsp_timer:stop()
+  lsp_timer:close()
+  lsp_timer = nil
+end
+
+local function start_lsp_timer()
+  if lsp_timer then
+    return
+  end
+  lsp_timer = assert(vim.uv.new_timer())
+  lsp_timer:start(
+    100,
+    100,
+    vim.schedule_wrap(function()
+      if not lsp_busy() then
+        return stop_lsp_timer()
+      end
+      frame = frame % #frames + 1
+      if vim.fn.mode() ~= "c" then
+        vim.cmd.redrawstatus()
+      end
+    end)
+  )
+end
+
+local function shorten(text, max)
+  if vim.fn.strdisplaywidth(text) <= max then
+    return text
+  end
+  local n = math.min(vim.fn.strchars(text), max)
+  while n > 0 and vim.fn.strdisplaywidth(vim.fn.strcharpart(text, 0, n)) > max - 1 do
+    n = n - 1
+  end
+  return vim.fn.strcharpart(text, 0, n) .. "\u{2026}"
+end
+
+local function lsp_progress()
+  local ids = {}
+  for client_id in pairs(lsp_active) do
+    ids[#ids + 1] = client_id
+  end
+  table.sort(ids)
+  local parts = {}
+  for _, client_id in ipairs(ids) do
+    local client = vim.lsp.get_client_by_id(client_id)
+    local tokens = lsp_active[client_id]
+    if not client or not tokens then
+      lsp_active[client_id] = nil
+    else
+      local items = {}
+      for _, item in pairs(tokens) do
+        items[#items + 1] = item
+      end
+      table.sort(items, function(a, b)
+        if a.title ~= b.title then
+          return a.title < b.title
+        end
+        return (a.message or "") < (b.message or "")
+      end)
+      for _, item in ipairs(items) do
+        local bits = { frames[frame], client.name }
+        if item.title ~= "" then
+          bits[#bits + 1] = item.title:gsub("%s+", " ")
+        end
+        if type(item.percentage) == "number" then
+          bits[#bits + 1] = string.format("%d%%", item.percentage)
+        end
+        if item.message and item.message ~= "" and item.message ~= item.title then
+          bits[#bits + 1] = item.message:gsub("%s+", " ")
+        end
+        parts[#parts + 1] = table.concat(bits, " ")
+      end
+    end
+  end
+  if not lsp_busy() then
+    stop_lsp_timer()
+  end
+  if #parts == 0 then
+    return ""
+  end
+  local text = shorten(table.concat(parts, "  "), math.floor(vim.o.columns / 3))
+  return hl("StlProgress", (text:gsub("%%", "%%%%")))
+end
+
+local function on_lsp_progress(ev)
+  local value = vim.tbl_get(ev, "data", "params", "value")
+  if type(value) ~= "table" or not value.kind then
+    return
+  end
+  local client_id = ev.data.client_id
+  local token = ev.data.params.token
+  local tokens = lsp_active[client_id] or {}
+  lsp_active[client_id] = tokens
+  if value.kind == "end" then
+    tokens[token] = nil
+    if not next(tokens) then
+      lsp_active[client_id] = nil
+    end
+    if not lsp_busy() then
+      stop_lsp_timer()
+    end
+  else
+    local prev = tokens[token]
+    local item = {
+      title = value.title or (prev and prev.title) or "",
+      message = value.message,
+      percentage = value.percentage,
+    }
+    if value.kind == "report" and prev then
+      if item.message == nil then
+        item.message = prev.message
+      end
+      if item.percentage == nil then
+        item.percentage = prev.percentage
+      end
+    end
+    tokens[token] = item
+    start_lsp_timer()
+  end
+  vim.cmd.redrawstatus()
+end
+
 local function lsp()
-  local names = vim.tbl_map(function(c)
-    return c.name
-  end, vim.lsp.get_clients({ bufnr = 0 }))
+  local names = {}
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+    if not lsp_active[client.id] then
+      names[#names + 1] = client.name
+    end
+  end
   return #names > 0 and hl("StlMuted", "\u{f085} " .. table.concat(names, ", ")) or ""
 end
 
@@ -117,6 +274,7 @@ statusline.setup({
       local left = join({ hl("StlMode" .. mode[2], mode[1]), wide and git() or "", filename() })
       local right = join({
         diagnostics(),
+        lsp_progress(),
         wide and lsp() or "",
         wide and filetype() or "",
         hl("StlMuted", "%l:%c  %P"),
@@ -161,6 +319,7 @@ local function set_highlights()
   set(0, "StlDiagnosticWarn", { fg = c.yellow, bg = bar })
   set(0, "StlDiagnosticInfo", { fg = c.sky, bg = bar })
   set(0, "StlDiagnosticHint", { fg = c.teal, bg = bar })
+  set(0, "StlProgress", { fg = c.sapphire, bg = bar })
   set(0, "StlExplorerHeader", { fg = c.subtext0, bold = true })
 end
 
@@ -177,4 +336,12 @@ vim.api.nvim_create_autocmd({ "DiagnosticChanged", "LspAttach", "LspDetach", "Us
       vim.cmd.redrawstatus()
     end
   end,
+})
+vim.api.nvim_create_autocmd("LspProgress", {
+  group = "config_statusline",
+  callback = on_lsp_progress,
+})
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  group = "config_statusline",
+  callback = stop_lsp_timer,
 })
