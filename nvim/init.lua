@@ -16,6 +16,7 @@ require("plugins.lsp")
 require("plugins.completion")
 require("plugins.formatting")
 require("plugins.git")
+require("plugins.cmake")
 
 require("config.keymaps")
 require("config.autocmds")

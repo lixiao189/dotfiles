@@ -65,6 +65,7 @@ require("which-key").setup({
     { "<Leader>dp", group = "profiler" },
     { "<Leader>f", group = "file/find" },
     { "<Leader>g", group = "git", mode = { "n", "x" } },
+    { "<Leader>m", group = "cmake" },
     { "<Leader>gh", group = "hunks", mode = { "n", "x" } },
     { "<Leader>q", group = "quit/session" },
     { "<Leader>s", group = "search", mode = { "n", "x" } },

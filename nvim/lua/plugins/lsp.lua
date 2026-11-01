@@ -19,7 +19,7 @@ local servers = {
 }
 
 -- rustfmt ships with rustup; mason's package is deprecated.
-local tools = { "stylua", "shfmt", "gofumpt", "goimports", "prettier", "clang-format" }
+local tools = { "stylua", "shfmt", "gofumpt", "goimports", "prettier", "clang-format", "gersemi" }
 
 vim.diagnostic.config({
   underline = true,

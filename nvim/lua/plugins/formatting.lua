@@ -13,6 +13,7 @@ require("conform").setup({
     rust = { "rustfmt" },
     c = { "clang-format" },
     cpp = { "clang-format" },
+    cmake = { "gersemi" },
     javascript = prettier,
     javascriptreact = prettier,
     typescript = prettier,

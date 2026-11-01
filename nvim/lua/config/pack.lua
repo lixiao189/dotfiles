@@ -34,6 +34,8 @@ vim.pack.add({
   gh("mason-org/mason.nvim"),
   gh("stevearc/conform.nvim"),
   gh("lewis6991/gitsigns.nvim"),
+  gh("nvim-lua/plenary.nvim"), -- required by cmake-tools
+  gh("Civitasv/cmake-tools.nvim"),
 })
 
 vim.api.nvim_create_user_command("PackUpdate", function(args)
