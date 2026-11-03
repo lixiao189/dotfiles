@@ -74,6 +74,37 @@ autocmd("FileType", {
   end,
 })
 
+-- Frontend, config, and Lua stay at 2 spaces; everything else inherits the global 4.
+autocmd("FileType", {
+  group = augroup("indent_width_2"),
+  pattern = {
+    "astro",
+    "css",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "json5",
+    "jsonc",
+    "less",
+    "lua",
+    "sass",
+    "scss",
+    "svelte",
+    "toml",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "yaml",
+  },
+  callback = function()
+    vim.bo.expandtab = true
+    vim.bo.shiftwidth = 2
+    vim.bo.softtabstop = 2
+    vim.bo.tabstop = 2
+  end,
+})
+
 -- No auto comment leader on <CR>/o/O (ftplugins add these back)
 autocmd("FileType", {
   group = augroup("formatoptions"),
