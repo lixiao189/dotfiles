@@ -60,12 +60,20 @@ set foldlevel=100
 " Leader key
 let g:mapleader = "\<Space>"
 
-" Indent settings
+" Indent: 4 spaces. Frontend, config, and Lua stay at 2 (same set as nvim).
+" Go matches nvim/after/ftplugin/go.lua.
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 set expandtab
 set cindent
+
+augroup indent_width
+  autocmd!
+  autocmd FileType astro,css,html,javascript,javascriptreact,json,json5,jsonc,less,lua,sass,scss,svelte,toml,typescript,typescriptreact,vue,yaml
+        \ setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
+  autocmd FileType go setlocal noexpandtab tabstop=4 softtabstop=4 shiftwidth=4
+augroup END
 
 " NerdTree
 nnoremap <leader>e :NERDTreeToggle<CR>
@@ -282,6 +290,3 @@ let g:which_key_map.l.g.t = 'type definition'
 let g:which_key_map.l.g.i = 'implementation'
 let g:which_key_map.l.g.r = 'references'
 silent! call which_key#register('<Space>', "g:which_key_map")
-
-" Lang
-autocmd FIletype c,cpp setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
