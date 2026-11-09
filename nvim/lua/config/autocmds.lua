@@ -105,7 +105,8 @@ autocmd("FileType", {
   end,
 })
 
--- No auto comment leader on <CR>/o/O (ftplugins add these back)
+-- Single source of truth for 'formatoptions': most ftplugins add "c"/"r"/"o" back, so
+-- strip them per buffer here instead of encoding the same intent in options.lua.
 autocmd("FileType", {
   group = augroup("formatoptions"),
   callback = function()

@@ -59,7 +59,6 @@ opt.fillchars = { foldopen = "\u{f078}", foldclose = "\u{f054}", fold = " ", fol
 opt.foldlevel = 99
 opt.foldmethod = "indent"
 opt.foldtext = ""
-opt.formatoptions = "jqlnt" -- no auto comment leader on <CR>/o/O
 opt.grepprg = "rg --vimgrep"
 opt.hlsearch = true
 opt.ignorecase = true
