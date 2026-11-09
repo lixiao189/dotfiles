@@ -1,10 +1,9 @@
-# Ghostty config
 # Reload: Cmd+Shift+,   |   Open this file: Cmd+,
 # Theme preview: ghostty +list-themes
 
 # -----------------------------------------------------------------------------
 # Theme
-# Follows the macOS appearance. Preview others with `ghostty +list-themes`.
+# Follows the macOS appearance.
 # -----------------------------------------------------------------------------
 theme = light:Catppuccin Latte,dark:Catppuccin Mocha
 background-opacity = 0.94
