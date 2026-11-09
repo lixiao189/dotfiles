@@ -18,6 +18,8 @@ vim.api.nvim_create_autocmd("PackChanged", {
 })
 
 -- One call, so the first start asks for confirmation once.
+-- Specs with data.lazy are installed and tracked but not put on 'runtimepath';
+-- their plugins/*.lua packadds them on demand.
 vim.pack.add({
   { src = gh("catppuccin/nvim"), name = "catppuccin" },
   gh("nvim-mini/mini.nvim"), -- ai, pairs, surround, icons, statusline, tabline, hipatterns
@@ -34,8 +36,15 @@ vim.pack.add({
   gh("mason-org/mason.nvim"),
   gh("stevearc/conform.nvim"),
   gh("lewis6991/gitsigns.nvim"),
-  gh("nvim-lua/plenary.nvim"), -- required by cmake-tools
-  gh("Civitasv/cmake-tools.nvim"),
+  { src = gh("nvim-lua/plenary.nvim"), data = { lazy = true } }, -- required by cmake-tools
+  { src = gh("Civitasv/cmake-tools.nvim"), data = { lazy = true } },
+}, {
+  load = function(p)
+    if not (p.spec.data and p.spec.data.lazy) then
+      -- What vim.pack does by default during init: plugin/ is sourced later with the rest of startup.
+      vim.cmd.packadd({ vim.fn.escape(p.spec.name, " "), bang = true, magic = { file = false } })
+    end
+  end,
 })
 
 vim.api.nvim_create_user_command("PackUpdate", function(args)
