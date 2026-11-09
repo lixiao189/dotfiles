@@ -71,59 +71,69 @@ for name, opts in pairs(servers) do
 end
 vim.lsp.enable(to_enable)
 
-local registry = require("mason-registry")
-registry.refresh(vim.schedule_wrap(function()
-  local lsp_to_pkg = {}
-  for _, spec in ipairs(registry.get_all_package_specs()) do
-    local lspconfig = vim.tbl_get(spec, "neovim", "lspconfig")
-    if lspconfig then
-      lsp_to_pkg[lspconfig] = spec.name
-    end
-  end
+local missing_tools = vim.tbl_filter(function(tool)
+  return vim.fn.executable(tool) == 0
+end, tools)
 
-  local function install(pkg_name, on_done)
-    local ok, pkg = pcall(registry.get_package, pkg_name)
-    if not ok then
-      return vim.notify("mason: unknown package " .. pkg_name, vim.log.levels.WARN)
+local function ensure_installed()
+  local registry = require("mason-registry")
+  registry.refresh(vim.schedule_wrap(function()
+    local lsp_to_pkg = {}
+    for _, spec in ipairs(registry.get_all_package_specs()) do
+      local lspconfig = vim.tbl_get(spec, "neovim", "lspconfig")
+      if lspconfig then
+        lsp_to_pkg[lspconfig] = spec.name
+      end
     end
-    if pkg:is_installed() then
-      return on_done and on_done()
-    end
-    if pkg:is_installing() then
-      return
-    end
-    vim.notify("mason: installing " .. pkg_name)
-    pkg:install(
-      {},
-      vim.schedule_wrap(function(success)
-        if success then
-          vim.notify("mason: installed " .. pkg_name)
-          if on_done then
-            on_done()
+
+    local function install(pkg_name, on_done)
+      local ok, pkg = pcall(registry.get_package, pkg_name)
+      if not ok then
+        return vim.notify("mason: unknown package " .. pkg_name, vim.log.levels.WARN)
+      end
+      if pkg:is_installed() then
+        return on_done and on_done()
+      end
+      if pkg:is_installing() then
+        return
+      end
+      vim.notify("mason: installing " .. pkg_name)
+      pkg:install(
+        {},
+        vim.schedule_wrap(function(success)
+          if success then
+            vim.notify("mason: installed " .. pkg_name)
+            if on_done then
+              on_done()
+            end
+          else
+            vim.notify("mason: failed to install " .. pkg_name, vim.log.levels.ERROR)
           end
-        else
-          vim.notify("mason: failed to install " .. pkg_name, vim.log.levels.ERROR)
-        end
-      end)
-    )
-  end
-
-  for _, server in ipairs(to_install) do
-    local pkg = lsp_to_pkg[server]
-    if pkg then
-      install(pkg, function()
-        vim.lsp.enable(server)
-      end)
-    else
-      vim.notify("mason: no package for LSP " .. server, vim.log.levels.WARN)
+        end)
+      )
     end
-  end
-  for _, tool in ipairs(tools) do
-    if vim.fn.executable(tool) == 0 then
+
+    for _, server in ipairs(to_install) do
+      local pkg = lsp_to_pkg[server]
+      if pkg then
+        install(pkg, function()
+          vim.lsp.enable(server)
+        end)
+      else
+        vim.notify("mason: no package for LSP " .. server, vim.log.levels.WARN)
+      end
+    end
+    for _, tool in ipairs(missing_tools) do
       install(tool)
     end
-  end
-end))
+  end))
+end
+
+-- Everything present (the usual start): skip the registry, which would otherwise be loaded,
+-- refreshed (a download once it is a day old), and scanned on every launch.
+if #to_install > 0 or #missing_tools > 0 then
+  ensure_installed()
+end
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("config_lsp_attach", { clear = true }),
