@@ -18,14 +18,6 @@ cmp.setup({
   enabled = function()
     return vim.bo.buftype ~= "prompt" and not disabled_filetypes[vim.bo.filetype]
   end,
-  performance = {
-    debounce = 10,
-    throttle = 10,
-    fetching_timeout = 200,
-    filtering_context_budget = 5000,
-    async_budget = 10,
-    max_view_entries = 50,
-  },
   completion = { completeopt = "menu,menuone,noinsert" },
   snippet = {
     expand = function(args)
