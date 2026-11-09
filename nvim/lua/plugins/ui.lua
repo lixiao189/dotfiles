@@ -1,4 +1,4 @@
--- Colorscheme: match Ghostty (Latte when light, Mocha when dark) with a transparent background.
+-- Catppuccin: Latte when light, Mocha when dark, transparent background.
 -- Neovim ships its own colors/catppuccin.vim, so load the plugin's per-flavour scheme explicitly.
 require("catppuccin").setup({
   transparent_background = true,

@@ -39,10 +39,7 @@ vim.diagnostic.config({
 
 require("mason").setup()
 
--- nvim-lspconfig uses a cmd function for these so a project-local
--- node_modules/.bin binary can win. The function still spawns this
--- program when no local binary exists, so check that binary instead of
--- treating every function cmd as already installed.
+-- lspconfig gives these a cmd function to prefer node_modules/.bin; it falls back to this binary.
 local fn_cmd_bin = {
   jsonls = "vscode-json-language-server",
   yamlls = "yaml-language-server",
@@ -129,8 +126,7 @@ local function ensure_installed()
   end))
 end
 
--- Everything present (the usual start): skip the registry, which would otherwise be loaded,
--- refreshed (a download once it is a day old), and scanned on every launch.
+-- Skip the registry when nothing is missing: it is loaded, refreshed daily, and scanned.
 if #to_install > 0 or #missing_tools > 0 then
   ensure_installed()
 end

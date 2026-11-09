@@ -328,7 +328,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   group = vim.api.nvim_create_augroup("config_statusline", { clear = true }),
   callback = set_highlights,
 })
--- Redraw on git/diagnostic/LSP changes so the bar never lags.
+-- Redraw on git/diagnostic/LSP changes.
 local function redrawstatus()
   vim.cmd.redrawstatus()
 end

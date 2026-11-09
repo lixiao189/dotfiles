@@ -4,7 +4,7 @@ vim.g.maplocalleader = "\\"
 vim.g.autoformat = false -- format on save (toggle with <leader>uf / <leader>uF)
 vim.g.snacks_animate = false
 
--- Native message/cmdline UI (replaces noice.nvim): no "Press ENTER", highlighted cmdline, `g<` pager.
+-- Native message/cmdline UI: no "Press ENTER", highlighted cmdline, `g<` pager.
 require("vim._core.ui2").enable({})
 
 local opt = vim.opt

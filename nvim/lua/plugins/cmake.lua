@@ -1,11 +1,6 @@
--- Configure, build, run, and test via :CMake* commands.
--- Highlighting is treesitter "cmake"; diagnostics and completion are neocmake.
--- LazyVim's cmake extra does not bind keys, so neither does this.
--- `cmake` must be on PATH. compile_commands.json is symlinked to the project root for clangd.
---
--- Loaded only when needed: cmake-tools treats the cwd as the project, so a cwd with a
--- CMakeLists.txt (at startup or after :cd) or opening a cmake file pulls it in. Elsewhere
--- it would cost ~3ms of startup plus its session and DirChanged autocmds for nothing.
+-- :CMake* commands. Needs `cmake` on PATH; compile_commands.json is symlinked to the root for clangd.
+-- cmake-tools treats the cwd as the project, so it loads only for a cwd with a CMakeLists.txt
+-- (at startup or after :cd) or a cmake file; elsewhere it would cost ~3ms of startup.
 local group = vim.api.nvim_create_augroup("config_cmake", { clear = true })
 
 local function load()

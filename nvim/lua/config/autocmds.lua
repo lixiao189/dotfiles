@@ -105,8 +105,7 @@ autocmd("FileType", {
   end,
 })
 
--- Single source of truth for 'formatoptions': most ftplugins add "c"/"r"/"o" back, so
--- strip them per buffer here instead of encoding the same intent in options.lua.
+-- Most ftplugins add "c"/"r"/"o" back to 'formatoptions', so strip them per buffer.
 autocmd("FileType", {
   group = augroup("formatoptions"),
   callback = function()
