@@ -1,5 +1,4 @@
 # Used when no closer project .clang-format exists (clang-format / clangd walk parents).
-# LLVM is clang-format's default; only the indent width is changed.
 BasedOnStyle: LLVM
 IndentWidth: 4
 TabWidth: 4
