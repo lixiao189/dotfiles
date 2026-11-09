@@ -87,7 +87,7 @@ return {
       end
     end,
   },
-  { "nvim-mini/mini.tabline", lazy = false, dependencies = { "nvim-mini/mini.icons" }, opts = {} },
+  { "nvim-mini/mini.tabline", lazy = false, opts = {} },
   {
     "folke/snacks.nvim",
     lazy = false,

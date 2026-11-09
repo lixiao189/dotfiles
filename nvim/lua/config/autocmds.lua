@@ -46,7 +46,6 @@ autocmd("BufReadPost", {
 autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
-    "checkhealth",
     "gitsigns-blame",
     "grug-far",
     "help",
@@ -73,7 +72,7 @@ autocmd("FileType", {
   end,
 })
 
--- Frontend, config, and Lua stay at 2 spaces; everything else inherits the global 4.
+-- Frontend, config, Lua and Markdown stay at 2 spaces; everything else inherits the global 4.
 autocmd("FileType", {
   group = augroup("indent_width_2"),
   pattern = {
@@ -87,6 +86,7 @@ autocmd("FileType", {
     "jsonc",
     "less",
     "lua",
+    "markdown",
     "sass",
     "scss",
     "svelte",
