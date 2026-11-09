@@ -26,7 +26,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " Auto complete
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'liuchengxu/vim-which-key'
 call plug#end()
 
@@ -40,8 +40,8 @@ set nowrap
 set mouse=a
 set cul
 set clipboard=unnamedplus
-set incsearch  " Enable incremental search
-set hlsearch   " Enable highlight search
+set incsearch
+set hlsearch
 set splitbelow
 set splitright
 set encoding=utf-8
@@ -112,7 +112,7 @@ function! ShowDocumentation()
   endif
 endfunction
 
-command! -nargs=0 Format :call CocActionAsync('format') " Add format command
+command! -nargs=0 Format :call CocActionAsync('format')
 
 augroup mygroup
   autocmd!
