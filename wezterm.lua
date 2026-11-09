@@ -49,7 +49,6 @@ config.font_size = 14
 config.line_height = 1.05
 -- Ligatures reshape the current line on every keystroke.
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
-config.anti_alias_custom_block_glyphs = true
 
 -- Theme
 config.color_scheme = dark and "Catppuccin Mocha" or "Catppuccin Latte"
@@ -119,17 +118,6 @@ config.audible_bell = "Disabled"
 -- reflow-on-resize both scale with this.
 config.scrollback_lines = 10000
 config.quick_select_remove_styling = true
-config.skip_close_confirmation_for_processes_named = {
-	"bash",
-	"sh",
-	"zsh",
-	"fish",
-	"tmux",
-	"nu",
-	"cmd.exe",
-	"pwsh.exe",
-	"powershell.exe",
-}
 
 -- Key bindings
 -- Keys are lowercase and modifiers always spell out SHIFT: an uppercase key
