@@ -3,20 +3,7 @@ if vim.fn.has("nvim-0.12") == 0 then
   return
 end
 
-vim.loader.enable()
-
 require("config.options")
-require("config.pack")
-
-require("plugins.ui")
-require("plugins.statusline")
-require("plugins.editor")
-require("plugins.treesitter")
-require("plugins.lsp")
-require("plugins.completion")
-require("plugins.formatting")
-require("plugins.git")
-require("plugins.cmake")
-
+require("config.lazy")
 require("config.keymaps")
 require("config.autocmds")

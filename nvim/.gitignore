@@ -6,4 +6,4 @@ debug
 foo.*
 *.log
 data
-nvim-pack-lock.json
+lazy-lock.json

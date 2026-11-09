@@ -1,5 +1,3 @@
-local statusline = require("mini.statusline")
-
 local modes = {
   n = { "NORMAL", "Normal" },
   no = { "O-PENDING", "Normal" },
@@ -61,7 +59,7 @@ local function filename()
   end
   local path = vim.fn.fnamemodify(name, ":~:.")
   local dir, tail = path:match("^(.*/)([^/]+)$")
-  local ret = (dir and not statusline.is_truncated(100)) and hl("StlDir", dir) or ""
+  local ret = (dir and not MiniStatusline.is_truncated(100)) and hl("StlDir", dir) or ""
   ret = ret .. hl("StlFile", tail or path)
   if vim.bo[buf].modified then
     ret = ret .. hl("StlModified", " \u{25cf}")
@@ -253,7 +251,7 @@ local function filetype()
   if ft == "" or vim.bo.buftype ~= "" then
     return ""
   end
-  local icon, icon_hl = MiniIcons.get("filetype", ft)
+  local icon, icon_hl = require("mini.icons").get("filetype", ft)
   return hl(icon_hl, icon) .. " " .. hl("StlMuted", ft)
 end
 
@@ -266,86 +264,92 @@ local function join(parts)
   )
 end
 
-statusline.setup({
-  content = {
-    active = function()
-      local mode = modes[vim.fn.mode()] or modes[vim.fn.mode():sub(1, 1)] or modes.n
-      local wide = not statusline.is_truncated(80)
-      local left = join({ hl("StlMode" .. mode[2], mode[1]), wide and git() or "", filename() })
-      local right = join({
-        diagnostics(),
-        lsp_progress(),
-        wide and lsp() or "",
-        wide and filetype() or "",
-        hl("StlMuted", "%l:%c  %P"),
-      })
-      return hl("StatusLine", " ") .. left .. hl("StatusLine", "%<%=") .. right .. hl("StatusLine", " ")
-    end,
-    inactive = function()
-      return hl("StatusLineNC", " %f%=")
-    end,
-  },
-})
+return {
+  "nvim-mini/mini.statusline",
+  lazy = false,
+  config = function()
+    require("mini.statusline").setup({
+      content = {
+        active = function()
+          local mode = modes[vim.fn.mode()] or modes[vim.fn.mode():sub(1, 1)] or modes.n
+          local wide = not MiniStatusline.is_truncated(80)
+          local left = join({ hl("StlMode" .. mode[2], mode[1]), wide and git() or "", filename() })
+          local right = join({
+            diagnostics(),
+            lsp_progress(),
+            wide and lsp() or "",
+            wide and filetype() or "",
+            hl("StlMuted", "%l:%c  %P"),
+          })
+          return hl("StatusLine", " ") .. left .. hl("StatusLine", "%<%=") .. right .. hl("StatusLine", " ")
+        end,
+        inactive = function()
+          return hl("StatusLineNC", " %f%=")
+        end,
+      },
+    })
 
-local function set_highlights()
-  local ok, palettes = pcall(require, "catppuccin.palettes")
-  if not ok or not (vim.g.colors_name or ""):find("^catppuccin") then
-    return
-  end
-  local c = palettes.get_palette()
-  local bar = "NONE" -- let the terminal's translucent background show through
-  local set = vim.api.nvim_set_hl
-  set(0, "StatusLine", { fg = c.text, bg = bar })
-  set(0, "StatusLineNC", { fg = c.overlay0, bg = bar })
-  for name, color in pairs({
-    Normal = c.blue,
-    Insert = c.green,
-    Visual = c.mauve,
-    Replace = c.red,
-    Command = c.peach,
-    Terminal = c.teal,
-  }) do
-    set(0, "StlMode" .. name, { fg = color, bg = bar, bold = true })
-  end
-  set(0, "StlBranch", { fg = c.mauve, bg = bar, bold = true })
-  set(0, "StlAdded", { fg = c.green, bg = bar })
-  set(0, "StlChanged", { fg = c.yellow, bg = bar })
-  set(0, "StlRemoved", { fg = c.red, bg = bar })
-  set(0, "StlDir", { fg = c.overlay1, bg = bar })
-  set(0, "StlFile", { fg = c.text, bg = bar, bold = true })
-  set(0, "StlModified", { fg = c.peach, bg = bar })
-  set(0, "StlMuted", { fg = c.overlay1, bg = bar })
-  set(0, "StlDiagnosticError", { fg = c.red, bg = bar })
-  set(0, "StlDiagnosticWarn", { fg = c.yellow, bg = bar })
-  set(0, "StlDiagnosticInfo", { fg = c.sky, bg = bar })
-  set(0, "StlDiagnosticHint", { fg = c.teal, bg = bar })
-  set(0, "StlProgress", { fg = c.sapphire, bg = bar })
-  set(0, "StlExplorerHeader", { fg = c.subtext0, bold = true })
-end
+    local function set_highlights()
+      local ok, palettes = pcall(require, "catppuccin.palettes")
+      if not ok or not (vim.g.colors_name or ""):find("^catppuccin") then
+        return
+      end
+      local c = palettes.get_palette()
+      local bar = "NONE" -- let the terminal's translucent background show through
+      local set = vim.api.nvim_set_hl
+      set(0, "StatusLine", { fg = c.text, bg = bar })
+      set(0, "StatusLineNC", { fg = c.overlay0, bg = bar })
+      for name, color in pairs({
+        Normal = c.blue,
+        Insert = c.green,
+        Visual = c.mauve,
+        Replace = c.red,
+        Command = c.peach,
+        Terminal = c.teal,
+      }) do
+        set(0, "StlMode" .. name, { fg = color, bg = bar, bold = true })
+      end
+      set(0, "StlBranch", { fg = c.mauve, bg = bar, bold = true })
+      set(0, "StlAdded", { fg = c.green, bg = bar })
+      set(0, "StlChanged", { fg = c.yellow, bg = bar })
+      set(0, "StlRemoved", { fg = c.red, bg = bar })
+      set(0, "StlDir", { fg = c.overlay1, bg = bar })
+      set(0, "StlFile", { fg = c.text, bg = bar, bold = true })
+      set(0, "StlModified", { fg = c.peach, bg = bar })
+      set(0, "StlMuted", { fg = c.overlay1, bg = bar })
+      set(0, "StlDiagnosticError", { fg = c.red, bg = bar })
+      set(0, "StlDiagnosticWarn", { fg = c.yellow, bg = bar })
+      set(0, "StlDiagnosticInfo", { fg = c.sky, bg = bar })
+      set(0, "StlDiagnosticHint", { fg = c.teal, bg = bar })
+      set(0, "StlProgress", { fg = c.sapphire, bg = bar })
+      set(0, "StlExplorerHeader", { fg = c.subtext0, bold = true })
+    end
 
-set_highlights()
-vim.api.nvim_create_autocmd("ColorScheme", {
-  group = vim.api.nvim_create_augroup("config_statusline", { clear = true }),
-  callback = set_highlights,
-})
--- Redraw on git/diagnostic/LSP changes.
-local function redrawstatus()
-  vim.cmd.redrawstatus()
-end
-vim.api.nvim_create_autocmd({ "DiagnosticChanged", "LspAttach", "LspDetach" }, {
-  group = "config_statusline",
-  callback = redrawstatus,
-})
-vim.api.nvim_create_autocmd("User", {
-  group = "config_statusline",
-  pattern = "GitSignsUpdate",
-  callback = redrawstatus,
-})
-vim.api.nvim_create_autocmd("LspProgress", {
-  group = "config_statusline",
-  callback = on_lsp_progress,
-})
-vim.api.nvim_create_autocmd("VimLeavePre", {
-  group = "config_statusline",
-  callback = stop_lsp_timer,
-})
+    set_highlights()
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      group = vim.api.nvim_create_augroup("config_statusline", { clear = true }),
+      callback = set_highlights,
+    })
+    -- Redraw on git/diagnostic/LSP changes.
+    local function redrawstatus()
+      vim.cmd.redrawstatus()
+    end
+    vim.api.nvim_create_autocmd({ "DiagnosticChanged", "LspAttach", "LspDetach" }, {
+      group = "config_statusline",
+      callback = redrawstatus,
+    })
+    vim.api.nvim_create_autocmd("User", {
+      group = "config_statusline",
+      pattern = "GitSignsUpdate",
+      callback = redrawstatus,
+    })
+    vim.api.nvim_create_autocmd("LspProgress", {
+      group = "config_statusline",
+      callback = on_lsp_progress,
+    })
+    vim.api.nvim_create_autocmd("VimLeavePre", {
+      group = "config_statusline",
+      callback = stop_lsp_timer,
+    })
+  end,
+}

@@ -50,7 +50,6 @@ autocmd("FileType", {
     "gitsigns-blame",
     "grug-far",
     "help",
-    "nvim-pack",
     "nvim-undotree",
     "qf",
     "query",

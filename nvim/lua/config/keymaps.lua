@@ -95,7 +95,7 @@ map("x", ">", ">gv")
 map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
 map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
 
-map("n", "<leader>l", "<cmd>PackUpdate<cr>", { desc = "Update Plugins (vim.pack)" })
+map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 map("n", "<leader>L", "<cmd>help news<cr>", { desc = "Neovim News" })
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
@@ -344,37 +344,10 @@ map("n", "<leader>?", P("keymaps", { global = false }), { desc = "Buffer Keymaps
 map("n", "<leader>sl", P("loclist"), { desc = "Location List" })
 map("n", "<leader>sm", P("marks"), { desc = "Marks" })
 map("n", "<leader>sM", P("man"), { desc = "Man Pages" })
-map(
-  "n",
-  "<leader>sp",
-  P("files", { cwd = vim.fn.stdpath("data") .. "/site/pack/core/opt" }),
-  { desc = "Search Plugin Files" }
-)
+map("n", "<leader>sp", P("files", { cwd = vim.fn.stdpath("data") .. "/lazy" }), { desc = "Search Plugin Files" })
 map("n", "<leader>sq", P("qflist"), { desc = "Quickfix List" })
 map("n", "<leader>sR", P("resume"), { desc = "Resume" })
 map("n", "<leader>su", "<cmd>packadd nvim.undotree<cr><cmd>Undotree<cr>", { desc = "Undotree" })
 map({ "n", "x" }, "<leader>sw", P("grep_word", root_opts), { desc = "Visual selection or word (Root Dir)" })
 map({ "n", "x" }, "<leader>sW", P("grep_word"), { desc = "Visual selection or word (cwd)" })
 map("n", "<leader>uC", P("colorschemes"), { desc = "Colorschemes" })
-
-map({ "n", "x" }, "<leader>sr", function()
-  local grug = require("grug-far")
-  local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
-  grug.open({ transient = true, prefills = { filesFilter = ext and ext ~= "" and "*." .. ext or nil } })
-end, { desc = "Search and Replace" })
-
-map({ "n", "x", "o" }, "s", function()
-  require("flash").jump()
-end, { desc = "Flash" })
-map({ "n", "x", "o" }, "S", function()
-  require("flash").treesitter()
-end, { desc = "Flash Treesitter" })
-map("o", "r", function()
-  require("flash").remote()
-end, { desc = "Remote Flash" })
-map({ "o", "x" }, "R", function()
-  require("flash").treesitter_search()
-end, { desc = "Treesitter Search" })
-map("c", "<c-s>", function()
-  require("flash").toggle()
-end, { desc = "Toggle Flash Search" })
