@@ -46,10 +46,9 @@ config.unicode_version = 15
 -- Font
 config.font_size = 14
 config.line_height = 1.05
-config.font = wezterm.font("Maple Mono NF CN", {
-	-- Ligatures reshape the current line on every keystroke.
-	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
-})
+config.font = wezterm.font("Maple Mono NF CN")
+-- Ligatures reshape the current line on every keystroke.
+config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 config.bold_brightens_ansi_colors = "BrightAndBold"
 config.anti_alias_custom_block_glyphs = true
 
