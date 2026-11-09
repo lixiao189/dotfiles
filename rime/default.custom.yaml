@@ -1,6 +1,6 @@
 patch:
-  "menu/page_size": 8 # 候选词个数
+  "menu/page_size": 8
   ascii_composer:
-    good_old_caps_lock: true # true | false
+    good_old_caps_lock: true
     switch_key:
       Shift_L: commit_code # commit_code | commit_text | inline_ascii | clear | noop
