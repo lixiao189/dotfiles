@@ -38,7 +38,7 @@ local OPACITY = dark and 0.82 or 0.88
 local BLUR = 40
 
 -- Performance
-config.front_end = "OpenGL"
+config.front_end = "WebGpu"
 config.max_fps = 120
 config.animation_fps = 1
 config.unicode_version = 15
