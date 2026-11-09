@@ -54,9 +54,10 @@ config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 config.color_scheme = dark and "Catppuccin Mocha" or "Catppuccin Latte"
 config.command_palette_bg_color = p.mantle
 config.command_palette_fg_color = p.text
-config.command_palette_font_size = 14
+config.command_palette_font_size = config.font_size
 config.char_select_bg_color = p.mantle
 config.char_select_fg_color = p.text
+config.char_select_font_size = config.font_size -- default 18
 config.colors = {
 	split = p.surface1,
 	compose_cursor = p.peach,
