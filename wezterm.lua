@@ -98,6 +98,7 @@ config.adjust_window_size_when_changing_font_size = false
 -- Tab bar
 config.hide_tab_bar_if_only_one_tab = true
 config.show_new_tab_button_in_tab_bar = false
+config.switch_to_last_active_tab_when_closing_tab = true
 
 -- General
 config.quit_when_all_windows_are_closed = false
@@ -130,9 +131,33 @@ config.keys = {
 	{ key = "Enter", mods = "SUPER", action = act.ToggleFullScreen },
 
 	-- Scrollback, palette, copy mode. QuickSelect keeps CTRL|SHIFT+Space (SUPER+Space is Spotlight).
-	{ key = "k", mods = "SUPER", action = act.ClearScrollback("ScrollbackAndViewport") },
+	-- CTRL+L makes the shell redraw the prompt the clear wiped.
+	{
+		key = "k",
+		mods = "SUPER",
+		action = act.Multiple({
+			act.ClearScrollback("ScrollbackAndViewport"),
+			act.SendKey({ key = "l", mods = "CTRL" }),
+		}),
+	},
 	{ key = "p", mods = "SUPER|SHIFT", action = act.ActivateCommandPalette },
 	{ key = "c", mods = "SUPER|SHIFT", action = act.ActivateCopyMode },
+}
+
+-- Mouse: links open on SUPER+click only. Unlisted defaults still apply.
+config.mouse_bindings = {
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "NONE",
+		action = act.CompleteSelection("ClipboardAndPrimarySelection"),
+	},
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "SUPER",
+		action = act.OpenLinkAtMouseCursor,
+	},
+	-- Keep the press from reaching apps with mouse reporting.
+	{ event = { Down = { streak = 1, button = "Left" } }, mods = "SUPER", action = act.Nop },
 }
 
 return config
