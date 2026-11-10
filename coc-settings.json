@@ -4,5 +4,13 @@
   "inlayHint.enableParameter": false,
   "suggest.enableFloat": false,
 
+  "clangd.arguments": [
+    "--background-index",
+    "--clang-tidy",
+    "--header-insertion=iwyu",
+    "--completion-style=detailed",
+    "--function-arg-placeholders=1"
+  ],
+
   "rust-analyzer.check.command": "clippy"
 }
