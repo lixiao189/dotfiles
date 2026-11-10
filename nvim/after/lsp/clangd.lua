@@ -6,8 +6,7 @@ return {
     "--clang-tidy",
     "--header-insertion=iwyu",
     "--completion-style=detailed",
-    "--function-arg-placeholders",
-    "--fallback-style=llvm",
+    "--function-arg-placeholders=1",
   },
   capabilities = {
     textDocument = {
