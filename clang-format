@@ -1,5 +1,20 @@
 # Used when no closer project .clang-format exists (clang-format / clangd walk parents).
-BasedOnStyle: LLVM
+BasedOnStyle: Microsoft
+BreakBeforeBraces: Attach
 IndentWidth: 4
+ContinuationIndentWidth: 8
 TabWidth: 4
 UseTab: Never
+ColumnLimit: 120
+AccessModifierOffset: -4
+IndentCaseLabels: true
+PointerAlignment: Left
+AlignAfterOpenBracket: DontAlign
+AlignOperands: DontAlign
+BreakBeforeBinaryOperators: NonAssignment
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortLambdasOnASingleLine: Inline
+BreakConstructorInitializers: BeforeColon
+ConstructorInitializerIndentWidth: 4
+FixNamespaceComments: false
+SortIncludes: Never

@@ -15,6 +15,16 @@ local function has_clang_format_config(buf)
   })[1] ~= nil
 end
 
+local fallback_style = "--style={"
+  .. "BasedOnStyle: Microsoft, BreakBeforeBraces: Attach, IndentWidth: 4, "
+  .. "ContinuationIndentWidth: 8, TabWidth: 4, UseTab: Never, ColumnLimit: 120, "
+  .. "AccessModifierOffset: -4, IndentCaseLabels: true, PointerAlignment: Left, "
+  .. "AlignAfterOpenBracket: DontAlign, AlignOperands: DontAlign, "
+  .. "BreakBeforeBinaryOperators: NonAssignment, "
+  .. "AllowShortFunctionsOnASingleLine: Inline, AllowShortLambdasOnASingleLine: Inline, "
+  .. "BreakConstructorInitializers: BeforeColon, ConstructorInitializerIndentWidth: 4, "
+  .. "FixNamespaceComments: false, SortIncludes: Never}"
+
 return {
   "stevearc/conform.nvim",
   event = "BufWritePre",
@@ -45,12 +55,11 @@ return {
     default_format_opts = { lsp_format = "fallback", timeout_ms = 3000 },
     formatters = {
       ["clang-format"] = {
-        -- LLVM preset is 2-wide. Without a project .clang-format, use it at indent 4.
         prepend_args = function(_, ctx)
           if has_clang_format_config(ctx.buf) then
             return {}
           end
-          return { "--style={BasedOnStyle: LLVM, IndentWidth: 4, TabWidth: 4, UseTab: Never}" }
+          return { fallback_style }
         end,
       },
     },
