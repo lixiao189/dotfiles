@@ -67,9 +67,9 @@ return {
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "markdown", "Avante" },
+    ft = "markdown",
     opts = {
-      file_types = { "markdown", "Avante", "markdown.Avante" },
+      file_types = { "markdown" },
       completions = { lsp = { enabled = true } },
       code = { sign = false, width = "block", right_pad = 1 },
       heading = { sign = false, icons = {} },
