@@ -1,32 +1,42 @@
 local M = {}
 
-M.root_markers = { ".git", "lua" }
+-- Nearest ancestor of the buffer holding one of these is the project root.
+-- `.git` first: a VCS checkout wins over the project files inside it.
+M.root_markers = {
+  ".git",
+  ".hg",
+  ".jj",
+  ".svn",
+  "CMakeLists.txt",
+  "Cargo.toml",
+  "Makefile",
+  "compile_commands.json",
+  "compile_flags.txt",
+  ".clangd",
+  "go.mod",
+  "lua",
+  "meson.build",
+  "package.json",
+  "pyproject.toml",
+}
 
 ---@param buf? integer
 ---@return string
 function M.root(buf)
-  if not buf or buf == 0 then
-    buf = vim.api.nvim_get_current_buf()
-  end
-  local name = vim.api.nvim_buf_get_name(buf)
-  local path = name ~= "" and vim.fs.normalize(vim.uv.fs_realpath(name) or name) or nil
-  if path then
-    for _, client in ipairs(vim.lsp.get_clients({ bufnr = buf })) do
-      local roots = vim.tbl_map(function(ws)
-        return vim.uri_to_fname(ws.uri)
-      end, client.workspace_folders or {})
-      if #roots == 0 and client.root_dir then
-        roots = { client.root_dir }
-      end
-      for _, root in ipairs(roots) do
-        if vim.fs.relpath(root, path) then
-          return root
-        end
-      end
-    end
-  end
-  return vim.fs.root(buf, M.root_markers) or vim.fn.getcwd()
+  return vim.fs.root(buf or 0, M.root_markers) or vim.fn.getcwd()
 end
+
+vim.api.nvim_create_user_command("Root", function()
+  local root = M.root()
+  local marker = vim.iter(M.root_markers):find(function(m)
+    return vim.uv.fs_stat(vim.fs.joinpath(root, m)) ~= nil
+  end)
+  vim.notify(
+    ("%s (%s)"):format(vim.fn.fnamemodify(root, ":~"), marker or "cwd"),
+    vim.log.levels.INFO,
+    { title = "Project root" }
+  )
+end, { desc = "Project root" })
 
 ---@param buf? integer
 function M.autoformat_enabled(buf)
@@ -74,7 +84,9 @@ function M.rename_file()
       return vim.notify("Rename: " .. new .. " already exists", vim.log.levels.ERROR)
     end
     if vim.bo[buf].modified then
-      vim.api.nvim_buf_call(buf, function() vim.cmd("silent! write") end)
+      vim.api.nvim_buf_call(buf, function()
+        vim.cmd("silent! write")
+      end)
     end
     vim.fn.mkdir(vim.fn.fnamemodify(new, ":h"), "p")
     local ok, err = vim.uv.fs_rename(old, new)

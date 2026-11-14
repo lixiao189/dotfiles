@@ -59,7 +59,7 @@ set foldlevel=100
 
 let g:mapleader = "\<Space>"
 
-" Indent: 4 spaces. Frontend, config, and Lua stay at 2 (same set as nvim).
+" Indent: 4 spaces. Frontend, config, Lua and C/C++ stay at 2 (same set as nvim).
 " Go matches nvim/after/ftplugin/go.lua.
 set shiftwidth=4
 set tabstop=4
@@ -69,7 +69,7 @@ set cindent
 
 augroup indent_width
   autocmd!
-  autocmd FileType astro,css,html,javascript,javascriptreact,json,json5,jsonc,less,lua,sass,scss,svelte,toml,typescript,typescriptreact,vue,yaml
+  autocmd FileType astro,c,cpp,css,cuda,html,javascript,javascriptreact,json,json5,jsonc,less,lua,objc,objcpp,sass,scss,svelte,toml,typescript,typescriptreact,vue,yaml
         \ setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
   autocmd FileType go setlocal noexpandtab tabstop=4 softtabstop=4 shiftwidth=4
 augroup END

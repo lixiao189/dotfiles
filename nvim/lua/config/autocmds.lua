@@ -72,12 +72,16 @@ autocmd("FileType", {
   end,
 })
 
--- Frontend, config, Lua and Markdown stay at 2 spaces; everything else inherits the global 4.
+-- Frontend, config, Lua, Markdown and C/C++ stay at 2 spaces (C matches the LLVM/Google default);
+-- everything else inherits the global 4.
 autocmd("FileType", {
   group = augroup("indent_width_2"),
   pattern = {
     "astro",
+    "c",
+    "cpp",
     "css",
+    "cuda",
     "html",
     "javascript",
     "javascriptreact",
@@ -87,6 +91,8 @@ autocmd("FileType", {
     "less",
     "lua",
     "markdown",
+    "objc",
+    "objcpp",
     "sass",
     "scss",
     "svelte",

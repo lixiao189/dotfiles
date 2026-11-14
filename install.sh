@@ -33,7 +33,6 @@ link_configs() {
     link "$DOTFILES/wezterm.lua"   ~/.wezterm.lua
     link "$DOTFILES/vimrc"         ~/.vim/vimrc
     link "$DOTFILES/coc-settings.json" ~/.vim/coc-settings.json
-    link "$DOTFILES/clang-format" ~/.clang-format
     link "$DOTFILES/zsh/zshrc"     ~/.zshrc
 }
 

@@ -120,7 +120,7 @@ return {
         yamlls = {},
       },
       -- rustfmt ships with rustup; mason's package is deprecated.
-      tools = { "stylua", "shfmt", "gofumpt", "goimports", "prettier", "clang-format", "gersemi" },
+      tools = { "stylua", "shfmt", "gofumpt", "goimports", "prettier", "gersemi" },
     },
     config = function(_, opts)
       vim.lsp.semantic_tokens.enable(false)
