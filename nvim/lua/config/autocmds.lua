@@ -12,10 +12,16 @@ autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   end,
 })
 
-autocmd("TextYankPost", {
-  group = augroup("highlight_yank"),
+-- hl_op() lands in 0.13 (with TextPutPost), on_yank() covers 0.12.
+local highlight_events = { "TextYankPost" }
+if vim.fn.exists("##TextPutPost") == 1 then
+  table.insert(highlight_events, "TextPutPost")
+end
+
+autocmd(highlight_events, {
+  group = augroup("highlight_op"),
   callback = function()
-    vim.hl.on_yank()
+    (vim.hl.hl_op or vim.hl.on_yank)()
   end,
 })
 
