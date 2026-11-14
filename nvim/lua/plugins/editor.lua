@@ -80,12 +80,16 @@ return {
     keys = {
       {
         "<leader>bd",
-        function() require("mini.bufremove").delete(0, false) end,
+        function()
+          require("mini.bufremove").delete(0, false)
+        end,
         desc = "Delete Buffer",
       },
       {
         "<leader>bD",
-        function() require("mini.bufremove").delete(0, true) end,
+        function()
+          require("mini.bufremove").delete(0, true)
+        end,
         desc = "Delete Buffer and Window",
       },
       {
@@ -141,10 +145,26 @@ return {
     "nvim-mini/mini.indentscope",
     event = { "LazyFile", "VeryLazy" },
     opts = function()
+      local excluded = {
+        dashboard = true,
+        alpha = true,
+        ministarter = true,
+        lazy = true,
+        mason = true,
+        ["neo-tree"] = true,
+        Trouble = true,
+        trouble = true,
+        notify = true,
+        checkhealth = true,
+      }
       return {
-        -- mini.ai owns `ii`/`ai`, so keep the module's own mappings out of the way.
         mappings = { object_scope = "", object_scope_with_border = "", goto_top = "", goto_bottom = "" },
-        draw = { animation = require("mini.indentscope").gen_animation.none() },
+        draw = {
+          animation = require("mini.indentscope").gen_animation.none(),
+          predicate = function(scope)
+            return vim.bo.buftype == "" and not excluded[vim.bo.filetype] and not scope.body.is_incomplete
+          end,
+        },
       }
     end,
   },
