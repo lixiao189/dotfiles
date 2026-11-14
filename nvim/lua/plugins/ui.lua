@@ -1,5 +1,3 @@
--- Catppuccin: Latte when light, Mocha when dark, transparent background.
--- Neovim ships its own colors/catppuccin.vim, so load the plugin's per-flavour scheme explicitly.
 return {
   {
     "catppuccin/nvim",
@@ -27,10 +25,32 @@ return {
           FzfLuaNormal = { fg = c.text, bg = none },
           FzfLuaBorder = { fg = c.surface2, bg = none },
           FzfLuaTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
+          FzfLuaTitleFlags = { fg = c.overlay1, bg = none },
+          FzfLuaPreviewNormal = { fg = c.text, bg = none },
+          FzfLuaPreviewBorder = { fg = c.surface2, bg = none },
           FzfLuaPreviewTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
           FzfLuaCursorLine = { bg = c.surface0 },
+          FzfLuaCursorLineNr = { fg = c.overlay1, bg = none },
           FzfLuaSearch = { fg = c.blue, style = { "bold" } },
           FzfLuaDirIcon = { fg = c.blue },
+          FzfLuaDirPart = { fg = c.overlay1 },
+          FzfLuaHeaderBind = { fg = c.mauve },
+          FzfLuaHeaderText = { fg = c.overlay2 },
+          FzfLuaScrollBorderFull = { fg = c.surface2, bg = none },
+          FzfLuaFzfNormal = { fg = c.text, bg = none },
+          FzfLuaFzfCursorLine = { bg = c.surface0 },
+          FzfLuaFzfMatch = { fg = c.blue, style = { "bold" } },
+          FzfLuaFzfBorder = { fg = c.surface2, bg = none },
+          FzfLuaFzfScrollbar = { fg = c.surface2, bg = none },
+          FzfLuaFzfSeparator = { fg = c.surface1, bg = none },
+          FzfLuaFzfGutter = { bg = none },
+          FzfLuaFzfHeader = { fg = c.overlay2, bg = none },
+          FzfLuaFzfInfo = { fg = c.overlay1, bg = none },
+          FzfLuaFzfPointer = { fg = c.blue, bg = none },
+          FzfLuaFzfMarker = { fg = c.green, bg = none },
+          FzfLuaFzfSpinner = { fg = c.blue, bg = none },
+          FzfLuaFzfPrompt = { fg = c.blue, bg = none },
+          FzfLuaFzfQuery = { fg = c.text, bg = none },
           NeoTreeNormal = { bg = none },
           NeoTreeNormalNC = { bg = none },
           NeoTreeWinSeparator = { fg = c.surface0, bg = none },
@@ -43,8 +63,10 @@ return {
           NeoTreeGitStaged = { fg = c.green },
           NeoTreeGitUntracked = { fg = c.yellow },
           NeoTreeGitDeleted = { fg = c.red },
-          DashboardHeader = { fg = c.blue },
-          DashboardCenter = { fg = c.subtext0 },
+          DashboardHeader = { fg = c.blue, style = { "bold" } },
+          DashboardIcon = { fg = c.blue },
+          DashboardDesc = { fg = c.subtext1 },
+          DashboardKey = { fg = c.blue },
           DashboardShortCut = { fg = c.overlay1 },
           DashboardFooter = { fg = c.overlay1 },
           NotifyBackground = { link = "NormalFloat" },
@@ -105,14 +127,21 @@ return {
   },
   { "nvim-mini/mini.tabline", lazy = false, opts = {} },
   {
-    -- Reports go through nvim-notify so <leader>n can show the history.
     "rcarriga/nvim-notify",
     lazy = false,
     keys = {
-      { "<leader>n", function() require("notify").show_history() end, desc = "Notification History" },
+      {
+        "<leader>n",
+        function()
+          require("notify").show_history()
+        end,
+        desc = "Notification History",
+      },
       {
         "<leader>un",
-        function() require("notify").dismiss({ pending = true, silent = true }) end,
+        function()
+          require("notify").dismiss({ pending = true, silent = true })
+        end,
         desc = "Dismiss All Notifications",
       },
     },
@@ -127,59 +156,76 @@ return {
     "nvimdev/dashboard-nvim",
     event = "VimEnter",
     cmd = "Dashboard",
-    opts = {
-      theme = "doom",
-      config = {
-        header = {
-          "",
-          "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗",
-          "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║",
-          "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║",
-          "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║",
-          "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║",
-          "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝",
-          "",
+    opts = function()
+      local opts = {
+        theme = "doom",
+        hide = { statusline = true, tabline = true, winbar = true },
+        config = {
+          vertical_center = true,
+          header = {
+            "",
+            "┏┓╻┏━╸┏━┓╻ ╻╻┏┳┓",
+            "┃┗┫┣╸ ┃ ┃┃┏┛┃┃┃┃",
+            "╹ ╹┗━╸┗━┛┗┛ ╹╹ ╹",
+            "",
+            "",
+          },
+          center = {
+            {
+              icon = "  ",
+              desc = "Find File",
+              key = "f",
+              action = function()
+                require("fzf-lua").files({ cwd = require("config.util").root() })
+              end,
+            },
+            {
+              icon = "  ",
+              desc = "Find Text",
+              key = "g",
+              action = function()
+                require("fzf-lua").live_grep({ cwd = require("config.util").root() })
+              end,
+            },
+            {
+              icon = "  ",
+              desc = "Recent Files",
+              key = "r",
+              action = function()
+                require("fzf-lua").oldfiles()
+              end,
+            },
+            {
+              icon = "  ",
+              desc = "Explorer",
+              key = "e",
+              action = function()
+                require("neo-tree.command").execute({ toggle = true, dir = require("config.util").root() })
+              end,
+            },
+            { icon = "  ", desc = "New File", key = "n", action = ":ene | startinsert" },
+            {
+              icon = "  ",
+              desc = "Config",
+              key = "c",
+              action = function()
+                require("fzf-lua").files({ cwd = vim.fn.stdpath("config") })
+              end,
+            },
+            { icon = "󰒲  ", desc = "Update Plugins", key = "u", action = ":Lazy update" },
+            { icon = "  ", desc = "Quit", key = "q", action = ":qa" },
+          },
+          footer = function()
+            local stats = require("lazy").stats()
+            return { "", ("v%d.%d  ·  %d plugins"):format(vim.version().major, vim.version().minor, stats.count) }
+          end,
         },
-        center = {
-          {
-            icon = " ",
-            desc = "Find File",
-            key = "f",
-            action = function() require("fzf-lua").files({ cwd = require("config.util").root() }) end,
-          },
-          {
-            icon = " ",
-            desc = "Find Text",
-            key = "g",
-            action = function() require("fzf-lua").live_grep({ cwd = require("config.util").root() }) end,
-          },
-          {
-            icon = " ",
-            desc = "Recent Files",
-            key = "r",
-            action = function() require("fzf-lua").oldfiles() end,
-          },
-          {
-            icon = " ",
-            desc = "Explorer",
-            key = "e",
-            action = function() require("neo-tree.command").execute({ toggle = true, dir = require("config.util").root() }) end,
-          },
-          { icon = " ", desc = "New File", key = "n", action = ":ene | startinsert" },
-          {
-            icon = " ",
-            desc = "Config",
-            key = "c",
-            action = function() require("fzf-lua").files({ cwd = vim.fn.stdpath("config") }) end,
-          },
-          { icon = " ", desc = "Update Plugins", key = "u", action = ":Lazy update" },
-          { icon = " ", desc = "Quit", key = "q", action = ":qa" },
-        },
-        footer = function()
-          local stats = require("lazy").stats()
-          return { "⚡ Neovim " .. vim.version().major .. "." .. vim.version().minor .. " · " .. stats.loaded .. "/" .. stats.count .. " plugins loaded" }
-        end,
-      },
-    },
+      }
+      for _, item in ipairs(opts.config.center) do
+        item.desc = ("%-22s"):format(item.desc)
+        item.key_format = " %s"
+      end
+      return opts
+    end,
   },
 }

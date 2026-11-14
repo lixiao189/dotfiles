@@ -8,7 +8,9 @@ local function pick(name, opts)
   end
 end
 
-local root = function() return { cwd = util.root() } end
+local root = function()
+  return { cwd = util.root() }
+end
 
 local todo_keywords = { "TODO", "FIX", "FIXME", "BUG", "HACK", "WARN", "PERF", "NOTE" }
 ---@param keywords string[]
@@ -102,29 +104,69 @@ return {
     },
     opts = {
       winopts = {
-        width = 0.8,
-        height = 0.8,
+        width = 0.80,
+        height = 0.70,
         row = 0.5,
         col = 0.5,
-        preview = { scrollchars = { "┃", "" } },
+        border = "rounded",
+        backdrop = 60,
+        treesitter = { enabled = false },
+        preview = {
+          layout = "flex",
+          flip_columns = 120,
+          horizontal = "right:55%",
+          vertical = "down:45%",
+          border = "rounded",
+          title = true,
+          scrollbar = false,
+          winopts = { number = false, relativenumber = false, signcolumn = "no" },
+        },
+      },
+      fzf_colors = true,
+      prompt = "❯ ",
+      fzf_opts = {
+        ["--pointer"] = "❯",
+        ["--marker"] = "✓",
+        ["--info"] = "inline-right",
+        ["--no-separator"] = true,
+        ["--scrollbar"] = "",
       },
       keymap = {
         fzf = {
+          true,
+          ["ctrl-/"] = "toggle-preview",
           ["ctrl-q"] = "select-all+accept",
           ["ctrl-u"] = "half-page-up",
           ["ctrl-d"] = "half-page-down",
           ["ctrl-f"] = "preview-page-down",
           ["ctrl-b"] = "preview-page-up",
         },
+        builtin = {
+          true,
+          ["<C-/>"] = "toggle-preview",
+          ["<C-u>"] = "preview-page-up",
+          ["<C-d>"] = "preview-page-down",
+        },
       },
-      files = { cwd_prompt = false },
+      files = {
+        cwd_prompt = false,
+        cwd_header = false,
+        formatter = "path.filename_first",
+        winopts = { preview = { hidden = true } },
+      },
+      buffers = { winopts = { preview = { hidden = true } } },
+      oldfiles = {
+        cwd_header = false,
+        formatter = "path.filename_first",
+        winopts = { preview = { hidden = true } },
+      },
+      grep = { cwd_header = false },
       lsp = {
         code_actions = { previewer = vim.fn.executable("delta") == 1 and "codeaction_native" or nil },
       },
     },
   },
   {
-    -- vim.ui.input/select: Avante's input provider and the LSP prompts route through it.
     "stevearc/dressing.nvim",
     lazy = false,
     opts = {
