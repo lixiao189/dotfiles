@@ -35,7 +35,7 @@ syntax on
 set shortmess=atI
 set number
 set relativenumber
-set noshowcmd noruler " Turn off this to improve nvim's performance
+set noshowcmd noruler
 set nowrap
 set mouse=a
 set cul
@@ -57,7 +57,6 @@ set belloff=all
 set foldmethod=indent
 set foldlevel=100
 
-" Leader key
 let g:mapleader = "\<Space>"
 
 " Indent: 4 spaces. Frontend, config, and Lua stay at 2 (same set as nvim).
@@ -77,7 +76,7 @@ augroup END
 
 " NerdTree
 nnoremap <leader>e :NERDTreeToggle<CR>
-let g:loaded_netrw       = 1 " disable netrw
+let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 
 " LSP settings
@@ -133,7 +132,6 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use `[d` and `]d` to navigate diagnostics
 nmap <silent> [d <Plug>(coc-diagnostic-prev)
 nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
@@ -158,7 +156,6 @@ nmap <leader>gs <Plug>(GitGutterStageHunk)
 nmap <leader>gr <Plug>(GitGutterUndoHunk)
 nmap <leader>gp <Plug>(GitGutterPreviewHunk)
 
-" Clear search highlight on Esc
 nnoremap <silent> <Esc> :nohlsearch<CR><Esc>
 
 " VIM easymotion

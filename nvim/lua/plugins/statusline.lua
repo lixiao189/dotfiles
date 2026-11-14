@@ -330,7 +330,6 @@ return {
       group = vim.api.nvim_create_augroup("config_statusline", { clear = true }),
       callback = set_highlights,
     })
-    -- Redraw on git/diagnostic/LSP changes.
     local function redrawstatus()
       vim.cmd.redrawstatus()
     end

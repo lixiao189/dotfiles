@@ -1,10 +1,7 @@
 # Reload: Cmd+Shift+,   |   Open this file: Cmd+,
 # Theme preview: ghostty +list-themes
 
-# -----------------------------------------------------------------------------
 # Theme
-# Follows the macOS appearance.
-# -----------------------------------------------------------------------------
 theme = light:Catppuccin Latte,dark:Catppuccin Mocha
 background-opacity = 0.94
 background-blur = true
@@ -12,24 +9,17 @@ background-opacity-cells = true
 unfocused-split-opacity = 0.85
 minimum-contrast = 1.1
 
-# -----------------------------------------------------------------------------
 # Font
-# Maple Mono NF CN covers Latin + CJK and ships Nerd Font icons.
-# -----------------------------------------------------------------------------
 font-family = Maple Mono NF CN
 font-size = 14
 adjust-cell-height = 15%
 
-# -----------------------------------------------------------------------------
 # Cursor
-# -----------------------------------------------------------------------------
 cursor-style = block
 cursor-style-blink = false
 adjust-cursor-thickness = 2
 
-# -----------------------------------------------------------------------------
 # Window
-# -----------------------------------------------------------------------------
 window-theme = auto
 window-padding-x = 8
 window-padding-y = 2
@@ -48,7 +38,6 @@ resize-overlay = never
 quick-terminal-position = top
 quick-terminal-autohide = true
 
-# -----------------------------------------------------------------------------
 # Shell integration + SSH
 # ssh-env:     remote TERM falls back to xterm-256color and COLORTERM /
 #              TERM_PROGRAM are forwarded (remote sshd must Allow those).
@@ -56,6 +45,5 @@ quick-terminal-autohide = true
 #              missing, then keep TERM=xterm-ghostty. Needs `tic` remotely.
 #              Cache: `ghostty +ssh-cache`
 # sudo:        wrap sudo so the terminfo still resolves.
-# -----------------------------------------------------------------------------
 shell-integration = detect
 shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo,path

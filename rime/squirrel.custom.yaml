@@ -1,7 +1,7 @@
 patch:
   app_options:
     com.apple.Spotlight:
-      ascii_mode: true # 开启默认英文
+      ascii_mode: true
     com.microsoft.VSCode:
       ascii_mode: true
       vim_mode: true
@@ -24,18 +24,16 @@ patch:
       vim_mode: true
 
   style:
-    # 选择皮肤，亮色与暗色主题
     color_scheme: nord_light
     color_scheme_dark: nord_dark
 
     inline_preedit: true
 
-  # 皮肤列表
   preset_color_schemes:
     nord_light:
       name: 北方浅色
       candidate_list_layout: "linear"
-      candidate_format: "%c %@ " # 用 1/6 em 空格 U+2005 来控制编号 %c 和候选词 %@ 前后的空间
+      candidate_format: "%c %@ "
       font_point: 16
       label_font_point: 14
       corner_radius: 5
@@ -53,7 +51,7 @@ patch:
     nord_dark:
       name: 北方深色
       candidate_list_layout: "linear"
-      candidate_format: "%c %@ " # 用 1/6 em 空格 U+2005 来控制编号 %c 和候选词 %@ 前后的空间
+      candidate_format: "%c %@ "
       font_point: 16
       label_font_point: 14
       corner_radius: 5

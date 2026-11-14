@@ -4,7 +4,6 @@ end
 
 local disabled_filetypes = { bigfile = true, snacks_picker_input = true, snacks_input = true }
 
--- Border comes from 'winborder'.
 local function bordered(winhighlight)
   return require("cmp").config.window.bordered({ winhighlight = winhighlight })
 end

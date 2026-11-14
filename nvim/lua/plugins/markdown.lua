@@ -1,5 +1,3 @@
--- Keymaps follow LazyVim's markdown extra.
-
 -- Fallback for files with no markdownlint config of their own.
 ---@param buf integer
 ---@return string[]
@@ -69,8 +67,9 @@ return {
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    ft = "markdown",
+    ft = { "markdown", "Avante" },
     opts = {
+      file_types = { "markdown", "Avante", "markdown.Avante" },
       completions = { lsp = { enabled = true } },
       code = { sign = false, width = "block", right_pad = 1 },
       heading = { sign = false, icons = {} },

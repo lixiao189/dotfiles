@@ -81,10 +81,10 @@ return {
     opts = {
       preset = "helix",
       delay = 300,
-      -- Translucent terminal: no blending. Border is "single" like 'winborder'.
       win = { border = "single" },
       spec = {
         { "<Leader><Tab>", group = "tabs" },
+        { "<Leader>a", group = "ai", mode = { "n", "x" } },
         { "<Leader>b", group = "buffer" },
         { "<Leader>c", group = "code", mode = { "n", "x" } },
         { "<Leader>d", group = "debug" },

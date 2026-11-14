@@ -1,8 +1,4 @@
-# Native zsh prompt, single line (no framework):
-#   user@host ~/path branch[*][ ↑N][:action] (venv) ✦jobs exit >
-# Git info via vcs_info: branch, '*' if anything is uncommitted, '↑N' for
-# unpushed commits. Colours use %F/%f so zsh counts widths correctly. Root
-# gets '#'.
+# user@host ~/path branch[*][ ↑N][:action] (venv) ✦jobs exit >
 
 autoload -Uz add-zsh-hook vcs_info
 
@@ -52,13 +48,8 @@ add-zsh-hook preexec _prompt_title_preexec
 add-zsh-hook precmd  _prompt_precmd
 add-zsh-hook precmd  _prompt_osc7
 
-# Continuation / selection prompts.
 PROMPT2='%F{8}...%f '
 
-# Colour scheme: user@host blue, path white, branch and its
-# status magenta, venv cyan,
-# background job count yellow, non-zero exit code red; the prompt symbol is
-# green on success and red after a failed command.
 PROMPT='%B%F{blue}%n@%m%f%b %B%F{white}%3~%f%b${vcs_info_msg_0_}'
 PROMPT+='${_prompt_venv}'
 PROMPT+='%(1j. %F{yellow}✦%j%f.)'

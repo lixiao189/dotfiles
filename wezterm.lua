@@ -3,14 +3,12 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 local act = wezterm.action
 
--- The CN build embeds CJK glyphs, so Chinese needs no system fallback (~20MB per weight).
 local FONT = "Maple Mono NF CN"
 
 -- Re-evaluated on appearance changes. The mux server has no GUI to ask, so it falls back to dark.
 local appearance = wezterm.gui and wezterm.gui.get_appearance() or "Dark"
 local dark = appearance:find("Dark") ~= nil
 
--- Catppuccin Mocha / Latte: only the colors overridden below.
 local MOCHA = {
 	mantle = "#181825",
 	surface0 = "#313244",
@@ -40,7 +38,7 @@ config.max_fps = 120
 config.animation_fps = 1
 config.unicode_version = 15
 
--- Font: 14 for the terminal and its overlays, 12 for window chrome.
+-- Font
 config.font = wezterm.font(FONT)
 config.font_size = 14
 config.line_height = 1.05
@@ -103,7 +101,6 @@ config.switch_to_last_active_tab_when_closing_tab = true
 -- General
 config.quit_when_all_windows_are_closed = false
 config.audible_bell = "Disabled"
--- Default is 3.5k; memory and reflow on resize scale with this.
 config.scrollback_lines = 10000
 config.quick_select_remove_styling = true
 

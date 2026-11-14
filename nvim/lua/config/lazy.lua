@@ -22,6 +22,8 @@ Event.mappings.LazyFile = { id = "LazyFile", event = { "BufReadPost", "BufNewFil
 require("lazy").setup({
   spec = { { import = "plugins" } },
   defaults = { lazy = true },
+  -- lazy.nvim also uses this timeout for build commands; Avante compiles Rust libraries.
+  git = { timeout = 600 },
   install = { colorscheme = { "catppuccin-mocha", "habamax" } },
   change_detection = { notify = false },
   rocks = { enabled = false },

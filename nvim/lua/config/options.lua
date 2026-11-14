@@ -34,7 +34,6 @@ if vim.fn.has("mac") == 1 then
     flush()
   end
   local function paste()
-    -- Copy still in flight
     if last and (pending or running) then
       return { last.lines, last.regtype }
     end
