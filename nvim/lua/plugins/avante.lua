@@ -11,16 +11,14 @@ return {
         return value
       end
       return {
-        provider = "custom",
+        provider = "openai",
         providers = {
-          custom = {
-            __inherited_from = "openai",
+          -- The built-in openai provider keeps its default api_key_name, so the key
+          -- comes from AVANTE_OPENAI_API_KEY (scoped) or OPENAI_API_KEY.
+          openai = {
             endpoint = required("AVANTE_API_URL"),
             model = required("AVANTE_MODEL"),
             context_window = tonumber(vim.env.AVANTE_CONTEXT_WINDOW),
-            use_response_api = false,
-            support_previous_response_id = false,
-            api_key_name = "AVANTE_API_KEY",
             extra_request_body = {
               max_completion_tokens = tonumber(vim.env.AVANTE_MAX_TOKENS),
               reasoning_effort = vim.env.AVANTE_REASONING_EFFORT,
@@ -29,8 +27,9 @@ return {
         },
         behaviour = { auto_set_keymaps = false },
         selection = { hint_display = "none" },
-        input = { provider = "snacks" },
-        selector = { provider = "snacks" },
+        input = { provider = "dressing" },
+        -- fzf-lua previews lazily, so opening @file does not read every project file.
+        selector = { provider = "fzf_lua" },
       }
     end,
     dependencies = {
@@ -38,7 +37,8 @@ return {
       "MunifTanjim/nui.nvim",
       { "ColinKennedy/mega.cmdparse", dependencies = { "ColinKennedy/mega.logging" } },
       "hrsh7th/nvim-cmp",
-      "folke/snacks.nvim",
+      "ibhagwan/fzf-lua",
+      "stevearc/dressing.nvim",
       "nvim-mini/mini.icons",
       "MeanderingProgrammer/render-markdown.nvim",
     },
