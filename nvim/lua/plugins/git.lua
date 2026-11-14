@@ -52,14 +52,11 @@ return {
   },
   config = function(_, opts)
     require("gitsigns").setup(opts)
-    Snacks.toggle({
-      name = "Git Signs",
-      get = function()
-        return require("gitsigns.config").config.signcolumn
-      end,
-      set = function(state)
-        require("gitsigns").toggle_signs(state)
-      end,
-    }):map("<leader>uG")
+    vim.keymap.set("n", "<leader>uG", function()
+      local gitsigns = require("gitsigns")
+      local enabled = not require("gitsigns.config").config.signcolumn
+      gitsigns.toggle_signs(enabled)
+      vim.notify("Git Signs: " .. (enabled and "on" or "off"))
+    end, { desc = "Toggle Git Signs" })
   end,
 }

@@ -24,19 +24,35 @@ return {
           PmenuThumb = { bg = c.surface1 },
           CmpItemMenu = { fg = c.overlay1 },
           WinSeparator = { fg = c.surface0 },
-          SnacksPickerTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
-          SnacksPickerInputTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
-          SnacksPickerListTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
-          SnacksPickerPreviewTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
-          SnacksPickerPrompt = { fg = c.blue },
-          SnacksPickerTree = { fg = c.surface1 },
-          SnacksPickerListCursorLine = { bg = c.surface0 },
-          SnacksNotifierBorderInfo = { link = "FloatBorder" },
-          SnacksNotifierBorderWarn = { link = "FloatBorder" },
-          SnacksNotifierBorderError = { link = "FloatBorder" },
-          SnacksNotifierBorderDebug = { link = "FloatBorder" },
-          SnacksNotifierBorderTrace = { link = "FloatBorder" },
-          SnacksIndentScope = { fg = c.surface2 },
+          FzfLuaNormal = { fg = c.text, bg = none },
+          FzfLuaBorder = { fg = c.surface2, bg = none },
+          FzfLuaTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
+          FzfLuaPreviewTitle = { fg = c.subtext1, bg = none, style = { "bold" } },
+          FzfLuaCursorLine = { bg = c.surface0 },
+          FzfLuaSearch = { fg = c.blue, style = { "bold" } },
+          FzfLuaDirIcon = { fg = c.blue },
+          NeoTreeNormal = { bg = none },
+          NeoTreeNormalNC = { bg = none },
+          NeoTreeWinSeparator = { fg = c.surface0, bg = none },
+          NeoTreeRootName = { fg = c.subtext1, style = { "bold" } },
+          NeoTreeDirectoryName = { fg = c.blue },
+          NeoTreeDirectoryIcon = { fg = c.blue },
+          NeoTreeIndentMarker = { fg = c.surface1 },
+          NeoTreeExpander = { fg = c.overlay1 },
+          NeoTreeGitModified = { fg = c.peach },
+          NeoTreeGitStaged = { fg = c.green },
+          NeoTreeGitUntracked = { fg = c.yellow },
+          NeoTreeGitDeleted = { fg = c.red },
+          DashboardHeader = { fg = c.blue },
+          DashboardCenter = { fg = c.subtext0 },
+          DashboardShortCut = { fg = c.overlay1 },
+          DashboardFooter = { fg = c.overlay1 },
+          NotifyBackground = { link = "NormalFloat" },
+          NotifyERRORBorder = { fg = c.red },
+          NotifyWARNBorder = { fg = c.yellow },
+          NotifyINFOBorder = { fg = c.blue },
+          NotifyDEBUGBorder = { fg = c.overlay1 },
+          NotifyTRACEBorder = { fg = c.mauve },
           WhichKeyNormal = { bg = none },
           WhichKeyBorder = { link = "FloatBorder" },
           WhichKeyTitle = { link = "FloatTitle" },
@@ -89,64 +105,81 @@ return {
   },
   { "nvim-mini/mini.tabline", lazy = false, opts = {} },
   {
-    "folke/snacks.nvim",
+    -- Reports go through nvim-notify so <leader>n can show the history.
+    "rcarriga/nvim-notify",
     lazy = false,
-    priority = 1000,
+    keys = {
+      { "<leader>n", function() require("notify").show_history() end, desc = "Notification History" },
+      {
+        "<leader>un",
+        function() require("notify").dismiss({ pending = true, silent = true }) end,
+        desc = "Dismiss All Notifications",
+      },
+    },
+    opts = { stages = "fade_in_slide_out", timeout = 2500, max_width = 60, background_colour = "#000000" },
+    config = function(_, opts)
+      local notify = require("notify")
+      notify.setup(opts)
+      vim.notify = notify
+    end,
+  },
+  {
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    cmd = "Dashboard",
     opts = {
-      bigfile = { enabled = true },
-      dashboard = {
-        enabled = true,
-        preset = {
-          keys = {
-            { icon = "\u{f002} ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-            { icon = "\u{f15b} ", key = "n", desc = "New File", action = ":ene | startinsert" },
-            { icon = "\u{f0b0} ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-            { icon = "\u{f1da} ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-            {
-              icon = "\u{f013} ",
-              key = "c",
-              desc = "Config",
-              action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
-            },
-            { icon = "󰒲 ", key = "u", desc = "Update Plugins", action = ":Lazy update" },
-            { icon = "\u{f08b} ", key = "q", desc = "Quit", action = ":qa" },
+      theme = "doom",
+      config = {
+        header = {
+          "",
+          "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗",
+          "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║",
+          "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║",
+          "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║",
+          "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║",
+          "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝",
+          "",
+        },
+        center = {
+          {
+            icon = " ",
+            desc = "Find File",
+            key = "f",
+            action = function() require("fzf-lua").files({ cwd = require("config.util").root() }) end,
           },
-        },
-        sections = {
-          { section = "header" },
-          { section = "keys", gap = 1, padding = 1 },
-        },
-      },
-      explorer = { enabled = true, replace_netrw = true },
-      indent = { enabled = true },
-      input = { enabled = true },
-      notifier = { enabled = true, style = "compact" },
-      picker = {
-        enabled = true,
-        -- No dimming backdrop: it covers the translucent background with a solid layer.
-        layout = {
-          preset = function()
-            return vim.o.columns >= 120 and "default" or "vertical"
-          end,
-          layout = { backdrop = false },
-        },
-        sources = {
-          explorer = {
-            layout = { preset = "sidebar", hidden = { "input", "preview" }, layout = { width = 30, min_width = 30 } },
-            win = {
-              list = {
-                wo = {
-                  winbar = "%#StlExplorerHeader#  \u{f07c}  %{toupper(fnamemodify(getcwd(), ':t'))}",
-                  statuscolumn = " ",
-                  cursorline = true,
-                },
-              },
-            },
+          {
+            icon = " ",
+            desc = "Find Text",
+            key = "g",
+            action = function() require("fzf-lua").live_grep({ cwd = require("config.util").root() }) end,
           },
+          {
+            icon = " ",
+            desc = "Recent Files",
+            key = "r",
+            action = function() require("fzf-lua").oldfiles() end,
+          },
+          {
+            icon = " ",
+            desc = "Explorer",
+            key = "e",
+            action = function() require("neo-tree.command").execute({ toggle = true, dir = require("config.util").root() }) end,
+          },
+          { icon = " ", desc = "New File", key = "n", action = ":ene | startinsert" },
+          {
+            icon = " ",
+            desc = "Config",
+            key = "c",
+            action = function() require("fzf-lua").files({ cwd = vim.fn.stdpath("config") }) end,
+          },
+          { icon = " ", desc = "Update Plugins", key = "u", action = ":Lazy update" },
+          { icon = " ", desc = "Quit", key = "q", action = ":qa" },
         },
+        footer = function()
+          local stats = require("lazy").stats()
+          return { "⚡ Neovim " .. vim.version().major .. "." .. vim.version().minor .. " · " .. stats.loaded .. "/" .. stats.count .. " plugins loaded" }
+        end,
       },
-      scope = { enabled = true },
-      statuscolumn = { enabled = true },
     },
   },
 }

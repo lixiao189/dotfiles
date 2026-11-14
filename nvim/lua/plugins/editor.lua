@@ -76,6 +76,79 @@ return {
     end,
   },
   {
+    "nvim-mini/mini.bufremove",
+    keys = {
+      {
+        "<leader>bd",
+        function() require("mini.bufremove").delete(0, false) end,
+        desc = "Delete Buffer",
+      },
+      {
+        "<leader>bD",
+        function() require("mini.bufremove").delete(0, true) end,
+        desc = "Delete Buffer and Window",
+      },
+      {
+        "<leader>bo",
+        function()
+          local cur = vim.api.nvim_get_current_buf()
+          for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            if buf ~= cur and vim.bo[buf].buflisted then
+              require("mini.bufremove").delete(buf, false)
+            end
+          end
+        end,
+        desc = "Delete Other Buffers",
+      },
+      {
+        "<leader>bi",
+        function()
+          for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            if #vim.fn.win_findbuf(buf) == 0 then
+              require("mini.bufremove").delete(buf, false)
+            end
+          end
+        end,
+        desc = "Delete Invisible Buffers",
+      },
+      {
+        "<leader>bl",
+        function()
+          local cur = vim.api.nvim_get_current_buf()
+          for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            if buf < cur and vim.bo[buf].buflisted then
+              require("mini.bufremove").delete(buf, false)
+            end
+          end
+        end,
+        desc = "Delete Buffers to the Left",
+      },
+      {
+        "<leader>br",
+        function()
+          local cur = vim.api.nvim_get_current_buf()
+          for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            if buf > cur and vim.bo[buf].buflisted then
+              require("mini.bufremove").delete(buf, false)
+            end
+          end
+        end,
+        desc = "Delete Buffers to the Right",
+      },
+    },
+  },
+  {
+    "nvim-mini/mini.indentscope",
+    event = { "LazyFile", "VeryLazy" },
+    opts = function()
+      return {
+        -- mini.ai owns `ii`/`ai`, so keep the module's own mappings out of the way.
+        mappings = { object_scope = "", object_scope_with_border = "", goto_top = "", goto_bottom = "" },
+        draw = { animation = require("mini.indentscope").gen_animation.none() },
+      }
+    end,
+  },
+  {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
@@ -88,7 +161,6 @@ return {
         { "<Leader>b", group = "buffer" },
         { "<Leader>c", group = "code", mode = { "n", "x" } },
         { "<Leader>d", group = "debug" },
-        { "<Leader>dp", group = "profiler" },
         { "<Leader>f", group = "file/find" },
         { "<Leader>g", group = "git", mode = { "n", "x" } },
         { "<Leader>gh", group = "hunks", mode = { "n", "x" } },

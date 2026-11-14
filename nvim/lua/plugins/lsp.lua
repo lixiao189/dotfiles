@@ -80,7 +80,7 @@ return {
     opts = {
       library = {
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-        { path = "snacks.nvim", words = { "Snacks" } },
+        { path = "fzf-lua", words = { "FzfLua" } },
       },
     },
   },
@@ -97,9 +97,7 @@ return {
     keys = {
       {
         "<leader>cl",
-        function()
-          Snacks.picker.lsp_config()
-        end,
+        "<cmd>checkhealth vim.lsp<cr>",
         desc = "Lsp Info",
       },
     },
@@ -175,23 +173,23 @@ return {
           end
 
           map("n", "gd", function()
-            Snacks.picker.lsp_definitions()
+            require("fzf-lua").lsp_definitions()
           end, "Goto Definition", "textDocument/definition")
           map("n", "gr", function()
-            Snacks.picker.lsp_references()
+            require("fzf-lua").lsp_references()
           end, "References", "textDocument/references")
           map("n", "gI", function()
-            Snacks.picker.lsp_implementations()
+            require("fzf-lua").lsp_implementations()
           end, "Goto Implementation", "textDocument/implementation")
           map("n", "gy", function()
-            Snacks.picker.lsp_type_definitions()
+            require("fzf-lua").lsp_typedefs()
           end, "Goto Type Definition", "textDocument/typeDefinition")
           map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration", "textDocument/declaration")
           map("n", "gai", function()
-            Snacks.picker.lsp_incoming_calls()
+            require("fzf-lua").lsp_incoming_calls()
           end, "Calls Incoming", "callHierarchy/incomingCalls")
           map("n", "gao", function()
-            Snacks.picker.lsp_outgoing_calls()
+            require("fzf-lua").lsp_outgoing_calls()
           end, "Calls Outgoing", "callHierarchy/outgoingCalls")
           map("n", "gK", vim.lsp.buf.signature_help, "Signature Help", "textDocument/signatureHelp")
           map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature Help", "textDocument/signatureHelp")
@@ -202,7 +200,7 @@ return {
           end, "Refresh & Display Codelens", "textDocument/codeLens")
           map("n", "<leader>cr", vim.lsp.buf.rename, "Rename", "textDocument/rename")
           map("n", "<leader>cR", function()
-            Snacks.rename.rename_file()
+            require("config.util").rename_file()
           end, "Rename File")
           map("n", "<leader>cA", function()
             vim.lsp.buf.code_action({ apply = true, context = { only = { "source" }, diagnostics = {} } })
@@ -214,10 +212,10 @@ return {
             })
           end, "Organize Imports", "textDocument/codeAction")
           map("n", "<leader>ss", function()
-            Snacks.picker.lsp_symbols()
+            require("fzf-lua").lsp_document_symbols()
           end, "LSP Symbols", "textDocument/documentSymbol")
           map("n", "<leader>sS", function()
-            Snacks.picker.lsp_workspace_symbols()
+            require("fzf-lua").lsp_workspace_symbols()
           end, "LSP Workspace Symbols", "workspace/symbol")
 
           if client.name == "clangd" then

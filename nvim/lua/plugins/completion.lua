@@ -2,7 +2,7 @@ local function truncate(s, max)
   return vim.fn.strchars(s) > max and vim.fn.strcharpart(s, 0, max - 1) .. "…" or s
 end
 
-local disabled_filetypes = { bigfile = true, snacks_picker_input = true, snacks_input = true }
+local disabled_filetypes = { bigfile = true, DressingInput = true }
 
 local function bordered(winhighlight)
   return require("cmp").config.window.bordered({ winhighlight = winhighlight })

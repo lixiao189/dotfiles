@@ -16,7 +16,8 @@ install_packages() {
         eval "$(/opt/homebrew/bin/brew shellenv)"
     fi
 
-    brew install git neovim vim ripgrep fnm lazygit tree-sitter \
+    # fzf/fd/zoxide back the pickers and the <leader>fp project switcher.
+    brew install git neovim vim ripgrep fd fzf zoxide fnm lazygit tree-sitter \
         font-jetbrains-mono-nerd-font
     brew install --cask wezterm ghostty squirrel-app
 }

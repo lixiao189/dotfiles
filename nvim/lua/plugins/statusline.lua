@@ -38,10 +38,9 @@ local function git()
 end
 
 local special = {
-  snacks_picker_list = "\u{f07c} Explorer",
-  snacks_picker_input = "\u{f002} Search",
-  snacks_dashboard = "\u{f015} Dashboard",
-  snacks_terminal = "\u{f120} Terminal",
+  ["neo-tree"] = "\u{f07c} Explorer",
+  dashboard = "\u{f015} Dashboard",
+  toggleterm = "\u{f120} Terminal",
   ["grug-far"] = "\u{f002} Search & Replace",
   qf = "\u{f0ae} Quickfix",
   help = "\u{f059} Help",

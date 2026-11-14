@@ -77,11 +77,9 @@ return {
     },
     config = function(_, opts)
       require("render-markdown").setup(opts)
-      Snacks.toggle({
-        name = "Render Markdown",
-        get = require("render-markdown").get,
-        set = require("render-markdown").set,
-      }):map("<leader>um")
+      vim.keymap.set("n", "<leader>um", function()
+        require("render-markdown").toggle()
+      end, { desc = "Render Markdown" })
     end,
   },
   {
