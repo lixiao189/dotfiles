@@ -1,0 +1,170 @@
+/* Fcitx5 macOS · 薄荷
+   在主题编辑器的「高级 → 用户 CSS」中导入。配色随候选窗的深浅色切换。 */
+
+#fcitx-theme {
+  --mint-panel-radius: 8px;
+  --mint-selection-radius: 5px;
+  --mint-row-inset: 4px;
+  --mint-surface-top: #fffefa;
+  --mint-surface-bottom: #f3f6f3;
+  --mint-header: #edf3ef;
+  --mint-border: #c2cfc8;
+  --mint-divider: #cdd9d2;
+  --mint-text: #162a25;
+  --mint-secondary: #4c645b;
+  --mint-disabled: #75857e;
+  --mint-accent: #116b59;
+  --mint-selected-top: #ddf5e9;
+  --mint-selected-bottom: #c6ebda;
+  --mint-selected-border: #79b8a4;
+  --mint-selected-text: #103d32;
+  --mint-selected-secondary: #225b4c;
+  --mint-hover: #e1eee7;
+  --mint-pressed: #b4dfcc;
+  --mint-shadow: 0 6px 16px rgb(20 43 35 / 19%), 0 1px 3px rgb(20 43 35 / 12%);
+}
+
+#fcitx-theme.fcitx-dark {
+  --mint-surface-top: #252d2c;
+  --mint-surface-bottom: #1b2221;
+  --mint-header: #293433;
+  --mint-border: #485a55;
+  --mint-divider: #3e514b;
+  --mint-text: #f0f6f3;
+  --mint-secondary: #a5b9b0;
+  --mint-disabled: #71837b;
+  --mint-accent: #96ead0;
+  --mint-selected-top: #365e52;
+  --mint-selected-bottom: #28493f;
+  --mint-selected-border: #5b9c85;
+  --mint-selected-text: #f2fff9;
+  --mint-selected-secondary: #b2f0da;
+  --mint-hover: #31423c;
+  --mint-pressed: #386653;
+  --mint-shadow: 0 6px 16px rgb(0 0 0 / 42%), 0 1px 3px rgb(0 0 0 / 30%);
+}
+
+/* 与内置翻页规则使用相同的匹配条件，覆盖右侧单独计算的圆角。 */
+#fcitx-theme .fcitx-panel,
+#fcitx-theme .fcitx-panel:has(.fcitx-horizontal .fcitx-paging:is(.fcitx-arrow, .fcitx-scroll)),
+#fcitx-theme .fcitx-contextmenu {
+  border: 1px solid var(--mint-border);
+  border-radius: var(--mint-panel-radius);
+  background: linear-gradient(180deg, var(--mint-surface-top), var(--mint-surface-bottom)) padding-box;
+  box-shadow: var(--mint-shadow);
+}
+
+#fcitx-theme :is(.fcitx-candidate-background, .fcitx-divider-side, .fcitx-header, .fcitx-aux-down,
+                  .fcitx-paging, .fcitx-tabs) {
+  background-color: transparent;
+}
+
+#fcitx-theme .fcitx-hoverables {
+  background-image: none;
+}
+
+#fcitx-theme .fcitx-header:has(> :not(.fcitx-hidden)) {
+  background-color: var(--mint-header);
+  box-shadow: inset 0 -1px var(--mint-divider);
+}
+
+#fcitx-theme :is(.fcitx-pre-caret, .fcitx-post-caret, .fcitx-aux-up, .fcitx-aux-down,
+                  .fcitx-menu-item, .fcitx-tab-inner) {
+  color: var(--mint-text);
+}
+
+#fcitx-theme .fcitx-preedit {
+  font-weight: 550;
+}
+
+#fcitx-theme .fcitx-caret {
+  color: var(--mint-accent);
+}
+
+#fcitx-theme .fcitx-caret.fcitx-no-text {
+  background-color: var(--mint-accent);
+}
+
+/* 只为未展开的候选列表加宽留白，展开时沿用原有的网格尺寸。 */
+#fcitx-theme .fcitx-hoverables:not(.fcitx-horizontal-scroll) {
+  --margin: var(--mint-row-inset);
+  --middle-margin: calc(var(--mint-row-inset) / 2);
+  --label-text-gap: 6px;
+  --left-padding: 8px;
+  --right-padding: 8px;
+}
+
+#fcitx-theme :is(.fcitx-candidate-inner, .fcitx-paging-inner, .fcitx-tab-inner, .fcitx-menu-item) {
+  border-radius: var(--mint-selection-radius);
+}
+
+#fcitx-theme .fcitx-candidate :is(.fcitx-label, .fcitx-comment) {
+  color: var(--mint-secondary);
+}
+
+#fcitx-theme .fcitx-label {
+  font-variant-numeric: tabular-nums;
+}
+
+#fcitx-theme .fcitx-candidate .fcitx-text {
+  color: var(--mint-text);
+}
+
+#fcitx-theme .fcitx-paging {
+  color: var(--mint-disabled);
+}
+
+#fcitx-theme .fcitx-paging .fcitx-hoverable-inner {
+  color: var(--mint-accent);
+}
+
+#fcitx-theme .fcitx-divider-middle {
+  background-color: var(--mint-divider);
+}
+
+#fcitx-theme .fcitx-horizontal-scroll .fcitx-divider-middle,
+#fcitx-theme .fcitx-scroll-area::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+#fcitx-theme .fcitx-tabs {
+  border-color: var(--mint-divider);
+}
+
+#fcitx-theme .fcitx-scroll-area::-webkit-scrollbar-thumb {
+  background-color: var(--mint-selected-border);
+}
+
+#fcitx-theme .fcitx-scroll-area::-webkit-scrollbar-thumb:hover {
+  background-color: var(--mint-accent);
+}
+
+#fcitx-theme .fcitx-mousemoved .fcitx-hoverable:not(.fcitx-highlighted):hover:not(:active) .fcitx-hoverable-inner,
+#fcitx-theme .fcitx-menu-item:hover {
+  color: var(--mint-text);
+  background-color: var(--mint-hover);
+}
+
+#fcitx-theme .fcitx-highlighted .fcitx-hoverable-inner,
+#fcitx-theme .fcitx-tab.fcitx-highlighted .fcitx-tab-inner {
+  background: linear-gradient(180deg, var(--mint-selected-top), var(--mint-selected-bottom));
+  box-shadow: inset 0 0 0 1px var(--mint-selected-border);
+}
+
+#fcitx-theme .fcitx-hoverable:active .fcitx-hoverable-inner,
+#fcitx-theme .fcitx-tab:active .fcitx-tab-inner {
+  background: var(--mint-pressed);
+}
+
+#fcitx-theme .fcitx-highlighted .fcitx-text,
+#fcitx-theme .fcitx-tab:is(.fcitx-highlighted, :active) .fcitx-tab-inner {
+  color: var(--mint-selected-text);
+}
+
+#fcitx-theme .fcitx-highlighted :is(.fcitx-label, .fcitx-comment, .fcitx-mark) {
+  color: var(--mint-selected-secondary);
+}
+
+#fcitx-theme .fcitx-highlighted .fcitx-mark.fcitx-no-text {
+  background-color: var(--mint-accent);
+}
