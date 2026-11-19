@@ -1,0 +1,162 @@
+/* Fcitx5 macOS · 蓝黑
+   在主题编辑器的「高级 → 用户 CSS」中导入。 */
+
+#fcitx-theme {
+  --blue-panel-radius: 8px;
+  --blue-selection-radius: 5px;
+  --blue-row-inset: 4px;
+  --blue-surface: #f5f7fa;
+  --blue-header: #e9edf3;
+  --blue-border: #bec9d8;
+  --blue-divider: #d4dce8;
+  --blue-text: #182234;
+  --blue-secondary: #52627a;
+  --blue-disabled: #758194;
+  --blue-accent: #2559bf;
+  --blue-selected: #2559bf;
+  --blue-selected-text: #fff;
+  --blue-selected-secondary: #e2ebff;
+  --blue-hover: #e2eaf7;
+  --blue-pressed: #1d479a;
+  --blue-scrollbar: #aabbd2;
+  --blue-shadow: 0 5px 14px rgb(16 26 43 / 16%);
+}
+
+#fcitx-theme.fcitx-dark {
+  --blue-surface: #121418;
+  --blue-header: #1a1e25;
+  --blue-border: #353c48;
+  --blue-divider: #2a303b;
+  --blue-text: #eff2f7;
+  --blue-secondary: #a7b1c2;
+  --blue-disabled: #737e91;
+  --blue-accent: #8cb4ff;
+  --blue-selected: #275bc4;
+  --blue-hover: #222d40;
+  --blue-pressed: #204ca6;
+  --blue-scrollbar: #4e6386;
+  --blue-shadow: 0 5px 14px rgb(0 0 0 / 34%);
+}
+
+/* 与内置翻页规则使用相同的匹配条件，覆盖右侧单独计算的圆角。 */
+#fcitx-theme .fcitx-panel,
+#fcitx-theme .fcitx-panel:has(.fcitx-horizontal .fcitx-paging:is(.fcitx-arrow, .fcitx-scroll)),
+#fcitx-theme .fcitx-contextmenu {
+  border: 1px solid var(--blue-border);
+  border-radius: var(--blue-panel-radius);
+  background: var(--blue-surface) padding-box;
+  box-shadow: var(--blue-shadow);
+}
+
+#fcitx-theme :is(.fcitx-candidate-background, .fcitx-divider-side, .fcitx-header, .fcitx-aux-down,
+                  .fcitx-paging, .fcitx-tabs) {
+  background-color: transparent;
+}
+
+#fcitx-theme .fcitx-hoverables {
+  background-image: none;
+}
+
+#fcitx-theme .fcitx-header:has(> :not(.fcitx-hidden)) {
+  background-color: var(--blue-header);
+}
+
+#fcitx-theme :is(.fcitx-pre-caret, .fcitx-post-caret, .fcitx-aux-up, .fcitx-aux-down,
+                  .fcitx-menu-item, .fcitx-tab-inner) {
+  color: var(--blue-text);
+}
+
+#fcitx-theme .fcitx-preedit {
+  font-weight: 550;
+}
+
+#fcitx-theme .fcitx-caret {
+  color: var(--blue-accent);
+}
+
+#fcitx-theme .fcitx-caret.fcitx-no-text {
+  background-color: var(--blue-accent);
+}
+
+/* 只为未展开的候选列表加宽留白，展开时沿用原有的网格尺寸。 */
+#fcitx-theme .fcitx-hoverables:not(.fcitx-horizontal-scroll) {
+  --margin: var(--blue-row-inset);
+  --middle-margin: calc(var(--blue-row-inset) / 2);
+  --label-text-gap: 6px;
+  --left-padding: 8px;
+  --right-padding: 8px;
+}
+
+#fcitx-theme :is(.fcitx-candidate-inner, .fcitx-paging-inner, .fcitx-tab-inner, .fcitx-menu-item) {
+  border-radius: var(--blue-selection-radius);
+}
+
+#fcitx-theme .fcitx-candidate :is(.fcitx-label, .fcitx-comment) {
+  color: var(--blue-secondary);
+}
+
+#fcitx-theme .fcitx-label {
+  font-variant-numeric: tabular-nums;
+}
+
+#fcitx-theme .fcitx-candidate .fcitx-text {
+  color: var(--blue-text);
+}
+
+#fcitx-theme .fcitx-paging {
+  color: var(--blue-disabled);
+}
+
+#fcitx-theme .fcitx-paging .fcitx-hoverable-inner {
+  color: var(--blue-accent);
+}
+
+#fcitx-theme .fcitx-divider-middle {
+  background-color: var(--blue-divider);
+}
+
+#fcitx-theme .fcitx-horizontal-scroll .fcitx-divider-middle,
+#fcitx-theme .fcitx-scroll-area::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+#fcitx-theme .fcitx-tabs {
+  border-color: var(--blue-divider);
+}
+
+#fcitx-theme .fcitx-scroll-area::-webkit-scrollbar-thumb {
+  background-color: var(--blue-scrollbar);
+}
+
+#fcitx-theme .fcitx-scroll-area::-webkit-scrollbar-thumb:hover {
+  background-color: var(--blue-accent);
+}
+
+#fcitx-theme .fcitx-mousemoved .fcitx-hoverable:not(.fcitx-highlighted):hover:not(:active) .fcitx-hoverable-inner,
+#fcitx-theme .fcitx-menu-item:hover {
+  color: var(--blue-text);
+  background-color: var(--blue-hover);
+}
+
+#fcitx-theme .fcitx-highlighted .fcitx-hoverable-inner,
+#fcitx-theme .fcitx-tab.fcitx-highlighted .fcitx-tab-inner {
+  background-color: var(--blue-selected);
+}
+
+#fcitx-theme .fcitx-hoverable:active .fcitx-hoverable-inner,
+#fcitx-theme .fcitx-tab:active .fcitx-tab-inner {
+  background-color: var(--blue-pressed);
+}
+
+#fcitx-theme .fcitx-highlighted .fcitx-text,
+#fcitx-theme .fcitx-tab:is(.fcitx-highlighted, :active) .fcitx-tab-inner {
+  color: var(--blue-selected-text);
+}
+
+#fcitx-theme .fcitx-highlighted :is(.fcitx-label, .fcitx-comment, .fcitx-mark) {
+  color: var(--blue-selected-secondary);
+}
+
+#fcitx-theme .fcitx-highlighted .fcitx-mark.fcitx-no-text {
+  background-color: var(--blue-accent);
+}
