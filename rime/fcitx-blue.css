@@ -4,7 +4,7 @@
 #fcitx-theme {
   --blue-panel-radius: 8px;
   --blue-selection-radius: 5px;
-  --blue-row-inset: 4px;
+  --blue-row-inset: 3px;
   --blue-surface: #f5f7fa;
   --blue-header: #e9edf3;
   --blue-border: #bec9d8;
@@ -78,13 +78,22 @@
   background-color: var(--blue-accent);
 }
 
-/* 只为未展开的候选列表加宽留白，展开时沿用原有的网格尺寸。 */
+/* 收紧普通候选行，保留展开后的卷轴网格尺寸。 */
 #fcitx-theme .fcitx-hoverables:not(.fcitx-horizontal-scroll) {
   --margin: var(--blue-row-inset);
   --middle-margin: calc(var(--blue-row-inset) / 2);
-  --label-text-gap: 6px;
-  --left-padding: 8px;
-  --right-padding: 8px;
+  --label-text-gap: 5px;
+  --left-padding: 6px;
+  --right-padding: 6px;
+}
+
+#fcitx-theme .fcitx-horizontal-tb .fcitx-horizontal:not(.fcitx-horizontal-scroll) .fcitx-divider-paging .fcitx-divider-side {
+  flex: 1;
+}
+
+#fcitx-theme .fcitx-horizontal-tb .fcitx-horizontal:not(.fcitx-horizontal-scroll) .fcitx-divider-paging .fcitx-divider-middle {
+  flex: 0 1 16px;
+  block-size: 16px;
 }
 
 #fcitx-theme :is(.fcitx-candidate-inner, .fcitx-paging-inner, .fcitx-tab-inner, .fcitx-menu-item) {
