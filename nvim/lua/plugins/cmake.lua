@@ -1,4 +1,4 @@
--- :CMake* commands. Needs `cmake` on PATH; compile_commands.json is symlinked to the project root.
+-- :CMake* commands. Needs `cmake` on PATH; compile_commands.json is symlinked to the root for clangd.
 -- cmake-tools treats the cwd as the project, so it loads for a cwd with a CMakeLists.txt
 -- (at startup or after :cd) or a cmake file.
 local function in_cmake_project()

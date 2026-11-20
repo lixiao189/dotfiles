@@ -50,7 +50,8 @@ return {
       css = prettier,
       html = prettier,
     },
-    -- C/C++ uses Clice's LSP formatting, which reads the project's .clang-format.
+    -- C/C++ has no formatter here: `lsp_format = "fallback"` hands it to clangd,
+    -- which honors a project `.clang-format` or its own preset (LLVM).
     format_on_save = function(buf)
       if util.autoformat_enabled(buf) then
         return {}

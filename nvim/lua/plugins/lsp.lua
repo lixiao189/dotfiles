@@ -106,7 +106,7 @@ return {
       ---@type table<string, {mason?: boolean}>
       servers = {
         bashls = {},
-        clice = {},
+        clangd = {},
         gopls = {},
         jsonls = {},
         lua_ls = {},
@@ -218,34 +218,8 @@ return {
             require("fzf-lua").lsp_workspace_symbols()
           end, "LSP Workspace Symbols", "workspace/symbol")
 
-          if client.name == "clice" then
-            map("n", "<leader>ch", function()
-              local function open(uri)
-                vim.cmd.edit({ args = { vim.uri_to_fname(uri) }, magic = { file = false } })
-              end
-
-              client:request("clice/counterparts", { uri = vim.uri_from_bufnr(buf) }, function(err, result)
-                if err then
-                  return vim.notify(err.message, vim.log.levels.WARN)
-                end
-                if result.preferred and result.preferred ~= vim.NIL then
-                  return open(result.preferred)
-                end
-                if #result.candidates == 0 then
-                  return vim.notify("Clice: no corresponding source or header found")
-                end
-                vim.ui.select(result.candidates, {
-                  prompt = "Switch Source/Header",
-                  format_item = function(candidate)
-                    return vim.fn.fnamemodify(vim.uri_to_fname(candidate.uri), ":~:.")
-                  end,
-                }, function(candidate)
-                  if candidate then
-                    open(candidate.uri)
-                  end
-                end)
-              end, buf)
-            end, "Switch Source/Header (C/C++)")
+          if client.name == "clangd" then
+            map("n", "<leader>ch", "<cmd>LspClangdSwitchSourceHeader<cr>", "Switch Source/Header (C/C++)")
           end
 
           if client:supports_method("textDocument/documentColor", buf) then

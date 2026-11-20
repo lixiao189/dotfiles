@@ -1,4 +1,4 @@
--- Clice handles C/C++; sourcekit-lsp handles Swift and Objective-C.
+-- clangd handles C/C++; sourcekit-lsp only Swift and Objective-C.
 ---@type vim.lsp.Config
 return {
   filetypes = { "swift", "objc", "objcpp" },
