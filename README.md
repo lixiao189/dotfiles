@@ -1,6 +1,6 @@
 # My dotfiles config backup
 
-Config files back up for zsh, neovim, vim, wezterm, ghostty, rime, etc.
+Config files back up for zsh, neovim, vim, wezterm, ghostty, kitty, rime, etc.
 
 Git clone this repo to your home directory.
 

@@ -19,7 +19,7 @@ install_packages() {
     # fzf/fd/zoxide back the pickers and the <leader>fp project switcher.
     brew install git neovim vim ripgrep fd fzf zoxide fnm lazygit tree-sitter \
         font-jetbrains-mono-nerd-font
-    brew install --cask wezterm ghostty squirrel-app
+    brew install --cask wezterm ghostty kitty squirrel-app
 }
 
 install_packages_if_darwin() {
@@ -30,6 +30,7 @@ install_packages_if_darwin() {
 link_configs() {
     link "$DOTFILES/nvim"          ~/.config/nvim
     link "$DOTFILES/ghostty"       ~/.config/ghostty
+    link "$DOTFILES/kitty"         ~/.config/kitty
     link "$DOTFILES/wezterm.lua"   ~/.wezterm.lua
     link "$DOTFILES/vimrc"         ~/.vim/vimrc
     link "$DOTFILES/coc-settings.json" ~/.vim/coc-settings.json
