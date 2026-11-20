@@ -104,5 +104,10 @@ return {
         end, { "i", "s" }),
       },
     })
+
+    cmp.setup.filetype("cpp", {
+      performance = { debounce = 10, throttle = 10 },
+      view = { entries = { name = "native" } },
+    })
   end,
 }
