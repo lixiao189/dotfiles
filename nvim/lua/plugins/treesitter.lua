@@ -47,9 +47,19 @@ return {
 
     ---@param buf integer
     ---@param lang string
-    ---@return boolean
+    ---@return boolean handled False when the parser needs to be installed.
     local function attach(buf, lang)
-      if not vim.api.nvim_buf_is_valid(buf) or not vim.treesitter.language.add(lang) then
+      local line_count = vim.api.nvim_buf_line_count(buf)
+      if line_count > 5000 or vim.api.nvim_buf_get_offset(buf, line_count) > 512 * 1024 then
+        -- Neovim's Lua and Markdown ftplugins already start the highlighter.
+        vim.treesitter.stop(buf)
+        for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+          vim.wo[win][0].foldmethod = "manual"
+        end
+        return true
+      end
+
+      if not vim.treesitter.language.add(lang) then
         return false
       end
       vim.treesitter.start(buf, lang)
@@ -73,7 +83,9 @@ return {
         if available[lang] then
           ts.install(lang):await(function()
             vim.schedule(function()
-              attach(ev.buf, lang)
+              if vim.api.nvim_buf_is_loaded(ev.buf) and vim.bo[ev.buf].filetype == ev.match then
+                attach(ev.buf, lang)
+              end
             end)
           end)
         end

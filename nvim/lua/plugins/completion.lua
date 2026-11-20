@@ -10,8 +10,8 @@ end
 
 return {
   "hrsh7th/nvim-cmp",
-  event = "InsertEnter",
-  dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path" },
+  event = { "VeryLazy", "InsertEnter" },
+  dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "nvim-mini/mini.pairs" },
   config = function()
     local cmp = require("cmp")
     local compare = cmp.config.compare
