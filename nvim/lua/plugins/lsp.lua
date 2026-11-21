@@ -93,7 +93,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = "LazyFile",
-    dependencies = { "mason-org/mason.nvim", "hrsh7th/cmp-nvim-lsp" },
+    dependencies = { "mason-org/mason.nvim", "saghen/blink.cmp" },
     keys = {
       {
         "<leader>cl",
@@ -139,8 +139,6 @@ return {
           },
         },
       })
-
-      vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
 
       local to_enable, to_install = {}, {}
       for name, server in pairs(opts.servers) do

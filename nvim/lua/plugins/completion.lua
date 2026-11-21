@@ -1,113 +1,87 @@
-local function truncate(s, max)
-  return vim.fn.strchars(s) > max and vim.fn.strcharpart(s, 0, max - 1) .. "…" or s
-end
-
 local disabled_filetypes = { bigfile = true, DressingInput = true }
 
-local function bordered(winhighlight)
-  return require("cmp").config.window.bordered({ winhighlight = winhighlight })
-end
-
 return {
-  "hrsh7th/nvim-cmp",
+  "saghen/blink.cmp",
+  branch = "main", -- Upstream v2 development branch.
   event = { "VeryLazy", "InsertEnter" },
-  dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "nvim-mini/mini.pairs" },
-  config = function()
-    local cmp = require("cmp")
-    local compare = cmp.config.compare
-    cmp.setup({
-      enabled = function()
-        return vim.bo.buftype ~= "prompt" and not disabled_filetypes[vim.bo.filetype]
-      end,
-      completion = { completeopt = "menu,menuone,noinsert" },
-      snippet = {
-        expand = function(args)
-          vim.snippet.expand(args.body)
-        end,
-      },
-      sources = cmp.config.sources({
-        { name = "lazydev" },
-        { name = "nvim_lsp" },
-        { name = "path" },
-      }, {
-        { name = "buffer" },
-      }),
-      sorting = {
-        priority_weight = 2,
-        comparators = {
-          compare.offset,
-          compare.exact,
-          compare.score,
-          compare.recently_used,
-          compare.sort_text,
-          compare.length,
-          compare.order,
+  dependencies = {
+    "saghen/blink.lib",
+    "nvim-mini/mini.icons",
+    "nvim-mini/mini.pairs",
+  },
+  build = function()
+    assert(require("blink.cmp").build():pwait())
+  end,
+  opts = {
+    enabled = function()
+      return vim.bo.buftype ~= "prompt" and not disabled_filetypes[vim.bo.filetype]
+    end,
+    fuzzy = { implementation = "rust", sorts = { "exact", "score", "sort_text" } },
+    cmdline = { enabled = false },
+    term = { enabled = false },
+    keymap = {
+      preset = "default",
+      ["<C-k>"] = false, -- LspAttach maps this to vim.lsp.buf.signature_help.
+      ["<C-n>"] = { "select_next", "fallback" },
+      ["<C-p>"] = { "select_prev", "fallback" },
+      ["<CR>"] = { "accept", "fallback" }, -- Fall through to mini.pairs.
+      ["<Tab>"] = { "accept", "snippet_forward", "fallback" },
+    },
+    sources = {
+      default = { "lsp", "path", "buffer" },
+      per_filetype = { lua = { "lazydev", inherit_defaults = true } },
+      providers = {
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          score_offset = 100,
+          fallbacks = { "buffer" },
+        },
+        path = { opts = { trailing_slash = false } },
+        buffer = {
+          opts = {
+            get_bufnrs = function()
+              return { vim.api.nvim_get_current_buf() }
+            end,
+          },
         },
       },
-      formatting = {
-        fields = { "kind", "abbr", "menu" },
-        format = function(entry, item)
-          item.kind = (require("mini.icons").get("lsp", item.kind or "Text"))
-          item.abbr = truncate((item.abbr:gsub("%b()", "")), 40)
-          local details = entry.completion_item.labelDetails
-          item.menu = details and (details.description or details.detail) or nil
-          item.menu = item.menu and truncate(vim.trim(item.menu), 20)
-          return item
-        end,
+    },
+    completion = {
+      list = { selection = { preselect = true, auto_insert = false } },
+      accept = { auto_brackets = { enabled = false } },
+      menu = {
+        border = "single",
+        winhighlight = "Normal:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:None",
+        draw = {
+          components = {
+            kind_icon = {
+              text = function(ctx)
+                return (require("mini.icons").get("lsp", ctx.kind))
+              end,
+            },
+            label = {
+              width = { max = 40 },
+              text = function(ctx)
+                return ctx.label
+              end,
+            },
+            label_description = {
+              width = { max = 20 },
+              text = function(ctx)
+                return vim.trim(ctx.label_description ~= "" and ctx.label_description or ctx.label_detail)
+              end,
+            },
+          },
+        },
       },
-      window = {
-        completion = bordered("Normal:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:None"),
-        documentation = bordered("Normal:NormalFloat,FloatBorder:FloatBorder,Search:None"),
+      documentation = {
+        auto_show = false,
+        window = {
+          border = "single",
+          winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,Search:None",
+        },
       },
-      view = { docs = { auto_open = false } },
-      mapping = {
-        ["<C-Space>"] = cmp.mapping(function()
-          if not cmp.visible() then
-            cmp.complete()
-          elseif cmp.visible_docs() then
-            cmp.close_docs()
-          else
-            cmp.open_docs()
-          end
-        end, { "i" }),
-        ["<C-e>"] = cmp.mapping(cmp.mapping.abort(), { "i" }),
-        ["<C-y>"] = cmp.mapping(cmp.mapping.confirm({ select = true }), { "i" }),
-        ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
-        ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
-        ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
-        ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
-        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i" }),
-        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i" }),
-        -- Otherwise fall through to mini.pairs' <CR>
-        ["<CR>"] = cmp.mapping(function(fallback)
-          if cmp.visible() and cmp.get_selected_entry() then
-            cmp.confirm()
-          else
-            fallback()
-          end
-        end, { "i" }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() and cmp.get_selected_entry() then
-            cmp.confirm()
-          elseif vim.snippet.active({ direction = 1 }) then
-            vim.snippet.jump(1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if vim.snippet.active({ direction = -1 }) then
-            vim.snippet.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-      },
-    })
-
-    cmp.setup.filetype("cpp", {
-      performance = { debounce = 10, throttle = 10 },
-      view = { entries = { name = "native" } },
-    })
-  end,
+    },
+  },
 }
