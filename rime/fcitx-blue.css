@@ -1,4 +1,4 @@
-/* Fcitx5 macOS · 蓝黑
+/* Fcitx5 macOS · 雾蓝
    在主题编辑器的「高级 → 用户 CSS」中导入。 */
 
 #fcitx-theme {
@@ -12,12 +12,12 @@
   --blue-text: #182234;
   --blue-secondary: #52627a;
   --blue-disabled: #758194;
-  --blue-accent: #2559bf;
-  --blue-selected: #2559bf;
-  --blue-selected-text: #fff;
-  --blue-selected-secondary: #e2ebff;
-  --blue-hover: #e2eaf7;
-  --blue-pressed: #1d479a;
+  --blue-accent: #4268a0;
+  --blue-selected: #dbe8fa;
+  --blue-selected-text: #233b5c;
+  --blue-selected-secondary: #405a7c;
+  --blue-hover: #eaf0f8;
+  --blue-pressed: #ccddf4;
   --blue-scrollbar: #aabbd2;
   --blue-shadow: 0 5px 14px rgb(16 26 43 / 16%);
 }
@@ -30,10 +30,12 @@
   --blue-text: #eff2f7;
   --blue-secondary: #a7b1c2;
   --blue-disabled: #737e91;
-  --blue-accent: #8cb4ff;
-  --blue-selected: #275bc4;
-  --blue-hover: #222d40;
-  --blue-pressed: #204ca6;
+  --blue-accent: #a3c3f5;
+  --blue-selected: #4e688c;
+  --blue-selected-text: #f6f9ff;
+  --blue-selected-secondary: #e6eefb;
+  --blue-hover: #2a374a;
+  --blue-pressed: #526c90;
   --blue-scrollbar: #4e6386;
   --blue-shadow: 0 5px 14px rgb(0 0 0 / 34%);
 }
@@ -158,11 +160,13 @@
 }
 
 #fcitx-theme .fcitx-highlighted .fcitx-text,
+#fcitx-theme .fcitx-hoverable:active .fcitx-text,
 #fcitx-theme .fcitx-tab:is(.fcitx-highlighted, :active) .fcitx-tab-inner {
   color: var(--blue-selected-text);
 }
 
-#fcitx-theme .fcitx-highlighted :is(.fcitx-label, .fcitx-comment, .fcitx-mark) {
+#fcitx-theme .fcitx-highlighted :is(.fcitx-label, .fcitx-comment, .fcitx-mark),
+#fcitx-theme .fcitx-hoverable:active :is(.fcitx-label, .fcitx-comment, .fcitx-mark) {
   color: var(--blue-selected-secondary);
 }
 

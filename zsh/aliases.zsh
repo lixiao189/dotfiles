@@ -1,5 +1,4 @@
 alias v=nvim
-alias s='kitty +kitten ssh'
 
 alias ls='ls -G'
 alias ll='ls -lh'
