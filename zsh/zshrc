@@ -21,6 +21,7 @@ setopt HIST_REDUCE_BLANKS HIST_VERIFY HIST_SAVE_NO_DUPS HIST_FIND_NO_DUPS HIST_F
 # Plugins
 export EDITOR=nvim VISUAL=nvim
 ZVM_INIT_MODE=sourcing            # initialise zsh-vi-mode immediately, no precmd hook
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=200
 
