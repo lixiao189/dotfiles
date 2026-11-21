@@ -142,31 +142,17 @@ return {
     },
   },
   {
-    "nvim-mini/mini.indentscope",
+    "lukas-reineke/indent-blankline.nvim",
     event = { "LazyFile", "VeryLazy" },
-    opts = function()
-      local excluded = {
-        dashboard = true,
-        alpha = true,
-        ministarter = true,
-        lazy = true,
-        mason = true,
-        ["neo-tree"] = true,
-        Trouble = true,
-        trouble = true,
-        notify = true,
-        checkhealth = true,
-      }
-      return {
-        mappings = { object_scope = "", object_scope_with_border = "", goto_top = "", goto_bottom = "" },
-        draw = {
-          animation = require("mini.indentscope").gen_animation.none(),
-          predicate = function(scope)
-            return vim.bo.buftype == "" and not excluded[vim.bo.filetype] and not scope.body.is_incomplete
-          end,
-        },
-      }
-    end,
+    main = "ibl",
+    opts = {
+      indent = { char = "│", tab_char = "│" },
+      scope = { show_start = false, show_end = false },
+      exclude = {
+        filetypes = { "alpha", "dashboard", "lazy", "mason", "ministarter", "neo-tree", "notify", "Trouble", "trouble" },
+        buftypes = { "acwrite", "help", "nowrite" },
+      },
+    },
   },
   {
     "folke/which-key.nvim",

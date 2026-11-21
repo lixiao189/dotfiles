@@ -8,6 +8,7 @@ return {
       transparent_background = true,
       float = { transparent = true, solid = false },
       term_colors = true,
+      integrations = { indent_blankline = { scope_color = "overlay2" } },
       custom_highlights = function(c)
         local none = c.none
         return {
