@@ -1,7 +1,7 @@
 alias v=nvim
 
-# GNU ls wants --color, BSD ls wants -G.
-if ls --version 2>/dev/null | grep -q GNU; then alias ls='ls --color=auto'; else alias ls='ls -G'; fi
+# GNU ls wants --color, BSD ls wants -G. $OSTYPE is a zsh builtin, no fork.
+if [[ $OSTYPE == darwin* ]]; then alias ls='ls -G'; else alias ls='ls --color=auto'; fi
 alias ll='ls -lh'
 alias l='ls -lah'
 alias la='ls -lAh'
