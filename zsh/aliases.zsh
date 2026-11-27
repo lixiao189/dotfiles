@@ -1,6 +1,7 @@
 alias v=nvim
 
-alias ls='ls -G'
+# GNU ls wants --color, BSD ls wants -G.
+if ls --version 2>/dev/null | grep -q GNU; then alias ls='ls --color=auto'; else alias ls='ls -G'; fi
 alias ll='ls -lh'
 alias l='ls -lah'
 alias la='ls -lAh'

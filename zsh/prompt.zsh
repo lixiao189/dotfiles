@@ -1,4 +1,4 @@
-# user@host ~/path branch[*][ ↑N][:action] (venv) ✦jobs exit >
+# user@host ~/path branch[*][ ↑N][:action] (venv) ✦jobs exit >, or a red # for root
 
 autoload -Uz add-zsh-hook vcs_info
 
@@ -54,4 +54,4 @@ PROMPT='%B%F{blue}%n@%m%f%b %B%F{white}%3~%f%b${vcs_info_msg_0_}'
 PROMPT+='${_prompt_venv}'
 PROMPT+='%(1j. %F{yellow}✦%j%f.)'
 PROMPT+='%(?.. %F{red}%?%f)'
-PROMPT+=' %(?.%F{green}.%F{red})%(!.#.>)%f '
+PROMPT+=' %(!.%F{red}#.%(?.%F{green}.%F{red})>)%f '   # root always warns in red
